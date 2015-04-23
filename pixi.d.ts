@@ -1,5 +1,5 @@
 ﻿/**
- * Pixi v3 Commit History Reviewed: 12/Apr
+ * Pixi v3.0.1 Commit History Reviewed: 22/Apr
  * 
  * https://github.com/GoodBoyDigital/pixi.js/
  * 
@@ -14,6 +14,7 @@ declare class PIXI {
     static PI_2: number;
     static RAD_TO_DEG: number;
     static DEG_TO_RAD: number;
+    static TARGET_FPMS: number;
     static RENDER_TYPE: {
         UNKNOWN: number;
         WEBGL: number;
@@ -245,6 +246,8 @@ declare module PIXI {
 
     }
     export class Graphics extends Container {
+
+        private boundsDirty: boolean;
 
         fillAlpha: number;
         lineWidth: number;
@@ -937,6 +940,8 @@ declare module PIXI {
         clear(): void;
         destroy(): void;
         getImage(): HTMLImageElement;
+        getPixels(): number[];
+        getPixel(x: number, y: number): number[];
         getBase64(): string;
         getCanvas(): HTMLCanvasElement;
 
@@ -955,6 +960,7 @@ declare module PIXI {
         private _frame: Rectangle;
         private _uvs: TextureUvs;
 
+        private onBaseTextureUpdated(baseTexture: BaseTexture): void;
         private onBaseTextureLoaded(baseTexture: BaseTexture): void;
         private _updateUvs(): void;
 
@@ -1098,6 +1104,7 @@ declare module PIXI {
             static fromImages(images: string[]): MovieClip;
 
             private _textures: Texture;
+            private _currentTime: number;
 
             private update(deltaTime: number): void;
 
@@ -1121,15 +1128,32 @@ declare module PIXI {
         }
         export class Ticker extends EventEmitter {
 
-            active: boolean;
+            private _tick(time: number): void;
+            private _emitter: EventEmitter;
+            private _requestId: number;
+            private _maxElapsedMS: number;
+
+            private _requestIfNeeded: void;
+            private _callIfNeeded(): void;
+            private _startIfPossible(): void;
+
+            autoStart: boolean;
             deltaTime: number;
-            timeElapsed: number;
+            elapsedMS: number;
+            FPS: number;
             lastTime: number;
+            minFPS: number;
             speed: number;
+            started: boolean;
+            shared: Ticker;
 
             start(): void;
             stop(): void;
             update(): void;
+
+            add(fn: (deltaTime: number) => void, context?: any): Ticker;
+            addOnce(fn: (deltaTime: number) => void, context?: any): Ticker;
+            remove(fn: (deltaTime: number) => void, context?: any): Ticker;
 
             on(event: "tick", fn: (deltaTime: number) => void, context?: any): EventEmitter;
             on(event: string, fn: Function, context?: any): EventEmitter;
@@ -1399,15 +1423,12 @@ declare module PIXI {
 
             private interactionDOMElement: HTMLElement;
             private eventsAdded: boolean;
-            private requestID: number;
             private _tempPoint: Point;
 
             private setTargetElement(element: HTMLElement, resolution: number): void;
             private addEvents(): void;
             private removeEvents(): void;
-            private update(): void;
             private dispatchEvent(displayObject: DisplayObject, eventString: string, eventData: any): void;
-            private throttleUpdate(): boolean;
             private onMouseDown: (event: Event) => void;
             private processMouseDown: (displayObject: DisplayObject, hit: boolean) => void;
             private onMouseUp: (event: Event) => void;
@@ -1441,6 +1462,7 @@ declare module PIXI {
             last: number;
             currentCursorStyle: string;
             resolution: number;
+            update(deltaTime: number): void;
 
             mapPositionToPoint(point: Point, x: number, y: number): void;
             processInteractive(point: Point, displayObject: DisplayObject, func: (displayObject: DisplayObject, hit: boolean) => void, hitTest: boolean, interactive: boolean): boolean;
