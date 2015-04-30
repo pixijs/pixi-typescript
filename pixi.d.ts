@@ -1,15 +1,15 @@
 ﻿/**
- * Pixi v3.0.1 Commit History Reviewed: 22/Apr
- * 
+ * Pixi v3.0.2 Commit History Reviewed: 30/Apr
+ *
  * https://github.com/GoodBoyDigital/pixi.js/
- * 
- * The definitions will follow the Dev Branch for now. 
+ *
+ * The definitions will follow the Dev Branch for now.
  *
  */
 declare class PIXI {
 
     static autoDetectRenderer(width: number, height: number, options?: PIXI.RendererOptions, noWebGL?: boolean): PIXI.WebGLRenderer | PIXI.CanvasRenderer;
-    static loader: PIXI.Loader;
+    static loader: PIXI.loaders.Loader;
     static VERSION: string;
     static PI_2: number;
     static RAD_TO_DEG: number;
@@ -161,43 +161,44 @@ declare module PIXI {
         interactiveChildren: boolean;
         defaultCursor: string;
 
-        on(event: 'click', fn: (event: InteractionEvent) => void, context?: any): EventEmitter;
-        on(event: 'mousedown', fn: (event: InteractionEvent) => void, context?: any): EventEmitter;
-        on(event: 'mouseout', fn: (event: InteractionEvent) => void, context?: any): EventEmitter;
-        on(event: 'mouseover', fn: (event: InteractionEvent) => void, context?: any): EventEmitter;
-        on(event: 'mouseup', fn: (event: InteractionEvent) => void, context?: any): EventEmitter;
-        on(event: 'mouseclick', fn: (event: InteractionEvent) => void, context?: any): EventEmitter;
-        on(event: 'mouseupoutside', fn: (event: InteractionEvent) => void, context?: any): EventEmitter;
-        on(event: 'rightclick', fn: (event: InteractionEvent) => void, context?: any): EventEmitter;
-        on(event: 'rightdown', fn: (event: InteractionEvent) => void, context?: any): EventEmitter;
-        on(event: 'rightup', fn: (event: InteractionEvent) => void, context?: any): EventEmitter;
-        on(event: 'rightupoutside', fn: (event: InteractionEvent) => void, context?: any): EventEmitter;
-        on(event: 'tap', fn: (event: InteractionEvent) => void, context?: any): EventEmitter;
-        on(event: 'touchend', fn: (event: InteractionEvent) => void, context?: any): EventEmitter;
-        on(event: 'touchendoutside', fn: (event: InteractionEvent) => void, context?: any): EventEmitter;
-        on(event: 'touchmove', fn: (event: InteractionEvent) => void, context?: any): EventEmitter;
-        on(event: 'touchstart', fn: (event: InteractionEvent) => void, context?: any): EventEmitter;
+        on(event: 'click', fn: (event: interaction.InteractionEvent) => void, context?: any): EventEmitter;
+        on(event: 'mousedown', fn: (event: interaction.InteractionEvent) => void, context?: any): EventEmitter;
+        on(event: 'mouseout', fn: (event: interaction.InteractionEvent) => void, context?: any): EventEmitter;
+        on(event: 'mouseover', fn: (event: interaction.InteractionEvent) => void, context?: any): EventEmitter;
+        on(event: 'mouseup', fn: (event: interaction.InteractionEvent) => void, context?: any): EventEmitter;
+        on(event: 'mouseclick', fn: (event: interaction.InteractionEvent) => void, context?: any): EventEmitter;
+        on(event: 'mouseupoutside', fn: (event: interaction.InteractionEvent) => void, context?: any): EventEmitter;
+        on(event: 'rightclick', fn: (event: interaction.InteractionEvent) => void, context?: any): EventEmitter;
+        on(event: 'rightdown', fn: (event: interaction.InteractionEvent) => void, context?: any): EventEmitter;
+        on(event: 'rightup', fn: (event: interaction.InteractionEvent) => void, context?: any): EventEmitter;
+        on(event: 'rightupoutside', fn: (event: interaction.InteractionEvent) => void, context?: any): EventEmitter;
+        on(event: 'tap', fn: (event: interaction.InteractionEvent) => void, context?: any): EventEmitter;
+        on(event: 'touchend', fn: (event: interaction.InteractionEvent) => void, context?: any): EventEmitter;
+        on(event: 'touchendoutside', fn: (event: interaction.InteractionEvent) => void, context?: any): EventEmitter;
+        on(event: 'touchmove', fn: (event: interaction.InteractionEvent) => void, context?: any): EventEmitter;
+        on(event: 'touchstart', fn: (event: interaction.InteractionEvent) => void, context?: any): EventEmitter;
         on(event: string, fn: Function, context?: any): EventEmitter;
 
-        once(event: 'click', fn: (event: InteractionEvent) => void, context?: any): EventEmitter;
-        once(event: 'mousedown', fn: (event: InteractionEvent) => void, context?: any): EventEmitter;
-        once(event: 'mouseout', fn: (event: InteractionEvent) => void, context?: any): EventEmitter;
-        once(event: 'mouseover', fn: (event: InteractionEvent) => void, context?: any): EventEmitter;
-        once(event: 'mouseup', fn: (event: InteractionEvent) => void, context?: any): EventEmitter;
-        once(event: 'mouseclick', fn: (event: InteractionEvent) => void, context?: any): EventEmitter;
-        once(event: 'mouseupoutside', fn: (event: InteractionEvent) => void, context?: any): EventEmitter;
-        once(event: 'rightclick', fn: (event: InteractionEvent) => void, context?: any): EventEmitter;
-        once(event: 'rightdown', fn: (event: InteractionEvent) => void, context?: any): EventEmitter;
-        once(event: 'rightup', fn: (event: InteractionEvent) => void, context?: any): EventEmitter;
-        once(event: 'rightupoutside', fn: (event: InteractionEvent) => void, context?: any): EventEmitter;
-        once(event: 'tap', fn: (event: InteractionEvent) => void, context?: any): EventEmitter;
-        once(event: 'touchend', fn: (event: InteractionEvent) => void, context?: any): EventEmitter;
-        once(event: 'touchendoutside', fn: (event: InteractionEvent) => void, context?: any): EventEmitter;
-        once(event: 'touchmove', fn: (event: InteractionEvent) => void, context?: any): EventEmitter;
-        once(event: 'touchstart', fn: (event: InteractionEvent) => void, context?: any): EventEmitter;
+        once(event: 'click', fn: (event: interaction.InteractionEvent) => void, context?: any): EventEmitter;
+        once(event: 'mousedown', fn: (event: interaction.InteractionEvent) => void, context?: any): EventEmitter;
+        once(event: 'mouseout', fn: (event: interaction.InteractionEvent) => void, context?: any): EventEmitter;
+        once(event: 'mouseover', fn: (event: interaction.InteractionEvent) => void, context?: any): EventEmitter;
+        once(event: 'mouseup', fn: (event: interaction.InteractionEvent) => void, context?: any): EventEmitter;
+        once(event: 'mouseclick', fn: (event: interaction.InteractionEvent) => void, context?: any): EventEmitter;
+        once(event: 'mouseupoutside', fn: (event: interaction.InteractionEvent) => void, context?: any): EventEmitter;
+        once(event: 'rightclick', fn: (event: interaction.InteractionEvent) => void, context?: any): EventEmitter;
+        once(event: 'rightdown', fn: (event: interaction.InteractionEvent) => void, context?: any): EventEmitter;
+        once(event: 'rightup', fn: (event: interaction.InteractionEvent) => void, context?: any): EventEmitter;
+        once(event: 'rightupoutside', fn: (event: interaction.InteractionEvent) => void, context?: any): EventEmitter;
+        once(event: 'tap', fn: (event: interaction.InteractionEvent) => void, context?: any): EventEmitter;
+        once(event: 'touchend', fn: (event: interaction.InteractionEvent) => void, context?: any): EventEmitter;
+        once(event: 'touchendoutside', fn: (event: interaction.InteractionEvent) => void, context?: any): EventEmitter;
+        once(event: 'touchmove', fn: (event: interaction.InteractionEvent) => void, context?: any): EventEmitter;
+        once(event: 'touchstart', fn: (event: interaction.InteractionEvent) => void, context?: any): EventEmitter;
         once(event: string, fn: Function, context?: any): EventEmitter;
 
     }
+
     export class Container extends DisplayObject {
 
         private _renderWebGL(renderer: WebGLRenderer): void;
@@ -273,7 +274,7 @@ declare module PIXI {
         drawEllipse(x: number, y: number, width: number, height: number): Graphics;
         drawPolygon(path: Point[]): Graphics;
         clear(): Graphics;
-        //todo 
+        //todo
         generateTexture(renderer: WebGLRenderer | CanvasRenderer, resolution?: number, scaleMode?: number): Texture;
         getBounds(matrix?: Matrix): Rectangle;
         containsPoint(point: Point): boolean;
@@ -1163,7 +1164,7 @@ declare module PIXI {
         }
         export class TilingSprite extends Sprite {
 
-            //This is really unclean but is the only way :(  
+            //This is really unclean but is the only way :(
             //See http://stackoverflow.com/questions/29593905/typescript-declaration-extending-class-with-static-method/29595798#29595798
             //Thanks bas!
             static fromFrame(frameId: string): Sprite;
@@ -1394,30 +1395,31 @@ declare module PIXI {
         applyFilter(renderer: WebGLRenderer, input: RenderTarget, output: RenderTarget): void;
 
     }
-    
+
     //////////////////////////////////////////////////////////////////////////////
     ////////////////////////////INTERACTION///////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////
 
-    export interface InteractionEvent {
+    export module interaction {
+        export interface InteractionEvent {
 
-        stopped: boolean;
-        target: any;
-        type: string;
-        data: InteractionData;
-        stopPropagation(): void;
+            stopped: boolean;
+            target: any;
+            type: string;
+            data: InteractionData;
+            stopPropagation(): void;
 
-    }
-    export interface InteractionData {
+        }
 
-        global: Point;
-        target: DisplayObject;
-        originalEvent: Event;
+        export class InteractionData {
 
-        getLocalPosition(displayObject: DisplayObject, point?: Point, globalPos?: Point): Point;
+            global: Point;
+            target: DisplayObject;
+            originalEvent: Event;
 
-    }
-    module interaction {
+            getLocalPosition(displayObject: DisplayObject, point?: Point, globalPos?: Point): Point;
+
+        }
 
         export class InteractionManager {
 
@@ -1469,6 +1471,7 @@ declare module PIXI {
             destroy(): void;
 
         }
+
         export interface InteractiveTarget {
 
             interactive: boolean;
@@ -1485,92 +1488,94 @@ declare module PIXI {
     //////////////////////////////////////////////////////////////////////////////
     //https://github.com/englercj/resource-loader/blob/master/src/Loader.js
 
-    export interface LoaderOptions {
+    export module loaders {
+        export interface LoaderOptions {
 
-        crossOrigin?: boolean;
-        loadType?: number;
-        xhrType?: string;
+            crossOrigin?: boolean;
+            loadType?: number;
+            xhrType?: string;
 
-    }
-    export class Loader extends EventEmitter {
-
-        constructor(baseUrl?: string, concurrency?: number);
-
-        baseUrl: string;
-        progress: number;
-        loading: boolean;
-        resources: Resource[];
-
-        add(name: string, url: string, options?: LoaderOptions, cb?: () => void): Loader;
-        add(url: string, options?: LoaderOptions, cb?: () => void): Loader;
-        //todo I am not sure of object literal notional (or its options) so just allowing any but would love to improve this 
-        add(obj: any, options?: LoaderOptions, cb?: () => void): Loader;
-
-        on(event: 'complete', fn: (loader: PIXI.Loader, object: any) => void, context?: any): EventEmitter;
-        on(event: 'error', fn: (error: Error, loader: PIXI.Loader, resource: Resource) => void, context?: any): EventEmitter;
-        on(event: 'load', fn: (loader: PIXI.Loader, resource: Resource) => void, context?: any): EventEmitter;
-        on(event: 'progress', fn: (loader: PIXI.Loader, resource: Resource) => void, context?: any): EventEmitter;
-        on(event: 'start', fn: (loader: PIXI.Loader) => void, context?: any): EventEmitter;
-        on(event: string, fn: Function, context?: any): EventEmitter;
-
-        once(event: 'complete', fn: (loader: PIXI.Loader, object: any) => void, context?: any): EventEmitter;
-        once(event: 'error', fn: (error: Error, loader: PIXI.Loader, resource: Resource) => void, context?: any): EventEmitter;
-        once(event: 'load', fn: (loader: PIXI.Loader, resource: Resource) => void, context?: any): EventEmitter;
-        once(event: 'progress', fn: (loader: PIXI.Loader, resource: Resource) => void, context?: any): EventEmitter;
-        once(event: 'start', fn: (loader: PIXI.Loader) => void, context?: any): EventEmitter;
-        once(event: string, fn: Function, context?: any): EventEmitter;
-
-        before(fn: Function): Loader;
-        pre(fn: Function): Loader;
-
-        after(fn: Function): Loader;
-        use(fn: Function): Loader;
-
-        reset(): void;
-
-        load(cb?: (loader: PIXI.Loader, object: any) => void): Loader;
-
-    }
-    export class Resource extends EventEmitter {
-
-        static LOAD_TYPE: {
-            XHR: number;
-            IMAGE: number;
-            AUDIO: number;
-            VIDEO: number;
-        };
-
-        static XHR_READ_STATE: {
-            UNSENT: number;
-            OPENED: number;
-            HEADERS_RECIEVED: number;
-            LOADING: number;
-            DONE: number;
-        };
-
-        static XHR_RESPONSE_TYPE: {
-            DEFAULT: number;
-            BUFFER: number;
-            BLOB: number;
-            DOCUMENT: number;
-            JSON: number;
-            TEXT: number;
         }
+        export class Loader extends EventEmitter {
 
-        constructor(name?: string, url?: string | string[], options?: LoaderOptions)
+            constructor(baseUrl?: string, concurrency?: number);
 
-        name: string;
-        url: string;
-        data: any;
-        crossOrigin: string;
-        loadType: number;
-        xhrType: string;
-        error: Error;
-        xhr: XMLHttpRequest;
+            baseUrl: string;
+            progress: number;
+            loading: boolean;
+            resources: Resource[];
 
-        complete(): void;
-        load(cb?: () => void): void;
+            add(name: string, url: string, options?: LoaderOptions, cb?: () => void): Loader;
+            add(url: string, options?: LoaderOptions, cb?: () => void): Loader;
+            //todo I am not sure of object literal notional (or its options) so just allowing any but would love to improve this
+            add(obj: any, options?: LoaderOptions, cb?: () => void): Loader;
 
+            on(event: 'complete', fn: (loader: loaders.Loader, object: any) => void, context?: any): EventEmitter;
+            on(event: 'error', fn: (error: Error, loader: loaders.Loader, resource: Resource) => void, context?: any): EventEmitter;
+            on(event: 'load', fn: (loader: loaders.Loader, resource: Resource) => void, context?: any): EventEmitter;
+            on(event: 'progress', fn: (loader: loaders.Loader, resource: Resource) => void, context?: any): EventEmitter;
+            on(event: 'start', fn: (loader: loaders.Loader) => void, context?: any): EventEmitter;
+            on(event: string, fn: Function, context?: any): EventEmitter;
+
+            once(event: 'complete', fn: (loader: loaders.Loader, object: any) => void, context?: any): EventEmitter;
+            once(event: 'error', fn: (error: Error, loader: loaders.Loader, resource: Resource) => void, context?: any): EventEmitter;
+            once(event: 'load', fn: (loader: loaders.Loader, resource: Resource) => void, context?: any): EventEmitter;
+            once(event: 'progress', fn: (loader: loaders.Loader, resource: Resource) => void, context?: any): EventEmitter;
+            once(event: 'start', fn: (loader: loaders.Loader) => void, context?: any): EventEmitter;
+            once(event: string, fn: Function, context?: any): EventEmitter;
+
+            before(fn: Function): Loader;
+            pre(fn: Function): Loader;
+
+            after(fn: Function): Loader;
+            use(fn: Function): Loader;
+
+            reset(): void;
+
+            load(cb?: (loader: loaders.Loader, object: any) => void): Loader;
+
+        }
+        export class Resource extends EventEmitter {
+
+            static LOAD_TYPE: {
+                XHR: number;
+                IMAGE: number;
+                AUDIO: number;
+                VIDEO: number;
+            };
+
+            static XHR_READ_STATE: {
+                UNSENT: number;
+                OPENED: number;
+                HEADERS_RECIEVED: number;
+                LOADING: number;
+                DONE: number;
+            };
+
+            static XHR_RESPONSE_TYPE: {
+                DEFAULT: number;
+                BUFFER: number;
+                BLOB: number;
+                DOCUMENT: number;
+                JSON: number;
+                TEXT: number;
+            }
+
+            constructor(name?: string, url?: string | string[], options?: LoaderOptions)
+
+            name: string;
+            url: string;
+            data: any;
+            crossOrigin: string;
+            loadType: number;
+            xhrType: string;
+            error: Error;
+            xhr: XMLHttpRequest;
+
+            complete(): void;
+            load(cb?: () => void): void;
+
+        }
     }
 
     //////////////////////////////////////////////////////////////////////////////
@@ -1630,5 +1635,4 @@ declare module PIXI {
         }
 
     }
-
 }
