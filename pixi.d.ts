@@ -124,7 +124,8 @@ declare module PIXI {
         private _initCachedDisplayObjectCanvas(renderer: CanvasRenderer): void;
         private _getCachedBounds(): Rectangle;
         private _destroyCachedDisplayObject(): void;
-        private updateTransform(): void;
+
+        updateTransform(): void;
 
         position: Point;
         scale: Point;
@@ -582,11 +583,12 @@ declare module PIXI {
     }
     export class AbstractFilter {
 
-        private uniforms: any;
         private vertexSrc: string[];
         private fragmentSrc: string[];
 
         constructor(vertexSrc: string | string[], fragmentSrc: string | string[], uniforms: any);
+
+        uniforms: any;
 
         padding: number;
 
