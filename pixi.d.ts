@@ -939,6 +939,7 @@ declare module PIXI {
         renderer: CanvasRenderer | WebGLRenderer;
         valid: boolean;
 
+        render(displayObject: DisplayObject, matrix?: Matrix, clear?: boolean, updateTransform?: boolean);
         resize(width: number, height: number, updateBase?: boolean): void;
         clear(): void;
         destroy(): void;
