@@ -118,6 +118,7 @@ declare module PIXI {
         private _mask: Rectangle;
         private _cachedObject: any;
 
+        private _cacheAsBitmapDestroy(): void;
         private _renderCachedWebGL(renderer: WebGLRenderer): void;
         private _initCachedDisplayObject(renderer: WebGLRenderer): void;
         private _renderCachedCanvas(renderer: CanvasRenderer): void;
@@ -1072,6 +1073,8 @@ declare module PIXI {
 
         }
         export class BitmapText extends Container {
+
+            static fonts: any;
 
             private _glyphs: Sprite[];
             private _font: string | {
