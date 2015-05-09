@@ -1,10 +1,9 @@
 ﻿/**
- * Pixi v3.0.2 Commit History Reviewed: 30/Apr
+ * Pixi v3.0.3 Commit History Reviewed: 09/May
  *
  * https://github.com/GoodBoyDigital/pixi.js/
  *
  * The definitions will follow the Dev Branch for now.
- *
  */
 declare class PIXI {
 
@@ -153,7 +152,7 @@ declare module PIXI {
         getLocalBounds(): Rectangle;
         toGlobal(position: Point): Point;
         toLocal(position: Point, from?: DisplayObject): Point;
-        generateTexture(renderer: CanvasRenderer | WebGLRenderer, resolution: number, scaleMode: number): Texture;
+        generateTexture(renderer: CanvasRenderer | WebGLRenderer, scaleMode: number, resolution: number): Texture;
         destroy(): void;
         getChildByName(name: string): DisplayObject;
         getGlobalPosition(point: Point): Point;
@@ -531,6 +530,7 @@ declare module PIXI {
 
         pushMask(maskData: any, renderer: WebGLRenderer | CanvasRenderer): void;
         popMask(renderer: WebGLRenderer | CanvasRenderer): void;
+        destroy(): void;
 
     }
     export class CanvasTinter {
@@ -844,7 +844,7 @@ declare module PIXI {
         wordWrapWidth?: number;
         lineHeight?: number;
         dropShadow?: boolean;
-        dropShadowColor?: string;
+        dropShadowColor?: string | number;
         dropShadowAngle?: number;
         dropShadowDistance?: number;
         padding?: number;
@@ -940,7 +940,7 @@ declare module PIXI {
         renderer: CanvasRenderer | WebGLRenderer;
         valid: boolean;
 
-        render(displayObject: DisplayObject, matrix?: Matrix, clear?: boolean, updateTransform?: boolean);
+        render(displayObject: DisplayObject, matrix?: Matrix, clear?: boolean, updateTransform?: boolean): void;
         resize(width: number, height: number, updateBase?: boolean): void;
         clear(): void;
         destroy(): void;
@@ -1218,6 +1218,9 @@ declare module PIXI {
     }
     export class BlurFilter extends AbstractFilter {
 
+        private blurXFilter: BlurXFilter;
+        private blurYFilter: BlurYFilter;
+
         blur: number;
         passes: number;
         blurX: number;
@@ -1243,6 +1246,10 @@ declare module PIXI {
     }
     export class ColorMatrixFilter extends AbstractFilter {
 
+        private _loadMatrix(matrix: number[], multiply: boolean): void;
+        private _multiply(out: number[], a: number[], b: number[]): void;
+        private _colorMatrix(matrix: number[]): void;
+
         matrix: number[];
 
         brightness(b: number, multiply?: boolean): void;
@@ -1250,7 +1257,7 @@ declare module PIXI {
         blackAndWhite(multiply?: boolean): void;
         hue(rotation: number, multiply?: boolean): void;
         contrast(amount: number, multiply?: boolean): void;
-        saturation(amount: number, multiply?: boolean): void;
+        saturate(amount: number, multiply?: boolean): void;
         desaturate(multiply?: boolean): void;
         negative(multiply?: boolean): void;
         sepia(multiply?: boolean): void;
@@ -1618,6 +1625,10 @@ declare module PIXI {
 
         }
         export class Rope extends Mesh {
+
+            private getTextureUvs(): TextureUvs;
+
+            private _textureUvs: TextureUvs;
 
             constructor(texture: Texture, points: Point[]);
 
