@@ -1,5 +1,5 @@
 ﻿/**
- * Pixi v3.0.3 Commit History Reviewed: 09/May
+ * Pixi v3.0.5 Commit History Reviewed: 15/May
  *
  * https://github.com/GoodBoyDigital/pixi.js/
  *
@@ -560,6 +560,7 @@ declare module PIXI {
         private _renderTargetStack: RenderTarget[];
 
         private _initContext(): void;
+        private _createContext(): void;
         private handleContextLost: (event: WebGLContextEvent) => void;
         private _mapBlendModes(): void;
 
@@ -1040,19 +1041,6 @@ declare module PIXI {
         static BaseTextureCache: any;
 
     }
-    export module utils {
-
-        export class PolyK {
-
-            private static _PointInTriangle(px: number, py: number, ax: number, ay: number, bx: number, by: number, cx: number, cy: number): boolean;
-            private static _convex(ax: number, ay: number, bx: number, by: number, cx: number, cy: number, sign: boolean): boolean;
-
-            static Triangulate(p: any): number[];
-
-        }
-
-    }
-
 
     //////////////////////////////////////////////////////////////////////////////
     ////////////////////////////EXTRAS////////////////////////////////////////////
@@ -1131,41 +1119,6 @@ declare module PIXI {
             gotoAndStop(frameName: number): void;
             gotoAndPlay(frameName: number): void;
             destroy(): void;
-
-        }
-        export class Ticker extends EventEmitter {
-
-            private _tick(time: number): void;
-            private _emitter: EventEmitter;
-            private _requestId: number;
-            private _maxElapsedMS: number;
-
-            private _requestIfNeeded: void;
-            private _callIfNeeded(): void;
-            private _startIfPossible(): void;
-
-            autoStart: boolean;
-            deltaTime: number;
-            elapsedMS: number;
-            FPS: number;
-            lastTime: number;
-            minFPS: number;
-            speed: number;
-            started: boolean;
-            shared: Ticker;
-
-            start(): void;
-            stop(): void;
-            update(): void;
-
-            add(fn: (deltaTime: number) => void, context?: any): Ticker;
-            addOnce(fn: (deltaTime: number) => void, context?: any): Ticker;
-            remove(fn: (deltaTime: number) => void, context?: any): Ticker;
-
-            on(event: "tick", fn: (deltaTime: number) => void, context?: any): EventEmitter;
-            on(event: string, fn: Function, context?: any): EventEmitter;
-            once(event: "tick", fn: (deltaTime: number) => void, context?: any): EventEmitter;
-            once(event: string, fn: Function, context?: any): EventEmitter;
 
         }
         export class TilingSprite extends Sprite {
@@ -1617,18 +1570,20 @@ declare module PIXI {
 
             getBounds(matrix?: Matrix): Rectangle;
 
+            private _texture: Texture;
+
             private _renderCanvasTriangleMesh(context: CanvasRenderingContext2D): void;
             private _renderCanvasTriangles(context: CanvasRenderingContext2D): void;
             private _renderCanvasDrawTriangle(context: CanvasRenderingContext2D, vertices: number, uvs: number, index0: number, index1: number, index2: number): void;
             private renderMeshFlat(Mesh: Mesh): void;
-            private onTextureUpdate(): void;
+            private _onTextureUpdate(): void;
 
         }
         export class Rope extends Mesh {
 
-            private getTextureUvs(): TextureUvs;
+            private _ready: boolean;
 
-            private _textureUvs: TextureUvs;
+            private getTextureUvs(): TextureUvs;
 
             constructor(texture: Texture, points: Point[]);
 
@@ -1649,6 +1604,46 @@ declare module PIXI {
 
         }
         export interface StripShader extends Shader {
+        }
+
+    }
+
+    module ticker {
+
+        export class Ticker extends EventEmitter {
+
+            private _tick(time: number): void;
+            private _emitter: EventEmitter;
+            private _requestId: number;
+            private _maxElapsedMS: number;
+
+            private _requestIfNeeded: void;
+            private _callIfNeeded(): void;
+            private _startIfPossible(): void;
+
+            autoStart: boolean;
+            deltaTime: number;
+            elapsedMS: number;
+            FPS: number;
+            lastTime: number;
+            minFPS: number;
+            speed: number;
+            started: boolean;
+            shared: Ticker;
+
+            start(): void;
+            stop(): void;
+            update(): void;
+
+            add(fn: (deltaTime: number) => void, context?: any): Ticker;
+            addOnce(fn: (deltaTime: number) => void, context?: any): Ticker;
+            remove(fn: (deltaTime: number) => void, context?: any): Ticker;
+
+            on(event: "tick", fn: (deltaTime: number) => void, context?: any): EventEmitter;
+            on(event: string, fn: Function, context?: any): EventEmitter;
+            once(event: "tick", fn: (deltaTime: number) => void, context?: any): EventEmitter;
+            once(event: string, fn: Function, context?: any): EventEmitter;
+
         }
 
     }
