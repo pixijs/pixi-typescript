@@ -1,5 +1,5 @@
 ﻿/**
- * Pixi v3.0.5 Commit History Reviewed: 15/May
+ * Pixi v3.0.6 Commit History Reviewed: 25/May
  *
  * https://github.com/GoodBoyDigital/pixi.js/
  *
@@ -39,6 +39,15 @@ declare class PIXI {
         LUMINOSITY: number;
 
     };
+    static DRAW_MODES: {
+        POINTS: number;
+        LINES: number;
+        LINE_LOOP: number;
+        LINE_STRIP: number;
+        TRIANGLES: number;
+        TRIANGLE_STRIP: number;
+        TRIANGLE_FAN: number;
+    };
     static SCALE_MODES: {
         DEFAULT: number;
         LINEAR: number;
@@ -69,16 +78,6 @@ declare class PIXI {
 
 }
 
-/*export interface Document {
-
-    on(event: 'mousemove', fn: (event: PIXI.InteractionEvent) => void, context?: any): PIXI.EventEmitter;
-    on(event: string, fn: (event: PIXI.InteractionEvent) => void, context?: any): PIXI.EventEmitter;
-
-    once(event: 'mousemove', fn: (event: PIXI.InteractionEvent) => void, context?: any): PIXI.EventEmitter;
-    once(event: string, fn: (event: PIXI.InteractionEvent) => void, context?: any): PIXI.EventEmitter;
-
-}*/
-
 declare module PIXI {
 
     //https://github.com/primus/eventemitter3
@@ -104,26 +103,32 @@ declare module PIXI {
 
     export class DisplayObject extends EventEmitter implements interaction.InteractiveTarget {
 
+        //begin extras.cacheAsBitmap
         private _cacheAsBitmap: boolean;
         private _originalRenderWebGL: WebGLRenderer;
         private _originalRenderCanvas: CanvasRenderer;
         private _originalUpdateTransform: boolean;
         private _originalHitTest: any;
         private _cachedSprite: any;
-        private _sr: number;
-        private _cr: number;
-        private _bounds: Rectangle;
-        private _currentBounds: Rectangle;
-        private _mask: Rectangle;
-        private _cachedObject: any;
+        private _originalDestroy: any;
 
-        private _cacheAsBitmapDestroy(): void;
+        cacheAsBitmap: boolean;
+
         private _renderCachedWebGL(renderer: WebGLRenderer): void;
         private _initCachedDisplayObject(renderer: WebGLRenderer): void;
         private _renderCachedCanvas(renderer: CanvasRenderer): void;
         private _initCachedDisplayObjectCanvas(renderer: CanvasRenderer): void;
         private _getCachedBounds(): Rectangle;
         private _destroyCachedDisplayObject(): void;
+        private _cacheAsBitmapDestroy(): void;
+        //end extras.cacheAsBitmap
+
+        private _sr: number;
+        private _cr: number;
+        private _bounds: Rectangle;
+        private _currentBounds: Rectangle;
+        private _mask: Rectangle;
+        private _cachedObject: any;
 
         updateTransform(): void;
 
@@ -146,7 +151,6 @@ declare module PIXI {
         filters: AbstractFilter[];
         name: string;
 
-        cacheAsBitmap: boolean;
 
         getBounds(matrix?: Matrix): Rectangle;
         getLocalBounds(): Rectangle;
@@ -315,7 +319,7 @@ declare module PIXI {
         ty: number;
 
         fromArray(array: number[]): void;
-        toArray(transpose?: boolean): number[];
+        toArray(transpose?: boolean, out?: number[]): number[];
         apply(pos: Point, newPos?: Point): Point;
         applyInverse(pos: Point, newPos?: Point): Point;
         translate(x: number, y: number): Matrix;
@@ -562,7 +566,7 @@ declare module PIXI {
         private _initContext(): void;
         private _createContext(): void;
         private handleContextLost: (event: WebGLContextEvent) => void;
-        private _mapBlendModes(): void;
+        private _mapGlModes(): void;
 
         constructor(width?: number, height?: number, options?: RendererOptions);
 
@@ -670,11 +674,12 @@ declare module PIXI {
     }
     export class WebGLManager {
 
+        private onContextChange: () => void;
+
         constructor(renderer: WebGLRenderer);
 
         renderer: WebGLRenderer;
 
-        onContextChange: () => void;
         destroy(): void;
 
     }
@@ -809,6 +814,8 @@ declare module PIXI {
     }
     export class SpriteRenderer extends ObjectRenderer {
 
+        private renderBatch(texture: Texture, size: number, startIndex: number): void;
+
         vertSize: number;
         vertByteSize: number;
         size: number;
@@ -816,18 +823,13 @@ declare module PIXI {
         positions: number[];
         colors: number[];
         indices: number[];
-        lastIndexCount: number;
-        drawing: boolean;
         currentBatchSize: number;
-        currentBaseTexture: BaseTexture;
-        textures: Texture[];
-        blendModes: number[];
-        shaders: Shader[];
         sprites: Sprite[];
         shader: Shader;
 
         render(sprite: Sprite): void;
-        renderBatch(texture: Texture, size: number, startIndex: number): void;
+        flush(): void;
+        start(): void;
         destroy(): void;
 
     }
@@ -1593,9 +1595,14 @@ declare module PIXI {
             refresh(): void;
 
         }
-        export interface MeshRenderer extends ObjectRenderer {
+
+        export class MeshRenderer extends ObjectRenderer {
+
+            private _initWebGL(mesh: Mesh): void;
 
             indices: number[];
+
+            constructor(renderer: WebGLRenderer);
 
             render(mesh: Mesh): void;
             flush(): void;
@@ -1603,6 +1610,7 @@ declare module PIXI {
             destroy(): void;
 
         }
+
         export interface StripShader extends Shader {
         }
 
@@ -1610,39 +1618,34 @@ declare module PIXI {
 
     module ticker {
 
-        export class Ticker extends EventEmitter {
+        export class Ticker {
 
             private _tick(time: number): void;
             private _emitter: EventEmitter;
             private _requestId: number;
             private _maxElapsedMS: number;
 
-            private _requestIfNeeded: void;
-            private _callIfNeeded(): void;
+            private _requestIfNeeded(): void;
+            private _cancelIfNeeded(): void;
             private _startIfPossible(): void;
 
             autoStart: boolean;
             deltaTime: number;
             elapsedMS: number;
-            FPS: number;
             lastTime: number;
-            minFPS: number;
             speed: number;
             started: boolean;
-            shared: Ticker;
 
-            start(): void;
-            stop(): void;
-            update(): void;
+            FPS: number;
+            minFPS: number;
+            shared: Ticker;
 
             add(fn: (deltaTime: number) => void, context?: any): Ticker;
             addOnce(fn: (deltaTime: number) => void, context?: any): Ticker;
             remove(fn: (deltaTime: number) => void, context?: any): Ticker;
-
-            on(event: "tick", fn: (deltaTime: number) => void, context?: any): EventEmitter;
-            on(event: string, fn: Function, context?: any): EventEmitter;
-            once(event: "tick", fn: (deltaTime: number) => void, context?: any): EventEmitter;
-            once(event: string, fn: Function, context?: any): EventEmitter;
+            start(): void;
+            stop(): void;
+            update(): void;
 
         }
 
