@@ -4,6 +4,6 @@ This definition file attempts to follow the [development branch of pixi](https:/
 
 The pixi-tests.ts attempts to keep up with the [latest examples](https://github.com/pixijs/examples)
 
-Any advice, suggestions on improvements would be appreciatated. 
+Any advice, suggestions or improvements would be appreciated. 
 
 *Note That Spine and its Examples are not yet done.*
