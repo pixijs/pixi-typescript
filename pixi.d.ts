@@ -1,5 +1,5 @@
 ﻿/**
- * Pixi v3.0.6 Commit History Reviewed: 25/May
+ * Pixi v3.0.6 Commit History Reviewed: 05/Jun
  *
  * https://github.com/GoodBoyDigital/pixi.js/
  *
@@ -103,8 +103,7 @@ declare module PIXI {
 
     export class DisplayObject extends EventEmitter implements interaction.InteractiveTarget {
 
-        //begin extras.cacheAsBitmap
-        private _cacheAsBitmap: boolean;
+        //begin extras.cacheAsBitmap see https://github.com/pixijs/pixi-typescript/commit/1207b7f4752d79a088d6a9a465a3ec799906b1db 
         private _originalRenderWebGL: WebGLRenderer;
         private _originalRenderCanvas: CanvasRenderer;
         private _originalUpdateTransform: boolean;
@@ -147,7 +146,7 @@ declare module PIXI {
         x: number;
         y: number;
         worldVisible: boolean;
-        mask: Graphics;
+        mask: Graphics | Sprite;
         filters: AbstractFilter[];
         name: string;
 
@@ -271,7 +270,7 @@ declare module PIXI {
         bezierCurveTo(cpX: number, cpY: number, cpX2: number, cpY2: number, toX: number, toY: number): Graphics;
         arcTo(x1: number, y1: number, x2: number, y2: number, radius: number): Graphics;
         arc(cx: number, cy: number, radius: number, startAngle: number, endAngle: number, anticlockwise?: boolean): Graphics;
-        beginFill(color: number, alpha: number): Graphics;
+        beginFill(color: number, alpha?: number): Graphics;
         endFill(): Graphics;
         drawRect(x: number, y: number, width: number, height: number): Graphics;
         drawRoundedRect(x: number, y: number, width: number, height: number, radius: number): Graphics;
@@ -419,11 +418,11 @@ declare module PIXI {
 
     export interface ParticleContainerProperties {
 
-        scale?: any;
-        position?: any;
-        rotation?: number;
-        uvs?: any;
-        alpha?: number;
+        scale?: boolean;
+        position?: boolean;
+        rotation?: boolean;
+        uvs?: boolean;
+        alpha?: boolean;
     }
     export class ParticleContainer extends Container {
 
@@ -553,7 +552,7 @@ declare module PIXI {
     export class WebGLRenderer extends SystemRenderer {
 
         private _useFXAA: boolean;
-        private _FXAAFilter: FXAAFilter;
+        private _FXAAFilter: filters.FXAAFilter;
         private _contextOptions: {
             alpha: boolean;
             antiAlias: boolean;
@@ -592,7 +591,7 @@ declare module PIXI {
         private vertexSrc: string[];
         private fragmentSrc: string[];
 
-        constructor(vertexSrc: string | string[], fragmentSrc: string | string[], uniforms: any);
+        constructor(vertexSrc?: string | string[], fragmentSrc?: string | string[], uniforms?: any);
 
         uniforms: any;
 
@@ -959,7 +958,7 @@ declare module PIXI {
         static fromImage(imageUrl: string, crossOrigin?: boolean, scaleMode?: number): Texture;
         static fromFrame(frameId: string): Texture;
         static fromCanvas(canvas: HTMLCanvasElement, scaleMode?: number): Texture;
-        static fromVideo(video: HTMLVideoElement, scaleMode?: number): Texture;
+        static fromVideo(video: HTMLVideoElement | string, scaleMode?: number): Texture;
         static fromVideoUrl(videoUrl: string, scaleMode?: number): Texture;
         static addTextureToCache(texture: Texture, id: string): void;
         static removeTextureFromCache(id: string): Texture;
@@ -1161,207 +1160,212 @@ declare module PIXI {
     ///////////////////////////////FILTERS////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////
 
-    export class AsciiFilter extends AbstractFilter {
-        size: number;
-    }
-    export class BloomFilter extends AbstractFilter {
+    module filters {
 
-        blur: number;
-        blurX: number;
-        blurY: number;
+        export class AsciiFilter extends AbstractFilter {
+            size: number;
+        }
+        export class BloomFilter extends AbstractFilter {
 
-    }
-    export class BlurFilter extends AbstractFilter {
+            blur: number;
+            blurX: number;
+            blurY: number;
 
-        private blurXFilter: BlurXFilter;
-        private blurYFilter: BlurYFilter;
+        }
+        export class BlurFilter extends AbstractFilter {
 
-        blur: number;
-        passes: number;
-        blurX: number;
-        blurY: number;
+            private blurXFilter: BlurXFilter;
+            private blurYFilter: BlurYFilter;
 
-    }
-    export class BlurXFilter extends AbstractFilter {
+            blur: number;
+            passes: number;
+            blurX: number;
+            blurY: number;
 
-        passed: number;
-        strength: number;
-        blur: number;
+        }
+        export class BlurXFilter extends AbstractFilter {
 
-    }
-    export class BlurYFilter extends AbstractFilter {
+            passed: number;
+            strength: number;
+            blur: number;
 
-        passed: number;
-        strength: number;
-        blur: number;
+        }
+        export class BlurYFilter extends AbstractFilter {
 
-    }
-    export class SmartBlurFilter extends AbstractFilter {
+            passed: number;
+            strength: number;
+            blur: number;
 
-    }
-    export class ColorMatrixFilter extends AbstractFilter {
+        }
+        export class SmartBlurFilter extends AbstractFilter {
 
-        private _loadMatrix(matrix: number[], multiply: boolean): void;
-        private _multiply(out: number[], a: number[], b: number[]): void;
-        private _colorMatrix(matrix: number[]): void;
+        }
+        export class ColorMatrixFilter extends AbstractFilter {
 
-        matrix: number[];
+            private _loadMatrix(matrix: number[], multiply: boolean): void;
+            private _multiply(out: number[], a: number[], b: number[]): void;
+            private _colorMatrix(matrix: number[]): void;
 
-        brightness(b: number, multiply?: boolean): void;
-        greyscale(scale: number, multiply?: boolean): void;
-        blackAndWhite(multiply?: boolean): void;
-        hue(rotation: number, multiply?: boolean): void;
-        contrast(amount: number, multiply?: boolean): void;
-        saturate(amount: number, multiply?: boolean): void;
-        desaturate(multiply?: boolean): void;
-        negative(multiply?: boolean): void;
-        sepia(multiply?: boolean): void;
-        technicolor(multiply?: boolean): void;
-        polaroid(multiply?: boolean): void;
-        toBGR(multiply?: boolean): void;
-        kodachrome(multiply?: boolean): void;
-        browni(multiply?: boolean): void;
-        vintage(multiply?: boolean): void;
-        colorTone(desaturation: number, toned: number, lightColor: string, darkColor: string, multiply?: boolean): void;
-        night(intensity: number, multiply?: boolean): void;
-        predator(amount: number, multiply?: boolean): void;
-        lsd(multiply?: boolean): void;
-        reset(): void;
+            matrix: number[];
 
-    }
-    export class ColorStepFilter extends AbstractFilter {
+            brightness(b: number, multiply?: boolean): void;
+            greyscale(scale: number, multiply?: boolean): void;
+            blackAndWhite(multiply?: boolean): void;
+            hue(rotation: number, multiply?: boolean): void;
+            contrast(amount: number, multiply?: boolean): void;
+            saturate(amount: number, multiply?: boolean): void;
+            desaturate(multiply?: boolean): void;
+            negative(multiply?: boolean): void;
+            sepia(multiply?: boolean): void;
+            technicolor(multiply?: boolean): void;
+            polaroid(multiply?: boolean): void;
+            toBGR(multiply?: boolean): void;
+            kodachrome(multiply?: boolean): void;
+            browni(multiply?: boolean): void;
+            vintage(multiply?: boolean): void;
+            colorTone(desaturation: number, toned: number, lightColor: string, darkColor: string, multiply?: boolean): void;
+            night(intensity: number, multiply?: boolean): void;
+            predator(amount: number, multiply?: boolean): void;
+            lsd(multiply?: boolean): void;
+            reset(): void;
 
-        step: number;
+        }
+        export class ColorStepFilter extends AbstractFilter {
 
-    }
-    export class ConvolutionFilter extends AbstractFilter {
+            step: number;
 
-        constructor(matrix: number[], width: number, height: number);
+        }
+        export class ConvolutionFilter extends AbstractFilter {
 
-        matrix: number[];
-        width: number;
-        height: number;
+            constructor(matrix: number[], width: number, height: number);
 
-    }
-    export class CrossHatchFilter extends AbstractFilter {
+            matrix: number[];
+            width: number;
+            height: number;
 
-    }
-    export class DisplacementFilter extends AbstractFilter {
+        }
+        export class CrossHatchFilter extends AbstractFilter {
 
-        constructor(sprite: Sprite);
+        }
+        export class DisplacementFilter extends AbstractFilter {
 
-        map: Texture;
+            constructor(sprite: Sprite);
 
-    }
-    export class DotScreenFilter extends AbstractFilter {
+            map: Texture;
 
-        scale: number;
-        angle: number;
+            scale: Point;
 
-    }
-    export class BlurYTintFilter extends AbstractFilter {
+        }
+        export class DotScreenFilter extends AbstractFilter {
 
-        blur: number;
+            scale: number;
+            angle: number;
 
-    }
-    export class DropShadowFilter extends AbstractFilter {
+        }
+        export class BlurYTintFilter extends AbstractFilter {
 
-        blur: number;
-        blurX: number;
-        blurY: number;
-        color: number;
-        alpha: number;
-        distance: number;
-        angle: number;
+            blur: number;
 
-    }
-    export class GrayFilter extends AbstractFilter {
+        }
+        export class DropShadowFilter extends AbstractFilter {
 
-        gray: number;
+            blur: number;
+            blurX: number;
+            blurY: number;
+            color: number;
+            alpha: number;
+            distance: number;
+            angle: number;
 
-    }
-    export class InvertFilter extends AbstractFilter {
+        }
+        export class GrayFilter extends AbstractFilter {
 
-        invert: number;
+            gray: number;
 
-    }
-    export class NoiseFilter extends AbstractFilter {
+        }
+        export class InvertFilter extends AbstractFilter {
 
-        noise: number;
+            invert: number;
 
-    }
-    export class NormalMapFilter extends AbstractFilter {
+        }
+        export class NoiseFilter extends AbstractFilter {
 
-        constructor(texture: Texture);
+            noise: number;
 
-        map: Texture;
-        scale: Point;
-        offset: Point;
+        }
+        export class NormalMapFilter extends AbstractFilter {
 
-    }
-    export class PixelateFilter extends AbstractFilter {
+            constructor(texture: Texture);
 
-        size: Point;
+            map: Texture;
+            scale: Point;
+            offset: Point;
 
-    }
-    export class RGBSplitFilter extends AbstractFilter {
+        }
+        export class PixelateFilter extends AbstractFilter {
 
-        red: number;
-        green: number;
-        blue: number;
+            size: Point;
 
-    }
-    export class SepiaFilter extends AbstractFilter {
+        }
+        export class RGBSplitFilter extends AbstractFilter {
 
-        sepia: number;
+            red: number;
+            green: number;
+            blue: number;
 
-    }
-    export class ShockwaveFilter extends AbstractFilter {
+        }
+        export class SepiaFilter extends AbstractFilter {
 
-        center: number[];
-        params: any;
-        time: number;
+            sepia: number;
 
-    }
-    export class TiltShiftAxisFilter extends AbstractFilter {
+        }
+        export class ShockwaveFilter extends AbstractFilter {
 
-        blur: number;
-        gradientBlur: number;
-        start: number;
-        end: number;
+            center: number[];
+            params: any;
+            time: number;
 
-        updateDelta(): void;
+        }
+        export class TiltShiftAxisFilter extends AbstractFilter {
 
-    }
-    export class TiltShiftFilter extends AbstractFilter {
+            blur: number;
+            gradientBlur: number;
+            start: number;
+            end: number;
 
-        blur: number;
-        gradientBlur: number;
-        start: number;
-        end: number;
+            updateDelta(): void;
 
-    }
-    export class TiltShiftXFilter extends AbstractFilter {
+        }
+        export class TiltShiftFilter extends AbstractFilter {
 
-        updateDelta(): void;
+            blur: number;
+            gradientBlur: number;
+            start: number;
+            end: number;
 
-    }
-    export class TiltShiftYFilter extends AbstractFilter {
+        }
+        export class TiltShiftXFilter extends AbstractFilter {
 
-        updateDelta(): void;
+            updateDelta(): void;
 
-    }
-    export class TwistFilter extends AbstractFilter {
+        }
+        export class TiltShiftYFilter extends AbstractFilter {
 
-        offset: Point;
-        radius: number;
-        angle: number;
+            updateDelta(): void;
 
-    }
-    export class FXAAFilter extends AbstractFilter {
+        }
+        export class TwistFilter extends AbstractFilter {
 
-        applyFilter(renderer: WebGLRenderer, input: RenderTarget, output: RenderTarget): void;
+            offset: Point;
+            radius: number;
+            angle: number;
 
+        }
+        export class FXAAFilter extends AbstractFilter {
+
+            applyFilter(renderer: WebGLRenderer, input: RenderTarget, output: RenderTarget): void;
+
+        }
     }
 
     //////////////////////////////////////////////////////////////////////////////
@@ -1618,6 +1622,8 @@ declare module PIXI {
 
     module ticker {
 
+        export var shared: Ticker;
+
         export class Ticker {
 
             private _tick(time: number): void;
@@ -1638,7 +1644,6 @@ declare module PIXI {
 
             FPS: number;
             minFPS: number;
-            shared: Ticker;
 
             add(fn: (deltaTime: number) => void, context?: any): Ticker;
             addOnce(fn: (deltaTime: number) => void, context?: any): Ticker;
