@@ -1185,14 +1185,14 @@ declare module PIXI {
         }
         export class BlurXFilter extends AbstractFilter {
 
-            passed: number;
+            passes: number;
             strength: number;
             blur: number;
 
         }
         export class BlurYFilter extends AbstractFilter {
 
-            passed: number;
+            passes: number;
             strength: number;
             blur: number;
 
