@@ -7,8 +7,7 @@
  */
 declare class PIXI {
 
-    static autoDetectRenderer(width: number, height: number, options?: PIXI.RendererOptions, noWebGL?: boolean): PIXI.WebGLRenderer | PIXI.CanvasRenderer;
-    static loader: PIXI.loaders.Loader;
+
     static VERSION: string;
     static PI_2: number;
     static RAD_TO_DEG: number;
@@ -79,7 +78,8 @@ declare class PIXI {
 }
 
 declare module PIXI {
-
+    export function  autoDetectRenderer(width: number, height: number, options?: PIXI.RendererOptions, noWebGL?: boolean): PIXI.WebGLRenderer | PIXI.CanvasRenderer;
+    export var loader: PIXI.loaders.Loader;
     //https://github.com/primus/eventemitter3
     export class EventEmitter {
 
@@ -103,7 +103,7 @@ declare module PIXI {
 
     export class DisplayObject extends EventEmitter implements interaction.InteractiveTarget {
 
-        //begin extras.cacheAsBitmap see https://github.com/pixijs/pixi-typescript/commit/1207b7f4752d79a088d6a9a465a3ec799906b1db 
+        //begin extras.cacheAsBitmap see https://github.com/pixijs/pixi-typescript/commit/1207b7f4752d79a088d6a9a465a3ec799906b1db
         private _originalRenderWebGL: WebGLRenderer;
         private _originalRenderCanvas: CanvasRenderer;
         private _originalUpdateTransform: boolean;
@@ -721,7 +721,7 @@ declare module PIXI {
     }
     export class TextureShader extends Shader {
 
-        constructor(shaderManager: ShaderManager, vertexSrc?: string, fragmentSrc?: string, customUniforms?: any, customAttributes?: any)
+        constructor(shaderManager: ShaderManager, vertexSrc?: string, fragmentSrc?: string, customUniforms?: any, customAttributes?: any);
 
     }
     export interface StencilMaskStack {
@@ -1531,9 +1531,9 @@ declare module PIXI {
                 DOCUMENT: number;
                 JSON: number;
                 TEXT: number;
-            }
+            };
 
-            constructor(name?: string, url?: string | string[], options?: LoaderOptions)
+            constructor(name?: string, url?: string | string[], options?: LoaderOptions);
 
             name: string;
             url: string;
