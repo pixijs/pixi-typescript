@@ -1536,6 +1536,7 @@ declare module PIXI {
             constructor(name?: string, url?: string | string[], options?: LoaderOptions);
 
             name: string;
+            texture: Texture;
             url: string;
             data: any;
             crossOrigin: string;
