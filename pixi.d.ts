@@ -1,12 +1,11 @@
 ﻿/**
- * Pixi v3.0.6 Commit History Reviewed: 05/Jun
+ * Pixi v3.0.6 Commit History Reviewed: 23/Jun
  *
  * https://github.com/GoodBoyDigital/pixi.js/
  *
  * The definitions will follow the Dev Branch for now.
  */
 declare class PIXI {
-
 
     static VERSION: string;
     static PI_2: number;
@@ -78,8 +77,10 @@ declare class PIXI {
 }
 
 declare module PIXI {
-    export function  autoDetectRenderer(width: number, height: number, options?: PIXI.RendererOptions, noWebGL?: boolean): PIXI.WebGLRenderer | PIXI.CanvasRenderer;
+
+    export function autoDetectRenderer(width: number, height: number, options?: PIXI.RendererOptions, noWebGL?: boolean): PIXI.WebGLRenderer | PIXI.CanvasRenderer;
     export var loader: PIXI.loaders.Loader;
+
     //https://github.com/primus/eventemitter3
     export class EventEmitter {
 
@@ -150,7 +151,6 @@ declare module PIXI {
         filters: AbstractFilter[];
         name: string;
 
-
         getBounds(matrix?: Matrix): Rectangle;
         getLocalBounds(): Rectangle;
         toGlobal(position: Point): Point;
@@ -164,6 +164,7 @@ declare module PIXI {
         buttonMode: boolean;
         interactiveChildren: boolean;
         defaultCursor: string;
+        hitArea: any;
 
         on(event: 'click', fn: (event: interaction.InteractionEvent) => void, context?: any): EventEmitter;
         on(event: 'mousedown', fn: (event: interaction.InteractionEvent) => void, context?: any): EventEmitter;
@@ -226,6 +227,15 @@ declare module PIXI {
 
         renderWebGL(renderer: WebGLRenderer): void;
         renderCanvas(renderer: CanvasRenderer): void;
+
+        once(event: 'added', fn: (event: interaction.InteractionEvent) => void, context?: any): EventEmitter;
+        once(event: string, fn: Function, context?: any): EventEmitter;
+        once(event: 'removed', fn: (event: interaction.InteractionEvent) => void, context?: any): EventEmitter;
+        once(event: string, fn: Function, context?: any): EventEmitter;
+        on(event: 'added', fn: (event: interaction.InteractionEvent) => void, context?: any): EventEmitter;
+        on(event: string, fn: Function, context?: any): EventEmitter;
+        on(event: 'removed', fn: (event: interaction.InteractionEvent) => void, context?: any): EventEmitter;
+        on(event: string, fn: Function, context?: any): EventEmitter;
 
     }
 
@@ -503,6 +513,7 @@ declare module PIXI {
         smoothProperty: string;
 
         render(object: DisplayObject): void;
+        resize(w: number, h: number): void;
 
     }
     export class CanvasBuffer {
@@ -1373,6 +1384,7 @@ declare module PIXI {
     //////////////////////////////////////////////////////////////////////////////
 
     export module interaction {
+
         export interface InteractionEvent {
 
             stopped: boolean;
@@ -1450,6 +1462,7 @@ declare module PIXI {
             buttonMode: boolean;
             interactiveChildren: boolean;
             defaultCursor: string;
+            hitArea: any;
 
         }
 
@@ -1576,6 +1589,7 @@ declare module PIXI {
             drawMode: number;
 
             getBounds(matrix?: Matrix): Rectangle;
+            containsPoint(point: Point): boolean;
 
             private _texture: Texture;
 
