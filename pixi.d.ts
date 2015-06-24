@@ -164,7 +164,7 @@ declare module PIXI {
         buttonMode: boolean;
         interactiveChildren: boolean;
         defaultCursor: string;
-        hitArea: any;
+        hitArea: Circle | Ellipse | Polygon | Rectangle | RoundedRectangle | HitArea;
 
         on(event: 'click', fn: (event: interaction.InteractionEvent) => void, context?: any): EventEmitter;
         on(event: 'mousedown', fn: (event: interaction.InteractionEvent) => void, context?: any): EventEmitter;
@@ -345,7 +345,14 @@ declare module PIXI {
         static TEMP_MATRIX: Matrix;
 
     }
-    export class Circle {
+
+    export interface HitArea {
+
+        contains(x: number, y: number): boolean;
+
+    }
+
+    export class Circle implements HitArea {
 
         constructor(x?: number, y?: number, radius?: number);
 
@@ -359,7 +366,7 @@ declare module PIXI {
         getBounds(): Rectangle;
 
     }
-    export class Ellipse {
+    export class Ellipse implements HitArea {
 
         constructor(x?: number, y?: number, width?: number, height?: number);
 
@@ -374,7 +381,7 @@ declare module PIXI {
         getBounds(): Rectangle;
 
     }
-    export class Polygon {
+    export class Polygon implements HitArea {
 
         constructor(points: Point[]);
         constructor(points: number[]);
@@ -390,7 +397,7 @@ declare module PIXI {
 
 
     }
-    export class Rectangle {
+    export class Rectangle implements HitArea {
 
         constructor(x?: number, y?: number, width?: number, height?: number);
 
@@ -406,7 +413,7 @@ declare module PIXI {
         contains(x: number, y: number): boolean;
 
     }
-    export class RoundedRectangle {
+    export class RoundedRectangle implements HitArea {
 
         constructor(x?: number, y?: number, width?: number, height?: number, radius?: number);
 
@@ -1462,7 +1469,7 @@ declare module PIXI {
             buttonMode: boolean;
             interactiveChildren: boolean;
             defaultCursor: string;
-            hitArea: any;
+            hitArea: Circle | Ellipse | Polygon | Rectangle | RoundedRectangle | HitArea;
 
         }
 
