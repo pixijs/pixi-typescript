@@ -164,7 +164,7 @@ declare module PIXI {
         buttonMode: boolean;
         interactiveChildren: boolean;
         defaultCursor: string;
-        hitArea: Circle | Ellipse | Polygon | Rectangle | RoundedRectangle | HitArea;
+        hitArea: HitArea;
 
         on(event: 'click', fn: (event: interaction.InteractionEvent) => void, context?: any): EventEmitter;
         on(event: 'mousedown', fn: (event: interaction.InteractionEvent) => void, context?: any): EventEmitter;
@@ -1469,7 +1469,7 @@ declare module PIXI {
             buttonMode: boolean;
             interactiveChildren: boolean;
             defaultCursor: string;
-            hitArea: Circle | Ellipse | Polygon | Rectangle | RoundedRectangle | HitArea;
+            hitArea: HitArea;
 
         }
 
