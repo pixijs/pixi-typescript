@@ -2179,7 +2179,7 @@ module demos {
             // make the sprite interactive
             this.dude.interactive = true;
 
-            this.dude.on('click',(): void => {
+            this.dude.on('click', (): void => {
                 this.bol = !this.bol;
 
                 if (this.bol) {
