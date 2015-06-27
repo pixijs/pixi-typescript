@@ -639,11 +639,29 @@ declare module PIXI {
         setBlendMode(blendMode: number): boolean;
 
     }
+
     export class FilterManager extends WebGLManager {
 
         constructor(renderer: WebGLRenderer);
 
+        filterStack: any[];
+        renderer: WebGLRenderer;
+        texturePool: any[];
+
+        onContextChange: () => void;
+        setFilterStack(filterStack: any[]): void;
+        pushFilter(target: RenderTarget, filters: any[]): void;
+        popFilter(): AbstractFilter;
+        getRenderTarget(clear?: boolean): RenderTarget;
+        protected returnRenderTarget(renderTarget: RenderTarget): void;
+        applyFilter(shader: Shader, inputTarget: RenderTarget, outputTarget: RenderTarget, clear?: boolean): void;
+        calculateMappedMatrix(filterArea: Rectangle, sprite: Sprite, outputMatrix?: Matrix): Matrix;
+        capFilterArea(filterArea: Rectangle): void;
+        resize(width: number, height: number): void;
+        destroy(): void;
+
     }
+
     export class MaskManager extends WebGLManager {
 
         stencilStack: StencilMaskStack;
