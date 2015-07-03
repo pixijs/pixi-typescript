@@ -1,5 +1,5 @@
 ﻿/**
- * Pixi v3.0.6 Commit History Reviewed: 23/Jun
+ * Pixi v3.0.7+ Commit History Reviewed: 1/Jul
  *
  * https://github.com/GoodBoyDigital/pixi.js/
  *
@@ -263,6 +263,8 @@ declare module PIXI {
     export class Graphics extends Container {
 
         protected boundsDirty: boolean;
+        protected dirty: boolean;
+        protected glDirty: boolean;
 
         fillAlpha: number;
         lineWidth: number;
@@ -909,6 +911,7 @@ declare module PIXI {
 
         canvas: HTMLCanvasElement;
         context: CanvasRenderingContext2D;
+        dirty: boolean;
         resolution: number;
         text: string;
         style: TextStyle;
@@ -1285,7 +1288,7 @@ declare module PIXI {
         }
         export class DisplacementFilter extends AbstractFilter {
 
-            constructor(sprite: Sprite);
+            constructor(sprite: Sprite, scale?: number);
 
             map: Texture;
 
