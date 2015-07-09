@@ -35,10 +35,10 @@ declare module PIXI
 			data;
 			tracks;
 			events:Event[];
-			onStart:Function;
-			onEnd:Function;
-			onComplete:Function;
-			onEvent:Function;
+			onStart:(index:number)=>void;
+			onEnd:(trackIndex:number)=>void;
+			onComplete:(i:number, count:number)=>void;
+			onEvent:(i:number, event:Event)=>void;
 			timeScale:number;
 
 			constructor(stateData);
@@ -733,10 +733,10 @@ declare module PIXI
 			mixTime:number;
 			mixDuration:number;
 			mix:number;
-			onStart:Function;
-			onEnd:Function;
-			onComplete:Function;
-			onEvent:Function;
+			onStart:(index:number)=>void;
+			onEnd:(trackIndex:number)=>void;
+			onComplete:(i:number, count:number)=>void;
+			onEvent:(i:number, event:Event)=>void;
 		}
 
 
