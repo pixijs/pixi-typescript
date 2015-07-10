@@ -18,6 +18,9 @@ declare module PIXI {
 
         export interface Attachment {
 
+            name: string;
+            type: number;
+
         }
 
         export class Animation {
@@ -37,6 +40,7 @@ declare module PIXI {
         }
 
         export class AnimationState {
+
             data: AnimationStateData;
             tracks: TrackEntry[];
             events: Event[];
@@ -201,6 +205,7 @@ declare module PIXI {
         }
 
         export class DrawOrderTimeline implements Timeline {
+
             constructor(frameCount: number);
 
             frames: number[];
