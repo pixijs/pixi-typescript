@@ -1,5 +1,5 @@
 ﻿/**
- * Pixi v3.0.7+ Commit History Reviewed: 1/Jul
+ * Pixi v3.0.7+ Commit History Reviewed: 16/Jul
  *
  * https://github.com/GoodBoyDigital/pixi.js/
  *
@@ -477,6 +477,7 @@ declare module PIXI {
         clearBeforeRendering?: boolean;
         preserveDrawingBuffer?: boolean;
         forceFXAA?: boolean;
+        roundPixels?: boolean;
 
     }
     export class SystemRenderer extends EventEmitter {
@@ -1077,6 +1078,7 @@ declare module PIXI {
         static getResolutionOfUrl(url: string): boolean;
         static sayHello(type: string): void;
         static isWebGLSupported(): boolean;
+        static sign(n: number): number;
         static TextureCache: any;
         static BaseTextureCache: any;
 
