@@ -6,4 +6,4 @@ The pixi-tests.ts attempts to keep up with the [latest examples](https://github.
 
 Any advice, suggestions or improvements would be appreciated. 
 
-*Note That Spine and its Examples are not yet done.*
+*Note That Spine is available but Examples are not yet done.*
