@@ -1,5 +1,5 @@
 ﻿/**
- * Pixi v3.0.7+ Commit History Reviewed: 16/Jul
+ * Pixi v3.0.7+ Commit History Reviewed: 28/Jul
  *
  * https://github.com/GoodBoyDigital/pixi.js/
  *
@@ -64,6 +64,7 @@ declare class PIXI {
         backgroundColor: number;
         clearBeforeRender: boolean;
         preserveDrawingBuffer: boolean;
+        roundPixels: boolean;
     };
     static SHAPES: {
         POLY: number;
@@ -209,6 +210,8 @@ declare module PIXI {
         protected _renderWebGL(renderer: WebGLRenderer): void;
         protected _renderCanvas(renderer: CanvasRenderer): void;
 
+        protected onChildrenChange: () => void;
+
         children: DisplayObject[];
 
         width: number;
@@ -224,6 +227,7 @@ declare module PIXI {
         removeChildAt(index: number): DisplayObject;
         removeChildren(beginIndex?: number, endIndex?: number): DisplayObject[];
         destroy(destroyChildren?: boolean): void;
+        generateTexture(renderer: PIXI.CanvasRenderer | PIXI.WebGLRenderer, resolution?: number, scaleMode?: number): Texture;
 
         renderWebGL(renderer: WebGLRenderer): void;
         renderCanvas(renderer: CanvasRenderer): void;
@@ -288,7 +292,7 @@ declare module PIXI {
         drawRoundedRect(x: number, y: number, width: number, height: number, radius: number): Graphics;
         drawCircle(x: number, y: number, radius: number): Graphics;
         drawEllipse(x: number, y: number, width: number, height: number): Graphics;
-        drawPolygon(path: Point[]): Graphics;
+        drawPolygon(path: number[] | Point[]): Graphics;
         clear(): Graphics;
         //todo
         generateTexture(renderer: WebGLRenderer | CanvasRenderer, resolution?: number, scaleMode?: number): Texture;
@@ -445,18 +449,39 @@ declare module PIXI {
     }
     export class ParticleContainer extends Container {
 
-        constructor(size?: number, properties?: ParticleContainerProperties);
+        constructor(size?: number, properties?: ParticleContainerProperties, batchSize?: number);
+
+        protected _maxSize: number;
+        protected _batchSize: number;
+
+        protected onChildrenChange: () => void;
 
         interactiveChildren: boolean;
         blendMode: number;
         roundPixels: boolean;
 
         setProperties(properties: ParticleContainerProperties): void;
-        addChildAt(child: DisplayObject, index: number): DisplayObject;
-        removeChildAt(index: number): DisplayObject;
 
     }
     export interface ParticleBuffer {
+        
+        gl: WebGLRenderingContext;
+        vertSize: number;
+        vertByteSize: number;
+        size: number;
+        dynamicProperties: any[];
+        staticProperties: any[];
+
+        staticStride: number;
+        staticBuffer: any;
+        staticData: any;
+        dynamicStride: number;
+        dynamicBuffer: any;
+        dynamicData: any;
+
+        initBuffers(): void;
+        bind(): void;
+        destroy(): void;
 
     }
     export interface ParticleRenderer {
@@ -1334,15 +1359,6 @@ declare module PIXI {
             noise: number;
 
         }
-        export class NormalMapFilter extends AbstractFilter {
-
-            constructor(texture: Texture);
-
-            map: Texture;
-            scale: Point;
-            offset: Point;
-
-        }
         export class PixelateFilter extends AbstractFilter {
 
             size: Point;
@@ -1660,8 +1676,7 @@ declare module PIXI {
 
         }
 
-        export interface StripShader extends Shader {
-        }
+        export interface MeshShader extends Shader {}
 
     }
 
