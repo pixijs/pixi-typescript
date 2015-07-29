@@ -292,7 +292,7 @@ declare module PIXI {
         drawRoundedRect(x: number, y: number, width: number, height: number, radius: number): Graphics;
         drawCircle(x: number, y: number, radius: number): Graphics;
         drawEllipse(x: number, y: number, width: number, height: number): Graphics;
-        drawPolygon(path: number[] | Point[]): Graphics;
+        drawPolygon(path: number[]| Point[]): Graphics;
         clear(): Graphics;
         //todo
         generateTexture(renderer: WebGLRenderer | CanvasRenderer, resolution?: number, scaleMode?: number): Texture;
@@ -464,7 +464,7 @@ declare module PIXI {
 
     }
     export interface ParticleBuffer {
-        
+
         gl: WebGLRenderingContext;
         vertSize: number;
         vertByteSize: number;
@@ -1676,7 +1676,7 @@ declare module PIXI {
 
         }
 
-        export interface MeshShader extends Shader {}
+        export interface MeshShader extends Shader { }
 
     }
 
