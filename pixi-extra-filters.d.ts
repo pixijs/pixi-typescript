@@ -1,6 +1,8 @@
+/// <reference path="pixi.d.ts" />
+
 /**
  * Support for the community filters not found in the core 
- * Commit History Review 13/Jun
+ * Commit History Review 10/Aug
  *
  * https://github.com/pixijs/pixi-extra-filters
  *
@@ -14,6 +16,16 @@ declare module PIXI {
             radius: number;
             strength: number;
             center: PIXI.Point;
+
+        }
+
+        export class ColorReplaceFilter extends PIXI.AbstractFilter {
+
+            constructor(originalColor: number[], newColor: number[], epsilon?: number);
+
+            originalColor: number[];
+            newColor: number[];
+            epsilon: number;
 
         }
 
