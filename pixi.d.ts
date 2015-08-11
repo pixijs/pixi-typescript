@@ -1,5 +1,5 @@
 ﻿/**
- * Pixi v3.0.7+ Commit History Reviewed: 28/Jul
+ * Pixi v3.0.7+ Commit History Reviewed: 10/Aug
  *
  * https://github.com/GoodBoyDigital/pixi.js/
  *
@@ -446,6 +446,7 @@ declare module PIXI {
         rotation?: boolean;
         uvs?: boolean;
         alpha?: boolean;
+
     }
     export class ParticleContainer extends Container {
 
@@ -453,8 +454,11 @@ declare module PIXI {
 
         protected _maxSize: number;
         protected _batchSize: number;
+        protected _properties: boolean[];
+        protected _buffers: WebGLBuffer[];
+        protected _bufferToUpdate: number;
 
-        protected onChildrenChange: () => void;
+        protected onChildrenChange: (smallestChildIndex?: number) => void;
 
         interactiveChildren: boolean;
         blendMode: number;
@@ -543,8 +547,6 @@ declare module PIXI {
         refresh: boolean;
         maskManager: CanvasMaskManager;
         roundPixels: boolean;
-        currentScaleMode: number;
-        currentBlendMode: number;
         smoothProperty: string;
 
         render(object: DisplayObject): void;
@@ -1147,6 +1149,7 @@ declare module PIXI {
             textWidth: number;
             textHeight: number;
             maxWidth: number;
+            maxLineHeight: number;
             dirty: boolean;
 
             tint: number;
@@ -1165,7 +1168,8 @@ declare module PIXI {
             static fromFrames(frame: string[]): MovieClip;
             static fromImages(images: string[]): MovieClip;
 
-            protected _textures: Texture;
+            protected _textures: Texture[];
+            protected _durations: number[];
             protected _currentTime: number;
 
             protected update(deltaTime: number): void;
