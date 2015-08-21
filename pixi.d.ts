@@ -1,5 +1,5 @@
 ﻿/**
- * Pixi v3.0.7+ Commit History Reviewed: 10/Aug
+ * Pixi v3.0.7+ Commit History Reviewed: 19/Aug
  *
  * https://github.com/GoodBoyDigital/pixi.js/
  *
@@ -157,6 +157,7 @@ declare module PIXI {
         toGlobal(position: Point): Point;
         toLocal(position: Point, from?: DisplayObject): Point;
         generateTexture(renderer: CanvasRenderer | WebGLRenderer, scaleMode: number, resolution: number): Texture;
+        setParent(container: Container): Container;
         destroy(): void;
         getChildByName(name: string): DisplayObject;
         getGlobalPosition(point: Point): Point;
