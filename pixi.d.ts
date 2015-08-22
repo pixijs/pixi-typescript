@@ -508,7 +508,7 @@ declare module PIXI {
         preserveDrawingBuffer?: boolean;
         forceFXAA?: boolean;
         roundPixels?: boolean;
-        backgroundColor: number;
+        backgroundColor?: number;
     }
     export class SystemRenderer extends EventEmitter {
 
