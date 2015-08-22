@@ -1,4 +1,4 @@
-/// <reference path="pixi.d.ts" />
+/// <reference path="pixi.js.d.ts" />
 
 /**
  * Support for the community filters not found in the core 
