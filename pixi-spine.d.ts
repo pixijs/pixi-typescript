@@ -2,7 +2,7 @@
  * Created by martijncroezen on 9-7-2015.
  * note: I haven't implemented all returntypes n stuff..
  */
-///<reference path="pixi.d.ts"/>
+///<reference path="pixi.js.d.ts"/>
 declare module PIXI {
 
     export module spine {

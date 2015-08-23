@@ -2,7 +2,7 @@
   "name": "pixi-typescript",
   "version": "1.0.0",
   "description": "Typescript definitions for pixi.js",
-  "main": "pixi.d.ts",
+  "main": "pixi.js.d.ts",
   "author": "Chad Engler <chad@pantherdev.com>",
   "license": "MIT",
   "bugs": {
@@ -17,5 +17,12 @@
     "pixi",
     "typescript",
     "ts"
-  ]
+  ],
+  "devDependencies": {
+    "definition-tester": "^0.2.0",
+    "typescript": "^1.5.3"
+  },
+  "scripts": {
+    "test": "node ./node_modules/.bin/dt"
+  }
 }
