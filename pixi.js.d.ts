@@ -1,10 +1,8 @@
-﻿/**
- * Pixi v3.0.7+ Commit History Reviewed: 19/Aug
- *
- * https://github.com/GoodBoyDigital/pixi.js/
- *
- * The definitions will follow the Dev Branch for now.
- */
+﻿// Type definitions for Pixi.js [dev 19/Aug]
+// Project: https://github.com/GoodBoyDigital/pixi.js/
+// Definitions by: clark-stevenson <https://github.com/pixijs/pixi-typescript>
+// Definitions: https://github.com/borisyankov/DefinitelyTyped
+
 declare class PIXI {
 
     static VERSION: string;

@@ -1,7 +1,8 @@
-/**
- * Created by martijncroezen on 9-7-2015.
- * note: I haven't implemented all returntypes n stuff..
- */
+// Type definitions for pixi-spine [dev 9/Jul]
+// Project: https://github.com/pixijs/pixi-spine/
+// Definitions by: martijncroezen <https://github.com/pixijs/pixi-typescript>
+// Definitions: https://github.com/borisyankov/DefinitelyTyped
+
 ///<reference path="pixi.js.d.ts"/>
 declare module PIXI {
 
