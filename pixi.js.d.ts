@@ -10,7 +10,7 @@ declare class PIXI {
     static RAD_TO_DEG: number;
     static DEG_TO_RAD: number;
     static TARGET_FPMS: number;
-    static RENDER_TYPE: {
+    static RENDERER_TYPE: {
         UNKNOWN: number;
         WEBGL: number;
         CANVAS: number;
