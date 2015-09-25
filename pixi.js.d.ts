@@ -1097,7 +1097,7 @@ declare module PIXI {
         static uuid(): number;
         static hex2rgb(hex: number, out?: number[]): number[];
         static hex2String(hex: number): string;
-        static rbg2hex(rgb: Number[]): number;
+        static rgb2hex(rgb: Number[]): number;
         static canUseNewCanvasBlendModel(): boolean;
         static getNextPowerOfTwo(number: number): number;
         static isPowerOfTwo(width: number, height: number): boolean;
