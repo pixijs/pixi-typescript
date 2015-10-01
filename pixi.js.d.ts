@@ -1,4 +1,4 @@
-﻿// Type definitions for Pixi.js [dev 19/Aug]
+﻿// Type definitions for Pixi.js [dev 01/Oct]
 // Project: https://github.com/GoodBoyDigital/pixi.js/
 // Definitions by: clark-stevenson <https://github.com/pixijs/pixi-typescript>
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
@@ -291,7 +291,7 @@ declare module PIXI {
         drawRoundedRect(x: number, y: number, width: number, height: number, radius: number): Graphics;
         drawCircle(x: number, y: number, radius: number): Graphics;
         drawEllipse(x: number, y: number, width: number, height: number): Graphics;
-        drawPolygon(path: number[]| Point[]): Graphics;
+        drawPolygon(path: number[] | Point[]): Graphics;
         clear(): Graphics;
         //todo
         generateTexture(renderer: WebGLRenderer | CanvasRenderer, resolution?: number, scaleMode?: number): Texture;
@@ -507,6 +507,7 @@ declare module PIXI {
         forceFXAA?: boolean;
         roundPixels?: boolean;
         backgroundColor?: number;
+
     }
     export class SystemRenderer extends EventEmitter {
 
@@ -528,6 +529,7 @@ declare module PIXI {
         blendModes: any; //todo?
         preserveDrawingBuffer: boolean;
         clearBeforeRender: boolean;
+        roundPixels: boolean;
         backgroundColor: number;
 
         render(object: DisplayObject): void;
@@ -842,6 +844,7 @@ declare module PIXI {
 
         map(rect: Rectangle, rect2: Rectangle): void;
         upload(): void;
+        destroy(): void;
 
     }
 
@@ -1073,7 +1076,7 @@ declare module PIXI {
     export class VideoBaseTexture extends BaseTexture {
 
         static fromVideo(video: HTMLVideoElement, scaleMode?: number): VideoBaseTexture;
-        static fromUrl(videoSrc: string | any | string[]| any[]): VideoBaseTexture;
+        static fromUrl(videoSrc: string | any | string[] | any[]): VideoBaseTexture;
 
         protected _loaded: boolean;
 
@@ -1101,7 +1104,7 @@ declare module PIXI {
         static canUseNewCanvasBlendModel(): boolean;
         static getNextPowerOfTwo(number: number): number;
         static isPowerOfTwo(width: number, height: number): boolean;
-        static getResolutionOfUrl(url: string): boolean;
+        static getResolutionOfUrl(url: string): number;
         static sayHello(type: string): void;
         static isWebGLSupported(): boolean;
         static sign(n: number): number;
