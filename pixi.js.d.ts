@@ -1,4 +1,4 @@
-﻿// Type definitions for Pixi.js [dev 01/Oct]
+﻿// Type definitions for Pixi.js
 // Project: https://github.com/GoodBoyDigital/pixi.js/
 // Definitions by: clark-stevenson <https://github.com/pixijs/pixi-typescript>
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
@@ -973,7 +973,7 @@ declare module PIXI {
         scaleMode: number;
         hasLoaded: boolean;
         isLoading: boolean;
-        source: HTMLImageElement | HTMLCanvasElement;
+        source: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement;
         premultipliedAlpha: boolean;
         imageUrl: string;
         isPowerOfTwo: boolean;
@@ -1079,7 +1079,6 @@ declare module PIXI {
         static fromUrl(videoSrc: string | any | string[] | any[]): VideoBaseTexture;
 
         protected _loaded: boolean;
-
         protected _onUpdate(): void;
         protected _onPlayStart(): void;
         protected _onPlayStop(): void;
