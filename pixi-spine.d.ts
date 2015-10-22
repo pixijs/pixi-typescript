@@ -77,7 +77,7 @@ declare module PIXI {
 
             private autoUpdateTransform(): void;
             private createSprite(slot: Slot, attachment: Attachment): Sprite;
-            private createMesh(slot, attachment)
+            private createMesh(slot, attachment);
 
             spineData: any;
             skeleton: Skeleton;
@@ -133,7 +133,7 @@ declare module PIXI {
             m10: number;
             m11: number;
             worldY: number;
-            worldRotation: number;;
+            worldRotation: number;
             worldScaleX: number;
             worldScaleY: number;
             worldFlipX: boolean;
@@ -473,7 +473,7 @@ declare module PIXI {
             setSkinByName(skinName: string): Skin;
             setSkin(newSkin: Skin): void;
             getAttachmentBySlotName(slotName: string, attachmentName: string): Attachment;
-            getAttachmentBySlotIndex(slotIndex: number, attachmentName: string): Attachment
+            getAttachmentBySlotIndex(slotIndex: number, attachmentName: string): Attachment;
             setAttachment(slotName: string, attachmentName: string): void;
             findIkConstraint(ikConstraintName: string): IkConstraint;
             update(delta: number): void;
@@ -527,7 +527,7 @@ declare module PIXI {
             findSlotIndex(slotName: string): number;
             findSkin(skinName: string): Skin;
             findEvent(eventName: string): Event;
-            findAnimation(animationName: string): Animation
+            findAnimation(animationName: string): Animation;
             findIkConstraint(ikConstraintName: string): IkConstraint;
 
         }
