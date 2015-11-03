@@ -1532,6 +1532,10 @@ declare module PIXI {
             xhrType?: string;
 
         }
+        export interface ResourceDictionary {
+
+            [index: string]: PIXI.loaders.Resource;
+        }
         export class Loader extends EventEmitter {
 
             constructor(baseUrl?: string, concurrency?: number);
@@ -1539,7 +1543,7 @@ declare module PIXI {
             baseUrl: string;
             progress: number;
             loading: boolean;
-            resources: Resource[];
+            resources: ResourceDictionary;
 
             add(name: string, url: string, options?: LoaderOptions, cb?: () => void): Loader;
             add(url: string, options?: LoaderOptions, cb?: () => void): Loader;
