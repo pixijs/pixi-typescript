@@ -1,4 +1,4 @@
-﻿// Type definitions for Pixi.js
+﻿// Type definitions for Pixi.js 3.0.9 dev
 // Project: https://github.com/GoodBoyDigital/pixi.js/
 // Definitions by: clark-stevenson <https://github.com/pixijs/pixi-typescript>
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
@@ -156,6 +156,7 @@ declare module PIXI {
         toLocal(position: Point, from?: DisplayObject): Point;
         generateTexture(renderer: CanvasRenderer | WebGLRenderer, scaleMode: number, resolution: number): Texture;
         setParent(container: Container): Container;
+        setTransform(x?: number, y?: number, scaleX?: number, scaleY?: number, rotation?: number, skewX?: number, skewY?: number, pivotX?: number, pivotY?: number): DisplayObject;
         destroy(): void;
         getChildByName(name: string): DisplayObject;
         getGlobalPosition(point: Point): Point;
@@ -345,6 +346,8 @@ declare module PIXI {
         identity(): Matrix;
         clone(): Matrix;
         copy(matrix: Matrix): Matrix;
+        set(a: number, b: number, c: number, d: number, tx: number, ty: number): Matrix;
+        setTransform(a: number, b: number, c: number, d: number, sr: number, cr: number, cy: number, sy: number, nsx: number, cs: number): PIXI.Matrix;
 
         static IDENTITY: Matrix;
         static TEMP_MATRIX: Matrix;
@@ -615,6 +618,7 @@ declare module PIXI {
         protected _createContext(): void;
         protected handleContextLost: (event: WebGLContextEvent) => void;
         protected _mapGlModes(): void;
+        protected _managedTextures: Texture[];
 
         constructor(width?: number, height?: number, options?: RendererOptions);
 
@@ -632,7 +636,7 @@ declare module PIXI {
         setObjectRenderer(objectRenderer: ObjectRenderer): void;
         setRenderTarget(renderTarget: RenderTarget): void;
         updateTexture(texture: BaseTexture | Texture): BaseTexture | Texture;
-        destroyTexture(texture: BaseTexture | Texture): void;
+        destroyTexture(texture: BaseTexture | Texture, _skipRemove?: boolean): void;
 
     }
     export class AbstractFilter {
@@ -958,7 +962,7 @@ declare module PIXI {
         static fromImage(imageUrl: string, crossorigin?: boolean, scaleMode?: number): BaseTexture;
         static fromCanvas(canvas: HTMLCanvasElement, scaleMode?: number): BaseTexture;
 
-        protected _glTextures: any[];
+        protected _glTextures: any;
 
         protected _sourceLoaded(): void;
 
@@ -1642,6 +1646,7 @@ declare module PIXI {
             blendMode: number;
             canvasPadding: number;
             drawMode: number;
+            shader: Shader;
 
             getBounds(matrix?: Matrix): Rectangle;
             containsPoint(point: Point): boolean;
@@ -1669,6 +1674,15 @@ declare module PIXI {
             refresh(): void;
 
         }
+        export class Plane extends Mesh {
+
+            segmentsX: number;
+            segmentsY: number;
+
+            constructor(texture: Texture, segmentsX?: number, segmentsY?: number);
+
+        }
+
 
         export class MeshRenderer extends ObjectRenderer {
 
