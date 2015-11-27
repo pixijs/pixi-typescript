@@ -1609,6 +1609,7 @@ declare module PIXI {
 
             name: string;
             texture: Texture;
+			textures: Texture[];
             url: string;
             data: any;
             crossOrigin: string;
