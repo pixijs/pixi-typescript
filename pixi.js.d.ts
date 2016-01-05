@@ -689,7 +689,7 @@ declare module PIXI {
         popFilter(): AbstractFilter;
         getRenderTarget(clear?: boolean): RenderTarget;
         protected returnRenderTarget(renderTarget: RenderTarget): void;
-        applyFilter(shader: Shader, inputTarget: RenderTarget, outputTarget: RenderTarget, clear?: boolean): void;
+        applyFilter(shader: Shader | AbstractFilter, inputTarget: RenderTarget, outputTarget: RenderTarget, clear?: boolean): void;
         calculateMappedMatrix(filterArea: Rectangle, sprite: Sprite, outputMatrix?: Matrix): Matrix;
         capFilterArea(filterArea: Rectangle): void;
         resize(width: number, height: number): void;
@@ -871,7 +871,7 @@ declare module PIXI {
         anchor: Point;
         tint: number;
         blendMode: number;
-        shader: Shader;
+        shader: Shader | AbstractFilter;
         texture: Texture;
 
         width: number;
@@ -896,7 +896,7 @@ declare module PIXI {
         indices: number[];
         currentBatchSize: number;
         sprites: Sprite[];
-        shader: Shader;
+        shader: Shader | AbstractFilter;
 
         render(sprite: Sprite): void;
         flush(): void;
@@ -1647,7 +1647,7 @@ declare module PIXI {
             blendMode: number;
             canvasPadding: number;
             drawMode: number;
-            shader: Shader;
+            shader: Shader | AbstractFilter;
 
             getBounds(matrix?: Matrix): Rectangle;
             containsPoint(point: Point): boolean;
