@@ -87,10 +87,10 @@ declare module PIXI {
         emit(event: string, ...args: any[]): boolean;
         on(event: string, fn: Function, context?: any): EventEmitter;
         once(event: string, fn: Function, context?: any): EventEmitter;
-        removeListener(event: string, fn: Function, once?: boolean): EventEmitter;
+        removeListener(event: string, fn: Function, context?: any, once?: boolean): EventEmitter;
         removeAllListeners(event: string): EventEmitter;
 
-        off(event: string, fn: Function, once?: boolean): EventEmitter;
+        off(event: string, fn: Function, context?: any, once?: boolean): EventEmitter;
         addListener(event: string, fn: Function, context?: any): EventEmitter;
 
     }
