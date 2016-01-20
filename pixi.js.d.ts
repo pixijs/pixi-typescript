@@ -502,7 +502,7 @@ declare module PIXI {
     export interface RendererOptions {
 
         view?: HTMLCanvasElement;
-        transparent?: boolean
+        transparent?: boolean;
         antialias?: boolean;
         resolution?: number;
         clearBeforeRendering?: boolean;
@@ -611,7 +611,7 @@ declare module PIXI {
             premultipliedAlpha: boolean;
             stencil: boolean;
             preseveDrawingBuffer: boolean;
-        }
+        };
         protected _renderTargetStack: RenderTarget[];
 
         protected _initContext(): void;
@@ -1144,7 +1144,7 @@ declare module PIXI {
                 align: string;
                 name: string;
                 size: number;
-            }
+            };
             protected _text: string;
 
             protected updateText(): void;
@@ -1164,7 +1164,7 @@ declare module PIXI {
                 align: string;
                 name: string;
                 size: number;
-            }
+            };
             text: string;
 
         }
@@ -1635,7 +1635,7 @@ declare module PIXI {
             static DRAW_MODES: {
                 TRIANGLE_MESH: number;
                 TRIANGLES: number;
-            }
+            };
 
             constructor(texture: Texture, vertices?: number[], uvs?: number[], indices?: number[], drawMode?: number);
 
