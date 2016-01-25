@@ -667,6 +667,11 @@ declare module PIXI {
         offset: Point;
 
     }
+    export class FXAAFilter extends AbstractFilter {
+
+        applyFilter(renderer: WebGLRenderer, input: RenderTarget, output: RenderTarget): void;
+
+    }
     export class BlendModeManager extends WebGLManager {
 
         constructor(renderer: WebGLRenderer);
@@ -1425,11 +1430,6 @@ declare module PIXI {
             offset: Point;
             radius: number;
             angle: number;
-
-        }
-        export class FXAAFilter extends AbstractFilter {
-
-            applyFilter(renderer: WebGLRenderer, input: RenderTarget, output: RenderTarget): void;
 
         }
     }
