@@ -302,11 +302,25 @@ declare module PIXI {
         drawShape(shape: Circle | Rectangle | Ellipse | Polygon): GraphicsData;
 
     }
-    export interface GraphicsRenderer extends ObjectRenderer {
-        //yikes todo
+    export class GraphicsRenderer extends ObjectRenderer {
+        new (renderer: PIXI.WebGLRenderer);
+
+        buildCircle: (graphicsData: PIXI.Graphics, webGLData: Object) => void;
+        buildPoly: (graphicsData: PIXI.Graphics, webGLData: Object) => boolean;
+        buildRectangle: (graphicsData: PIXI.Graphics, webGLData: Object) => void;
+        buildComplexPoly: (graphicsData: PIXI.Graphics, webGLData: Object) => void;
+        buildLine: (graphicsData: PIXI.Graphics, webGLData: Object) => void;
+        updateGraphics: (graphics: PIXI.Graphics) => void;
+        buildRoundedRectangle: (graphicsData: PIXI.Graphics, webGLData: Object) => void;
+        quadraticBezierCurve: (fromX: number, fromY: number, cpX: number, cpY: number, toX: number, toY: number, out: any) => number[];
+        switchMode: (webGL: WebGLRenderingContext, type: number) => WebGLGraphicsData;
     }
-    export interface WebGLGraphicsData {
-        //yikes todo!
+    export class WebGLGraphicsData {
+        new (gl: WebGLRenderingContext);
+
+        upload: () => void;
+        reset: () => void;
+        destroy: () => void;
     }
 
     //math
@@ -490,8 +504,18 @@ declare module PIXI {
         destroy(): void;
 
     }
-    export interface ParticleRenderer {
+    export class ParticleRenderer extends ObjectRenderer {
+        new (renderer: PIXI.WebGLRenderer);
 
+        buildCircle: (graphicsData: PIXI.Graphics, webGLData: WebGLGraphicsData) => void;
+        buildPoly: (graphicsData: PIXI.Graphics, webGLData: WebGLGraphicsData) => boolean;
+        buildRectangle: (graphicsData: PIXI.Graphics, webGLData: WebGLGraphicsData) => void;
+        buildComplexPoly: (graphicsData: PIXI.Graphics, webGLData: WebGLGraphicsData) => void;
+        buildLine: (graphicsData: PIXI.Graphics, webGLData: WebGLGraphicsData) => void;
+        updateGraphics: (graphics: PIXI.Graphics) => void;
+        buildRoundedRectangle: (graphicsData: PIXI.Graphics, webGLData: WebGLGraphicsData) => void;
+        quadraticBezierCurve: (fromX: number, fromY: number, cpX: number, cpY: number, toX: number, toY: number, out: number[]) => number[];
+        switchMode: (webGL: WebGLRenderingContext, type: number) => WebGLGraphicsData;
     }
     export interface ParticleShader {
 
