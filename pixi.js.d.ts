@@ -303,20 +303,24 @@ declare module PIXI {
 
     }
     export class GraphicsRenderer extends ObjectRenderer {
-        new (renderer: PIXI.WebGLRenderer) : GraphicsRenderer
+        new (renderer: PIXI.WebGLRenderer);
 
         buildCircle: (graphicsData: PIXI.Graphics, webGLData: Object) => void;
         buildPoly: (graphicsData: PIXI.Graphics, webGLData: Object) => boolean;
         buildRectangle: (graphicsData: PIXI.Graphics, webGLData: Object) => void;
-        buildComplexPoly: (graphicsData: PIXI.Graphics, webGLData: Object) => any;
-        buildLine: (graphicsData: PIXI.Graphics, webGLData: Object) => any;
+        buildComplexPoly: (graphicsData: PIXI.Graphics, webGLData: Object) => void;
+        buildLine: (graphicsData: PIXI.Graphics, webGLData: Object) => void;
         updateGraphics: (graphics: PIXI.Graphics) => void;
         buildRoundedRectangle: (graphicsData: PIXI.Graphics, webGLData: Object) => void;
-        quadraticBezierCurve: (fromX: number, fromY: number, cpX: number, cpY: number, toX: number, toY: number, out: any) => Array<any>;
+        quadraticBezierCurve: (fromX: number, fromY: number, cpX: number, cpY: number, toX: number, toY: number, out: any) => number[];
         switchMode: (webGL: WebGLRenderingContext, type: number) => WebGLGraphicsData;
     }
-    export interface WebGLGraphicsData {
-        //yikes todo!
+    export class WebGLGraphicsData {
+        new (gl: WebGLRenderingContext);
+
+        upload: () => void;
+        reset: () => void;
+        destroy: () => void;
     }
 
     //math
