@@ -628,7 +628,7 @@ declare module PIXI {
     export class WebGLRenderer extends SystemRenderer {
 
         protected _useFXAA: boolean;
-        protected _FXAAFilter: filters.FXAAFilter;
+        protected _FXAAFilter: FXAAFilter;
         protected _contextOptions: {
             alpha: boolean;
             antiAlias: boolean;
