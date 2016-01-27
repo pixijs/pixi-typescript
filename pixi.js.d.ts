@@ -117,6 +117,7 @@ declare module PIXI {
         pivot: Point;
         rotation: number;
         renderable: boolean;
+        skew: Point;
         alpha: number;
         visible: boolean;
         parent: Container;
