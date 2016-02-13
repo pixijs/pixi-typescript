@@ -180,6 +180,9 @@ declare module PIXI {
         interactiveChildren: boolean;
         defaultCursor: string;
         hitArea: HitArea;
+        accessible:boolean;
+        accessibleTitle:string;
+        tabIndex:number;
 
         on(event: 'click', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
         on(event: 'mousedown', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
