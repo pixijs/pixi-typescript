@@ -107,7 +107,7 @@ declare module PIXI {
 
     export interface AccessibleTarget {
 
-        //TODO Not 100% here. 
+        //TODO Not 100% here.
         //src/accessibility/accessibleTarget.js
 
     }
@@ -1242,7 +1242,7 @@ declare module PIXI {
 
             protected update(deltaTime: number): void;
 
-            constructor(textures: Texture[]);
+            constructor(textures: Texture[]|{texture: Texture, time?: number}[]);
 
             animationSpeed: number;
             loop: boolean;
@@ -1251,7 +1251,7 @@ declare module PIXI {
             playing: boolean;
 
             totalFrames: number;
-            textures: Texture[];
+            textures: Texture[]|{texture: Texture, time?: number}[];
 
             stop(): void;
             play(): void;
