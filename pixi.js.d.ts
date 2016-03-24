@@ -180,9 +180,9 @@ declare module PIXI {
         interactiveChildren: boolean;
         defaultCursor: string;
         hitArea: HitArea;
-        accessible:boolean;
-        accessibleTitle:string;
-        tabIndex:number;
+        accessible: boolean;
+        accessibleTitle: string;
+        tabIndex: number;
 
         on(event: 'click', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
         on(event: 'mousedown', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
@@ -968,6 +968,8 @@ declare module PIXI {
         strokeThickness?: number;
         wordWrap?: boolean;
         wordWrapWidth?: number;
+        letterSpacing?: number;
+        breakWords?: boolean;
         lineHeight?: number;
         dropShadow?: boolean;
         dropShadowColor?: string | number;
@@ -991,6 +993,7 @@ declare module PIXI {
 
         protected updateText(): void;
         protected updateTexture(): void;
+        protected drawLetterSpacing(text: string, x: number, y: number, isStroke: boolean): void;
         protected determineFontProperties(fontStyle: TextStyle): TextStyle;
         protected wordWrap(text: string): boolean;
 
@@ -1248,7 +1251,7 @@ declare module PIXI {
 
             protected update(deltaTime: number): void;
 
-            constructor(textures: Texture[]|{texture: Texture, time?: number}[]);
+            constructor(textures: Texture[] | { texture: Texture, time?: number }[]);
 
             animationSpeed: number;
             loop: boolean;
@@ -1257,7 +1260,7 @@ declare module PIXI {
             playing: boolean;
 
             totalFrames: number;
-            textures: Texture[]|{texture: Texture, time?: number}[];
+            textures: Texture[] | { texture: Texture, time?: number }[];
 
             stop(): void;
             play(): void;
