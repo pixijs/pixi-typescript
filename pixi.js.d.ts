@@ -1,4 +1,4 @@
-﻿// Type definitions for Pixi.js v3.0.10-dev
+﻿// Type definitions for Pixi.js v3.0.10
 // Project: https://github.com/GoodBoyDigital/pixi.js/
 // Definitions by: clark-stevenson <https://github.com/pixijs/pixi-typescript>
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
@@ -341,6 +341,12 @@ declare module PIXI {
     }
 
     //math
+
+    export class GroupD8 {
+        
+        //wip
+
+    }
 
     export class Point {
 
@@ -1091,7 +1097,7 @@ declare module PIXI {
         protected onBaseTextureLoaded(baseTexture: BaseTexture): void;
         protected _updateUvs(): void;
 
-        constructor(baseTexture: BaseTexture, frame?: Rectangle, crop?: Rectangle, trim?: Rectangle, rotate?: boolean);
+        constructor(baseTexture: BaseTexture, frame?: Rectangle, crop?: Rectangle, trim?: Rectangle, rotate?: number);
 
         noFrame: boolean;
         baseTexture: BaseTexture;
@@ -1121,7 +1127,7 @@ declare module PIXI {
         x3: number;
         y3: number;
 
-        set(frame: Rectangle, baseFrame: Rectangle, rotate: number): void;
+        protected set(frame: Rectangle, baseFrame: Rectangle, rotate: number): void;
 
     }
     export class VideoBaseTexture extends BaseTexture {
@@ -1522,6 +1528,7 @@ declare module PIXI {
 
             protected interactionDOMElement: HTMLElement;
             protected eventsAdded: boolean;
+            protected moveWhenInside: boolean;
             protected _tempPoint: Point;
 
             protected setTargetElement(element: HTMLElement, resolution: number): void;
