@@ -545,17 +545,19 @@ declare module PIXI {
 
     }
     export class ParticleRenderer extends ObjectRenderer {
-        new(renderer: PIXI.WebGLRenderer);
+        constructor(renderer: PIXI.WebGLRenderer);
 
-        buildCircle: (graphicsData: PIXI.Graphics, webGLData: WebGLGraphicsData) => void;
-        buildPoly: (graphicsData: PIXI.Graphics, webGLData: WebGLGraphicsData) => boolean;
-        buildRectangle: (graphicsData: PIXI.Graphics, webGLData: WebGLGraphicsData) => void;
-        buildComplexPoly: (graphicsData: PIXI.Graphics, webGLData: WebGLGraphicsData) => void;
-        buildLine: (graphicsData: PIXI.Graphics, webGLData: WebGLGraphicsData) => void;
-        updateGraphics: (graphics: PIXI.Graphics) => void;
-        buildRoundedRectangle: (graphicsData: PIXI.Graphics, webGLData: WebGLGraphicsData) => void;
-        quadraticBezierCurve: (fromX: number, fromY: number, cpX: number, cpY: number, toX: number, toY: number, out: number[]) => number[];
-        switchMode: (webGL: WebGLRenderingContext, type: number) => WebGLGraphicsData;
+        generateBuffers: (container: PIXI.ParticleContainer) => PIXI.ParticleBuffer[];
+        indexBuffer: WebGLBuffer;
+        indices: Uint16Array;
+        properties: any; // TODO: Type this better?
+        shader: PIXI.Shader;
+        tempMatrix: Matrix;
+        uploadAlpha: (children: PIXI.DisplayObject[], startIndex: number, amount: number, array: number[], stride: number, offset: number) => void;
+        uploadPosition: (children: PIXI.DisplayObject[], startIndex: number, amount: number, array: number[], stride: number, offset: number) => void;
+        uploadRotation: (children: PIXI.DisplayObject[], startIndex: number, amount: number, array: number[], stride: number, offset: number) => void;
+        uploadUvs: (children: PIXI.DisplayObject[], startIndex: number, amount: number, array: number[], stride: number, offset: number) => void;
+        uploadVertices: (children: PIXI.DisplayObject[], startIndex: number, amount: number, array: number[], stride: number, offset: number) => void;
     }
     export interface ParticleShader {
 
