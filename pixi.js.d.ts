@@ -487,10 +487,8 @@ declare module PIXI {
         height: number;
         radius: number;
         type: number;
-
-        static EMPTY: Rectangle;
-
-        clone(): Rectangle;
+        
+        clone(): RoundedRectangle;
         contains(x: number, y: number): boolean;
 
     }
