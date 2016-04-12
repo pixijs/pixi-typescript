@@ -172,7 +172,6 @@ declare module PIXI {
         setParent(container: Container): Container;
         setTransform(x?: number, y?: number, scaleX?: number, scaleY?: number, rotation?: number, skewX?: number, skewY?: number, pivotX?: number, pivotY?: number): DisplayObject;
         destroy(): void;
-        getChildByName(name: string): DisplayObject;
         getGlobalPosition(point: Point): Point;
 
         interactive: boolean;
@@ -240,6 +239,7 @@ declare module PIXI {
         getChildIndex(child: DisplayObject): number;
         setChildIndex(child: DisplayObject, index: number): void;
         getChildAt(index: number): DisplayObject;
+        getChildByName(name: string): DisplayObject;
         removeChild(child: DisplayObject): DisplayObject;
         removeChildAt(index: number): DisplayObject;
         removeChildren(beginIndex?: number, endIndex?: number): DisplayObject[];
