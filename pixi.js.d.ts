@@ -1099,7 +1099,7 @@ declare module PIXI {
         getCanvas(): HTMLCanvasElement;
 
     }
-    export class Texture extends EventEmitter {
+    export class Texture extends utils.EventEmitter {
 
         static fromImage(imageUrl: string, crossOrigin?: boolean, scaleMode?: number): Texture;
         static fromFrame(frameId: string): Texture;
