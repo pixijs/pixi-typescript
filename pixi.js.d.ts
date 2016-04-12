@@ -1175,9 +1175,9 @@ declare module PIXI {
 
         export function uuid(): number;
         export function hex2rgb(hex: number, out?: number[]): number[];
-        export function hex2String(hex: number): string;
+        export function hex2string(hex: number): string;
         export function rgb2hex(rgb: Number[]): number;
-        export function canUseNewCanvasBlendModel(): boolean;
+        export function canUseNewCanvasBlendModes(): boolean;
         export function getNextPowerOfTwo(number: number): number;
         export function isPowerOfTwo(width: number, height: number): boolean;
         export function getResolutionOfUrl(url: string): number;
