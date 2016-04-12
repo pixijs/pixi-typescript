@@ -49,7 +49,7 @@ declare module PIXI {
         LINEAR: number;
         NEAREST: number;
     };
-    export var RETINA_PREFIX: string;
+    export var RETINA_PREFIX: RegExp;
     export var RESOLUTION: number;
     export var FILTER_RESOLUTION: number;
     export var DEFAULT_RENDER_OPTIONS: {
