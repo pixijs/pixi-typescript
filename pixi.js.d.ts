@@ -342,10 +342,29 @@ declare module PIXI {
 
     //math
 
-    export class GroupD8 {
-        
-        //wip
+    export module GroupD8 {
+        export function add(rotationSecond: number, rotationFirst: number): number;
+        export function byDirection(dx: number, dy: number): number;
+        export function inv(rotation: number): number;
+        export function isSwapWidthHeight(rotation: number): boolean;
+        export function matrixAppendRotationInv(matrix: Matrix, rotation: number, tx: number, ty: number): void;
+        export function rotate180(rotation: number): number;
+        export function sub(rotationSecond: number, rotationFirst: number): number;
+        export function uX(ind: number): number;
+        export function uY(ind: number): number;
+        export function vX(ind: number): number;
+        export function vY(ind: number): number;
 
+        export var E: number;
+        export var MIRROR_HORIZONTAL: number;
+        export var MIRROR_VERTICAL: number;
+        export var N: number;
+        export var NE: number;
+        export var NW: number;
+        export var S: number;
+        export var SE: number;
+        export var SW: number;
+        export var W: number;
     }
 
     export class Point {
