@@ -620,12 +620,12 @@ declare module PIXI {
         destroy(): void;
 
     }
-    export class CanvasGraphics {
+    export module CanvasGraphics {
 
-        static renderGraphicsMask(graphics: Graphics, context: CanvasRenderingContext2D): void;
-        static updateGraphicsTint(graphics: Graphics): void;
+        export function renderGraphicsMask(graphics: Graphics, context: CanvasRenderingContext2D): void;
+        export function updateGraphicsTint(graphics: Graphics): void;
 
-        static renderGraphics(graphics: Graphics, context: CanvasRenderingContext2D): void;
+        export function renderGraphics(graphics: Graphics, context: CanvasRenderingContext2D): void;
 
     }
     export class CanvasMaskManager {
