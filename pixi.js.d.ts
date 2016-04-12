@@ -320,7 +320,7 @@ declare module PIXI {
 
     }
     export class GraphicsRenderer extends ObjectRenderer {
-        new(renderer: PIXI.WebGLRenderer);
+        constructor(renderer: PIXI.WebGLRenderer);
 
         buildCircle: (graphicsData: PIXI.Graphics, webGLData: Object) => void;
         buildPoly: (graphicsData: PIXI.Graphics, webGLData: Object) => boolean;
@@ -333,7 +333,7 @@ declare module PIXI {
         switchMode: (webGL: WebGLRenderingContext, type: number) => WebGLGraphicsData;
     }
     export class WebGLGraphicsData {
-        new(gl: WebGLRenderingContext);
+        constructor(gl: WebGLRenderingContext);
 
         upload: () => void;
         reset: () => void;
@@ -545,7 +545,7 @@ declare module PIXI {
 
     }
     export class ParticleRenderer extends ObjectRenderer {
-        new(renderer: PIXI.WebGLRenderer);
+        constructor(renderer: PIXI.WebGLRenderer);
 
         buildCircle: (graphicsData: PIXI.Graphics, webGLData: WebGLGraphicsData) => void;
         buildPoly: (graphicsData: PIXI.Graphics, webGLData: WebGLGraphicsData) => boolean;
