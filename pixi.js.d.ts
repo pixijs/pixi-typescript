@@ -832,7 +832,7 @@ declare module PIXI {
 
         constructor(shaderManager: ShaderManager, vertexSrc: string, fragmentSrc: string, uniforms: any, attributes: any);
 
-        uuid: number;
+        uid: number;
         gl: WebGLRenderingContext;
         shaderManager: ShaderManager;
         program: WebGLProgram;
