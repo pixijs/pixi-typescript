@@ -544,13 +544,21 @@ declare module PIXI {
         destroy(): void;
 
     }
+
+    export interface IParticleRendererProperty {
+        attribute: number;
+        size: number;
+        uploadFunction: (children: PIXI.DisplayObject[], startIndex: number, amount: number, array: number[], stride: number, offset: number) => void;
+        offset: number;
+    }
+
     export class ParticleRenderer extends ObjectRenderer {
         constructor(renderer: PIXI.WebGLRenderer);
 
         generateBuffers: (container: PIXI.ParticleContainer) => PIXI.ParticleBuffer[];
         indexBuffer: WebGLBuffer;
         indices: Uint16Array;
-        properties: any; // TODO: Type this better?
+        properties: PIXI.IParticleRendererProperty[];
         shader: PIXI.Shader;
         tempMatrix: Matrix;
         uploadAlpha: (children: PIXI.DisplayObject[], startIndex: number, amount: number, array: number[], stride: number, offset: number) => void;
