@@ -107,8 +107,10 @@ declare module PIXI {
 
     export interface AccessibleTarget {
 
-        //TODO Not 100% here.
-        //src/accessibility/accessibleTarget.js
+        accessible: boolean;
+        accessibleTitle: string;
+        accessibleHint: string;
+        tabIndex: number;
 
     }
 
@@ -164,7 +166,7 @@ declare module PIXI {
         filters: AbstractFilter[];
         name: string;
 
-        getBounds(matrix?: Matrix): Rectangle;
+        getBounds(): Rectangle;
         getLocalBounds(): Rectangle;
         toGlobal(position: Point): Point;
         toLocal(position: Point, from?: DisplayObject, to?: Point): Point;
@@ -1621,10 +1623,12 @@ declare module PIXI {
     //////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////LOADER/////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////
-    //https://github.com/englercj/resource-loader/blob/master/src/Loader.js
+    //extends
+    //https://github.com/englercj/resource-loader/
     //1.6.4
 
     export module loaders {
+
         export interface LoaderOptions {
 
             crossOrigin?: boolean | string;
@@ -1633,11 +1637,17 @@ declare module PIXI {
             metaData?: any;
 
         }
+
         export interface ResourceDictionary {
 
             [index: string]: PIXI.loaders.Resource;
+
         }
-        export class Loader extends utils.EventEmitter {
+
+        export class Loader extends utils.EventEmitter{
+
+            protected static _pixiMiddleware: Function[];
+            static addPixiMiddleware(fn: Function): void;
 
             constructor(baseUrl?: string, concurrency?: number);
 
