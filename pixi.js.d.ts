@@ -991,7 +991,7 @@ declare module PIXI {
     export interface TextStyle {
 
         font?: string;
-        fill?: string | number;
+        fill?: string | number | CanvasGradient | CanvasPattern;
         align?: string;
         stroke?: string | number;
         strokeThickness?: number;
