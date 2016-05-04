@@ -23,3 +23,7 @@ npm-debug.log
 *__temp
 node_modules
 *-tests.js
+
+# Jetbrains IntelliJ
+.idea
+*.iml
