@@ -1,5 +1,5 @@
 ﻿// Type definitions for Pixi.js v4.1.0
-// Project: https://github.com/GoodBoyDigital/pixi.js/
+// Project: https://github.com/pixijs/pixi.js/
 // Definitions by: clark-stevenson <https://github.com/pixijs/pixi-typescript>
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
 
@@ -2474,6 +2474,8 @@ declare module PIXI {
         }
 
         export class VertexArrayObject {
+
+            static FORCE_NATIVE: boolean;
 
             constructor(gl: WebGLRenderingContext, state: WebGLState);
 
