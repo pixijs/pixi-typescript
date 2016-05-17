@@ -1,5 +1,5 @@
-﻿// Type definitions for Pixi.js v4.1.0
-// Project: https://github.com/pixijs/pixi.js/
+﻿// Type definitions for Pixi.js dev
+// Project: https://github.com/pixijs/pixi.js/tree/dev
 // Definitions by: clark-stevenson <https://github.com/pixijs/pixi-typescript>
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
 
@@ -85,7 +85,7 @@ declare module PIXI {
         //accessibility
         export class AccessibilityManager {
 
-            constructor(renderer: PIXI.SystemRenderer);
+            constructor(renderer: CanvasRenderer | WebGLRenderer);
 
             protected div: HTMLElement;
             protected pool: HTMLElement[];
@@ -125,287 +125,94 @@ declare module PIXI {
     ////////////////////////////////CORE//////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////
 
-    //c2d
+    //const
 
-    export class ComputedGeometry2d extends Geometry2D {
+    export class CONST {
 
-        protected _transformUid: number;
-        protected _transformVersion: number;
-        protected _geometryUid: number;
-        protected _geometryVersion: number;
-
-        applyTransformStatic(geometry: Geometry2D, transform: Transform2d): boolean;
-        applyTransform(geometry: Geometry2D, transform: Transform2d): void;
-        applyMatrix(geometry: Geometry2D, matrix: Matrix): void;
-
-    }
-    export class ComputedTransform2d {
-
-        static IDENTITY: ComputedTransform2d;
-
-        matrix2d: Matrix;
-        matrix: Matrix;
-        version: number;
-        uid: number;
-        is3d: boolean;
-        updated: boolean;
-        protected _dirtyLocalUid: number;
-        protected _dirtyLocalVersion: number;
-        protected _dirtyParentUid: number;
-        protected _dirtyParentVersion: number;
-        computedRayCast: Raycast2d;
-        protected _dirtyRaycastUid: number;
-        protected _dirtyRaycastVersion: number;
-        protected _dirtyRaycastMyVersion: number;
-
-        protected getIdentityMatrix(): Matrix;
-        protected getIdentityTransform(): ComputedTransform2d;
-        updateTransform(parentTransform: ComputedTransform2d, localTransform: ComputedTransform2d): boolean;
-        protected updateRaycast(parentRaycast: Raycast2d): Raycast2d;
-        protected updateChildTransform(childTransform: ComputedTransform2d, localTransform: ComputedTransform2d): ComputedTransform2d;
-        protected updateChildReverseTransform(childTransform: ComputedTransform2d, localTransform: ComputedTransform2d): ComputedTransform2d;
-        protected checkChildReverseTransform(childTransform: ComputedTransform2d, localTransform: ComputedTransform2d): boolean;
-        updateChildGeometry(computedGeometry: ComputedTransform2d, geometry: ComputedGeometry2d): ComputedGeometry2d;
-        updateChildRaycast(computedRaycast: Raycast2d, parentRaycast: Raycast2d): Raycast2d;
-
-    }
-    export class DisplayPoint {
-
-        protected _point: Point;
-        uid: number;
-        is3d: boolean;
-        version: number;
-        valid: boolean;
-
-        x: number;
-        y: number;
-
-        set(x: number, y: number): void;
-        copy(point: Point): void;
-        childApplyTransform(child: Raycast2d, transform: ComputedTransform2d): void;
-
-    }
-    export class Geometry {
-
-        vertices: number[];
-        indices: number[];
-        stride: number;
-        is3d: boolean;
-        uid: number;
-        version: number;
-        protected _bounds: Rectangle;
-        protected _dirtyBounds: number;
-
-        getBounds(): Rectangle;
-        size: number;
-        valid: boolean;
-
-    }
-    export class Geometry2D extends Geometry {
-
-        setRectCoords(offset: number, x1: number, y1: number, x2: number, y2: number): number;
-        static fromBuffers(vertices: number[], indices: number[]): Geometry2D;
-
-        containsPoint(point: Point, useIndices?: boolean): boolean;
-
-    }
-    export class GeometrySet {
-
-        constructor(local: Geometry2D);
-
-        local: Geometry2D;
-        computed: ComputedGeometry2d;
-        projected: ComputedTransform2d;
-        valid: boolean;
-
-        getBounds(computed: ComputedGeometry2d, projected: ComputedTransform2d): Rectangle;
-
-    }
-    export class GeometrySetProxy extends GeometrySet {
-
-        original: GeometrySet;
-        value: boolean;
-
-        wrap(original: GeometrySet): GeometrySetProxy;
-
-    }
-    export class ObservablePoint2d {
-
-        constructor(cb: Function, scope?: any, x?: number, y?: number);
-
-        x: number;
-        y: number;
-        cb: () => void;
-        scope: any;
-
-        set(x: number, y: number): void;
-        copy(p: Point | DisplayPoint | ObservablePoint2d): void;
-        destroy(): void;
-
-    }
-    export class Raycast2d {
-
-        protected _raycastUid: number;
-        protected _raycastVersion: number;
-        protected _transformUid: number;
-        protected _transformVersion: number;
-        protected _point: Point;
-
-        is3d: boolean;
-        valid: boolean
-        intersects: boolean;
-        version: number;
-        uid: number;
-
-        x: number;
-        y: number;
-
-        applyTransformStatic(raycast: Raycast2d, transform: ComputedTransform2d): boolean;
-        childApplyTransform(child: Raycast2d, transform: ComputedTransform2d): Raycast2d;
-        applyTransform(raycast: Raycast2d, transform: ComputedTransform2d): Matrix;
-
-    }
-    export class Transform2d {
-
-        constructor(isStatic: boolean);
-
-        matrix2d: Matrix;
-        isStatic: boolean;
-        position: ObservablePoint2d;
-        scale: ObservablePoint2d;
-        skew: ObservablePoint2d;
-        pivot: Point;
-        protected _rotation: number;
-        protected _sr: number;
-        protected _cr: number;
-        protected _cy: number;
-        protected _sy: number;
-        protected _nsx: number;
-        protected _cx: number;
-        protected _dirtyVersion: number;
-        version: number;
-        uid: number;
-
-        updateSkew(): void;
-        makeDirty(): void;
-        update(): boolean;
-        makeComputedTransform(computedTransform?: ComputedTransform2d): ComputedTransform2d;
-        destroy(): void;
-
-        rotation: number;
-        matrix: Matrix;
+        static VERSION: string;
+        static PI_2: number;
+        static RAD_TO_DEG: number;
+        static DEG_TO_RAD: number;
+        static TARGET_FPMS: number;
+        static RENDERER_TYPE: {
+            UNKNOWN: number;
+            WEBGL: number;
+            CANVAS: number;
+        }
+        static BLEND_MODES: {
+            NORMAL: number;
+            ADD: number;
+            MULTIPLY: number;
+            SCREEN: number;
+            OVERLAY: number;
+            DARKEN: number;
+            LIGHTEN: number;
+            COLOR_DODGE: number;
+            COLOR_BURN: number;
+            HARD_LIGHT: number;
+            SOFT_LIGHT: number;
+            DIFFERENCE: number;
+            EXCLUSION: number;
+            HUE: number;
+            SATURATION: number;
+            COLOR: number;
+            LUMINOSITY: number;
+        }
+        static DRAW_MODES: {
+            POINTS: number;
+            LINES: number;
+            LINE_LOOP: number;
+            LINE_STRIP: number;
+            TRIANGLES: number;
+            TRIANGLE_STRIP: number;
+            TRIANGLE_FAN: number;
+        }
+        static SCALE_MODES: {
+            DEFAULT: number;
+            CLAMP: number;
+            REPEAT: number;
+            MIRRORED_REPEAT: number;
+        }
+        static GC_MODES: {
+            DEFAULT: number;
+            AUTO: number;
+            MANUAL: number;
+        }
+        static MIPMAP_TEXTURES: boolean;
+        static RETINA_PREFIX: string;
+        static RESOLUTION: number;
+        static FILTER_RESOLUTION: number;
+        static DEFAULT_RENDER_OPTIONS: {
+            view: HTMLCanvasElement;
+            resolution: number;
+            antialias: boolean;
+            forceFXAA: boolean;
+            autoResize: boolean;
+            transparent: boolean;
+            backgroundColor: number;
+            clearBeforeRender: boolean;
+            preserveDrawingBuffer: boolean;
+            roundPixels: boolean;
+        }
+        static SHAPES: {
+            POLY: number;
+            RECT: number;
+            CIRC: number;
+            ELIP: number;
+            RREC: number;
+        }
+        static PRECISION: {
+            DEFAULT: string;
+            LOW: string;
+            MEDIUM: string;
+            HIGH: string;
+        }
+        static SPRITE_BATCH_SIZE: number;
+        static SPRITE_MAX_TEXTURES: number;
+        static TEXT_STYLE_CHANGED: string;
 
     }
 
-    //display
-
-    export class Camera2d extends Container {
-
-        //CameraProxy start
-        protected createProxy(): CameraProxy;
-        //CameraProxy end
-
-        projection: Transform2d;
-        worldProjection: ComputedTransform2d;
-        proxyCache: any;
-        onZOrder: Function;
-        protected _displayList: DisplayObject[];
-        protected _displayListFlag: DisplayObject[];
-        enableDisplayList: boolean;
-        protected displayListSort(a: DisplayObject, b: DisplayObject): void;
-        viewport: Rectangle;
-        autoUpdateViewport: boolean;
-        enableBoundsCulling: boolean;
-        protected initProjection(): void;
-        x: number;
-        y: number;
-        position: Point;
-        scale: Point;
-        pivot: Point;
-        skew: Point;
-        rotation: number;
-        protected _proxyContainer(containerFrom: Container, containerTo: Container): void;
-        protected _proxySwapBuffer(): void;
-        proxyContainer(containerFrom: Container, containerTo: Container): void;
-        renderWebGL(renderer: WebGLRenderer): void;
-        renderCanvas(renderer: CanvasRenderer): void;
-        protected _addInList(container: Container, parentZIndex: number, parentZOrder: Function): void;
-        protected updateDisplayList(): void;
-        protected updateBoundsCulling(viewport: Rectangle, container: Container): void;
-
-    }
-    export class CameraProxy extends ContainerProxy {
-
-        constructor(original: Camera2d | CameraProxy);
-
-        enableDisplayList: boolean;
-
-        protected createProxy(): CameraProxy;
-
-    }
-    export class Container extends DisplayObject {
-
-        //ContainerProxy start
-        protected createProxy(): ContainerProxy;
-        //ContainerProxy end
-
-        //begin extras.getChildByName
-        getChildByName(name: string): DisplayObject;
-        //end extras.getChildByName
-
-        children: DisplayObject[];
-        updatePostOrder: number;
-
-        width: number;
-        height: number;
-
-        protected onChildrenChange: (...args: any[]) => void;
-        addChild(...child: DisplayObject[]): DisplayObject;
-        addChildAt(child: DisplayObject, index: number): DisplayObject;
-        swapChildren(child: DisplayObject, child2: DisplayObject): void;
-        getChildIndex(child: DisplayObject): number;
-        setChildIndex(child: DisplayObject, index: number): void;
-        getChildAt(index: number): DisplayObject;
-        removeChild(...args: DisplayObject[]): DisplayObject;
-        removeChildAt(index: number): DisplayObject;
-        removeChildren(beginIndex?: number, endIndex?: number): DisplayObject[];
-        protected containerUpdateTransform(): void;
-        protected _getChildBounds(): Rectangle;
-        getBounds(): Rectangle;
-        protected containerGetBounds(): Rectangle;
-        getLocalBounds(): Rectangle;
-        protected _renderWebGL(renderer: PIXI.WebGLRenderer): void;
-        protected _renderCanvas(renderer: PIXI.CanvasRenderer): void;
-        renderWebGL(renderer: PIXI.WebGLRenderer): void;
-        renderCanvas(renderer: PIXI.CanvasRenderer): void;
-        destroy(destroyChildren?: boolean): void;
-
-        once(event: 'added', fn: (displayObject: DisplayObject) => void, context?: any): utils.EventEmitter;
-        once(event: 'removed', fn: (DisplayObject: DisplayObject) => void, context?: any): utils.EventEmitter;
-        once(event: string, fn: Function, context?: any): utils.EventEmitter;
-        on(event: 'added', fn: (displayObject: DisplayObject) => void, context?: any): utils.EventEmitter;
-        on(event: 'removed', fn: (DisplayObject: DisplayObject) => void, context?: any): utils.EventEmitter;
-        on(event: string, fn: Function, context?: any): utils.EventEmitter;
-        off(event: string, fn: Function, context?: any): utils.EventEmitter;
-
-    }
-    export class ContainerProxy extends DisplayObjectProxy {
-
-        children: DisplayObject[];
-        updateTransform(): ComputedTransform2d;
-        containerUpdateTransform(): void;
-        protected _getChildBounds(): Rectangle;
-        getBounds(): Rectangle;
-        containerGetBounds(): Rectangle;
-        getLocalBounds(): Rectangle;
-        protected _renderWebGL(renderer: PIXI.WebGLRenderer): void;
-        protected _renderCanvas(renderer: PIXI.CanvasRenderer): void;
-        renderWebGL(renderer: PIXI.WebGLRenderer): void;
-        renderCanvas(renderer: PIXI.CanvasRenderer): void;
-        protected createProxy(): ContainerProxy;
-        destroy(destroyChildren?: boolean): void;
-
-    }
     export class DisplayObject extends utils.EventEmitter implements interaction.InteractiveTarget {
 
         //begin extras.cacheAsBitmap
@@ -434,10 +241,6 @@ declare module PIXI {
         getGlobalPosition(point?: Point): Point;
         //end extras.getGlobalPosition
 
-        //begin c2d.DisplayPoint
-        childApplyTransform(child: Raycast2d, transform: ComputedTransform2d): void;
-        //end c2d.DisplayPoint
-
         //begin accessible target
         accessible: boolean;
         accessibleTitle: string;
@@ -452,15 +255,7 @@ declare module PIXI {
         defaultCursor: string;
         //end interactive target
 
-        uid: number;
-        transform: Transform2d;
-        computedTransform: ComputedTransform2d;
-        projectedTransform: ComputedTransform2d;
-        worldProjection: ComputedTransform2d;
-        geometry: Geometry2D;
-        computedGeometry: ComputedGeometry2d;
-        projectedGeometry: ComputedGeometry2d
-        protected _localBounds: GeometrySet;
+        transform: Transform;
         alpha: number;
         visible: boolean;
         renderable: boolean;
@@ -469,20 +264,10 @@ declare module PIXI {
         filterArea: Rectangle;
         protected _bounds: Rectangle;
         protected _currentBounds: Rectangle;
-        isRaycastCheckingBoundsFirst: boolean;
-        isRaycastPossible: boolean;
         protected _mask: Rectangle;
-        proxyContext: DisplayObjectProxy;
-        updateOrder: number;
-        displayOrder: number;
-        inheritZIndex: boolean;
-        protected _zIndex: number;
-        zOrder: number;
-        zIndex: number;
         x: number;
         y: number;
-        projectionMatrix: Matrix;
-        projectionMatrix2d: Matrix;
+        worldTransform: Matrix;
         localTransform: Matrix;
         position: Point;
         scale: Point;
@@ -493,21 +278,14 @@ declare module PIXI {
         mask: PIXI.Graphics | PIXI.Sprite;
         filters: Filter[];
 
-        initTransform(isStatic?: boolean): void;
-        updateTransform(): ComputedTransform2d | void;
-        updateGeometry(): ComputedGeometry2d;
-        updateProjectedGeometry(): ComputedGeometry2d;
-        updateProjectedTransform(): ComputedTransform2d;
-        displayObjectUpdateTransform(): void;
+        updateTransform(): void;
+        protected displayObjectUpdateTransform(): void;
         getBounds(): Rectangle;
         getLocalBounds(): Rectangle;
         toGlobal(position: Point): Point;
         toLocal(position: Point, from: Point, point?: Point): Point;
-        raycast(point: DisplayPoint, ignoreBoundsCheck?: boolean): Point;
-        containsPoint(point: Point): boolean;
-        containsLocalPoint(point: Point): boolean;
-        renderWebGL(renderer: WebGLRenderer): void;
-        renderCanvas(renderer: CanvasRenderer): void;
+        protected renderWebGL(renderer: WebGLRenderer): void;
+        protected renderCanvas(renderer: CanvasRenderer): void;
         setParent(container: Container): Container;
         setTransform(x?: number, y?: number, scaleX?: number, scaleY?: number, rotation?: number, skewX?: number, skewY?: number, pivotX?: number, pivotY?: number): DisplayObject;
         destroy(): void;
@@ -553,20 +331,108 @@ declare module PIXI {
         */
 
     }
-    export class DisplayObjectProxy extends DisplayObject implements interaction.InteractiveTargetProxy {
+    export class Container extends DisplayObject {
 
-        constructor(original: DisplayObject);
+        //begin extras.getChildByName
+        getChildByName(name: string): DisplayObject;
+        //end extras.getChildByName
 
-        original: DisplayObject;
-        protected _localBoundsProxy: GeometrySetProxy;
+        children: DisplayObject[];
+        width: number;
+        height: number;
 
-        updateOrder: number;
-        displayOrder: number;
-        worldAlpha: number;
-        protected _events: any;
+        protected onChildrenChange: (...args: any[]) => void;
+        addChild(child: DisplayObject): DisplayObject;
+        addChild(...child: DisplayObject[]): DisplayObject[];
+        addChildAt(child: DisplayObject, index: DisplayObject): DisplayObject;
+        swapChildren(child: DisplayObject, child2: DisplayObject): void;
+        getChildIndex(child: DisplayObject): number;
+        setChildIndex(child: DisplayObject, index: number): void;
+        getChildAt(index: number): DisplayObject;
+        removeChild(child: DisplayObject): DisplayObject;
+        removeChild(...child: DisplayObject[]): DisplayObject[];
+        removeChildAt(index: number): DisplayObject;
+        removeChildren(beginIndex?: number, endIndex?: number): DisplayObject | DisplayObject[];
+        updateTransform(): void;
+        protected containerUpdateTransform(): void;
+        getBounds(): Rectangle;
+        protected containerGetBounds(): Rectangle;
+        getLocalBounds(): Rectangle;
+        renderWebGL(renderer: PIXI.WebGLRenderer): void;
+        protected _renderWebGL(renderer: PIXI.WebGLRenderer): void;
+        protected _renderCanvas(renderer: PIXI.CanvasRenderer): void;
+        renderCanvas(renderer: PIXI.CanvasRenderer): void;
+        destroy(destroyChildren?: boolean): void;
 
-        swapContext(): void;
-        getOriginal(): DisplayObject;
+        once(event: 'added', fn: (displayObject: DisplayObject) => void, context?: any): utils.EventEmitter;
+        once(event: 'removed', fn: (DisplayObject: DisplayObject) => void, context?: any): utils.EventEmitter;
+        once(event: string, fn: Function, context?: any): utils.EventEmitter;
+        on(event: 'added', fn: (displayObject: DisplayObject) => void, context?: any): utils.EventEmitter;
+        on(event: 'removed', fn: (DisplayObject: DisplayObject) => void, context?: any): utils.EventEmitter;
+        on(event: string, fn: Function, context?: any): utils.EventEmitter;
+        off(event: string, fn: Function, context?: any): utils.EventEmitter;
+
+    }
+    export class ObservablePoint {
+
+        constructor(cb: Function, scope?: any, x?: number, y?: number);
+
+        x: number;
+        y: number;
+        cb: () => void;
+        scope: any;
+
+        set(x: number, y: number): void;
+
+    }
+    export class Transform {
+
+        constructor();
+
+        worldTransform: Matrix;
+        localTransform: Matrix;
+        position: Point;
+        scale: Point;
+        skew: Point;
+        pivot: Point;
+        protected _rotation: number;
+        protected _sr: number;
+        protected _cr: number;
+        protected _cy: number;
+        protected _sy: number;
+        protected _nsx: number;
+        protected _cx: number;
+        protected _dirty: number;
+        updated: boolean;
+
+        updateSkew(): void;
+        updateTransform(parentTransform: Transform): void;
+        protected updateChildTransform(childTransform: Transform): Transform;
+
+        rotation: number;
+
+    }
+    export class TransformStatic {
+
+        constructor();
+
+        worldTransform: Matrix;
+        localTransform: Matrix;
+        position: Point;
+        scale: Point;
+        pivot: Point;
+        skew: Point;
+        protected _rotation: number;
+        protected _sr: number;
+        protected _cr: number;
+        protected _dirtyLocal: number;
+        protected _versionLocal: number;
+        protected _versionGlobal: number;
+
+        updateTransform(parentTransform: Transform): void;
+        protected updateChildTransform(childTransform: Transform): Transform;
+
+        rotation: number;
 
     }
 
@@ -574,7 +440,7 @@ declare module PIXI {
 
     export class GraphicsData {
 
-        constructor(lineWidth: number, lineColor: number, lineAlpha: number, fillColor: number, fillAlpha: number, fill: boolean, shape: Circle | Rectangle | Ellipse | Polygon);
+        constructor(lineWidth: number, lineColor: number, lineAlpha: number, fillColor: number, fillAlpha: number, fill: boolean, shape: Shape | Circle | Rectangle | RoundedRectangle | Ellipse | Polygon);
 
         lineWidth: number;
         lineColor: number;
@@ -584,17 +450,15 @@ declare module PIXI {
         fillAlpha: number;
         protected _fillTint: number;
         fill: boolean;
-        shape: Circle | Rectangle | Ellipse | Polygon;
+        protected holes: Shape[];
+        shape: Shape | Circle | Rectangle | RoundedRectangle | Ellipse | Polygon;
         type: number;
-
         clone(): GraphicsData;
-
+        addHole(shape: Shape | Circle | Rectangle | RoundedRectangle | Ellipse | Polygon): void;
         destroy(); void;
 
     }
     export class Graphics extends Container {
-
-        static _SPRITE_TEXTURE: Texture;
 
         fillAlpha: number;
         lineWidth: number;
@@ -603,19 +467,19 @@ declare module PIXI {
         tint: number;
         protected _prevTint: number;
         blendMode: number;
-        protected currentPath: GraphicsData;
+        currentPath: GraphicsData;
         protected _webGL: any;
         isMask: boolean;
         boundsPadding: number;
-        protected _localBounds: GeometrySet;
-        protected dirty: boolean;
+        protected _localBounds: Rectangle;
+        dirty: boolean;
         protected glDirty: boolean;
         protected boundsDirty: boolean;
         protected cachedSpriteDirty: boolean;
         protected _spriteRect: Rectangle;
         protected _fastRect: boolean;
-        isRaycastCheckingBoundsFirst: boolean;
-        isRaycastPossible: boolean;
+
+        static _SPRITE_TEXTURE: Texture;
 
         clone(): Graphics;
         lineStyle(lineWidth?: number, color?: number, alpha?: number): Graphics;
@@ -634,17 +498,21 @@ declare module PIXI {
         drawPolygon(path: number[] | Point[]): Graphics;
         clear(): Graphics;
         protected _renderSpriteRect(renderer: PIXI.SystemRenderer): void;
-        drawShape(shape: Circle | Rectangle | Ellipse | Polygon | RoundedRectangle): GraphicsData;
+        containsPoint(point: Point): boolean;
+        updateLocalBounds(): void;
+        drawShape(shape: Shape | Circle | Rectangle | Ellipse | Polygon | RoundedRectangle): GraphicsData;
         generateCanvasTexture(scaleMode: number, resolution: number): Texture;
+        protected closePath(): Graphics;
+        protected addHole(): Graphics;
         destroy(): void;
 
     }
     export class CanvasGraphicsRenderer {
 
         constructor(renderer: SystemRenderer);
-
         render(graphics: Graphics): void;
         protected updateGraphicsTint(graphics: Graphics): void;
+        protected renderPolygon(points: Point[], close: boolean, context: CanvasRenderingContext2D): void;
         destroy(): void;
 
     }
@@ -667,7 +535,7 @@ declare module PIXI {
     }
     export class WebGLGraphicsData {
 
-        constructor(gl: WebGLRenderingContext, shader: glCore.GLShader, attribsState: any);
+        constructor(gl: WebGLRenderingContext, shader: glCore.GLShader, attribsState: glCore.AttribState);
 
         gl: WebGLRenderingContext;
         color: number[];
@@ -679,7 +547,7 @@ declare module PIXI {
         glPoints: number[];
         glIndices: number[];
         shader: glCore.GLShader;
-        vao: any;
+        vao: glCore.VertexArrayObject;
 
         reset(): void;
         upload(): void;
@@ -692,18 +560,6 @@ declare module PIXI {
 
     export module GroupD8 {
 
-        export function add(rotationSecond: number, rotationFirst: number): number;
-        export function byDirection(dx: number, dy: number): number;
-        export function inv(rotation: number): number;
-        export function isSwapWidthHeight(rotation: number): boolean;
-        export function matrixAppendRotationInv(matrix: Matrix, rotation: number, tx: number, ty: number): void;
-        export function rotate180(rotation: number): number;
-        export function sub(rotationSecond: number, rotationFirst: number): number;
-        export function uX(ind: number): number;
-        export function uY(ind: number): number;
-        export function vX(ind: number): number;
-        export function vY(ind: number): number;
-
         export var E: number;
         export var SE: number;
         export var S: number;
@@ -714,6 +570,18 @@ declare module PIXI {
         export var NE: number;
         export var MIRROR_HORIZONTAL: number;
         export var MIRROR_VERTICAL: number;
+
+        export function uX(ind: number): number;
+        export function uY(ind: number): number;
+        export function vX(ind: number): number;
+        export function vY(ind: number): number;
+        export function inv(rotation: number): number;
+        export function add(rotationSecond: number, rotationFirst: number): number;
+        export function sub(rotationSecond: number, rotationFirst: number): number;
+        export function rotate180(rotation: number): number;
+        export function isSwapWidthHeight(rotation: number): boolean;
+        export function byDirection(dx: number, dy: number): number;
+        export function matrixAppendRotationInv(matrix: Matrix, rotation: number, tx: number, ty: number): void;
 
     }
     export class Matrix {
@@ -853,7 +721,7 @@ declare module PIXI {
         autoResize?: boolean;
         antialias?: boolean;
         resolution?: number;
-        clearBeforeRendering?: boolean;
+        clearBeforeRender?: boolean;
         backgroundColor?: number;
         roundPixels?: boolean;
 
@@ -896,7 +764,7 @@ declare module PIXI {
         maskManager: CanvasMaskManager;
         smoothProperty: string;
 
-        render(displayObject: DisplayObject, renderTexture: RenderTexture, clear: boolean, transform: Transform2d, skipUpdateTransform: boolean): void;
+        render(displayObject: DisplayObject, renderTexture: RenderTexture, clear: boolean, transform: Transform, skipUpdateTransform: boolean): void;
         setBlendMode(blendMode: number): void;
         destroy(removeView?: boolean): void;
         resize(w: number, h: number): void;
@@ -915,7 +783,7 @@ declare module PIXI {
         constructor(renderer: CanvasRenderer);
 
         pushMask(maskData: any): void;
-        renderGraphics(graphics: Graphics): void;
+        protected renderGraphicsShape(graphics: Graphics): void;
         popMask(renderer: WebGLRenderer | CanvasRenderer): void;
         destroy(): void;
 
@@ -942,11 +810,11 @@ declare module PIXI {
         transparent?: boolean;
         autoResize?: boolean;
         antialias?: boolean;
-        resolution?: number;
-        clearBeforeRendering?: boolean;
-        backgroundColor?: number;
-        roundPixels?: boolean;
         forceFXAA?: boolean;
+        resolution?: number;
+        clearBeforeRender?: boolean;
+        preserveDrawingBuffer: boolean;
+        roundPixels?: boolean;
 
     }
     export class WebGLRenderer extends SystemRenderer {
@@ -960,6 +828,7 @@ declare module PIXI {
             stencil: boolean;
             preseveDrawingBuffer: boolean;
         };
+        protected _bakcgroundColorRgba: number[];
         maskManager: MaskManager;
         stencilManager: StencilManager;
         emptyRenderer: ObjectRenderer;
@@ -974,15 +843,15 @@ declare module PIXI {
         protected _activeTextureLocation: number;
         protected _activeTexture: Texture;
         protected _initContext(): void;
-        render(displayObject: DisplayObject, renderTexture: RenderTexture, clear: boolean, transform: Transform2d, skipUpdateTranform: boolean): void;
+
+        render(displayObject: DisplayObject, renderTexture: RenderTexture, clear: boolean, transform: Transform, skipUpdateTranform: boolean): void;
         setObjectRenderer(objectRenderer: ObjectRenderer): void;
         flush(): void;
         resize(width: number, height: number): void;
         setBlendMode(blendMode: number): void;
         clear(clearColor?: number): void;
         setTransform(matrix: Matrix): void;
-        bindRenderTexture(renderTexture: RenderTexture, transform: Transform2d): WebGLRenderer;
-        bindProjection(worldProjection: ComputedTransform2d): boolean;
+        bindRenderTexture(renderTexture: RenderTexture, transform: Transform): WebGLRenderer;
         bindRenderTarget(renderTarget: RenderTarget): WebGLRenderer;
         bindShader(shader: glCore.GLShader): WebGLRenderer;
         bindTexture(texture: Texture, location: number): WebGLRenderer;
@@ -1038,7 +907,7 @@ declare module PIXI {
 
         bindTexture(): void;
         getTexture(): WebGLTexture;
-        updateTexture(texture: BaseTexture): WebGLTexture;
+        updateTexture(texture: BaseTexture | Texture): WebGLTexture;
         destroyTexture(texture: BaseTexture, _skipRemove?: boolean): void;
         removeAll(): void;
         destroy(): void;
@@ -1094,35 +963,31 @@ declare module PIXI {
         constructor(gl: WebGLRenderingContext, width: number, height: number, scaleMode: number, resolution: number, root?: boolean);
 
         gl: WebGLRenderingContext;
-        frameBuffer: WebGLFramebuffer;
+        frameBuffer: glCore.GLFramebuffer;
         texture: Texture;
         clearColor: number[];
         size: Rectangle;
         resolution: number;
-        projection2d: Transform2d;
-        worldProjection: ComputedTransform2d;
+        projectionMatrix: Matrix;
         transform: Matrix;
         frame: Rectangle;
-        defaultFrame: WebGLRenderbuffer;
-        destinationFrame: WebGLRenderbuffer;
-        sourceFrame: WebGLRenderbuffer;
-        stencilBuffer: WebGLRenderbuffer;
+        defaultFrame: Rectangle;
+        destinationFrame: Rectangle;
+        sourceFrame: Rectangle;
+        stencilBuffer: glCore.GLFramebuffer;
         stencilMaskStack: StencilMaskStack[];
-        filterStack: [{
+        filterStack: {
             renderTarget: RenderTarget,
             filter: any[];
             bounds: Rectangle
-        }];
+        }[];
         scaleMode: number;
         root: boolean;
-        projectionMatrix: Matrix;
 
-        setWorldProjection(worldProjection: ComputedTransform2d): void;
-        checkWorldProjection(worldProjection: ComputedTransform2d): boolean;
         clear(clearColor?: number[]): void;
         attachStencilBuffer(): void;
         setFrame(destinationFrame: Rectangle, sourceFrame: Rectangle): void;
-        activate(worldProjection: ComputedTransform2d): void;
+        activate(): void;
         calculateProjection(destinationFrame: Rectangle, sourceFrame: Rectangle): void;
         resize(width: number, height: number): void;
         destroy(): void;
@@ -1171,6 +1036,7 @@ declare module PIXI {
         calculateNormalisedScreenSpaceMatrix(outputMatrix: Matrix): Matrix;
         calculateSpriteMatrix(outputMatrix: Matrix, sprite: Sprite): Matrix;
         destroy(): void;
+        emptyPool(): void;
         getPotRenderTarget(gl: WebGLRenderingContext, minWidth: number, minHeight: number, resolution: number): RenderTarget;
         freePotRenderTarget(renderTarget: RenderTarget): void;
 
@@ -1178,12 +1044,14 @@ declare module PIXI {
     export class MaskManager extends WebGLManager {
 
         scissor: boolean;
+        scissorData: any;
+        scissorRenderTarget: RenderTarget;
         enableScissor: boolean;
         alphaMaskPool: number[];
         alphaMaskIndex: number;
         pushMask(target: RenderTarget, maskData: any): void;
         popMask(target: RenderTarget, maskData: any): void;
-        pushSpriteMask(target: RenderTarget, maskData: any): void;
+        pushSpriteMask(target: RenderTarget, maskData: Sprite): void;
         popSpriteMask(): void;
         pushStencilMask(maskData: any): void;
         popStencilMask(): void;
@@ -1214,7 +1082,7 @@ declare module PIXI {
     }
     export class Filter {
 
-        constructor(vertexSrc: string, fragmentSrc: string, uniforms: any);
+        constructor(vertexSrc: string, fragmentSrc: string, uniforms: string);
 
         vertextSrc: string;
         fragmentSrc: string;
@@ -1231,9 +1099,13 @@ declare module PIXI {
 
     }
     export class SpriteMaskFilter extends Filter {
+
         constructor(sprite: Sprite);
+
         maskSprite: Sprite;
         maskMatrix: Matrix;
+        apply(filterManager: FilterManager, input: RenderTarget, output: RenderTarget): void;
+
     }
 
     //sprites
@@ -1242,28 +1114,27 @@ declare module PIXI {
 
         constructor(texture?: Texture);
 
-        protected _anchor: ObservablePoint2d;
-        protected _size: ObservablePoint2d;
+        anchor: Point;
         protected _texture: Texture;
+        protected _width: number;
+        protected _height: number;
         tint: number;
         blendMode: number;
         shader: glCore.GLShader | Filter;
         protected cachedTint: number;
         texture: Texture;
         protected textureDirty: boolean;
-        geometry: Geometry2D;
-        isRayCastPossible: boolean;
+        protected vertexData: number[];
         width: number;
         height: number;
-        anchor: ObservablePoint2d;
-        size: ObservablePoint2d;
 
+        protected _onTextureUpdate(): void;
         protected calculateVertices(): void;
-        protected makeDirty(): void;
         protected _renderWebGL(renderer: WebGLRenderer);
-        protected checkVertices(): void;
         protected _renderCanvas(renderer: CanvasRenderer);
-        containsLocalPoint(point: Point): boolean;
+        getBounds(): Rectangle;
+        getLocalBounds(): Rectangle;
+        containsPoint(point: Point): boolean;
         destroy(destroyTexture?: boolean, destroyBaseTexture?: boolean): void;
 
         static from(source: Texture): Sprite;
@@ -1282,6 +1153,8 @@ declare module PIXI {
     }
     export class SpriteRenderer extends ObjectRenderer {
 
+        constructor(renderer: PIXI.WebGLRenderer);
+
         vertSize: number;
         vertByteSize: number;
         size: number;
@@ -1294,12 +1167,13 @@ declare module PIXI {
         groups: any[];
         sprites: Sprite[];
         vertexBuffers: number[];
-        vaos: any[];
+        vaos: glCore.VertexArrayObject[];
         vaoMax: number;
         vertexCount: number;
 
+        protected onContextChanged(): void;
         protected onPrerender(): void;
-        render(object: Sprite): void;
+        render(sprite: Sprite): void;
         flush(): void;
         start(): void;
         stop(): void;
@@ -1310,7 +1184,7 @@ declare module PIXI {
 
         constructor(renderer: WebGLRenderer);
 
-        render(object: Sprite): void;
+        render(sprite: Sprite): void;
         destroy(): void;
 
     }
@@ -1333,25 +1207,28 @@ declare module PIXI {
 
     export interface TextStyle {
 
-        font?: string;
-        fill?: string | CanvasGradient | CanvasPattern;
         align?: string;
-        stroke?: string | number;
-        strokeThickness?: number;
-        wordWrap?: boolean;
-        wordWrapWidth?: number;
-        letterSpacing?: number;
         breakWords?: boolean;
-        lineHeight?: number;
         dropShadow?: boolean;
-        dropShadowColor?: string | number;
         dropShadowAngle?: number;
-        dropShadowDistance?: number;
         dropShadowBlur?: number;
-        padding?: number;
-        textBaseline?: string;
+        dropShadowColor?: string | number;
+        dropShadowDistance?: number;
+        fontFamily?: string;
+        fontSize?: number;
+        fontStyle?: string;
+        fontVariant?: string;
+        fontWeight?: string;
+        letterSpacing?: number;
+        lineHeight?: number;
         lineJoin?: string;
         miterLimit?: number;
+        padding?: number;
+        stroke?: string | number;
+        strokeThickness?: number;
+        textBaseline?: string;
+        wordWrap?: boolean;
+        wordWrapWidth?: number;
 
     }
     export class Text extends Sprite {
@@ -1363,24 +1240,28 @@ declare module PIXI {
         resolution: number;
         protected _text: string;
         protected _style: TextStyle;
+        protected _styleListener: Function;
+        protected _font: string;
+
         static fontPropertiesCache: any;
         static fontPropertiesCanvas: HTMLCanvasElement;
         static fontPropertiesContext: CanvasRenderingContext2D;
+
         width: number;
         height: number;
         style: TextStyle;
         text: string;
 
-        protected updateText(): void;
-        protected drawLetterSpacing(text: string, x: number, y: number, isStroke: boolean): void;
+        protected updateText(respectDirty?: boolean): void;
+        protected drawLetterSpacing(text: string, x: number, y: number, isStroke?: boolean): void;
         protected updateTexture(): void;
         protected _renderWebGL(renderer: WebGLRenderer): void;
         protected _renderCanvas(renderer: CanvasRenderer): void;
         protected determineFontProperties(fontStyle: TextStyle): TextStyle;
         protected wordWrap(text: string): boolean;
-        getBounds(): Rectangle;
+        getBounds(matrix?: Matrix): Rectangle;
+        protected _onStyleChange: () => void;
         destroy(): void;
-
         dirty: boolean;
 
     }
@@ -1424,7 +1305,7 @@ declare module PIXI {
         scaleMode: number;
         hasLoaded: boolean;
         isLoading: boolean;
-        source: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement;
+        source: HTMLImageElement | HTMLCanvasElement;
         premultipliedAlpha: boolean;
         imageUrl: string;
         protected isPowerOfTwo: boolean;
@@ -1459,7 +1340,7 @@ declare module PIXI {
     }
     export class RenderTexture extends BaseTexture {
 
-        constructor(baseRenderTexture: BaseTexture, frame: Rectangle);
+        constructor(baseRenderTexture: BaseTexture, frame?: Rectangle);
 
         protected legacyRenderer: any;
         valid: boolean;
@@ -1500,7 +1381,6 @@ declare module PIXI {
         static fromVideo(video: HTMLVideoElement | string, scaleMode?: number): Texture;
         static fromVideoUrl(videoUrl: string, scaleMode?: number): Texture;
         static from(source: any): Texture;
-
         static addTextureToCache(texture: Texture, id: string): void;
         static removeTextureFromCache(id: string): Texture;
 
@@ -1585,6 +1465,10 @@ declare module PIXI {
 
     }
 
+    //shader
+
+    export class Shader extends glCore.GLShader { }
+
     //////////////////////////////////////////////////////////////////////////////
     ////////////////////////////EXTRACT///////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////
@@ -1644,30 +1528,25 @@ declare module PIXI {
             textHeight: number;
             protected _glyphs: Sprite[];
             protected _font: string | {
-                tint?: number;
-                align?: string;
-                name: string;
-                size: number;
+                name?: string;
+                size?: number;
             };
             font: string | {
-                tint?: number;
-                align?: string;
-                name: string;
-                size: number;
+                name?: string;
+                size?: number;
             };
             protected _text: string;
             maxWidth: number;
             maxLineHeight: number;
             dirty: boolean;
-
-            protected updateText(): void;
-
             tint: number;
             align: string;
+            text: string;
+
+            protected updateText(): void;
             updateTransform(): void;
             getLocalBounds(): Rectangle;
             validate(): void;
-            text: string;
 
             static fonts: any;
 
@@ -1699,17 +1578,23 @@ declare module PIXI {
         }
         export class TilingSprite extends Sprite {
 
+            constructor(texture: Texture, width: number, height: number);
+
             tileScale: Point;
             tilePosition: Point;
+            protected _width: number;
+            protected _height: number;
             protected _uvs: TextureUvs[];
             protected _canvasPattern: CanvasPattern;
             protected _glDatas: any[];
+            width: number;
+            height: number;
+            protected _tileScaleOffset: Point;
 
-            constructor(texture: Texture, width: number, height: number);
-
+            protected _onTextureUpdate(): void;
             protected _renderWebGL(renderer: WebGLRenderer): void;
             protected _renderCanvas(renderer: CanvasRenderer): void;
-            protected calculateVertices(): void;
+            getBounds(): Rectangle;
             containsLocalPoint(point: Point): boolean;
             destroy(): void;
 
@@ -1720,7 +1605,6 @@ declare module PIXI {
             static fromFrame(frameId: string, width?: number, height?: number): TilingSprite;
             static fromImage(imageId: string, width?: number, height?: number, crossorigin?: boolean, scaleMode?: number): TilingSprite;
 
-            protected _tileScaleOffset: Point;
 
         }
         export class TilingShader extends glCore.GLShader { }
@@ -1733,20 +1617,15 @@ declare module PIXI {
 
     export module filters {
 
-        export class FXAAFilter extends Filter {
-
-            applyFilter(renderer: WebGLRenderer, input: RenderTarget, output: RenderTarget): void;
-
-        }
+        export class FXAAFilter extends Filter { }
         export class BlurFilter extends Filter {
 
-            protected blurXFilter: BlurXFilter;
-            protected blurYFilter: BlurYFilter;
-
+            blurXFilter: BlurXFilter;
+            blurYFilter: BlurYFilter;
+            resolution: number;
             padding: number;
-
-            blur: number;
             passes: number;
+            blur: number;
             blurX: number;
             blurY: number;
 
@@ -1756,6 +1635,7 @@ declare module PIXI {
             passes: number;
             resolution: number;
             strength: number;
+            firstRun: boolean;
             blur: number;
 
         }
@@ -1764,6 +1644,7 @@ declare module PIXI {
             passes: number;
             resolution: number;
             strength: number;
+            firstRun: boolean;
             blur: number;
 
         }
@@ -1823,6 +1704,9 @@ declare module PIXI {
             radius: number;
             angle: number;
 
+        }
+        export class VoidFilter extends Filter {
+            glShaderKey: string;
         }
 
         //pixi-filters.d.ts todo
@@ -1969,7 +1853,7 @@ declare module PIXI {
         }
         export class InteractionData {
 
-            global: DisplayPoint;
+            global: Point;
 
             protected _target: DisplayObject;
             target: DisplayObject;
