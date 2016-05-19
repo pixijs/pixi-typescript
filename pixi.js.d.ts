@@ -251,6 +251,7 @@ declare module PIXI {
         //begin interactive target
         interactive: boolean;
         buttonMode: boolean;
+        hitArea: HitArea;
         interactiveChildren: boolean;
         defaultCursor: string;
         //end interactive target
@@ -295,40 +296,40 @@ declare module PIXI {
         off(event: string, fn: Function, context?: any): utils.EventEmitter;
 
         /*
-        on(event: 'click', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
-        on(event: 'mousedown', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
-        on(event: 'mouseout', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
-        on(event: 'mouseover', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
-        on(event: 'mouseup', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
-        on(event: 'mouseclick', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
-        on(event: 'mouseupoutside', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
-        on(event: 'rightclick', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
-        on(event: 'rightdown', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
-        on(event: 'rightup', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
-        on(event: 'rightupoutside', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
-        on(event: 'tap', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
-        on(event: 'touchend', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
-        on(event: 'touchendoutside', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
-        on(event: 'touchmove', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
-        on(event: 'touchstart', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
+         on(event: 'click', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
+         on(event: 'mousedown', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
+         on(event: 'mouseout', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
+         on(event: 'mouseover', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
+         on(event: 'mouseup', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
+         on(event: 'mouseclick', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
+         on(event: 'mouseupoutside', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
+         on(event: 'rightclick', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
+         on(event: 'rightdown', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
+         on(event: 'rightup', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
+         on(event: 'rightupoutside', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
+         on(event: 'tap', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
+         on(event: 'touchend', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
+         on(event: 'touchendoutside', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
+         on(event: 'touchmove', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
+         on(event: 'touchstart', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
 
-        once(event: 'click', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
-        once(event: 'mousedown', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
-        once(event: 'mouseout', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
-        once(event: 'mouseover', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
-        once(event: 'mouseup', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
-        once(event: 'mouseclick', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
-        once(event: 'mouseupoutside', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
-        once(event: 'rightclick', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
-        once(event: 'rightdown', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
-        once(event: 'rightup', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
-        once(event: 'rightupoutside', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
-        once(event: 'tap', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
-        once(event: 'touchend', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
-        once(event: 'touchendoutside', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
-        once(event: 'touchmove', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
-        once(event: 'touchstart', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
-        */
+         once(event: 'click', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
+         once(event: 'mousedown', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
+         once(event: 'mouseout', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
+         once(event: 'mouseover', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
+         once(event: 'mouseup', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
+         once(event: 'mouseclick', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
+         once(event: 'mouseupoutside', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
+         once(event: 'rightclick', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
+         once(event: 'rightdown', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
+         once(event: 'rightup', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
+         once(event: 'rightupoutside', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
+         once(event: 'tap', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
+         once(event: 'touchend', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
+         once(event: 'touchendoutside', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
+         once(event: 'touchmove', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
+         once(event: 'touchstart', fn: (event: interaction.InteractionEvent) => void, context?: any): utils.EventEmitter;
+         */
 
     }
     export class Container extends DisplayObject {
@@ -633,7 +634,7 @@ declare module PIXI {
         contains(x: number, y: number): boolean;
 
     }
-    export class Circle implements HitArea {
+    export class Circle {
 
         constructor(x?: number, y?: number, radius?: number);
 
@@ -647,7 +648,7 @@ declare module PIXI {
         getBounds(): Rectangle;
 
     }
-    export class Ellipse implements HitArea {
+    export class Ellipse {
 
         constructor(x?: number, y?: number, width?: number, height?: number);
 
@@ -662,7 +663,7 @@ declare module PIXI {
         getBounds(): Rectangle;
 
     }
-    export class Polygon implements HitArea {
+    export class Polygon {
 
         constructor(points: Point[] | number[]);
         constructor(...points: Point[]);
@@ -676,7 +677,7 @@ declare module PIXI {
         contains(x: number, y: number): boolean;
 
     }
-    export class Rectangle implements HitArea {
+    export class Rectangle {
 
         constructor(x?: number, y?: number, width?: number, height?: number);
 
@@ -696,7 +697,7 @@ declare module PIXI {
         enlarge(rect: Rectangle): void;
 
     }
-    export class RoundedRectangle implements HitArea {
+    export class RoundedRectangle {
 
         constructor(x?: number, y?: number, width?: number, height?: number, radius?: number);
 
@@ -764,7 +765,7 @@ declare module PIXI {
         maskManager: CanvasMaskManager;
         smoothProperty: string;
 
-        render(displayObject: DisplayObject, renderTexture: RenderTexture, clear: boolean, transform: Transform, skipUpdateTransform: boolean): void;
+        render(displayObject: DisplayObject): void;
         setBlendMode(blendMode: number): void;
         destroy(removeView?: boolean): void;
         resize(w: number, h: number): void;
@@ -813,7 +814,7 @@ declare module PIXI {
         forceFXAA?: boolean;
         resolution?: number;
         clearBeforeRender?: boolean;
-        preserveDrawingBuffer: boolean;
+        preserveDrawingBuffer?: boolean;
         roundPixels?: boolean;
 
     }
@@ -844,7 +845,7 @@ declare module PIXI {
         protected _activeTexture: Texture;
         protected _initContext(): void;
 
-        render(displayObject: DisplayObject, renderTexture: RenderTexture, clear: boolean, transform: Transform, skipUpdateTranform: boolean): void;
+        render(displayObject: DisplayObject): void;
         setObjectRenderer(objectRenderer: ObjectRenderer): void;
         flush(): void;
         resize(width: number, height: number): void;
@@ -1214,8 +1215,9 @@ declare module PIXI {
         dropShadowBlur?: number;
         dropShadowColor?: string | number;
         dropShadowDistance?: number;
+        fill?: string|number;
         fontFamily?: string;
-        fontSize?: number;
+        fontSize?: number | string;
         fontStyle?: string;
         fontVariant?: string;
         fontWeight?: string;
@@ -1924,6 +1926,7 @@ declare module PIXI {
 
             interactive: boolean;
             buttonMode: boolean;
+            hitArea: HitArea;
             interactiveChildren: boolean;
             defaultCursor: string;
 
@@ -2206,8 +2209,8 @@ declare module PIXI {
     /////////////////////////////pixi-gl-core/////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////
     //pixi-gl-core https://github.com/pixijs/pixi-gl-core
-    //SharedArrayBuffer as a type is not available yet. 
-    //Need to fully define what an `Attrib` is. 
+    //SharedArrayBuffer as a type is not available yet.
+    //Need to fully define what an `Attrib` is.
     export module glCore {
 
         export interface ContextOptions {
