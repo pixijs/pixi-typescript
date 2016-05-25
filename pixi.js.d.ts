@@ -1189,18 +1189,18 @@ declare module PIXI {
         destroy(): void;
 
     }
-    export class CanvasTinter {
+    export module CanvasTinter {
 
-        static getTintedTexture(sprite: Sprite, color: number): HTMLCanvasElement;
-        static tintWithMultiply(texture: Texture, color: number, canvas: HTMLCanvasElement): void;
-        static tintWithOverlay(texture: Texture, color: number, canvas: HTMLCanvasElement): void;
-        static tintWithPerPixel(texture: Texture, color: number, canvas: HTMLCanvasElement): void;
-        static roundColor(color: number): number;
+        export function getTintedTexture(sprite: Sprite, color: number): HTMLCanvasElement;
+        export function tintWithMultiply(texture: Texture, color: number, canvas: HTMLCanvasElement): void;
+        export function tintWithOverlay(texture: Texture, color: number, canvas: HTMLCanvasElement): void;
+        export function tintWithPerPixel(texture: Texture, color: number, canvas: HTMLCanvasElement): void;
+        export function roundColor(color: number): number;
 
-        static cacheStepsPerColorChannel: number;
-        static convertTintToImage: boolean;
-        static canUseMultiply: boolean;
-        static tintMethod: Function;
+        export var cacheStepsPerColorChannel: number;
+        export var convertTintToImage: boolean;
+        export var canUseMultiply: boolean;
+        export var tintMethod: Function;
 
     }
 
