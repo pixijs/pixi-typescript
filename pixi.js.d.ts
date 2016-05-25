@@ -1476,9 +1476,9 @@ declare module PIXI {
         }
         export class RGBSplitFilter extends AbstractFilter {
 
-            red: number;
-            green: number;
-            blue: number;
+            red: Point;
+            green: Point;
+            blue: Point;
 
         }
         export class SepiaFilter extends AbstractFilter {
