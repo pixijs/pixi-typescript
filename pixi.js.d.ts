@@ -946,11 +946,14 @@ declare module PIXI {
         sourceFrame: Rectangle;
         stencilBuffer: glCore.GLFramebuffer;
         stencilMaskStack: StencilMaskStack[];
-        filterStack: {
-            renderTarget: RenderTarget,
-            filter: any[];
-            bounds: Rectangle
-        }[];
+        filterData: {
+            index: number,
+            stack: {
+                renderTarget: RenderTarget,
+                filter: any[];
+                bounds: Rectangle
+            }[]
+        };
         scaleMode: number;
         root: boolean;
 
