@@ -573,6 +573,7 @@ declare module PIXI {
         prepend(matrix: Matrix): Matrix;
         invert(): Matrix;
         identity(): Matrix;
+        decompose(transform: Transform) : Transform;
         clone(): Matrix;
         copy(matrix: Matrix): Matrix;
 
