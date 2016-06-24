@@ -1481,6 +1481,42 @@ declare module PIXI {
     }
 
     //////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////PREPARE///////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////
+
+    export module prepare {
+        export class canvas {
+            constructor ();
+            add: () => prepare.canvas;
+            destroy: () => void;
+            register: () => prepare.canvas;
+            upload: (done: () => void) => void;
+            upload: (displayObject: DisplayObject, done: () => void) => void;
+        }
+        export class webGL {
+            constructor (renderer: WebGLRenderer);
+            
+            static UPLOADS_PER_FRAME: number;
+
+            renderer: WebGLRenderer;
+            queue: any[];
+            ticking: boolean;
+
+            addHooks: Function[];
+            completes: Function[];
+            uploadHooks: Function[];
+            
+            add: (item: PIXI.DisplayObject | PIXI.Container | any) => prepare.webGL;
+            destroy: () => void;
+            register: (addHook: () => void, uploadHook: () => void) => PIXI.prepare.webGL;
+            tick: () => void;
+            upload: (done: () => void) => void;
+            upload: (displayObject: DisplayObject, done: () => void) => void;
+            
+        }
+    }
+
+    //////////////////////////////////////////////////////////////////////////////
     ////////////////////////////EXTRAS////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////
 
