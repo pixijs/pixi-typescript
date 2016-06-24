@@ -644,6 +644,7 @@ declare module PIXI {
 
         clone(): Polygon;
         contains(x: number, y: number): boolean;
+        close() : void;
 
     }
     export class Rectangle {
