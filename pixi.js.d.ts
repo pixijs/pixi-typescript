@@ -5,89 +5,29 @@
 
 declare module PIXI {
 
-    export var VERSION: string;
-    export var PI_2: number;
-    export var RAD_TO_DEG: number;
-    export var DEG_TO_RAD: number;
-    export var TARGET_FPMS: number;
-    export var RENDERER_TYPE: {
-        UNKNOWN: number;
-        WEBGL: number;
-        CANVAS: number;
-    };
-    export var BLEND_MODES: {
-        NORMAL: number;
-        ADD: number;
-        MULTIPLY: number;
-        SCREEN: number;
-        OVERLAY: number;
-        DARKEN: number;
-        LIGHTEN: number;
-        COLOR_DODGE: number;
-        COLOR_BURN: number;
-        HARD_LIGHT: number;
-        SOFT_LIGHT: number;
-        DIFFERENCE: number;
-        EXCLUSION: number;
-        HUE: number;
-        SATURATION: number;
-        COLOR: number;
-        LUMINOSITY: number;
-
-    };
-    export var DRAW_MODES: {
-        POINTS: number;
-        LINES: number;
-        LINE_LOOP: number;
-        LINE_STRIP: number;
-        TRIANGLES: number;
-        TRIANGLE_STRIP: number;
-        TRIANGLE_FAN: number;
-    };
-    export var SCALE_MODES: {
-        DEFAULT: number;
-        LINEAR: number;
-        NEAREST: number;
-    };
-    export var WRAP_MODES: {
-        CLAMP: number;
-        DEFAULT: number;
-        MIRRORED_REPEAT: number;
-        REPEAT: number;
-    };
-    export var TRANSFORM_MODE: {
-        DEFAULT: number;
-        DYNAMIC: number;
-        STATIC: number;
-    };
-    export var SPRITE_MAX_TEXTURES: number;
+    // From CONST
+    export var VERSION: typeof CONST.VERSION;
+    export var PI_2: typeof CONST.PI_2;
+    export var RAD_TO_DEG: typeof CONST.RAD_TO_DEG;
+    export var DEG_TO_RAD: typeof CONST.DEG_TO_RAD;
+    export var TARGET_FPMS: typeof CONST.TARGET_FPMS;
+    export var RENDERER_TYPE: typeof CONST.RENDERER_TYPE;
+    export var BLEND_MODES: typeof CONST.BLEND_MODES;
+    export var DRAW_MODES: typeof CONST.DRAW_MODES;
+    export var SCALE_MODES: typeof CONST.SCALE_MODES;
+    export var WRAP_MODES: typeof CONST.WRAP_MODES;
+    export var TRANSFORM_MODE: typeof CONST.TRANSFORM_MODE;
+    export var SPRITE_MAX_TEXTURES: typeof CONST.SPRITE_MAX_TEXTURES;
     export var PRECISION: typeof CONST.PRECISION;
     export var TEXT_STYLE_CHANGED: typeof CONST.TEXT_STYLE_CHANGED;
     export var GC_MODES: typeof CONST.GC_MODES;
     export var MIPMAP_TEXTURES: typeof CONST.MIPMAP_TEXTURES;
-    export var RETINA_PREFIX: RegExp;
-    export var RESOLUTION: number;
-    export var FILTER_RESOLUTION: number;
-    export var DEFAULT_RENDER_OPTIONS: {
-        view: HTMLCanvasElement;
-        resolution: number;
-        antialias: boolean;
-        forceFXAA: boolean;
-        autoResize: boolean;
-        transparent: boolean;
-        backgroundColor: number;
-        clearBeforeRender: boolean;
-        preserveDrawingBuffer: boolean;
-        roundPixels: boolean;
-    };
-    export var SHAPES: {
-        POLY: number;
-        RECT: number;
-        CIRC: number;
-        ELIP: number;
-        RREC: number;
-    };
-    export var SPRITE_BATCH_SIZE: number;
+    export var RETINA_PREFIX: typeof CONST.RETINA_PREFIX;
+    export var RESOLUTION: typeof CONST.RESOLUTION;
+    export var FILTER_RESOLUTION: typeof CONST.FILTER_RESOLUTION;
+    export var DEFAULT_RENDER_OPTIONS: typeof CONST.DEFAULT_RENDER_OPTIONS;
+    export var SHAPES: typeof CONST.SHAPES;
+    export var SPRITE_BATCH_SIZE: typeof CONST.SPRITE_BATCH_SIZE;
 
     export function autoDetectRenderer(width: number, height: number, options?: PIXI.RendererOptions, noWebGL?: boolean): PIXI.WebGLRenderer | PIXI.CanvasRenderer;
     export var loader: PIXI.loaders.Loader;
@@ -193,8 +133,19 @@ declare module PIXI {
             AUTO: number;
             MANUAL: number;
         };
+        export var WRAP_MODES: {
+            CLAMP: number;
+            DEFAULT: number;
+            MIRRORED_REPEAT: number;
+            REPEAT: number;
+        };
+        export var TRANSFORM_MODE: {
+            DEFAULT: number;
+            DYNAMIC: number;
+            STATIC: number;
+        };
         export var MIPMAP_TEXTURES: boolean;
-        export var RETINA_PREFIX: string;
+        export var RETINA_PREFIX: RegExp;
         export var RESOLUTION: number;
         export var FILTER_RESOLUTION: number;
         export var DEFAULT_RENDER_OPTIONS: {
