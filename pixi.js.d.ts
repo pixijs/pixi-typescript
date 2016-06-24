@@ -735,7 +735,7 @@ declare module PIXI {
         maskManager: CanvasMaskManager;
         smoothProperty: string;
 
-        render(displayObject: DisplayObject): void;
+        render(displayObject: PIXI.DisplayObject, renderTexture?: PIXI.RenderTexture, clear?: boolean, transform?: PIXI.Transform, skipUpdateTransform?: boolean) : void
         setBlendMode(blendMode: number): void;
         destroy(removeView?: boolean): void;
         resize(w: number, h: number): void;
@@ -815,7 +815,7 @@ declare module PIXI {
         protected _activeTexture: Texture;
         protected _initContext(): void;
 
-        render(displayObject: DisplayObject): void;
+        render(displayObject: PIXI.DisplayObject, renderTexture?: PIXI.RenderTexture, clear?: boolean, transform?: PIXI.Transform, skipUpdateTransform?: boolean) : void
         setObjectRenderer(objectRenderer: ObjectRenderer): void;
         flush(): void;
         resize(width: number, height: number): void;
