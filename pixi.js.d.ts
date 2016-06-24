@@ -2263,6 +2263,7 @@ declare module PIXI {
             once(event: string, fn: Function, context?: any): EventEmitter;
             removeListener(event: string, fn: Function, context?: any, once?: boolean): EventEmitter;
             removeAllListeners(event: string): EventEmitter;
+            eventNames(): string[];
 
             off(event: string, fn: Function, context?: any, once?: boolean): EventEmitter;
             addListener(event: string, fn: Function, context?: any): EventEmitter;
