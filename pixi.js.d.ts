@@ -1137,7 +1137,7 @@ declare module PIXI {
         size: number;
         buffers: BatchBuffer[];
         indices: number[];
-        shader: glCore.GLShader;
+        shaders: glCore.GLShader;
         textureCount: number;
         currentIndex: number;
         tick: number;
