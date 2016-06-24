@@ -1182,6 +1182,9 @@ declare module PIXI {
 
     //text
 
+    // TODO: This is actually a class, but as of TypeScript 1, classes cannot have optional properties, which are needed here.
+    // However, in TypeScript 2, optional class properties are supported (https://github.com/Microsoft/TypeScript/pull/8625).
+    // So when TypeScript 2 becomes the norm, change this to a class
     export interface TextStyle {
 
         align?: string;
@@ -1495,7 +1498,7 @@ declare module PIXI {
         }
         export class webGL {
             constructor (renderer: WebGLRenderer);
-            
+
             static UPLOADS_PER_FRAME: number;
 
             renderer: WebGLRenderer;
@@ -1505,14 +1508,14 @@ declare module PIXI {
             addHooks: Function[];
             completes: Function[];
             uploadHooks: Function[];
-            
+
             add: (item: PIXI.DisplayObject | PIXI.Container | any) => prepare.webGL;
             destroy: () => void;
             register: (addHook: () => void, uploadHook: () => void) => PIXI.prepare.webGL;
             tick: () => void;
             upload: (done: () => void) => void;
             upload: (displayObject: DisplayObject, done: () => void) => void;
-            
+
         }
     }
 
