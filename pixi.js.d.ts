@@ -1279,6 +1279,7 @@ declare module PIXI {
         scaleMode: number;
         hasLoaded: boolean;
         isLoading: boolean;
+        wrapMode: number;
         source: HTMLImageElement | HTMLCanvasElement;
         premultipliedAlpha: boolean;
         imageUrl: string;
