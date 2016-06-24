@@ -1098,6 +1098,7 @@ declare module PIXI {
 
         protected _onTextureUpdate(): void;
         protected calculateVertices(): void;
+        protected calculateBoundsVertices(): void;
         protected onAnchorUpdate() : void;
         protected _renderWebGL(renderer: WebGLRenderer);
         protected _renderCanvas(renderer: CanvasRenderer);
