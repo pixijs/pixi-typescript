@@ -220,6 +220,8 @@ declare module PIXI {
         hitArea: HitArea;
         interactiveChildren: boolean;
         defaultCursor: string;
+        _isRightDown: boolean;
+        _isLeftDown: boolean;
         //end interactive target
 
         transform: Transform;
@@ -1761,6 +1763,8 @@ declare module PIXI {
             hitArea: HitArea;
             interactiveChildren: boolean;
             defaultCursor: string;
+            _isRightDown: boolean;
+            _isLeftDown: boolean;
 
         }
         export interface InteractiveTargetProxy extends InteractiveTarget {
