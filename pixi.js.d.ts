@@ -64,6 +64,7 @@ declare module PIXI {
     export var PRECISION: typeof CONST.PRECISION;
     export var TEXT_STYLE_CHANGED: typeof CONST.TEXT_STYLE_CHANGED;
     export var GC_MODES: typeof CONST.GC_MODES;
+    export var MIPMAP_TEXTURES: typeof CONST.MIPMAP_TEXTURES;
     export var RETINA_PREFIX: RegExp;
     export var RESOLUTION: number;
     export var FILTER_RESOLUTION: number;
