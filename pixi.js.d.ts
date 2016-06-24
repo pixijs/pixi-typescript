@@ -1062,6 +1062,7 @@ declare module PIXI {
         glShaderKey: string;
         padding: number;
         resolution: number;
+        blendMode: number;
         apply(filterManager: FilterManager, input: RenderTarget, output: RenderTarget, clear?: boolean): void;
 
         static defaultVertexSrc: string;
