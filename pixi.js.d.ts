@@ -61,6 +61,7 @@ declare module PIXI {
         STATIC: number;
     };
     export var SPRITE_MAX_TEXTURES : number;
+    export var PRECISION : typeof CONST.PRECISION;
     export var RETINA_PREFIX: RegExp;
     export var RESOLUTION: number;
     export var FILTER_RESOLUTION: number;
