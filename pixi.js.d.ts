@@ -1441,33 +1441,32 @@ declare module PIXI {
     ////////////////////////////EXTRACT///////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////
 
-    export class Extract {
+    export module extract {
+        export class canvas {
+            protected renderer: CanvasRenderer;
 
-        protected renderer: CanvasRenderer;
+            constructor(renderer: CanvasRenderer);
 
-        constructor(renderer: CanvasRenderer);
+            image(target?: DisplayObject | RenderTexture): HTMLImageElement;
+            base64(target?: DisplayObject | RenderTexture): string;
+            canvas(target?: DisplayObject | RenderTexture): HTMLCanvasElement;
+            pixels(renderTexture?: DisplayObject | RenderTexture): number[];
 
-        image(target?: DisplayObject | RenderTexture): HTMLImageElement;
-        base64(target?: DisplayObject | RenderTexture): string;
-        canvas(target?: DisplayObject | RenderTexture): HTMLCanvasElement;
-        pixels(renderTexture?: DisplayObject | RenderTexture): number[];
+            destroy(): void;
+        }
 
-        destroy(): void;
+        export class webGL {
+            protected renderer: CanvasRenderer;
 
-    }
-    export class WebGLExtract {
+            constructor(renderer: CanvasRenderer);
 
-        protected renderer: CanvasRenderer;
+            image(target?: DisplayObject | RenderTexture): HTMLImageElement;
+            base64(target?: DisplayObject | RenderTexture): string;
+            canvas(target?: DisplayObject | RenderTexture): HTMLCanvasElement;
+            pixels(renderTexture?: DisplayObject | RenderTexture): number[];
 
-        constructor(renderer: CanvasRenderer);
-
-        image(target?: DisplayObject | RenderTexture): HTMLImageElement;
-        base64(target?: DisplayObject | RenderTexture): string;
-        canvas(target?: DisplayObject | RenderTexture): HTMLCanvasElement;
-        pixels(renderTexture?: DisplayObject | RenderTexture): number[];
-
-        destroy(): void;
-
+            destroy(): void;
+        }
     }
 
     //////////////////////////////////////////////////////////////////////////////
