@@ -1653,151 +1653,15 @@ declare module PIXI {
             map: Texture;
 
         }
-        export class GodrayFilter extends Filter {
-
-            offset: Point;
-            radius: number;
-            angle: number;
-
-        }
-        export class GrayFilter extends Filter {
-
-            gray: number;
-
-        }
-        export class TwistFilter extends Filter {
-
-            offset: Point;
-            radius: number;
-            angle: number;
-
-        }
         export class VoidFilter extends Filter {
             glShaderKey: string;
         }
 
         //pixi-filters.d.ts todo
         //https://github.com/pixijs/pixi-filters/
-        export class AsciiFilter extends Filter {
-            size: number;
-        }
-        export class BloomFilter extends Filter {
-
-            blur: number;
-            blurX: number;
-            blurY: number;
-
-        }
-        export class BlurDirFilter extends Filter {
-            constructor(dirX: number, dirY: number);
-            defaultFilter: Filter;
-            passes: number;
-            dirX: number;
-            dirY: number;
-            strength: number;
-            blur: number;
-        }
-        export class ColorStepFilter extends Filter {
-
-            step: number;
-
-        }
-        export class ConvolutionFilter extends Filter {
-
-            constructor(matrix: number[], width: number, height: number);
-
-            matrix: number[];
-            width: number;
-            height: number;
-
-        }
-        export class CrossHatchFilter extends Filter {
-
-        }
-        export class DotScreenFilter extends Filter {
-
-            scale: number;
-            angle: number;
-
-        }
-        export class BlurYTintFilter extends Filter {
-
-            blur: number;
-
-        }
-        export class DropShadowFilter extends Filter {
-
-            blur: number;
-            blurX: number;
-            blurY: number;
-            color: number;
-            alpha: number;
-            distance: number;
-            angle: number;
-
-        }
-        export class InvertFilter extends Filter {
-
-            invert: number;
-
-        }
         export class NoiseFilter extends Filter {
 
             noise: number;
-
-        }
-        export class PixelateFilter extends Filter {
-
-            size: Point;
-
-        }
-        export class RGBSplitFilter extends Filter {
-
-            red: Point;
-            green: Point;
-            blue: Point;
-
-        }
-        export class SepiaFilter extends Filter {
-
-            sepia: number;
-
-        }
-        export class SmartBlurFilter extends Filter {
-        }
-        export class ShockwaveFilter extends Filter {
-
-            center: number[];
-            params: any;
-            time: number;
-
-        }
-        export class TiltShiftAxisFilter extends Filter {
-
-            blur: number;
-            gradientBlur: number;
-            start: number;
-            end: number;
-
-            updateDelta(): void;
-
-        }
-        export class TiltShiftFilter extends Filter {
-
-            blur: number;
-            gradientBlur: number;
-            start: number;
-            end: number;
-
-        }
-        export class TiltShiftXFilter extends Filter {
-
-            updateDelta(): void;
-
-        }
-        export class TiltShiftYFilter extends Filter {
-
-            updateDelta(): void;
 
         }
 
