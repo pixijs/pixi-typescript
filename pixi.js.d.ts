@@ -60,6 +60,7 @@ declare module PIXI {
         DYNAMIC: number;
         STATIC: number;
     };
+    export var SPRITE_MAX_TEXTURES : number;
     export var RETINA_PREFIX: RegExp;
     export var RESOLUTION: number;
     export var FILTER_RESOLUTION: number;
