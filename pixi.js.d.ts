@@ -946,7 +946,7 @@ declare module PIXI {
         destinationFrame: Rectangle;
         sourceFrame: Rectangle;
         stencilBuffer: glCore.GLFramebuffer;
-        stencilMaskStack: StencilMaskStack[];
+        stencilMaskStack: Graphics[];
         filterData: {
             index: number,
             stack: {
@@ -1037,7 +1037,7 @@ declare module PIXI {
 
         constructor(renderer: WebGLRenderer);
 
-        stencilMaskStack: StencilMaskStack[];
+        stencilMaskStack: Graphics[];
 
         setMaskStack(stencilMasStack: StencilMaskStack[]): void;
         pushStencil(graphics: Graphics): void;
