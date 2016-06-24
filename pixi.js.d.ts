@@ -55,6 +55,11 @@ declare module PIXI {
         MIRRORED_REPEAT: number;
         REPEAT: number;
     };
+    export var TRANSFORM_MODE: {
+        DEFAULT: number;
+        DYNAMIC: number;
+        STATIC: number;
+    };
     export var RETINA_PREFIX: RegExp;
     export var RESOLUTION: number;
     export var FILTER_RESOLUTION: number;
