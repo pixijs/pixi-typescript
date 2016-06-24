@@ -1493,8 +1493,8 @@ declare module PIXI {
             add: () => prepare.canvas;
             destroy: () => void;
             register: () => prepare.canvas;
-            upload: (done: () => void) => void;
-            upload: (displayObject: DisplayObject, done: () => void) => void;
+            upload(done: Function): void;
+            upload(displayObject: DisplayObject, done: Function): void;
         }
         export class webGL {
             constructor (renderer: WebGLRenderer);
@@ -1513,8 +1513,8 @@ declare module PIXI {
             destroy: () => void;
             register: (addHook: () => void, uploadHook: () => void) => PIXI.prepare.webGL;
             tick: () => void;
-            upload: (done: () => void) => void;
-            upload: (displayObject: DisplayObject, done: () => void) => void;
+            upload(done: Function): void;
+            upload(displayObject: DisplayObject, done: Function): void;
 
         }
     }
