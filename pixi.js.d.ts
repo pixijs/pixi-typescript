@@ -1608,12 +1608,16 @@ declare module PIXI {
             blur: number;
             blurX: number;
             blurY: number;
+            quality: number;
 
         }
         export class BlurXFilter extends Filter {
 
             constructor(strength?: number, quality?: number, resolution?: number)
 
+            protected _quality: number;
+
+            quality: number;
             passes: number;
             resolution: number;
             strength: number;
@@ -1625,6 +1629,9 @@ declare module PIXI {
 
             constructor(strength?: number, quality?: number, resolution?: number)
 
+            protected _quality: number;
+
+            quality: number;
             passes: number;
             resolution: number;
             strength: number;
