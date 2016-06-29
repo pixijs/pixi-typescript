@@ -502,7 +502,7 @@ declare module PIXI {
         containsPoint(point: Point): boolean;
         updateLocalBounds(): void;
         drawShape(shape: Shape | Circle | Rectangle | Ellipse | Polygon | RoundedRectangle): GraphicsData;
-        generateCanvasTexture(scaleMode: number, resolution: number): Texture;
+        generateCanvasTexture(scaleMode?: number, resolution?: number): Texture;
         protected closePath(): Graphics;
         protected addHole(): Graphics;
         destroy(): void;
