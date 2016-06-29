@@ -750,7 +750,7 @@ declare module PIXI {
         backgroundColor: number;
 
         resize(width: number, height: number): void;
-        generateTexture(displayObject: DisplayObject, scaleMode: number, resolution: number): RenderTexture;
+        generateTexture(displayObject: DisplayObject, scaleMode?: number, resolution?: number): RenderTexture;
         render(...args: any[]): void;
         destroy(removeView?: boolean): void;
 
