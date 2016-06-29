@@ -1283,7 +1283,7 @@ declare module PIXI {
         protected _canvasRenderTarget: any;
         valid: boolean;
 
-        resize(width?: number, height?: number): boolean;
+        resize(width: number, height: number): void;
         destroy(): void;
 
         once(event: 'update', fn: (baseRenderTexture: BaseRenderTexture) => void, context?: any): utils.EventEmitter;
@@ -1340,9 +1340,9 @@ declare module PIXI {
         off(event: string, fn: Function, context?: any): utils.EventEmitter;
 
     }
-    export class RenderTexture extends BaseTexture {
+    export class RenderTexture extends Texture {
 
-        constructor(baseRenderTexture: BaseTexture, frame?: Rectangle);
+        constructor(baseRenderTexture: BaseRenderTexture, frame?: Rectangle);
 
         protected legacyRenderer: any;
         valid: boolean;
