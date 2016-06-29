@@ -2000,6 +2000,10 @@ declare module PIXI {
             load(cb?: (loader: loaders.Loader, object: any) => void): Loader;
 
         }
+        export interface TextureDictionary {
+            [index: string]: PIXI.Texture;
+        }
+
         export class Resource extends utils.EventEmitter {
 
             static LOAD_TYPE: {
@@ -2030,7 +2034,7 @@ declare module PIXI {
 
             name: string;
             texture: Texture;
-            textures: Texture[];
+            textures: TextureDictionary;
             url: string;
             data: any;
             crossOrigin: boolean | string;
