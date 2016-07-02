@@ -5,73 +5,29 @@
 
 declare module PIXI {
 
-    export var VERSION: string;
-    export var PI_2: number;
-    export var RAD_TO_DEG: number;
-    export var DEG_TO_RAD: number;
-    export var TARGET_FPMS: number;
-    export var RENDERER_TYPE: {
-        UNKNOWN: number;
-        WEBGL: number;
-        CANVAS: number;
-    };
-    export var BLEND_MODES: {
-        NORMAL: number;
-        ADD: number;
-        MULTIPLY: number;
-        SCREEN: number;
-        OVERLAY: number;
-        DARKEN: number;
-        LIGHTEN: number;
-        COLOR_DODGE: number;
-        COLOR_BURN: number;
-        HARD_LIGHT: number;
-        SOFT_LIGHT: number;
-        DIFFERENCE: number;
-        EXCLUSION: number;
-        HUE: number;
-        SATURATION: number;
-        COLOR: number;
-        LUMINOSITY: number;
-
-    };
-    export var DRAW_MODES: {
-        POINTS: number;
-        LINES: number;
-        LINE_LOOP: number;
-        LINE_STRIP: number;
-        TRIANGLES: number;
-        TRIANGLE_STRIP: number;
-        TRIANGLE_FAN: number;
-    };
-    export var SCALE_MODES: {
-        DEFAULT: number;
-        LINEAR: number;
-        NEAREST: number;
-    };
-    export var RETINA_PREFIX: RegExp;
-    export var RESOLUTION: number;
-    export var FILTER_RESOLUTION: number;
-    export var DEFAULT_RENDER_OPTIONS: {
-        view: HTMLCanvasElement;
-        resolution: number;
-        antialias: boolean;
-        forceFXAA: boolean;
-        autoResize: boolean;
-        transparent: boolean;
-        backgroundColor: number;
-        clearBeforeRender: boolean;
-        preserveDrawingBuffer: boolean;
-        roundPixels: boolean;
-    };
-    export var SHAPES: {
-        POLY: number;
-        RECT: number;
-        CIRC: number;
-        ELIP: number;
-        RREC: number;
-    };
-    export var SPRITE_BATCH_SIZE: number;
+    // From CONST
+    export var VERSION: typeof CONST.VERSION;
+    export var PI_2: typeof CONST.PI_2;
+    export var RAD_TO_DEG: typeof CONST.RAD_TO_DEG;
+    export var DEG_TO_RAD: typeof CONST.DEG_TO_RAD;
+    export var TARGET_FPMS: typeof CONST.TARGET_FPMS;
+    export var RENDERER_TYPE: typeof CONST.RENDERER_TYPE;
+    export var BLEND_MODES: typeof CONST.BLEND_MODES;
+    export var DRAW_MODES: typeof CONST.DRAW_MODES;
+    export var SCALE_MODES: typeof CONST.SCALE_MODES;
+    export var WRAP_MODES: typeof CONST.WRAP_MODES;
+    export var TRANSFORM_MODE: typeof CONST.TRANSFORM_MODE;
+    export var SPRITE_MAX_TEXTURES: typeof CONST.SPRITE_MAX_TEXTURES;
+    export var PRECISION: typeof CONST.PRECISION;
+    export var TEXT_STYLE_CHANGED: typeof CONST.TEXT_STYLE_CHANGED;
+    export var GC_MODES: typeof CONST.GC_MODES;
+    export var MIPMAP_TEXTURES: typeof CONST.MIPMAP_TEXTURES;
+    export var RETINA_PREFIX: typeof CONST.RETINA_PREFIX;
+    export var RESOLUTION: typeof CONST.RESOLUTION;
+    export var FILTER_RESOLUTION: typeof CONST.FILTER_RESOLUTION;
+    export var DEFAULT_RENDER_OPTIONS: typeof CONST.DEFAULT_RENDER_OPTIONS;
+    export var SHAPES: typeof CONST.SHAPES;
+    export var SPRITE_BATCH_SIZE: typeof CONST.SPRITE_BATCH_SIZE;
 
     export function autoDetectRenderer(width: number, height: number, options?: PIXI.RendererOptions, noWebGL?: boolean): PIXI.WebGLRenderer | PIXI.CanvasRenderer;
     export var loader: PIXI.loaders.Loader;
@@ -127,19 +83,18 @@ declare module PIXI {
 
     //const
 
-    export class CONST {
-
-        static VERSION: string;
-        static PI_2: number;
-        static RAD_TO_DEG: number;
-        static DEG_TO_RAD: number;
-        static TARGET_FPMS: number;
-        static RENDERER_TYPE: {
+    export module CONST {
+        export var VERSION: string;
+        export var PI_2: number;
+        export var RAD_TO_DEG: number;
+        export var DEG_TO_RAD: number;
+        export var TARGET_FPMS: number;
+        export var RENDERER_TYPE: {
             UNKNOWN: number;
             WEBGL: number;
             CANVAS: number;
-        }
-        static BLEND_MODES: {
+        };
+        export var BLEND_MODES: {
             NORMAL: number;
             ADD: number;
             MULTIPLY: number;
@@ -157,8 +112,8 @@ declare module PIXI {
             SATURATION: number;
             COLOR: number;
             LUMINOSITY: number;
-        }
-        static DRAW_MODES: {
+        };
+        export var DRAW_MODES: {
             POINTS: number;
             LINES: number;
             LINE_LOOP: number;
@@ -166,23 +121,34 @@ declare module PIXI {
             TRIANGLES: number;
             TRIANGLE_STRIP: number;
             TRIANGLE_FAN: number;
-        }
-        static SCALE_MODES: {
+        };
+        export var SCALE_MODES: {
             DEFAULT: number;
             CLAMP: number;
             REPEAT: number;
             MIRRORED_REPEAT: number;
-        }
-        static GC_MODES: {
+        };
+        export var GC_MODES: {
             DEFAULT: number;
             AUTO: number;
             MANUAL: number;
-        }
-        static MIPMAP_TEXTURES: boolean;
-        static RETINA_PREFIX: string;
-        static RESOLUTION: number;
-        static FILTER_RESOLUTION: number;
-        static DEFAULT_RENDER_OPTIONS: {
+        };
+        export var WRAP_MODES: {
+            CLAMP: number;
+            DEFAULT: number;
+            MIRRORED_REPEAT: number;
+            REPEAT: number;
+        };
+        export var TRANSFORM_MODE: {
+            DEFAULT: number;
+            DYNAMIC: number;
+            STATIC: number;
+        };
+        export var MIPMAP_TEXTURES: boolean;
+        export var RETINA_PREFIX: RegExp;
+        export var RESOLUTION: number;
+        export var FILTER_RESOLUTION: number;
+        export var DEFAULT_RENDER_OPTIONS: {
             view: HTMLCanvasElement;
             resolution: number;
             antialias: boolean;
@@ -193,23 +159,23 @@ declare module PIXI {
             clearBeforeRender: boolean;
             preserveDrawingBuffer: boolean;
             roundPixels: boolean;
-        }
-        static SHAPES: {
+        };
+        export var SHAPES: {
             POLY: number;
             RECT: number;
             CIRC: number;
             ELIP: number;
             RREC: number;
-        }
-        static PRECISION: {
+        };
+        export var PRECISION: {
             DEFAULT: string;
             LOW: string;
             MEDIUM: string;
             HIGH: string;
-        }
-        static SPRITE_BATCH_SIZE: number;
-        static SPRITE_MAX_TEXTURES: number;
-        static TEXT_STYLE_CHANGED: string;
+        };
+        export var SPRITE_BATCH_SIZE: number;
+        export var SPRITE_MAX_TEXTURES: number;
+        export var TEXT_STYLE_CHANGED: string;
 
     }
 
@@ -254,6 +220,8 @@ declare module PIXI {
         hitArea: HitArea;
         interactiveChildren: boolean;
         defaultCursor: string;
+        _isRightDown: boolean;
+        _isLeftDown: boolean;
         //end interactive target
 
         transform: Transform;
@@ -607,6 +575,7 @@ declare module PIXI {
         prepend(matrix: Matrix): Matrix;
         invert(): Matrix;
         identity(): Matrix;
+        decompose(transform: Transform) : Transform;
         clone(): Matrix;
         copy(matrix: Matrix): Matrix;
 
@@ -675,6 +644,7 @@ declare module PIXI {
 
         clone(): Polygon;
         contains(x: number, y: number): boolean;
+        close() : void;
 
     }
     export class Rectangle {
@@ -765,7 +735,7 @@ declare module PIXI {
         maskManager: CanvasMaskManager;
         smoothProperty: string;
 
-        render(displayObject: DisplayObject): void;
+        render(displayObject: PIXI.DisplayObject, renderTexture?: PIXI.RenderTexture, clear?: boolean, transform?: PIXI.Transform, skipUpdateTransform?: boolean) : void
         setBlendMode(blendMode: number): void;
         destroy(removeView?: boolean): void;
         resize(w: number, h: number): void;
@@ -845,7 +815,7 @@ declare module PIXI {
         protected _activeTexture: Texture;
         protected _initContext(): void;
 
-        render(displayObject: DisplayObject): void;
+        render(displayObject: PIXI.DisplayObject, renderTexture?: PIXI.RenderTexture, clear?: boolean, transform?: PIXI.Transform, skipUpdateTransform?: boolean) : void
         setObjectRenderer(objectRenderer: ObjectRenderer): void;
         flush(): void;
         resize(width: number, height: number): void;
@@ -976,12 +946,15 @@ declare module PIXI {
         destinationFrame: Rectangle;
         sourceFrame: Rectangle;
         stencilBuffer: glCore.GLFramebuffer;
-        stencilMaskStack: StencilMaskStack[];
-        filterStack: {
-            renderTarget: RenderTarget,
-            filter: any[];
-            bounds: Rectangle
-        }[];
+        stencilMaskStack: Graphics[];
+        filterData: {
+            index: number,
+            stack: {
+                renderTarget: RenderTarget,
+                filter: any[];
+                bounds: Rectangle
+            }[]
+        };
         scaleMode: number;
         root: boolean;
 
@@ -1064,7 +1037,7 @@ declare module PIXI {
 
         constructor(renderer: WebGLRenderer);
 
-        stencilMaskStack: StencilMaskStack[];
+        stencilMaskStack: Graphics[];
 
         setMaskStack(stencilMasStack: StencilMaskStack[]): void;
         pushStencil(graphics: Graphics): void;
@@ -1093,6 +1066,7 @@ declare module PIXI {
         glShaderKey: string;
         padding: number;
         resolution: number;
+        blendMode: number;
         apply(filterManager: FilterManager, input: RenderTarget, output: RenderTarget, clear?: boolean): void;
 
         static defaultVertexSrc: string;
@@ -1131,6 +1105,8 @@ declare module PIXI {
 
         protected _onTextureUpdate(): void;
         protected calculateVertices(): void;
+        protected calculateBoundsVertices(): void;
+        protected onAnchorUpdate() : void;
         protected _renderWebGL(renderer: WebGLRenderer);
         protected _renderCanvas(renderer: CanvasRenderer);
         getBounds(): Rectangle;
@@ -1161,7 +1137,7 @@ declare module PIXI {
         size: number;
         buffers: BatchBuffer[];
         indices: number[];
-        shader: glCore.GLShader;
+        shaders: glCore.GLShader;
         textureCount: number;
         currentIndex: number;
         tick: number;
@@ -1206,6 +1182,9 @@ declare module PIXI {
 
     //text
 
+    // TODO: This is actually a class, but as of TypeScript 1, classes cannot have optional properties, which are needed here.
+    // However, in TypeScript 2, optional class properties are supported (https://github.com/Microsoft/TypeScript/pull/8625).
+    // So when TypeScript 2 becomes the norm, change this to a class
     export interface TextStyle {
 
         align?: string;
@@ -1307,6 +1286,7 @@ declare module PIXI {
         scaleMode: number;
         hasLoaded: boolean;
         isLoading: boolean;
+        wrapMode: number;
         source: HTMLImageElement | HTMLCanvasElement;
         premultipliedAlpha: boolean;
         imageUrl: string;
@@ -1475,33 +1455,68 @@ declare module PIXI {
     ////////////////////////////EXTRACT///////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////
 
-    export class Extract {
+    export module extract {
+        export class canvas {
+            protected renderer: CanvasRenderer;
 
-        protected renderer: CanvasRenderer;
+            constructor(renderer: CanvasRenderer);
 
-        constructor(renderer: CanvasRenderer);
+            image(target?: DisplayObject | RenderTexture): HTMLImageElement;
+            base64(target?: DisplayObject | RenderTexture): string;
+            canvas(target?: DisplayObject | RenderTexture): HTMLCanvasElement;
+            pixels(renderTexture?: DisplayObject | RenderTexture): number[];
 
-        image(target?: DisplayObject | RenderTexture): HTMLImageElement;
-        base64(target?: DisplayObject | RenderTexture): string;
-        canvas(target?: DisplayObject | RenderTexture): HTMLCanvasElement;
-        pixels(renderTexture?: DisplayObject | RenderTexture): number[];
+            destroy(): void;
+        }
 
-        destroy(): void;
+        export class webGL {
+            protected renderer: CanvasRenderer;
 
+            constructor(renderer: CanvasRenderer);
+
+            image(target?: DisplayObject | RenderTexture): HTMLImageElement;
+            base64(target?: DisplayObject | RenderTexture): string;
+            canvas(target?: DisplayObject | RenderTexture): HTMLCanvasElement;
+            pixels(renderTexture?: DisplayObject | RenderTexture): number[];
+
+            destroy(): void;
+        }
     }
-    export class WebGLExtract {
 
-        protected renderer: CanvasRenderer;
+    //////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////PREPARE///////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////
 
-        constructor(renderer: CanvasRenderer);
+    export module prepare {
+        export class canvas {
+            constructor ();
+            add: () => prepare.canvas;
+            destroy: () => void;
+            register: () => prepare.canvas;
+            upload(done: Function): void;
+            upload(displayObject: DisplayObject, done: Function): void;
+        }
+        export class webGL {
+            constructor (renderer: WebGLRenderer);
 
-        image(target?: DisplayObject | RenderTexture): HTMLImageElement;
-        base64(target?: DisplayObject | RenderTexture): string;
-        canvas(target?: DisplayObject | RenderTexture): HTMLCanvasElement;
-        pixels(renderTexture?: DisplayObject | RenderTexture): number[];
+            static UPLOADS_PER_FRAME: number;
 
-        destroy(): void;
+            renderer: WebGLRenderer;
+            queue: any[];
+            ticking: boolean;
 
+            addHooks: Function[];
+            completes: Function[];
+            uploadHooks: Function[];
+
+            add: (item: PIXI.DisplayObject | PIXI.Container | any) => prepare.webGL;
+            destroy: () => void;
+            register: (addHook: () => void, uploadHook: () => void) => PIXI.prepare.webGL;
+            tick: () => void;
+            upload(done: Function): void;
+            upload(displayObject: DisplayObject, done: Function): void;
+
+        }
     }
 
     //////////////////////////////////////////////////////////////////////////////
@@ -1622,6 +1637,8 @@ declare module PIXI {
         export class FXAAFilter extends Filter { }
         export class BlurFilter extends Filter {
 
+            constructor(strength?: number, quality?: number, resolution?: number)
+
             blurXFilter: BlurXFilter;
             blurYFilter: BlurYFilter;
             resolution: number;
@@ -1630,10 +1647,16 @@ declare module PIXI {
             blur: number;
             blurX: number;
             blurY: number;
+            quality: number;
 
         }
         export class BlurXFilter extends Filter {
 
+            constructor(strength?: number, quality?: number, resolution?: number)
+
+            protected _quality: number;
+
+            quality: number;
             passes: number;
             resolution: number;
             strength: number;
@@ -1643,6 +1666,11 @@ declare module PIXI {
         }
         export class BlurYFilter extends Filter {
 
+            constructor(strength?: number, quality?: number, resolution?: number)
+
+            protected _quality: number;
+
+            quality: number;
             passes: number;
             resolution: number;
             strength: number;
@@ -1688,151 +1716,15 @@ declare module PIXI {
             map: Texture;
 
         }
-        export class GodrayFilter extends Filter {
-
-            offset: Point;
-            radius: number;
-            angle: number;
-
-        }
-        export class GrayFilter extends Filter {
-
-            gray: number;
-
-        }
-        export class TwistFilter extends Filter {
-
-            offset: Point;
-            radius: number;
-            angle: number;
-
-        }
         export class VoidFilter extends Filter {
             glShaderKey: string;
         }
 
         //pixi-filters.d.ts todo
         //https://github.com/pixijs/pixi-filters/
-        export class AsciiFilter extends Filter {
-            size: number;
-        }
-        export class BloomFilter extends Filter {
-
-            blur: number;
-            blurX: number;
-            blurY: number;
-
-        }
-        export class BlurDirFilter extends Filter {
-            constructor(dirX: number, dirY: number);
-            defaultFilter: Filter;
-            passes: number;
-            dirX: number;
-            dirY: number;
-            strength: number;
-            blur: number;
-        }
-        export class ColorStepFilter extends Filter {
-
-            step: number;
-
-        }
-        export class ConvolutionFilter extends Filter {
-
-            constructor(matrix: number[], width: number, height: number);
-
-            matrix: number[];
-            width: number;
-            height: number;
-
-        }
-        export class CrossHatchFilter extends Filter {
-
-        }
-        export class DotScreenFilter extends Filter {
-
-            scale: number;
-            angle: number;
-
-        }
-        export class BlurYTintFilter extends Filter {
-
-            blur: number;
-
-        }
-        export class DropShadowFilter extends Filter {
-
-            blur: number;
-            blurX: number;
-            blurY: number;
-            color: number;
-            alpha: number;
-            distance: number;
-            angle: number;
-
-        }
-        export class InvertFilter extends Filter {
-
-            invert: number;
-
-        }
         export class NoiseFilter extends Filter {
 
             noise: number;
-
-        }
-        export class PixelateFilter extends Filter {
-
-            size: Point;
-
-        }
-        export class RGBSplitFilter extends Filter {
-
-            red: Point;
-            green: Point;
-            blue: Point;
-
-        }
-        export class SepiaFilter extends Filter {
-
-            sepia: number;
-
-        }
-        export class SmartBlurFilter extends Filter {
-        }
-        export class ShockwaveFilter extends Filter {
-
-            center: number[];
-            params: any;
-            time: number;
-
-        }
-        export class TiltShiftAxisFilter extends Filter {
-
-            blur: number;
-            gradientBlur: number;
-            start: number;
-            end: number;
-
-            updateDelta(): void;
-
-        }
-        export class TiltShiftFilter extends Filter {
-
-            blur: number;
-            gradientBlur: number;
-            start: number;
-            end: number;
-
-        }
-        export class TiltShiftXFilter extends Filter {
-
-            updateDelta(): void;
-
-        }
-        export class TiltShiftYFilter extends Filter {
-
-            updateDelta(): void;
 
         }
 
@@ -1929,6 +1821,8 @@ declare module PIXI {
             hitArea: HitArea;
             interactiveChildren: boolean;
             defaultCursor: string;
+            _isRightDown: boolean;
+            _isLeftDown: boolean;
 
         }
         export interface InteractiveTargetProxy extends InteractiveTarget {
@@ -2398,8 +2292,6 @@ declare module PIXI {
         export function hex2string(hex: number): string;
         export function rgb2hex(rgb: Number[]): number;
         export function canUseNewCanvasBlendModes(): boolean;
-        export function getNextPowerOfTwo(number: number): number;
-        export function isPowerOfTwo(width: number, height: number): boolean;
         export function getResolutionOfUrl(url: string): number;
         export function sayHello(type: string): void;
         export function isWebGLSupported(): boolean;
@@ -2417,6 +2309,7 @@ declare module PIXI {
             once(event: string, fn: Function, context?: any): EventEmitter;
             removeListener(event: string, fn: Function, context?: any, once?: boolean): EventEmitter;
             removeAllListeners(event: string): EventEmitter;
+            eventNames(): string[];
 
             off(event: string, fn: Function, context?: any, once?: boolean): EventEmitter;
             addListener(event: string, fn: Function, context?: any): EventEmitter;
@@ -2425,6 +2318,10 @@ declare module PIXI {
 
     }
 
+}
+
+declare module pixi {
+    export var gl : typeof PIXI.glCore;
 }
 
 declare module 'pixi.js' {
