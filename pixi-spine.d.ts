@@ -600,6 +600,10 @@ declare module PIXI {
 
         }
 
+        export interface SpriteDictionary {
+            [index: string]: PIXI.Sprite;
+        }
+
         export class Slot {
 
             constructor(slotData: SlotData, bone: Bone);
@@ -613,6 +617,7 @@ declare module PIXI {
             _attachmentTime: number;
             attachment: Attachment;
             attachmentVertices: number[];
+            sprites: SpriteDictionary;
             setAttachment(attachment: Attachment): void;
             setAttachmentTime(time: number): void;
             getAttachmentTime(): number;
