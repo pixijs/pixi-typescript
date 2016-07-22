@@ -133,7 +133,6 @@ declare module PIXI {
             m10: number;
             m11: number;
             worldY: number;
-            worldRotation: number;
             worldScaleX: number;
             worldScaleY: number;
             worldFlipX: boolean;
@@ -143,6 +142,8 @@ declare module PIXI {
             setToSetupPose(): void;
             worldToLocal(world: number[]): void;
             localToWorld(local: number[]): void;
+            getWorldRotationX(): number;
+            getWorldRotationY(): number;
 
         }
 
