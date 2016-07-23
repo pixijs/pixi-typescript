@@ -302,7 +302,7 @@ declare module PIXI {
         getBounds(): Rectangle;
         getLocalBounds(): Rectangle;
         toGlobal(position: Point): Point;
-        toLocal(position: Point, from: Point, point?: Point): Point;
+        toLocal(position: Point, from?: DisplayObject, point?: Point): Point;
         protected renderWebGL(renderer: WebGLRenderer): void;
         protected renderCanvas(renderer: CanvasRenderer): void;
         setParent(container: Container): Container;
