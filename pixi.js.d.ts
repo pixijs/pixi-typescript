@@ -1222,7 +1222,7 @@ declare module PIXI {
         dropShadowBlur?: number;
         dropShadowColor?: string | number;
         dropShadowDistance?: number;
-        fill?: string | number;
+        fill?: string|string[]|number|number[]|CanvasGradient|CanvasPattern;
         fillGradientType?: number;
         fontFamily?: string;
         fontSize?: number | string;
