@@ -145,7 +145,7 @@ declare module PIXI {
             STATIC: number;
         };
         export var MIPMAP_TEXTURES: boolean;
-        export var RETINA_PREFIX: RegExp;
+        export var RETINA_PREFIX: RegExp | String;
         export var RESOLUTION: number;
         export var FILTER_RESOLUTION: number;
         export var DEFAULT_RENDER_OPTIONS: {
@@ -188,6 +188,24 @@ declare module PIXI {
     export interface DestroyOptions {
         children?: boolean;
     }
+    export class BoundsBuilder {
+
+        minX: number;
+        minY: number;
+        maxX: number;
+        maxY: number;
+
+        isEmpty(): boolean;
+        clear(): void;
+
+        getRectangle(tempRect: Rectangle): Rectangle;
+        addPoint(point: Point): void;
+        addQuad(vertices: number[]): BoundsBuilder;
+        addFrame(transform: Transform, x0: number, y0: number, x1: number, y1: number): void;
+        addVertices(transform: Transform, vertices: number[], beginOffset: number, endOffset: number): void;
+        addBounds(bounds: BoundsBuilder): void;
+
+    }
     export class Container extends DisplayObject {
 
         //begin extras.getChildByName
@@ -210,10 +228,9 @@ declare module PIXI {
         removeChildAt(index: number): DisplayObject;
         removeChildren(beginIndex?: number, endIndex?: number): DisplayObject | DisplayObject[];
         updateTransform(): void;
+        calculateBounds(): void;
+        protected _calculateBounds(): void;
         protected containerUpdateTransform(): void;
-        getBounds(): Rectangle;
-        protected containerGetBounds(): Rectangle;
-        getLocalBounds(): Rectangle;
         renderWebGL(renderer: WebGLRenderer): void;
         protected _renderWebGL(renderer: WebGLRenderer): void;
         protected _renderCanvas(renderer: CanvasRenderer): void;
@@ -233,12 +250,7 @@ declare module PIXI {
 
         //begin extras.cacheAsBitmap
         protected _cacheAsBitmap: boolean;
-        protected _originalRenderWebGL: WebGLRenderer;
-        protected _originalRenderCanvas: CanvasRenderer;
-        protected _originalUpdateTransform: boolean;
-        protected _originalHitTest: any;
-        protected _originalDestroy: any;
-        protected _cachedSprite: any;
+        protected _cacheData: boolean;
         cacheAsBitmap: boolean;
         protected _renderCachedWebGL(renderer: WebGLRenderer): void;
         protected _initCachedDisplayObject(renderer: WebGLRenderer): void;
@@ -274,7 +286,7 @@ declare module PIXI {
         _isLeftDown: boolean;
         //end interactive target
 
-        transform: Transform;
+        transform: TransformBase;
         alpha: number;
         visible: boolean;
         renderable: boolean;
@@ -284,6 +296,7 @@ declare module PIXI {
         protected _bounds: Rectangle;
         protected _currentBounds: Rectangle;
         protected _mask: Rectangle;
+        protected _bounds_: BoundsBuilder;
         x: number;
         y: number;
         worldTransform: Matrix;
@@ -299,10 +312,11 @@ declare module PIXI {
 
         updateTransform(): void;
         protected displayObjectUpdateTransform(): void;
-        getBounds(): Rectangle;
+        protected _recursivePostUpdateTransform(): void;
+        getBounds(skipUpdate?: boolean): Rectangle;
         getLocalBounds(): Rectangle;
-        toGlobal(position: Point): Point;
-        toLocal(position: Point, from?: DisplayObject, point?: Point): Point;
+        toGlobal(position: Point, point: Point, skupUpdate?: boolean): Point;
+        toLocal(position: Point, from?: DisplayObject, point?: Point, skipUpdate?: boolean): Point;
         protected renderWebGL(renderer: WebGLRenderer): void;
         protected renderCanvas(renderer: CanvasRenderer): void;
         setParent(container: Container): Container;
@@ -350,45 +364,21 @@ declare module PIXI {
          */
 
     }
-    export class Transform {
 
-        constructor();
+    export class TransformBase {
 
-        worldTransform: Matrix;
-        localTransform: Matrix;
-        position: Point;
-        scale: Point;
-        skew: Point;
-        pivot: Point;
-        protected _rotation: number;
-        protected _sr: number;
-        protected _cr: number;
-        protected _cy: number;
-        protected _sy: number;
-        protected _nsx: number;
-        protected _cx: number;
-        protected _dirty: number;
-        updated: boolean;
-        protected _worldID: number;
-
-        updateSkew(): void;
-        updateTransform(parentTransform: Transform): void;
-        rotation: number;
-
-    }
-    export class TransformManual {
+        static IDENTITY: TransformBase;
 
         worldTransform: Matrix;
         localTransform: Matrix;
         protected _worldID: number;
-
-        updateTransform(parentTransform: Transform): void;
+        updateLocalTransform(): void;
+        updateTransform(parentTransform: TransformBase): void;
+        updateWorldTransform(parentTransform: TransformBase): void;
 
     }
-    export class TransformStatic {
+    export class TransformStatic extends TransformBase {
 
-        worldTransform: Matrix;
-        localTransform: Matrix;
         position: ObservablePoint;
         scale: ObservablePoint;
         pivot: ObservablePoint;
@@ -401,14 +391,35 @@ declare module PIXI {
         protected _sy: number;
         protected _nsx: number;
         protected _cx: number;
-        protected _localID: number;
         protected _currentLocalID: number;
-        protected _parentID: number;
-        protected _worldID: number;
-        protected onChange(): void;
-        protected updateSkew(): void;
 
-        updateTransform(parentTransform: Transform): void;
+        protected onChange(): void;
+        updateSkew(): void;
+        updateLocalTransform(): void;
+        updateTransform(parentTransform: TransformBase): void;
+        setFromMatrix(matrix: Matrix): void;
+
+        rotation: number;
+
+    }
+    export class Transform extends TransformBase {
+
+        constructor();
+
+        position: Point;
+        scale: Point;
+        skew: ObservablePoint;
+        pivot: Point;
+
+        protected _rotation: number;
+        protected _sr: number;
+        protected _cr: number;
+        protected _cy: number;
+        protected _sy: number;
+        protected _nsx: number;
+        protected _cx: number;
+
+        updateSkew(): void;
         setFromMatrix(matrix: Matrix): void;
 
         rotation: number;
@@ -450,7 +461,7 @@ declare module PIXI {
         protected _webGL: any;
         isMask: boolean;
         boundsPadding: number;
-        protected _localBounds: Rectangle;
+        protected _localBounds: BoundsBuilder;
         dirty: boolean;
         protected glDirty: boolean;
         protected boundsDirty: boolean;
@@ -477,6 +488,8 @@ declare module PIXI {
         drawPolygon(path: number[] | Point[]): Graphics;
         clear(): Graphics;
         isFastRect(): boolean;
+        protected _renderCanvas(renderer: CanvasRenderer): void;
+        protected _calculateBounds(): Rectangle;
         protected _renderSpriteRect(renderer: PIXI.SystemRenderer): void;
         containsPoint(point: Point): boolean;
         updateLocalBounds(): void;
@@ -586,7 +599,7 @@ declare module PIXI {
         prepend(matrix: Matrix): Matrix;
         invert(): Matrix;
         identity(): Matrix;
-        decompose(transform: Transform): Transform;
+        decompose(transform: TransformBase): TransformBase;
         clone(): Matrix;
         copy(matrix: Matrix): Matrix;
 
@@ -1133,11 +1146,11 @@ declare module PIXI {
 
         protected _onTextureUpdate(): void;
         protected calculateVertices(): void;
+        protected _calculateBounds(): void;
         protected calculateBoundsVertices(): void;
         protected onAnchorUpdate(): void;
         protected _renderWebGL(renderer: WebGLRenderer): void;
         protected _renderCanvas(renderer: CanvasRenderer): void;
-        getBounds(): Rectangle;
         getLocalBounds(): Rectangle;
         containsPoint(point: Point): boolean;
         destroy(destroyTexture?: boolean, destroyBaseTexture?: boolean): void;
@@ -1222,7 +1235,7 @@ declare module PIXI {
         dropShadowBlur?: number;
         dropShadowColor?: string | number;
         dropShadowDistance?: number;
-        fill?: string|string[]|number|number[]|CanvasGradient|CanvasPattern;
+        fill?: string | string[] | number | number[] | CanvasGradient | CanvasPattern;
         fillGradientType?: number;
         fontFamily?: string;
         fontSize?: number | string;
@@ -1269,7 +1282,7 @@ declare module PIXI {
         protected _renderCanvas(renderer: CanvasRenderer): void;
         protected determineFontProperties(fontStyle: TextStyle): TextStyle;
         protected wordWrap(text: string): boolean;
-        getBounds(matrix?: Matrix): Rectangle;
+        protected _calculateBounds(): void;
         protected _onStyleChange: () => void;
         protected _generateFullStyle(style: string | number | CanvasGradient, lines: number): string | number | CanvasGradient;
         destroy(): void;
@@ -1283,8 +1296,10 @@ declare module PIXI {
 
         constructor(width?: number, height?: number, scaleMode?: number, resolution?: number);
 
-        width: number;
         height: number;
+        width: number;
+        realHeight: number;
+        realWidth: number;
         resolution: number;
         scaleMode: number;
         hasLoaded: boolean;
@@ -1752,7 +1767,7 @@ declare module PIXI {
             getLocalPosition(displayObject: DisplayObject, point?: Point, globalPos?: Point): Point;
 
         }
-        export class InteractionManager {
+        export class InteractionManager extends utils.EventEmitter {
 
             constructor(renderer: SystemRenderer, options?: { autoPreventDefault?: boolean; interactionFrequency?: number; });
 
@@ -1779,6 +1794,7 @@ declare module PIXI {
             protected processMouseMove: (displayObject: DisplayObject, hit: boolean) => void;
             protected onMouseOut: (event: Event) => void;
             protected processMouseOverOut: (displayObject: DisplayObject, hit: boolean) => void;
+            protected onMouseOver: (event: Event) => void;
             protected onTouchStart: (event: Event) => void;
             protected processTouchStart: (DisplayObject: DisplayObject, hit: boolean) => void;
             protected onTouchEnd: (event: Event) => void;
@@ -1789,8 +1805,6 @@ declare module PIXI {
             defaultCursorStyle: string;
             currentCursorStyle: string;
             protected _tempPoint: Point;
-            protected _queue: any[][];
-            protected _eventDisplayOrder: number;
             resolution: number;
             protected setTargetElement(element: HTMLElement, resolution: number): void;
             protected addEvents(): void;
@@ -1798,7 +1812,6 @@ declare module PIXI {
             update(deltaTime: number): void;
             protected dispatchEvent(displayObject: DisplayObject, eventString: string, eventData: any): void;
             mapPositionToPoint(point: Point, x: number, y: number): void;
-            protected _processInteractive(point: Point, displayObject: DisplayObject, hitTestOrder: boolean, interactive?: boolean): boolean;
             protected processInteractive(point: Point, displayObject: DisplayObject, func: (displayObject: DisplayObject, hit: boolean) => void, hitTest: boolean, interactive: boolean): boolean;
             protected _startInteractionProcess(): void;
             protected _queueAdd(displayObject: DisplayObject, order: number): void;
@@ -1965,6 +1978,7 @@ declare module PIXI {
             isRaycastPossible: boolean;
             vertices: number[];
             indices: number[];
+            protected _calculateBounds(): void;
             protected _renderWebGL(renderer: WebGLRenderer): void;
             protected _renderCanvas(renderer: CanvasRenderer): void;
             protected _renderCanvasTriangleMesh(context: CanvasRenderingContext2D): void;
@@ -1995,15 +2009,31 @@ declare module PIXI {
         }
 
         export class NineSlicePlane extends Plane {
-            
+
             constructor(texture: Texture, leftWidth?: number, topHeight?: number, rightWidth?: number, bottomHeight?: number);
-            
+
             width: number;
             height: number;
             leftWidth: number;
-            rigthtWidth: number;
+            rightWidth: number;
             topHeight: number;
             bottomHeight: number;
+
+            protected _leftWidth: number;
+            protected _rightWidth: number;
+            protected _topHeight: number;
+            protected _bottomHeight: number;
+            protected _height: number;
+            protected _width: number;
+            protected _origHeight: number;
+            protected _origWidth: number;
+            protected _uvh: number;
+            protected _uvw: number;
+
+            updateHorizontalVertices(): void;
+            updateVerticalVertices(): void;
+            protected drawSegment(context: CanvasRenderingContext2D | WebGLRenderingContext, textureSource: any, w: number, h: number, x1: number, y1: number, x2: number, y2: number): void;
+
         }
 
         export class Rope extends Mesh {
