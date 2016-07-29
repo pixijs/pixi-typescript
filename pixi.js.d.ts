@@ -1996,7 +1996,7 @@ declare module PIXI {
 
         export class NineSlicePlane extends Plane {
             
-            constructor(texture: Texture, leftWidth: number, topHeight: number, rightWidth: number, bottomHeight: number);
+            constructor(texture: Texture, leftWidth?: number, topHeight?: number, rightWidth?: number, bottomHeight?: number);
             
             width: number;
             height: number;
