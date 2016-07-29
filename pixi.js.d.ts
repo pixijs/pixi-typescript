@@ -1993,6 +1993,19 @@ declare module PIXI {
             protected _onTexureUpdate(): void;
 
         }
+
+        export class NineSlicePlane extends Plane {
+            
+            constructor(texture: Texture, leftWidth: number, topHeight: number, rightWidth: number, bottomHeight: number);
+            
+            width: number;
+            height: number;
+            leftWidth: number;
+            rigthtWidth: number;
+            topHeight: number;
+            bottomHeight: number;
+        }
+
         export class Rope extends Mesh {
 
             constructor(texture: Texture, points: Point[]);
