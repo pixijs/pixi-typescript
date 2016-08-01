@@ -145,7 +145,7 @@ declare module PIXI {
             STATIC: number;
         };
         export var MIPMAP_TEXTURES: boolean;
-        export var RETINA_PREFIX: RegExp | String;
+        export var RETINA_PREFIX: RegExp;
         export var RESOLUTION: number;
         export var FILTER_RESOLUTION: number;
         export var DEFAULT_RENDER_OPTIONS: {
