@@ -619,6 +619,7 @@ declare module PIXI {
             attachment: Attachment;
             attachmentVertices: number[];
             sprites: SpriteDictionary;
+            currentSprite: PIXI.Sprite;
             setAttachment(attachment: Attachment): void;
             setAttachmentTime(time: number): void;
             getAttachmentTime(): number;
