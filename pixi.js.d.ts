@@ -847,6 +847,7 @@ declare module PIXI {
         state: WebGLState;
         renderingToScreen: boolean;
         filterManager: FilterManager;
+        textureManager: TextureManager;
         protected drawModes: any;
         protected _activeShader: glCore.GLShader;
         protected _activeRenderTarget: RenderTarget;
