@@ -1648,7 +1648,7 @@ declare module PIXI {
         export class FXAAFilter extends Filter { }
         export class BlurFilter extends Filter {
 
-            constructor(strength?: number, quality?: number, resolution?: number)
+            constructor(strength?: number, quality?: number, resolution?: number);
 
             blurXFilter: BlurXFilter;
             blurYFilter: BlurYFilter;
@@ -1663,7 +1663,7 @@ declare module PIXI {
         }
         export class BlurXFilter extends Filter {
 
-            constructor(strength?: number, quality?: number, resolution?: number)
+            constructor(strength?: number, quality?: number, resolution?: number);
 
             protected _quality: number;
 
@@ -1677,7 +1677,7 @@ declare module PIXI {
         }
         export class BlurYFilter extends Filter {
 
-            constructor(strength?: number, quality?: number, resolution?: number)
+            constructor(strength?: number, quality?: number, resolution?: number);
 
             protected _quality: number;
 
@@ -1690,6 +1690,8 @@ declare module PIXI {
 
         }
         export class ColorMatrixFilter extends Filter {
+
+            constructor();
 
             protected _loadMatrix(matrix: number[], multiply?: boolean): void;
             protected _multiply(out: number[], a: number[], b: number[]): void;
