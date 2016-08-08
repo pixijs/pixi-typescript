@@ -1320,7 +1320,7 @@ declare module PIXI {
     }
     export class BaseTexture extends utils.EventEmitter {
 
-        constructor(source: HTMLImageElement | HTMLCanvasElement, scaleMode?: number, resolution?: number);
+        constructor(source?: HTMLImageElement | HTMLCanvasElement, scaleMode?: number, resolution?: number);
 
         protected uuid: number;
         protected touched: number;
