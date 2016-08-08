@@ -1080,7 +1080,7 @@ declare module PIXI {
 
         stencilMaskStack: Graphics[];
 
-        setMaskStack(stencilMasStack: StencilMaskStack[]): void;
+        setMaskStack(stencilMasStack: Graphics[]): void;
         pushStencil(graphics: Graphics): void;
         popStencil(): void;
         destroy(): void;
