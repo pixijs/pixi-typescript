@@ -1282,7 +1282,7 @@ declare module PIXI {
         protected _renderWebGL(renderer: WebGLRenderer): void;
         protected _renderCanvas(renderer: CanvasRenderer): void;
         protected determineFontProperties(fontStyle: TextStyle): TextStyle;
-        protected wordWrap(text: string): boolean;
+        protected wordWrap(text: string): string;
         protected _calculateBounds(): void;
         protected _onStyleChange: () => void;
         protected _generateFullStyle(style: string | number | CanvasGradient, lines: number): string | number | CanvasGradient;
