@@ -186,7 +186,9 @@ declare module PIXI {
     //display
 
     export interface DestroyOptions {
-        children?: boolean;
+        children?:boolean,
+        texture?:boolean,
+        baseTexture?:boolean
     }
     export class Bounds {
 
