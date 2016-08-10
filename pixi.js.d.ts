@@ -1606,7 +1606,7 @@ declare module PIXI {
         }
         export class TilingSprite extends Sprite {
 
-            constructor(texture: Texture, width: number, height: number);
+            constructor(texture: Texture, width?: number, height?: number);
 
             tileScale: Point;
             tilePosition: Point;
