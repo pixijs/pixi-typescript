@@ -188,22 +188,23 @@ declare module PIXI {
     export interface DestroyOptions {
         children?: boolean;
     }
-    export class BoundsBuilder {
+    export class Bounds {
 
         minX: number;
         minY: number;
         maxX: number;
         maxY: number;
+        rect: Rectangle;
 
         isEmpty(): boolean;
         clear(): void;
 
-        getRectangle(tempRect: Rectangle): Rectangle;
+        getRectangle(rect?: Rectangle): Rectangle;
         addPoint(point: Point): void;
-        addQuad(vertices: number[]): BoundsBuilder;
+        addQuad(vertices: number[]): Bounds;
         addFrame(transform: Transform, x0: number, y0: number, x1: number, y1: number): void;
         addVertices(transform: Transform, vertices: number[], beginOffset: number, endOffset: number): void;
-        addBounds(bounds: BoundsBuilder): void;
+        addBounds(bounds: Bounds): void;
 
     }
     export class Container extends DisplayObject {
@@ -293,10 +294,12 @@ declare module PIXI {
         parent: Container;
         worldAlpha: number;
         filterArea: Rectangle;
-        protected _bounds: Rectangle;
-        protected _currentBounds: Rectangle;
+        protected _bounds: Bounds;
+        protected _boundsID: number;
+        protected _lastBoundsID: number;
+        protected _boundsRect: Rectangle;
+        protected _localBoundsRect: Rectangle;
         protected _mask: Rectangle;
-        protected _bounds_: BoundsBuilder;
         x: number;
         y: number;
         worldTransform: Matrix;
@@ -313,8 +316,8 @@ declare module PIXI {
         updateTransform(): void;
         protected displayObjectUpdateTransform(): void;
         protected _recursivePostUpdateTransform(): void;
-        getBounds(skipUpdate?: boolean): Rectangle;
-        getLocalBounds(): Rectangle;
+        getBounds(skipUpdate?: boolean, rect?: Rectangle): Rectangle;
+        getLocalBounds(rect?: Rectangle): Rectangle;
         toGlobal(position: Point, point: Point, skupUpdate?: boolean): Point;
         toLocal(position: Point, from?: DisplayObject, point?: Point, skipUpdate?: boolean): Point;
         protected renderWebGL(renderer: WebGLRenderer): void;
@@ -461,10 +464,11 @@ declare module PIXI {
         protected _webGL: any;
         isMask: boolean;
         boundsPadding: number;
-        protected _localBounds: BoundsBuilder;
+        protected _localBounds: Bounds;
         dirty: boolean;
-        protected glDirty: boolean;
-        protected boundsDirty: boolean;
+        fastRectDirty: number;
+        clearDirty: number;
+        boundsDirty: number;
         protected cachedSpriteDirty: boolean;
         protected _spriteRect: Rectangle;
         protected _fastRect: boolean;
@@ -1033,12 +1037,13 @@ declare module PIXI {
         }[];
         stackIndex: number;
         shaderCache: any;
+        filterData: any;
 
         pushFilter(target: RenderTarget, filters: Filter[]): void;
         popFilter(): void;
         applyFilter(shader: glCore.GLShader | Filter, inputTarget: RenderTarget, outputTarget: RenderTarget, clear?: boolean): void;
         syncUniforms(shader: glCore.GLShader, filter: Filter): void;
-        getRenderTarget(): RenderTarget;
+        getRenderTarget(clear?: boolean, resolution?: number): RenderTarget;
         returnRenderTarget(renderTarget: RenderTarget): RenderTarget;
         calculateScreenSpaceMatrix(outputMatrix: Matrix): Matrix;
         calculateNormalisedScreenSpaceMatrix(outputMatrix: Matrix): Matrix;
@@ -1999,10 +2004,10 @@ declare module PIXI {
         }
         export class Plane extends Mesh {
 
-            constructor(texture: Texture, segmentsX?: number, segmentsY?: number);
+            constructor(texture: Texture, verticesX?: number, verticesY?: number);
             protected _ready: boolean;
-            segmentsX: number;
-            segmentsY: number;
+            verticesX: number;
+            verticesY: number;
             drawMode: number;
 
             refresh(): void;
