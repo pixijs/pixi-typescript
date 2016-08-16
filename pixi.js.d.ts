@@ -1148,12 +1148,12 @@ declare module PIXI {
         protected cachedTint: number;
         texture: Texture;
         protected textureDirty: boolean;
-        protected vertexData: number[];
+        vertexData: number[];
         width: number;
         height: number;
 
         protected _onTextureUpdate(): void;
-        protected calculateVertices(): void;
+        calculateVertices(): void;
         protected _calculateBounds(): void;
         protected calculateBoundsVertices(): void;
         protected onAnchorUpdate(): void;
