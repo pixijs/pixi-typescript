@@ -320,7 +320,7 @@ declare module PIXI {
         protected _recursivePostUpdateTransform(): void;
         getBounds(skipUpdate?: boolean, rect?: Rectangle): Rectangle;
         getLocalBounds(rect?: Rectangle): Rectangle;
-        toGlobal(position: Point, point: Point, skupUpdate?: boolean): Point;
+        toGlobal(position: Point, point: Point, skipUpdate?: boolean): Point;
         toLocal(position: Point, from?: DisplayObject, point?: Point, skipUpdate?: boolean): Point;
         protected renderWebGL(renderer: WebGLRenderer): void;
         protected renderCanvas(renderer: CanvasRenderer): void;
@@ -450,7 +450,7 @@ declare module PIXI {
         type: number;
         clone(): GraphicsData;
         addHole(shape: Shape | Circle | Rectangle | RoundedRectangle | Ellipse | Polygon): void;
-        destroy(): void;
+        destroy(options?: DestroyOptions | boolean): void;
 
     }
     export class Graphics extends Container {
@@ -1161,7 +1161,7 @@ declare module PIXI {
         protected _renderCanvas(renderer: CanvasRenderer): void;
         getLocalBounds(): Rectangle;
         containsPoint(point: Point): boolean;
-        destroy(destroyTexture?: boolean, destroyBaseTexture?: boolean): void;
+        destroy(options?: DestroyOptions | boolean): void;
 
         static from(source: Texture): Sprite;
         static fromFrame(frameId: string): Sprite;
@@ -1293,7 +1293,7 @@ declare module PIXI {
         protected _calculateBounds(): void;
         protected _onStyleChange: () => void;
         protected _generateFullStyle(style: string | number | CanvasGradient, lines: number): string | number | CanvasGradient;
-        destroy(): void;
+        destroy(options?: DestroyOptions | boolean): void;
         dirty: boolean;
 
     }
@@ -2096,7 +2096,7 @@ declare module PIXI {
             setProperties(properties: ParticleContainerProperties): void;
             protected onChildrenChange: (smallestChildIndex?: number) => void;
 
-            destroy(): void;
+            destroy(options?: DestroyOptions | boolean): void;
 
         }
         export class ParticleBuffer {
