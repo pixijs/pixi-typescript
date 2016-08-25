@@ -1116,6 +1116,7 @@ declare module PIXI {
         padding: number;
         resolution: number;
         blendMode: number;
+        enabled: boolean;
         apply(filterManager: FilterManager, input: RenderTarget, output: RenderTarget, clear?: boolean): void;
 
         static defaultVertexSrc: string;
