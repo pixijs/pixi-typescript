@@ -1145,6 +1145,8 @@ declare module PIXI {
         protected _width: number;
         protected _height: number;
         tint: number;
+        protected _tint: number;
+        protected _tintRGB: number;
         blendMode: number;
         shader: glCore.GLShader | Filter;
         protected cachedTint: number;
