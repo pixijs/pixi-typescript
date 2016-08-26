@@ -28,6 +28,7 @@ declare module PIXI {
     export var DEFAULT_RENDER_OPTIONS: typeof CONST.DEFAULT_RENDER_OPTIONS;
     export var SHAPES: typeof CONST.SHAPES;
     export var SPRITE_BATCH_SIZE: typeof CONST.SPRITE_BATCH_SIZE;
+    export var TEXT_GRADIENT: typeof CONST.TEXT_GRADIENT;
 
     export function autoDetectRenderer(width: number, height: number, options?: PIXI.RendererOptions, noWebGL?: boolean): PIXI.WebGLRenderer | PIXI.CanvasRenderer;
     export var loader: PIXI.loaders.Loader;
