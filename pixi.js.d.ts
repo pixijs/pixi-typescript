@@ -1974,7 +1974,7 @@ declare module PIXI {
             constructor(texture: Texture, vertices?: number[], uvs?: number[], indices?: number[], drawMode?: number);
 
             protected _texture: Texture;
-            uvs: number[];
+            uvs: Float32Array;
             dirty: boolean;
             indexDirty: boolean;
             dirtyVertex: boolean;
@@ -1987,8 +1987,8 @@ declare module PIXI {
             protected _glDatas: any[];
             isRaycastCheckingBounds: boolean;
             isRaycastPossible: boolean;
-            vertices: number[];
-            indices: number[];
+            vertices: Float32Array;
+            indices: Uint16Array;
             protected _calculateBounds(): void;
             protected _renderWebGL(renderer: WebGLRenderer): void;
             protected _renderCanvas(renderer: CanvasRenderer): void;
