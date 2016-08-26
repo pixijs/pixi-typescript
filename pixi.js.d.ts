@@ -1822,7 +1822,6 @@ declare module PIXI {
             protected processTouchEnd: (displayObject: DisplayObject, hit: boolean) => void;
             protected onTouchMove: (event: Event) => void;
             protected processTouchMove: (displayObject: DisplayObject, hit: boolean) => void;
-            last: number;
             defaultCursorStyle: string;
             currentCursorStyle: string;
             protected _tempPoint: Point;
