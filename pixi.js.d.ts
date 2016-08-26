@@ -1301,7 +1301,7 @@ declare module PIXI {
         protected wordWrap(text: string): string;
         protected _calculateBounds(): void;
         protected _onStyleChange: () => void;
-        protected _generateFullStyle(style: string | number | CanvasGradient, lines: number): string | number | CanvasGradient;
+        protected _generateFillStyle(style: string | number | CanvasGradient, lines: number): string | number | CanvasGradient;
         destroy(options?: DestroyOptions | boolean): void;
         dirty: boolean;
 
