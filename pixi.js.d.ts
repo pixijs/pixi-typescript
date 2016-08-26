@@ -1398,6 +1398,7 @@ declare module PIXI {
         valid: boolean;
         requiresUpdate: boolean;
         protected _uvs: TextureUvs;
+        protected _updateID: number;
         orig: Rectangle;
         protected _rotate: boolean;
         frame: Rectangle;
