@@ -1281,6 +1281,7 @@ declare module PIXI {
         protected _style: TextStyle;
         protected _styleListener: Function;
         protected _font: string;
+        protected localStyleID: number;
 
         static fontPropertiesCache: any;
         static fontPropertiesCanvas: HTMLCanvasElement;
