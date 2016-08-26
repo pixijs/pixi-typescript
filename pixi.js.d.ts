@@ -524,7 +524,7 @@ declare module PIXI {
         protected primitiveShader: PrimitiveShader;
         gl: WebGLRenderingContext;
 
-        static CONTEXT_UID: number;
+        CONTEXT_UID: number;
 
         onContextChange(): void;
         destroy(): void;
