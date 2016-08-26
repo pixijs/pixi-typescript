@@ -1163,6 +1163,7 @@ declare module PIXI {
         calculateVertices(): void;
         protected _calculateBounds(): void;
         protected calculateBoundsVertices(): void;
+        protected calculateTrimmedVertices(): void;
         protected onAnchorUpdate(): void;
         protected _renderWebGL(renderer: WebGLRenderer): void;
         protected _renderCanvas(renderer: CanvasRenderer): void;
