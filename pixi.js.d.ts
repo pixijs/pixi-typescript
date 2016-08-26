@@ -1955,6 +1955,10 @@ declare module PIXI {
 
             constructor(name?: string, url?: string | string[], options?: LoaderOptions);
 
+            protected _loadSourceElement(type: string): void;
+            isLoading: boolean;
+            isComplete: boolean;
+
             name: string;
             texture: Texture;
             textures: TextureDictionary;
@@ -1969,6 +1973,7 @@ declare module PIXI {
 
             complete(): void;
             load(cb?: () => void): void;
+            abort(message: string): void;
 
         }
     }
