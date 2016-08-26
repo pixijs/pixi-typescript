@@ -741,6 +741,7 @@ declare module PIXI {
         clearBeforeRender?: boolean;
         backgroundColor?: number;
         roundPixels?: boolean;
+        context?: WebGLRenderingContext;
 
     }
     export class SystemRenderer extends utils.EventEmitter {
