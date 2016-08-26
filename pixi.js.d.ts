@@ -315,6 +315,7 @@ declare module PIXI {
         worldVisible: boolean;
         mask: PIXI.Graphics | PIXI.Sprite;
         filters: Filter[];
+        protected _enabledFilters: Filter[];
 
         updateTransform(): void;
         protected displayObjectUpdateTransform(): void;
