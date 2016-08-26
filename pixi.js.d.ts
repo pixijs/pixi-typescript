@@ -1152,6 +1152,8 @@ declare module PIXI {
         protected cachedTint: number;
         texture: Texture;
         protected textureDirty: boolean;
+        protected _textureID: number;
+        protected _transformID: number;
         protected vertexTrimmedData: Float32Array;
         vertexData: number[];
         width: number;
