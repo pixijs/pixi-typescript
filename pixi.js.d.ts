@@ -236,6 +236,7 @@ declare module PIXI {
         protected _calculateBounds(): void;
         protected containerUpdateTransform(): void;
         renderWebGL(renderer: WebGLRenderer): void;
+        renderAdvancedWebGL(renderer: WebGLRenderer): void;
         protected _renderWebGL(renderer: WebGLRenderer): void;
         protected _renderCanvas(renderer: CanvasRenderer): void;
         renderCanvas(renderer: CanvasRenderer): void;
@@ -297,6 +298,8 @@ declare module PIXI {
         parent: Container;
         worldAlpha: number;
         filterArea: Rectangle;
+        protected _filters: Filter[];
+        protected _enabledFilters: Filter[];
         protected _bounds: Bounds;
         protected _boundsID: number;
         protected _lastBoundsID: number;
@@ -315,7 +318,6 @@ declare module PIXI {
         worldVisible: boolean;
         mask: PIXI.Graphics | PIXI.Sprite;
         filters: Filter[];
-        protected _enabledFilters: Filter[];
 
         updateTransform(): void;
         protected displayObjectUpdateTransform(): void;
@@ -1157,14 +1159,13 @@ declare module PIXI {
         protected _textureID: number;
         protected _transformID: number;
         protected vertexTrimmedData: Float32Array;
-        vertexData: number[];
+        vertexData: Float32Array;
         width: number;
         height: number;
 
         protected _onTextureUpdate(): void;
         calculateVertices(): void;
         protected _calculateBounds(): void;
-        protected calculateBoundsVertices(): void;
         protected calculateTrimmedVertices(): void;
         protected onAnchorUpdate(): void;
         protected _renderWebGL(renderer: WebGLRenderer): void;
@@ -1196,7 +1197,7 @@ declare module PIXI {
         size: number;
         buffers: BatchBuffer[];
         indices: number[];
-        shaders: glCore.GLShader;
+        shaders: glCore.GLShader[];
         textureCount: number;
         currentIndex: number;
         tick: number;
@@ -1274,7 +1275,7 @@ declare module PIXI {
     }
     export class Text extends Sprite {
 
-        constructor(text?: string, style?: TextStyle, resolution?: number);
+        constructor(text?: string, style?: TextStyle);
 
         canvas: HTMLCanvasElement;
         context: CanvasRenderingContext2D;
@@ -1651,7 +1652,6 @@ declare module PIXI {
             static fromImage(imageId: string, crossorigin?: boolean, scaleMode?: number): Sprite;
             static fromFrame(frameId: string, width?: number, height?: number): TilingSprite;
             static fromImage(imageId: string, width?: number, height?: number, crossorigin?: boolean, scaleMode?: number): TilingSprite;
-
 
         }
         export class TilingShader extends glCore.GLShader { }
