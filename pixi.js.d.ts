@@ -2374,14 +2374,14 @@ declare module PIXI {
             protected nativeVao: VertexArrayObject;
             gl: WebGLRenderingContext;
             attributes: Attrib[];
-            indexBuffer: WebGLBuffer;
+            indexBuffer: GLBuffer;
             dirty: boolean;
 
             bind(): VertexArrayObject;
             unbind(): VertexArrayObject;
             activate(): VertexArrayObject;
-            addAttribute(buffer: WebGLBuffer, attribute: Attrib, type: number, normalized: boolean, stride: number, start: number): VertexArrayObject;
-            addIndex(buffer: WebGLBuffer, options?: any): VertexArrayObject;
+            addAttribute(buffer: GLBuffer, attribute: Attrib, type: number, normalized: boolean, stride: number, start: number): VertexArrayObject;
+            addIndex(buffer: GLBuffer, options?: any): VertexArrayObject;
             clear(): VertexArrayObject;
             draw(type: number, size: number, start: number): VertexArrayObject;
             destroy(): void;
