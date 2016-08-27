@@ -28,6 +28,7 @@ declare module PIXI {
     export var DEFAULT_RENDER_OPTIONS: typeof CONST.DEFAULT_RENDER_OPTIONS;
     export var SHAPES: typeof CONST.SHAPES;
     export var SPRITE_BATCH_SIZE: typeof CONST.SPRITE_BATCH_SIZE;
+    export var TEXT_GRADIENT: typeof CONST.TEXT_GRADIENT;
 
     export function autoDetectRenderer(width: number, height: number, options?: PIXI.RendererOptions, noWebGL?: boolean): PIXI.WebGLRenderer | PIXI.CanvasRenderer;
     export var loader: PIXI.loaders.Loader;
@@ -314,6 +315,7 @@ declare module PIXI {
         worldVisible: boolean;
         mask: PIXI.Graphics | PIXI.Sprite;
         filters: Filter[];
+        protected _enabledFilters: Filter[];
 
         updateTransform(): void;
         protected displayObjectUpdateTransform(): void;
@@ -523,7 +525,7 @@ declare module PIXI {
         protected primitiveShader: PrimitiveShader;
         gl: WebGLRenderingContext;
 
-        static CONTEXT_UID: number;
+        CONTEXT_UID: number;
 
         onContextChange(): void;
         destroy(): void;
@@ -739,6 +741,7 @@ declare module PIXI {
         clearBeforeRender?: boolean;
         backgroundColor?: number;
         roundPixels?: boolean;
+        context?: WebGLRenderingContext;
 
     }
     export class SystemRenderer extends utils.EventEmitter {
@@ -1139,16 +1142,21 @@ declare module PIXI {
 
         constructor(texture?: Texture);
 
-        anchor: Point;
+        anchor: ObservablePoint;
         protected _texture: Texture;
         protected _width: number;
         protected _height: number;
         tint: number;
+        protected _tint: number;
+        protected _tintRGB: number;
         blendMode: number;
         shader: glCore.GLShader | Filter;
         protected cachedTint: number;
         texture: Texture;
         protected textureDirty: boolean;
+        protected _textureID: number;
+        protected _transformID: number;
+        protected vertexTrimmedData: Float32Array;
         vertexData: number[];
         width: number;
         height: number;
@@ -1157,6 +1165,7 @@ declare module PIXI {
         calculateVertices(): void;
         protected _calculateBounds(): void;
         protected calculateBoundsVertices(): void;
+        protected calculateTrimmedVertices(): void;
         protected onAnchorUpdate(): void;
         protected _renderWebGL(renderer: WebGLRenderer): void;
         protected _renderCanvas(renderer: CanvasRenderer): void;
@@ -1274,6 +1283,7 @@ declare module PIXI {
         protected _style: TextStyle;
         protected _styleListener: Function;
         protected _font: string;
+        protected localStyleID: number;
 
         static fontPropertiesCache: any;
         static fontPropertiesCanvas: HTMLCanvasElement;
@@ -1293,7 +1303,7 @@ declare module PIXI {
         protected wordWrap(text: string): string;
         protected _calculateBounds(): void;
         protected _onStyleChange: () => void;
-        protected _generateFullStyle(style: string | number | CanvasGradient, lines: number): string | number | CanvasGradient;
+        protected _generateFillStyle(style: string | number | CanvasGradient, lines: number): string | number | CanvasGradient;
         destroy(options?: DestroyOptions | boolean): void;
         dirty: boolean;
 
@@ -1397,6 +1407,7 @@ declare module PIXI {
         valid: boolean;
         requiresUpdate: boolean;
         protected _uvs: TextureUvs;
+        protected _updateID: number;
         orig: Rectangle;
         protected _rotate: boolean;
         frame: Rectangle;
@@ -1812,7 +1823,6 @@ declare module PIXI {
             protected processTouchEnd: (displayObject: DisplayObject, hit: boolean) => void;
             protected onTouchMove: (event: Event) => void;
             protected processTouchMove: (displayObject: DisplayObject, hit: boolean) => void;
-            last: number;
             defaultCursorStyle: string;
             currentCursorStyle: string;
             protected _tempPoint: Point;
@@ -1945,6 +1955,10 @@ declare module PIXI {
 
             constructor(name?: string, url?: string | string[], options?: LoaderOptions);
 
+            protected _loadSourceElement(type: string): void;
+            isLoading: boolean;
+            isComplete: boolean;
+
             name: string;
             texture: Texture;
             textures: TextureDictionary;
@@ -1959,6 +1973,7 @@ declare module PIXI {
 
             complete(): void;
             load(cb?: () => void): void;
+            abort(message: string): void;
 
         }
     }
