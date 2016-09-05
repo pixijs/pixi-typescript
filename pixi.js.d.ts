@@ -19,6 +19,7 @@ declare module PIXI {
     export var TRANSFORM_MODE: typeof CONST.TRANSFORM_MODE;
     export var SPRITE_MAX_TEXTURES: typeof CONST.SPRITE_MAX_TEXTURES;
     export var PRECISION: typeof CONST.PRECISION;
+    export var TEXT_GRADIENT: typeof CONST.TEXT_GRADIENT;
     export var TEXT_STYLE_CHANGED: typeof CONST.TEXT_STYLE_CHANGED;
     export var GC_MODES: typeof CONST.GC_MODES;
     export var MIPMAP_TEXTURES: typeof CONST.MIPMAP_TEXTURES;
