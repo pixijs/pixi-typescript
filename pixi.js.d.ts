@@ -19,7 +19,6 @@ declare module PIXI {
     export var TRANSFORM_MODE: typeof CONST.TRANSFORM_MODE;
     export var SPRITE_MAX_TEXTURES: typeof CONST.SPRITE_MAX_TEXTURES;
     export var PRECISION: typeof CONST.PRECISION;
-    export var TEXT_GRADIENT: typeof CONST.TEXT_GRADIENT;
     export var TEXT_STYLE_CHANGED: typeof CONST.TEXT_STYLE_CHANGED;
     export var GC_MODES: typeof CONST.GC_MODES;
     export var MIPMAP_TEXTURES: typeof CONST.MIPMAP_TEXTURES;
@@ -188,9 +187,9 @@ declare module PIXI {
     //display
 
     export interface DestroyOptions {
-        children?:boolean,
-        texture?:boolean,
-        baseTexture?:boolean
+        children?: boolean,
+        texture?: boolean,
+        baseTexture?: boolean
     }
     export class Bounds {
 
@@ -262,7 +261,8 @@ declare module PIXI {
         protected _initCachedDisplayObject(renderer: WebGLRenderer): void;
         protected _renderCachedCanvas(renderer: CanvasRenderer): void;
         protected _initCachedDisplayObjectCanvas(renderer: CanvasRenderer): void;
-        protected _getCachedBounds(): Rectangle;
+        protected _calculateCachedBounds(): Rectangle;
+        protected _getCachedLocalBounds(): Rectangle;
         protected _destroyCachedDisplayObject(): void;
         protected _cacheAsBitmapDestroy(): void;
         //end extras.cacheAsBitmap
