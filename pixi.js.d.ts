@@ -627,7 +627,7 @@ declare module PIXI {
         cb: () => void;
         scope: any;
 
-        set(x: number, y: number): void;
+        set(x?: number, y?: number): void;
         copy(point: Point | ObservablePoint): void;
 
     }
