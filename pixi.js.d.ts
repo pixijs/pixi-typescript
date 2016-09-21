@@ -124,10 +124,9 @@ declare module PIXI {
             TRIANGLE_FAN: number;
         };
         export var SCALE_MODES: {
-            DEFAULT: number;
-            CLAMP: number;
-            REPEAT: number;
-            MIRRORED_REPEAT: number;
+            DEFAULT: number,
+            LINEAR: number,
+            NEAREST: number
         };
         export var GC_MODES: {
             DEFAULT: number;
