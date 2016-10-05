@@ -1615,12 +1615,12 @@ declare module PIXI {
             onComplete: () => void;
             protected _currentTime: number;
             playing: boolean;
-            totalFrames: number;
-            currentFrame: number;
+            readonly totalFrames: number;
+            readonly currentFrame: number;
             stop(): void;
             play(): void;
-            gotoAndStop(frameName: number): void;
-            gotoAndPlay(frameName: number): void;
+            gotoAndStop(frameNumber: number): void;
+            gotoAndPlay(frameNumber: number): void;
             protected update(deltaTime: number): void;
             destroy(): void;
 
