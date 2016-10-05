@@ -704,6 +704,10 @@ declare module PIXI {
         width: number;
         height: number;
         type: number;
+        left: number;
+        right: number;
+        top: number;
+        bottom: number;
 
         static EMPTY: Rectangle;
 
