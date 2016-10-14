@@ -1702,8 +1702,8 @@ declare module PIXI {
             protected _onTextureUpdate(): void;
             protected _renderWebGL(renderer: WebGLRenderer): void;
             protected _renderCanvas(renderer: CanvasRenderer): void;
+            protected _calculateBounds(): void;
             getLocalBounds(rect?: Rectangle): Rectangle;
-            getBounds(): Rectangle;
             containsPoint(point: Point): boolean;
             destroy(): void;
 
@@ -2077,6 +2077,8 @@ declare module PIXI {
 
             protected _texture: Texture;
             uvs: Float32Array;
+            vertices: Float32Array;
+            indices: Uint16Array;
             dirty: boolean;
             indexDirty: boolean;
             dirtyVertex: boolean;
@@ -2086,20 +2088,14 @@ declare module PIXI {
             drawMode: number;
             texture: Texture;
             shader: glCore.GLShader;
+            tintRgb: Float32Array;
             protected _glDatas: any[];
-            isRaycastCheckingBounds: boolean;
-            isRaycastPossible: boolean;
-            vertices: Float32Array;
-            indices: Uint16Array;
-            protected _calculateBounds(): void;
             protected _renderWebGL(renderer: WebGLRenderer): void;
             protected _renderCanvas(renderer: CanvasRenderer): void;
-            protected _renderCanvasTriangleMesh(context: CanvasRenderingContext2D): void;
-            protected _renderCanvasTriangles(context: CanvasRenderingContext2D): void;
-            protected _renderCanvasDrawTriangle(context: CanvasRenderingContext2D, vertices: number[], uvs: number[], index0: number, index1: number, index2: number): void;
-            protected renderMeshFlat(Mesh: Mesh): void;
             protected _onTextureUpdate(): void;
-            containsLocalPoint(point: Point): boolean;
+            protected _calculateBounds(): void;
+            containsPoint(point: Point): boolean;
+            tint: number;
 
             static DRAW_MODES: {
                 TRIANGLE_MESH: number;
@@ -2107,6 +2103,33 @@ declare module PIXI {
             };
 
         }
+
+        export class CanvasMeshRenderer {
+            
+            constructor(renderer: CanvasRenderer);
+
+            renderer: CanvasRenderer;
+
+            render(mesh: Mesh): void;
+            protected _renderTriangleMesh(mesh: Mesh): void;
+            protected _renderTriangles(mesh: Mesh): void;
+            protected _renderDrawTriangle(mesh: Mesh, index0: number, index1: number, index2: number): void;
+            protected renderMeshFlat(mesh: Mesh): void;
+
+            destroy(): void;
+
+        }
+
+        export class MeshRenderer extends ObjectRenderer {
+
+            constructor(renderer: WebGLRenderer);
+
+            shader: Shader;
+            onContextChange(): void;
+            render(mesh: Mesh): void;
+
+        }
+
         export class Plane extends Mesh {
 
             constructor(texture: Texture, verticesX?: number, verticesY?: number);
@@ -2162,9 +2185,6 @@ declare module PIXI {
             updateTransform(): void;
 
         }
-
-        export interface IMeshShader extends glCore.GLShader { }
-
     }
 
     //////////////////////////////////////////////////////////////////////////////
