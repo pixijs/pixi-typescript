@@ -150,7 +150,6 @@ declare module PIXI {
         export var FILTER_RESOLUTION: number;
         export var DEFAULT_RENDER_OPTIONS: {
             view: HTMLCanvasElement;
-            resolution: number;
             antialias: boolean;
             forceFXAA: boolean;
             autoResize: boolean;
@@ -1141,7 +1140,7 @@ declare module PIXI {
         fragmentSrc: string;
         protected uniformData: WebGLUniformLocation;
         uniforms: any;
-        glShaders: WebGLShader[];
+        glShaders: any;
         glShaderKey: string;
         padding: number;
         resolution: number;
@@ -1349,8 +1348,8 @@ declare module PIXI {
         resolution: number;
         scaleMode: number;
         hasLoaded: boolean;
-        protected _glRenderTargets: any;
-        protected _canvasRenderTarget: any;
+        protected _glRenderTargets: { [n: number]: WebGLTexture; };
+        protected _canvasRenderTarget: { [n: number]: WebGLTexture; };
         valid: boolean;
 
         resize(width: number, height: number): void;
@@ -1387,7 +1386,7 @@ declare module PIXI {
         protected isPowerOfTwo: boolean;
         mipmap: boolean;
         wrap: boolean;
-        protected _glTextures: WebGLTexture[];
+        protected _glTextures: any;
         protected _enabled: number;
         protected _id: number;
 
@@ -2089,7 +2088,7 @@ declare module PIXI {
             texture: Texture;
             shader: glCore.GLShader;
             tintRgb: Float32Array;
-            protected _glDatas: any[];
+            protected _glDatas: { [n: number]: any; };
             protected _renderWebGL(renderer: WebGLRenderer): void;
             protected _renderCanvas(renderer: CanvasRenderer): void;
             protected _onTextureUpdate(): void;
@@ -2209,7 +2208,7 @@ declare module PIXI {
             protected _properties: boolean[];
             protected _maxSize: number;
             protected _batchSize: number;
-            protected _glBuffers: WebGLBuffer[];
+            protected _glBuffers: { [n: number]: WebGLBuffer; };
             protected _bufferToUpdate: number;
             interactiveChildren: boolean;
             blendMode: number;
