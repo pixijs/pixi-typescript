@@ -1293,6 +1293,7 @@ declare module PIXI {
         padding?: number;
         stroke?: string | number;
         strokeThickness?: number;
+        styleID?:number;
         textBaseline?: string;
         wordWrap?: boolean;
         wordWrapWidth?: number;
