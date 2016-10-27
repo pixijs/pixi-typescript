@@ -2534,6 +2534,7 @@ declare module PIXI {
         export function decomposeDataUri(dataUri: string): IDecomposedDataUri;
         export function getUrlFileExtension(url: string): string;
         export function sayHello(type: string): void;
+        export function skipHello(): void;
         export function isWebGLSupported(): boolean;
         export function sign(n: number): number;
         export function removeItems<T>(arr: T[], startIdx: number, removeCount: number): void;
