@@ -511,7 +511,7 @@ declare module PIXI {
         generateCanvasTexture(scaleMode?: number, resolution?: number): Texture;
         protected closePath(): Graphics;
         protected addHole(): Graphics;
-        destroy(): void;
+        destroy(options?: IDestroyOptions | boolean): void;
 
     }
     export class CanvasGraphicsRenderer {
@@ -1293,7 +1293,7 @@ declare module PIXI {
         padding?: number;
         stroke?: string | number;
         strokeThickness?: number;
-        styleID?:number;
+        styleID?: number;
         textBaseline?: string;
         wordWrap?: boolean;
         wordWrapWidth?: number;
@@ -2105,7 +2105,7 @@ declare module PIXI {
         }
 
         export class CanvasMeshRenderer {
-            
+
             constructor(renderer: CanvasRenderer);
 
             renderer: CanvasRenderer;
@@ -2381,7 +2381,7 @@ declare module PIXI {
             type: number;
             drawType: number;
             data: ArrayBuffer | ArrayBufferView | any;
-            
+
             upload(data: ArrayBuffer | ArrayBufferView | any, offset: number, dontBind: boolean): void;
             bind(): void;
 
