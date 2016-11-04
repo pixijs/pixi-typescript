@@ -328,7 +328,7 @@ declare module PIXI {
         protected _recursivePostUpdateTransform(): void;
         getBounds(skipUpdate?: boolean, rect?: Rectangle): Rectangle;
         getLocalBounds(rect?: Rectangle): Rectangle;
-        toGlobal(position: Point, point: Point, skipUpdate?: boolean): Point;
+        toGlobal(position: Point, point?: Point, skipUpdate?: boolean): Point;
         toLocal(position: Point, from?: DisplayObject, point?: Point, skipUpdate?: boolean): Point;
         protected renderWebGL(renderer: WebGLRenderer): void;
         protected renderCanvas(renderer: CanvasRenderer): void;
