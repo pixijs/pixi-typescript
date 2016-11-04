@@ -1134,7 +1134,7 @@ declare module PIXI {
 
     export class Filter {
 
-        constructor(vertexSrc: string, fragmentSrc: string, uniforms: string);
+        constructor(vertexSrc?: string, fragmentSrc?: string, uniforms?: string);
 
         vertextSrc: string;
         fragmentSrc: string;
