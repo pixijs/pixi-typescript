@@ -1,4 +1,4 @@
-﻿// type definitions for Pixi.js dev
+﻿// type definitions for Pixi.js
 // project: https://github.com/pixijs/pixi.js/tree/dev
 // definitions by: clark-stevenson <https://github.com/pixijs/pixi-typescript>
 // definitions: https://github.com/borisyankov/DefinitelyTyped
@@ -2083,7 +2083,7 @@ declare module PIXI {
 
         export class Mesh extends Container {
 
-            constructor(texture: Texture, vertices?: number[], uvs?: number[], indices?: number[], drawMode?: number);
+            constructor(texture: Texture, vertices?: Float32Array, uvs?: Float32Array, indices?: Uint16Array, drawMode?: number);
 
             protected _texture: Texture;
             uvs: Float32Array;
