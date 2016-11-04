@@ -1131,15 +1131,25 @@ declare module PIXI {
         destroy(): void;
 
     }
+    export interface IUniformData {
 
+        type: string;
+        value: any;
+
+        // name is set by pixi if uniforms were automatically extracted from shader code, but not used anywhere
+        name?: string;
+
+    }
     export class Filter {
 
-        constructor(vertexSrc: string, fragmentSrc: string, uniforms: string);
+        // param uniforms should be an object matching type {[name: string]: IUniformData};
+        // left untyped as there's no way to define the type without requiring an index signature or making this class generic
+        constructor(vertexSrc?: string, fragmentSrc?: string, uniforms?: any);
 
         vertextSrc: string;
         fragmentSrc: string;
-        protected uniformData: WebGLUniformLocation;
-        uniforms: any;
+        protected uniformData: {[name: string]: IUniformData};
+        uniforms: {[name: string]: any};
         glShaders: any;
         glShaderKey: string;
         padding: number;
