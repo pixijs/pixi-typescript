@@ -1,6 +1,4 @@
-## Typescript Definitions for Pixi.js v4.1.0 ##
-
-This definition file attempts to follow the [development branch of pixi](https://github.com/pixijs/pixi.js/tree/dev) 
+## Typescript Definitions for Pixi.js v4.1.1 ##
 
 WIP
 
