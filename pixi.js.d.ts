@@ -275,7 +275,7 @@ declare module PIXI {
         // end extras.getChildByName
 
         // begin extras.getGlobalPosition
-        getGlobalPosition(point?: Point): Point;
+        getGlobalPosition(point?: Point, skipUpdate?: boolean): Point;
         // end extras.getGlobalPosition
 
         // begin accessible target
