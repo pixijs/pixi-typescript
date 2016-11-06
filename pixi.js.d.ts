@@ -1642,6 +1642,7 @@ declare module PIXI {
             tint: number;
             align: string;
             text: string;
+            anchor: PIXI.Point | number;
 
             protected updateText(): void;
             updateTransform(): void;
