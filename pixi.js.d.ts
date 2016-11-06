@@ -1,7 +1,7 @@
-﻿// type definitions for Pixi.js
-// project: https://github.com/pixijs/pixi.js/tree/dev
-// definitions by: clark-stevenson <https://github.com/pixijs/pixi-typescript>
-// definitions: https://github.com/borisyankov/DefinitelyTyped
+﻿// Type definitions for Pixi.js 4.1
+// Project: https://github.com/pixijs/pixi.js/tree/dev
+// Definitions by: clark-stevenson <https://github.com/pixijs/pixi-typescript>
+// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
 declare module PIXI {
 
@@ -2056,6 +2056,12 @@ declare module PIXI {
             isLoading: boolean;
             isComplete: boolean;
 
+            isJson: boolean;
+            isXml: boolean;
+            isImage: boolean;
+            isAudio: boolean;
+            isVideo: boolean;
+
             name: string;
             texture: Texture;
             textures: ITextureDictionary;
@@ -2067,6 +2073,10 @@ declare module PIXI {
             error: Error;
             xhr: XMLHttpRequest;
             SVGMetadataElement: any;
+
+            metadata: any;
+            spineAtlas: any;
+            spineData: any;
 
             complete(): void;
             load(cb?: () => void): void;
@@ -2089,10 +2099,8 @@ declare module PIXI {
             uvs: Float32Array;
             vertices: Float32Array;
             indices: Uint16Array;
-            dirty: boolean;
-            indexDirty: boolean;
-            dirtyVertex: boolean;
-            protected _geometryVersion: number;
+            dirty: number;
+            indexDirty: number;
             blendMode: number;
             canvasPadding: number;
             drawMode: number;
