@@ -2436,7 +2436,7 @@ declare module PIXI {
         }
         export class GLShader {
 
-            constructor(gl: WebGLRenderingContext, vertexSrc: string | string[], fragmentSrc: string | string[], attributeLocations: string | string[] | any);
+            constructor(gl: WebGLRenderingContext, vertexSrc: string | string[], fragmentSrc: string | string[]);
 
             gl: WebGLRenderingContext;
             program: WebGLProgram;
