@@ -2317,7 +2317,7 @@ declare module PIXI {
             protected ticking: boolean;
             protected delayedTick: () => void;
 
-            upload(item: Function | DisplayObject | Container, done?: () => void);
+            upload(item: Function | DisplayObject | Container, done?: () => void): void;
             protected tick(): void;
             protected prepareItems(): void;
             register(addHook?: addHook, uploadHook?: uploadHook<UploadHookSource>): BasePrepare<UploadHookSource>;
