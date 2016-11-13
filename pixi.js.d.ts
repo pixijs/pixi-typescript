@@ -1275,10 +1275,7 @@ declare module PIXI {
 
     // text
 
-    // todo: This is actually a class, but as of TypeScript 1, classes cannot have optional properties, which are needed here.
-    // however, in TypeScript 2, optional class properties are supported (https://github.com/Microsoft/TypeScript/pull/8625).
-    // so when TypeScript 2 becomes the norm, change this to a class
-    export interface ITextStyle {
+    export class TextStyle {
 
         align?: string;
         breakWords?: boolean;
@@ -1309,16 +1306,16 @@ declare module PIXI {
     }
     export class Text extends Sprite {
 
-        static getFontStyle(style: ITextStyle): string;
+        static getFontStyle(style: TextStyle): string;
         static calculateFontProperties(style: string): any;
 
-        constructor(text?: string, style?: ITextStyle);
+        constructor(text?: string, style?: TextStyle);
 
         canvas: HTMLCanvasElement;
         context: CanvasRenderingContext2D;
         resolution: number;
         protected _text: string;
-        protected _style: ITextStyle;
+        protected _style: TextStyle;
         protected _styleListener: Function;
         protected _font: string;
         protected localStyleID: number;
@@ -1329,7 +1326,7 @@ declare module PIXI {
 
         width: number;
         height: number;
-        style: ITextStyle;
+        style: TextStyle;
         text: string;
 
         protected updateText(respectDirty?: boolean): void;
@@ -1342,6 +1339,7 @@ declare module PIXI {
         protected _onStyleChange: () => void;
         protected _generateFillStyle(style: string | number | CanvasGradient, lines: number): string | number | CanvasGradient;
         destroy(options?: IDestroyOptions | boolean): void;
+        dirty: boolean;
 
     }
 
