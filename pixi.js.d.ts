@@ -1186,7 +1186,6 @@ declare module PIXI {
         protected _tint: number;
         protected _tintRGB: number;
         blendMode: number;
-        shader: glCore.GLShader | Filter;
         protected cachedTint: number;
         texture: Texture;
         protected textureDirty: boolean;
@@ -2105,7 +2104,6 @@ declare module PIXI {
             canvasPadding: number;
             drawMode: number;
             texture: Texture;
-            shader: glCore.GLShader;
             tintRgb: Float32Array;
             protected _glDatas: { [n: number]: any; };
             protected _renderWebGL(renderer: WebGLRenderer): void;
