@@ -2303,7 +2303,7 @@ declare module PIXI {
         interface uploadHook<UploadHookSource> {
             (prepare: UploadHookSource, item: any): boolean
         }
-        export abstract class BasePrepare<UploadHookSource extends CanvasPrepare | WebGLRenderer>{
+        export abstract class BasePrepare<UploadHookSource>{
 
             constructor(renderer: SystemRenderer);
 
@@ -2317,11 +2317,11 @@ declare module PIXI {
             protected ticking: boolean;
             protected delayedTick: () => void;
 
-            upload(item: Function | DisplayObject | Container, done?: () => void): void;
+            upload(item: Function | DisplayObject | BaseTexture | TextStyle | any, done?: () => void): void;
             protected tick(): void;
             protected prepareItems(): void;
-            register(addHook?: addHook, uploadHook?: uploadHook<UploadHookSource>): BasePrepare<UploadHookSource>;
-            add(item: DisplayObject | Container | any): BasePrepare<UploadHookSource>;
+            register(addHook?: addHook, uploadHook?: uploadHook<UploadHookSource>): this;
+            add(item: DisplayObject | any): this;
             destroy(): void;
 
         }
