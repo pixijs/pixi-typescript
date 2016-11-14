@@ -798,6 +798,7 @@ declare module PIXI {
         refresh: boolean;
         maskManager: CanvasMaskManager;
         smoothProperty: string;
+        extract: extract.CanvasExtract;
 
         render(displayObject: PIXI.DisplayObject, renderTexture?: PIXI.RenderTexture, clear?: boolean, transform?: PIXI.Transform, skipUpdateTransform?: boolean): void
         setBlendMode(blendMode: number): void;
@@ -883,6 +884,7 @@ declare module PIXI {
         boundTextures: Texture[];
         filterManager: FilterManager;
         textureManager: TextureManager;
+        extract: extract.WebGLExtract;
         protected drawModes: any;
         protected _activeShader: Shader;
         protected _activeRenderTarget: RenderTarget;
