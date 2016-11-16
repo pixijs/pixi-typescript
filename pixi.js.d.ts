@@ -1587,9 +1587,9 @@ declare module PIXI {
 
         }
         export class WebGLExtract {
-            protected renderer: CanvasRenderer;
+            protected renderer: WebGLRenderer;
 
-            constructor(renderer: CanvasRenderer);
+            constructor(renderer: WebGLRenderer);
 
             image(target?: DisplayObject | RenderTexture): HTMLImageElement;
             base64(target?: DisplayObject | RenderTexture): string;
