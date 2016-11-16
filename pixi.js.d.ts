@@ -784,9 +784,9 @@ declare module PIXI {
     export class CanvasRenderer extends SystemRenderer {
 
         // plugintarget mixin start
-        protected __plugins: any[];
+        static __plugins: any[];
+        static registerPlugin(pluginName: string, ctor: Function): void;
         plugins: any;
-        registerPlugin(pluginName: string, ctor: Function): void;
         initPlugins(): void;
         destroyPlugins(): void;
         // plugintarget mixin end
@@ -857,9 +857,9 @@ declare module PIXI {
     export class WebGLRenderer extends SystemRenderer {
 
         // plugintarget mixin start
-        protected __plugins: any[];
+        static __plugins: any[];
+        static registerPlugin(pluginName: string, ctor: Function): void;
         plugins: any;
-        registerPlugin(pluginName: string, ctor: Function): void;
         initPlugins(): void;
         destroyPlugins(): void;
         // plugintarget mixin end
