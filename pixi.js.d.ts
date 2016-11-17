@@ -533,7 +533,6 @@ declare module PIXI {
 
         CONTEXT_UID: number;
 
-        onContextChange(): void;
         destroy(): void;
         render(graphics: Graphics): void;
         protected updateGraphics(graphics: PIXI.Graphics): void;
@@ -785,9 +784,9 @@ declare module PIXI {
     export class CanvasRenderer extends SystemRenderer {
 
         // plugintarget mixin start
-        protected __plugins: any[];
+        static __plugins: any[];
+        static registerPlugin(pluginName: string, ctor: Function): void;
         plugins: any;
-        registerPlugin(pluginName: string, ctor: Function): void;
         initPlugins(): void;
         destroyPlugins(): void;
         // plugintarget mixin end
@@ -799,6 +798,7 @@ declare module PIXI {
         refresh: boolean;
         maskManager: CanvasMaskManager;
         smoothProperty: string;
+        extract: extract.CanvasExtract;
 
         render(displayObject: PIXI.DisplayObject, renderTexture?: PIXI.RenderTexture, clear?: boolean, transform?: PIXI.Transform, skipUpdateTransform?: boolean): void
         setBlendMode(blendMode: number): void;
@@ -857,9 +857,9 @@ declare module PIXI {
     export class WebGLRenderer extends SystemRenderer {
 
         // plugintarget mixin start
-        protected __plugins: any[];
+        static __plugins: any[];
+        static registerPlugin(pluginName: string, ctor: Function): void;
         plugins: any;
-        registerPlugin(pluginName: string, ctor: Function): void;
         initPlugins(): void;
         destroyPlugins(): void;
         // plugintarget mixin end
@@ -873,7 +873,7 @@ declare module PIXI {
             stencil: boolean;
             preseveDrawingBuffer: boolean;
         };
-        protected _bakcgroundColorRgba: number[];
+        protected _backgroundColorRgba: number[];
         maskManager: MaskManager;
         stencilManager: StencilManager;
         emptyRenderer: ObjectRenderer;
@@ -881,13 +881,13 @@ declare module PIXI {
         gl: WebGLRenderingContext;
         state: WebGLState;
         renderingToScreen: boolean;
+        boundTextures: Texture[];
         filterManager: FilterManager;
         textureManager: TextureManager;
+        extract: extract.WebGLExtract;
         protected drawModes: any;
-        protected _activeShader: glCore.GLShader;
+        protected _activeShader: Shader;
         protected _activeRenderTarget: RenderTarget;
-        protected _activeTextureLocation: number;
-        protected _activeTexture: Texture;
         protected _initContext(): void;
 
         render(displayObject: PIXI.DisplayObject, renderTexture?: PIXI.RenderTexture, clear?: boolean, transform?: PIXI.Transform, skipUpdateTransform?: boolean): void
@@ -899,12 +899,13 @@ declare module PIXI {
         setTransform(matrix: Matrix): void;
         bindRenderTexture(renderTexture: RenderTexture, transform: Transform): WebGLRenderer;
         bindRenderTarget(renderTarget: RenderTarget): WebGLRenderer;
-        bindShader(shader: glCore.GLShader): WebGLRenderer;
-        bindTexture(texture: Texture, location: number): WebGLRenderer;
+        bindShader(shader: Shader): WebGLRenderer;
+        bindTexture(texture: Texture, location: number, forceLocation?: boolean): WebGLRenderer;
+        unbindTexture(texture: Texture): WebGLRenderer;
         protected createVao(): glCore.VertexArrayObject;
         reset(): WebGLRenderer;
-        handleContextLost(event: WebGLContextEvent): void;
-        handleContextRestored(): void;
+        handleContextLost: (event: WebGLContextEvent) => void;
+        handleContextRestored: () => void;
         destroy(removeView?: boolean): void;
 
         on(event: "context", fn: (gl: WebGLRenderingContext) => void, context?: any): utils.EventEmitter;
@@ -1127,7 +1128,7 @@ declare module PIXI {
         constructor(renderer: WebGLRenderer);
 
         renderer: WebGLRenderer;
-        onContextChange(): void;
+        onContextChange: () => void;
         destroy(): void;
 
     }
@@ -1148,8 +1149,8 @@ declare module PIXI {
 
         vertextSrc: string;
         fragmentSrc: string;
-        protected uniformData: {[name: string]: IUniformData};
-        uniforms: {[name: string]: any};
+        protected uniformData: { [name: string]: IUniformData };
+        uniforms: { [name: string]: any };
         glShaders: any;
         glShaderKey: string;
         padding: number;
@@ -1187,7 +1188,6 @@ declare module PIXI {
         protected _tint: number;
         protected _tintRGB: number;
         blendMode: number;
-        shader: glCore.GLShader | Filter;
         protected cachedTint: number;
         texture: Texture;
         protected textureDirty: boolean;
@@ -1232,8 +1232,7 @@ declare module PIXI {
         size: number;
         buffers: BatchBuffer[];
         indices: number[];
-        shaders: glCore.GLShader[];
-        textureCount: number;
+        shaders: Shader[];
         currentIndex: number;
         tick: number;
         groups: any[];
@@ -1243,8 +1242,8 @@ declare module PIXI {
         vaoMax: number;
         vertexCount: number;
 
-        protected onContextChanged(): void;
-        protected onPrerender(): void;
+        protected onContextChanged: () => void;
+        protected onPrerender: () => void;
         render(sprite: Sprite): void;
         flush(): void;
         start(): void;
@@ -1277,10 +1276,7 @@ declare module PIXI {
 
     // text
 
-    // todo: This is actually a class, but as of TypeScript 1, classes cannot have optional properties, which are needed here.
-    // however, in TypeScript 2, optional class properties are supported (https://github.com/Microsoft/TypeScript/pull/8625).
-    // so when TypeScript 2 becomes the norm, change this to a class
-    export interface ITextStyle {
+    export class TextStyle {
 
         align?: string;
         breakWords?: boolean;
@@ -1311,13 +1307,16 @@ declare module PIXI {
     }
     export class Text extends Sprite {
 
-        constructor(text?: string, style?: ITextStyle);
+        static getFontStyle(style: TextStyle): string;
+        static calculateFontProperties(style: string): any;
+
+        constructor(text?: string, style?: TextStyle);
 
         canvas: HTMLCanvasElement;
         context: CanvasRenderingContext2D;
         resolution: number;
         protected _text: string;
-        protected _style: ITextStyle;
+        protected _style: TextStyle;
         protected _styleListener: Function;
         protected _font: string;
         protected localStyleID: number;
@@ -1328,15 +1327,14 @@ declare module PIXI {
 
         width: number;
         height: number;
-        style: ITextStyle;
+        style: TextStyle;
         text: string;
 
         protected updateText(respectDirty?: boolean): void;
         protected drawLetterSpacing(text: string, x: number, y: number, isStroke?: boolean): void;
         protected updateTexture(): void;
-        protected _renderWebGL(renderer: WebGLRenderer): void;
+        renderWebGL(renderer: WebGLRenderer): void;
         protected _renderCanvas(renderer: CanvasRenderer): void;
-        protected determineFontProperties(fontStyle: ITextStyle): ITextStyle;
         protected wordWrap(text: string): string;
         protected _calculateBounds(): void;
         protected _onStyleChange: () => void;
@@ -1588,9 +1586,9 @@ declare module PIXI {
 
         }
         export class WebGLExtract {
-            protected renderer: CanvasRenderer;
+            protected renderer: WebGLRenderer;
 
-            constructor(renderer: CanvasRenderer);
+            constructor(renderer: WebGLRenderer);
 
             image(target?: DisplayObject | RenderTexture): HTMLImageElement;
             base64(target?: DisplayObject | RenderTexture): string;
@@ -1652,7 +1650,7 @@ declare module PIXI {
             static fonts: any;
 
         }
-        export class MovieClip extends Sprite {
+        export class AnimatedSprite extends Sprite {
 
             constructor(textures: Texture[] | { texture: Texture, time?: number }[]);
 
@@ -1674,8 +1672,8 @@ declare module PIXI {
             protected update(deltaTime: number): void;
             destroy(): void;
 
-            static fromFrames(frame: string[]): MovieClip;
-            static fromImages(images: string[]): MovieClip;
+            static fromFrames(frame: string[]): AnimatedSprite;
+            static fromImages(images: string[]): AnimatedSprite;
 
         }
         export class TextureTransform {
@@ -2102,11 +2100,12 @@ declare module PIXI {
             indices: Uint16Array;
             dirty: number;
             indexDirty: number;
+            dirtyVertex: boolean;
+            protected _geometryVersion: number;
             blendMode: number;
             canvasPadding: number;
             drawMode: number;
             texture: Texture;
-            shader: glCore.GLShader;
             tintRgb: Float32Array;
             protected _glDatas: { [n: number]: any; };
             protected _renderWebGL(renderer: WebGLRenderer): void;
@@ -2144,7 +2143,6 @@ declare module PIXI {
             constructor(renderer: WebGLRenderer);
 
             shader: Shader;
-            onContextChange(): void;
             render(mesh: Mesh): void;
 
         }
@@ -2299,53 +2297,64 @@ declare module PIXI {
 
     export module prepare {
 
-        export class CanvasPrepare {
+        interface addHook {
+            (item: any, queue: any[]): boolean;
+        }
+        interface uploadHook<UploadHookSource> {
+            (prepare: UploadHookSource, item: any): boolean
+        }
+        export abstract class BasePrepare<UploadHookSource>{
 
-            static UPLOADS_PER_FRAME: number;
+            constructor(renderer: SystemRenderer);
+
+            limiter: CountLimiter | TimeLimiter;
+            protected renderer: SystemRenderer;
+            protected uploadHookHelper: UploadHookSource;
+            protected queue: any[];
+            protected addHooks: addHook[];
+            protected uploadHooks: uploadHook<UploadHookSource>[];
+            protected completes: Function[];
+            protected ticking: boolean;
+            protected delayedTick: () => void;
+
+            upload(item: Function | DisplayObject | BaseTexture | TextStyle | any, done?: () => void): void;
+            protected tick(): void;
+            protected prepareItems(): void;
+            register(addHook?: addHook, uploadHook?: uploadHook<UploadHookSource>): this;
+            add(item: DisplayObject | any): this;
+            destroy(): void;
+
+        }
+        export class CanvasPrepare extends BasePrepare<CanvasPrepare> {
 
             constructor(renderer: CanvasRenderer);
 
-            protected renderer: CanvasRenderer;
             protected canvas: HTMLCanvasElement;
             protected ctx: CanvasRenderingContext2D;
-            protected queue: any[];
-            protected addHooks: Function[];
-            protected uploadHooks: Function[];
-            protected completes: Function[];
-            protected ticking: boolean;
 
-            upload(item: Function | DisplayObject | Container, done?: Function): void;
-            protected tick(): void;
-            register(addHook?: (item: any, queue: any[]) => boolean, uploadHook?: (prepare: CanvasPrepare, item: any) => boolean): CanvasPrepare;
-            add(item: DisplayObject | Container | any): CanvasPrepare;
-            destroy(): void;
-            protected uploadBaseTextures(prepare: CanvasPrepare | any, item: any): boolean;
-            protected findBaseTextures(item: DisplayObject, queue: any[]): boolean;
         }
-
-        export class WebGLPrepare {
-
-            static UPLOADS_PER_FRAME: number;
+        export class WebGLPrepare extends BasePrepare<WebGLRenderer> {
 
             constructor(renderer: WebGLRenderer);
 
-            protected renderer: WebGLRenderer;
-            protected queue: any[];
-            protected addHooks: Function[];
-            protected uploadHooks: Function[];
-            protected completes: Function[];
-            protected ticking: boolean;
-            upload(item: Function | DisplayObject | Container, done?: Function): void;
-            protected tick(): void;
-            register(addHook?: (item: any, queue: any[]) => boolean, uploadHook?: (renderer: WebGLRenderer, item: any) => boolean): WebGLPrepare;
-            add(item: PIXI.DisplayObject | PIXI.Container | any): WebGLPrepare;
-            destroy(): void;
-            protected uploadBaseTextures(prepare: WebGLPrepare | any, item: any): boolean;
-            protected uploadGraphics(renderer: WebGLRenderer, item: DisplayObject): boolean;
-            protected findBaseTextures(item: DisplayObject, queue: any[]): boolean;
-            protected findGraphics(item: DisplayObject, queue: any[]): boolean;
+        }
+        export class CountLimiter {
+
+            constructor(maxItemsPerFrame: number);
+
+            protected maxItemsPerFrame: number;
+            protected itemsLeft: number;
 
         }
+        export class TimeLimiter {
+
+            constructor(maxMilliseconds: number);
+
+            protected maxMilliseconds: number;
+            protected frameStart: number;
+
+        }
+
     }
 
     //////////////////////////////////////////////////////////////////////////////
@@ -2560,6 +2569,43 @@ declare module PIXI {
         export function removeItems<T>(arr: T[], startIdx: number, removeCount: number): void;
         export var TextureCache: any;
         export var BaseTextureCache: any;
+
+        //https://github.com/kaimallea/isMobile
+        export module isMobile {
+            export var apple: {
+                phone: boolean;
+                ipod: boolean;
+                tablet: boolean;
+                device: boolean;
+            };
+            export var android: {
+                phone: boolean;
+                tablet: boolean;
+                device: boolean;
+            }
+            export var amazon: {
+                phone: boolean;
+                table: boolean;
+                device: boolean;
+            }
+            export var windows: {
+                phone: boolean;
+                tablet: boolean;
+                device: boolean;
+            }
+            export var seven_inch: boolean;
+            export var other: {
+                blackberry_10: boolean;
+                blackberry: boolean;
+                opera: boolean;
+                firefox: boolean;
+                chrome: boolean;
+                device: boolean;
+            }
+            export var any: boolean;
+            export var phone: boolean;
+            export var tablet: boolean;
+        }
 
         // https://github.com/primus/eventemitter3
         export class EventEmitter {
