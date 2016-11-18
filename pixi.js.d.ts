@@ -10,28 +10,54 @@ declare module PIXI {
     export var PI_2: typeof CONST.PI_2;
     export var RAD_TO_DEG: typeof CONST.RAD_TO_DEG;
     export var DEG_TO_RAD: typeof CONST.DEG_TO_RAD;
-    export var TARGET_FPMS: typeof CONST.TARGET_FPMS;
     export var RENDERER_TYPE: typeof CONST.RENDERER_TYPE;
     export var BLEND_MODES: typeof CONST.BLEND_MODES;
     export var DRAW_MODES: typeof CONST.DRAW_MODES;
     export var SCALE_MODES: typeof CONST.SCALE_MODES;
     export var WRAP_MODES: typeof CONST.WRAP_MODES;
     export var TRANSFORM_MODE: typeof CONST.TRANSFORM_MODE;
-    export var SPRITE_MAX_TEXTURES: typeof CONST.SPRITE_MAX_TEXTURES;
     export var PRECISION: typeof CONST.PRECISION;
     export var TEXT_STYLE_CHANGED: typeof CONST.TEXT_STYLE_CHANGED;
     export var GC_MODES: typeof CONST.GC_MODES;
-    export var MIPMAP_TEXTURES: typeof CONST.MIPMAP_TEXTURES;
-    export var RETINA_PREFIX: typeof CONST.RETINA_PREFIX;
-    export var RESOLUTION: typeof CONST.RESOLUTION;
-    export var FILTER_RESOLUTION: typeof CONST.FILTER_RESOLUTION;
-    export var DEFAULT_RENDER_OPTIONS: typeof CONST.DEFAULT_RENDER_OPTIONS;
     export var SHAPES: typeof CONST.SHAPES;
-    export var SPRITE_BATCH_SIZE: typeof CONST.SPRITE_BATCH_SIZE;
     export var TEXT_GRADIENT: typeof CONST.TEXT_GRADIENT;
 
     export function autoDetectRenderer(width: number, height: number, options?: PIXI.IRendererOptions, noWebGL?: boolean): PIXI.WebGLRenderer | PIXI.CanvasRenderer;
     export var loader: PIXI.loaders.Loader;
+
+    //////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////SETTINGS///////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////
+
+    export module settings {
+        export var TARGET_FPMS: number;
+        export var MIPMAP_TEXTURES: boolean;
+        export var RESOLUTION: number;
+        export var FILTER_RESOLUTION: number;
+        export var SPRITE_MAX_TEXTURES: number;
+        export var SPRITE_BATCH_SIZE: number;
+        export var RETINA_PREFIX: RegExp;
+        export var RENDER_OPTIONS: {
+            view: HTMLCanvasElement,
+            antialias: boolean,
+            forceFXAA: boolean,
+            autoResize: boolean,
+            transparent: boolean,
+            backgroundColor: number,
+            clearBeforeRender: boolean,
+            preserveDrawingBuffer: boolean,
+            roundPixels: boolean
+        };
+        export var TRANSFORM_MODE: number;
+        export var GC_MODE: number;
+        export var GC_MAX_IDLE: number;
+        export var GC_MAX_CHECK_COUNT: number;
+        export var WRAP_MODE: number;
+        export var SCALE_MODE: number;
+        export var PRECISION: string;
+        export var UPLOADS_PER_FRAME: number;
+        export var CAN_UPLOAD_SAME_BUFFER: boolean;
+    }
 
     //////////////////////////////////////////////////////////////////////////////
     /////////////////////////////ACCESSIBILITY////////////////////////////////////
@@ -89,7 +115,6 @@ declare module PIXI {
         export var PI_2: number;
         export var RAD_TO_DEG: number;
         export var DEG_TO_RAD: number;
-        export var TARGET_FPMS: number;
         export var RENDERER_TYPE: {
             UNKNOWN: number;
             WEBGL: number;
@@ -124,18 +149,15 @@ declare module PIXI {
             TRIANGLE_FAN: number;
         };
         export var SCALE_MODES: {
-            DEFAULT: number,
             LINEAR: number,
             NEAREST: number
         };
         export var GC_MODES: {
-            DEFAULT: number;
             AUTO: number;
             MANUAL: number;
         };
         export var WRAP_MODES: {
             CLAMP: number;
-            DEFAULT: number;
             MIRRORED_REPEAT: number;
             REPEAT: number;
         };
@@ -143,21 +165,6 @@ declare module PIXI {
             DEFAULT: number;
             DYNAMIC: number;
             STATIC: number;
-        };
-        export var MIPMAP_TEXTURES: boolean;
-        export var RETINA_PREFIX: RegExp;
-        export var RESOLUTION: number;
-        export var FILTER_RESOLUTION: number;
-        export var DEFAULT_RENDER_OPTIONS: {
-            view: HTMLCanvasElement;
-            antialias: boolean;
-            forceFXAA: boolean;
-            autoResize: boolean;
-            transparent: boolean;
-            backgroundColor: number;
-            clearBeforeRender: boolean;
-            preserveDrawingBuffer: boolean;
-            roundPixels: boolean;
         };
         export var URL_FILE_EXTENSION: RegExp | string;
         export var DATA_URI: RegExp | string;
@@ -170,7 +177,6 @@ declare module PIXI {
             RREC: number;
         };
         export var PRECISION: {
-            DEFAULT: string;
             LOW: string;
             MEDIUM: string;
             HIGH: string;
@@ -179,8 +185,6 @@ declare module PIXI {
             LINEAR_VERTICAL: number;
             LINEAR_HORIZONTAL: number;
         };
-        export var SPRITE_BATCH_SIZE: number;
-        export var SPRITE_MAX_TEXTURES: number;
         export var TEXT_STYLE_CHANGED: string;
 
     }
@@ -902,7 +906,8 @@ declare module PIXI {
         bindShader(shader: Shader): WebGLRenderer;
         bindTexture(texture: Texture, location: number, forceLocation?: boolean): WebGLRenderer;
         unbindTexture(texture: Texture): WebGLRenderer;
-        protected createVao(): glCore.VertexArrayObject;
+        createVao(): glCore.VertexArrayObject;
+        bindVao(vao: glCore.VertexArrayObject): WebGLRenderer;
         reset(): WebGLRenderer;
         handleContextLost: (event: WebGLContextEvent) => void;
         handleContextRestored: () => void;
@@ -1000,7 +1005,6 @@ declare module PIXI {
         vao: glCore.VertexArrayObject;
         initVao(shader: glCore.GLShader): void;
         map(targetTextureFrame: Rectangle, destinationFrame: Rectangle): Quad;
-        draw(): Quad;
         upload(): Quad;
         destroy(): void;
 
@@ -2256,7 +2260,6 @@ declare module PIXI {
             dynamicBuffer: any;
             dynamicData: any;
 
-            bind(): void;
             destroy(): void;
 
         }
