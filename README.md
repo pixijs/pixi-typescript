@@ -1,4 +1,4 @@
-## Typescript Definitions for Pixi.js v4.1.1 ##
+## Typescript Definitions for Pixi.js v4 ##
 
 WIP
 
