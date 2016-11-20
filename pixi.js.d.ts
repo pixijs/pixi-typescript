@@ -115,6 +115,7 @@ declare module PIXI {
         export var PI_2: number;
         export var RAD_TO_DEG: number;
         export var DEG_TO_RAD: number;
+        export var TARGET_FPMS: number;
         export var RENDERER_TYPE: {
             UNKNOWN: number;
             WEBGL: number;
@@ -334,7 +335,7 @@ declare module PIXI {
         toGlobal(position: Point, point?: Point, skipUpdate?: boolean): Point;
         toLocal(position: Point, from?: DisplayObject, point?: Point, skipUpdate?: boolean): Point;
         protected renderWebGL(renderer: WebGLRenderer): void;
-        protected renderCanvas(renderer: CanvasRenderer): void;
+        renderCanvas(renderer: CanvasRenderer): void;
         setParent(container: Container): Container;
         setTransform(x?: number, y?: number, scaleX?: number, scaleY?: number, rotation?: number, skewX?: number, skewY?: number, pivotX?: number, pivotY?: number): DisplayObject;
         destroy(): void;
@@ -803,6 +804,8 @@ declare module PIXI {
         smoothProperty: string;
         extract: extract.CanvasExtract;
 
+        context: CanvasRenderingContext2D;
+
         render(displayObject: PIXI.DisplayObject, renderTexture?: PIXI.RenderTexture, clear?: boolean, transform?: PIXI.Transform, skipUpdateTransform?: boolean): void
         setBlendMode(blendMode: number): void;
         destroy(removeView?: boolean): void;
@@ -882,6 +885,7 @@ declare module PIXI {
         emptyRenderer: ObjectRenderer;
         currentRenderer: ObjectRenderer;
         gl: WebGLRenderingContext;
+        CONTEXT_UID: number;
         state: WebGLState;
         renderingToScreen: boolean;
         boundTextures: Texture[];
@@ -890,7 +894,7 @@ declare module PIXI {
         extract: extract.WebGLExtract;
         protected drawModes: any;
         protected _activeShader: Shader;
-        protected _activeRenderTarget: RenderTarget;
+        _activeRenderTarget: RenderTarget;
         protected _initContext(): void;
 
         render(displayObject: PIXI.DisplayObject, renderTexture?: PIXI.RenderTexture, clear?: boolean, transform?: PIXI.Transform, skipUpdateTransform?: boolean): void
@@ -903,8 +907,8 @@ declare module PIXI {
         bindRenderTexture(renderTexture: RenderTexture, transform: Transform): WebGLRenderer;
         bindRenderTarget(renderTarget: RenderTarget): WebGLRenderer;
         bindShader(shader: Shader): WebGLRenderer;
-        bindTexture(texture: Texture, location: number, forceLocation?: boolean): WebGLRenderer;
-        unbindTexture(texture: Texture): WebGLRenderer;
+        bindTexture(texture: Texture | BaseTexture, location?: number, forceLocation?: boolean): number;
+        unbindTexture(texture: Texture | BaseTexture): WebGLRenderer;
         createVao(): glCore.VertexArrayObject;
         bindVao(vao: glCore.VertexArrayObject): WebGLRenderer;
         reset(): WebGLRenderer;
@@ -1131,7 +1135,7 @@ declare module PIXI {
         constructor(renderer: WebGLRenderer);
 
         renderer: WebGLRenderer;
-        onContextChange: () => void;
+        onContextChange(): void;
         destroy(): void;
 
     }
@@ -1212,7 +1216,7 @@ declare module PIXI {
         containsPoint(point: Point): boolean;
         destroy(options?: IDestroyOptions | boolean): void;
 
-        static from(source: number | string | BaseTexture | HTMLCanvasElement | HTMLVideoElement): Sprite;
+        static from(source: number | string | BaseTexture | HTMLImageElement | HTMLCanvasElement | HTMLVideoElement): Sprite;
         static fromFrame(frameId: string): Sprite;
         static fromImage(imageId: string, crossorigin?: boolean, scaleMode?: number): Sprite;
 
@@ -1469,7 +1473,7 @@ declare module PIXI {
         static fromCanvas(canvas: HTMLCanvasElement, scaleMode?: number): Texture;
         static fromVideo(video: HTMLVideoElement | string, scaleMode?: number): Texture;
         static fromVideoUrl(videoUrl: string, scaleMode?: number): Texture;
-        static from(source: number | string | BaseTexture | HTMLCanvasElement | HTMLVideoElement): Texture;
+        static from(source: number | string | BaseTexture | HTMLImageElement | HTMLCanvasElement | HTMLVideoElement): Texture;
         static addTextureToCache(texture: Texture, id: string): void;
         static removeTextureFromCache(id: string): Texture;
 
@@ -2412,12 +2416,12 @@ declare module PIXI {
             drawType: number;
             data: ArrayBuffer | ArrayBufferView | any;
 
-            upload(data: ArrayBuffer | ArrayBufferView | any, offset: number, dontBind: boolean): void;
+            upload(data: ArrayBuffer | ArrayBufferView | any, offset?: number, dontBind?: boolean): void;
             bind(): void;
 
-            static createVertexBuffer(gl: WebGLRenderingContext, data: ArrayBuffer | ArrayBufferView | any, drawType: number): WebGLBuffer;
-            static createIndexBuffer(gl: WebGLRenderingContext, data: ArrayBuffer | ArrayBufferView | any, drawType: number): WebGLBuffer;
-            static create(gl: WebGLRenderingContext, type: number, data: ArrayBuffer | ArrayBufferView | any, drawType: number): WebGLBuffer;
+            static createVertexBuffer(gl: WebGLRenderingContext, data: ArrayBuffer | ArrayBufferView | any, drawType: number): GLBuffer;
+            static createIndexBuffer(gl: WebGLRenderingContext, data: ArrayBuffer | ArrayBufferView | any, drawType: number): GLBuffer;
+            static create(gl: WebGLRenderingContext, type: number, data: ArrayBuffer | ArrayBufferView | any, drawType: number): GLBuffer;
 
             destroy(): void;
 
@@ -2452,6 +2456,7 @@ declare module PIXI {
             gl: WebGLRenderingContext;
             program: WebGLProgram;
             uniforms: any;
+            attributes: any;
 
             bind(): void;
             destroy(): void;
@@ -2459,7 +2464,7 @@ declare module PIXI {
         }
         export class GLTexture {
 
-            constructor(gl: WebGLRenderingContext, width: number, height: number, format: number, type: number);
+            constructor(gl: WebGLRenderingContext, width?: number, height?: number, format?: number, type?: number);
 
             gl: WebGLRenderingContext;
             texture: WebGLTexture;
@@ -2470,9 +2475,9 @@ declare module PIXI {
             format: number;
             type: number;
 
-            upload(source: HTMLImageElement | ImageData | HTMLVideoElement): void;
+            upload(source: HTMLImageElement | ImageData | HTMLVideoElement | HTMLCanvasElement): void;
             uploadData(data: number, width: number, height: number): void;
-            bind(): void;
+            bind(location?: number): void;
             unbind(): void;
             minFilter(linear: boolean): void;
             magFilter(linear: boolean): void;
@@ -2484,7 +2489,7 @@ declare module PIXI {
             enableWrapMirrorRepeat(): void;
             destroy(): void;
 
-            static fromSource(gl: WebGLRenderingContext, source: HTMLImageElement | ImageData | HTMLVideoElement, premultipleAlpha?: boolean): GLTexture;
+            static fromSource(gl: WebGLRenderingContext, source: HTMLImageElement | ImageData | HTMLVideoElement | HTMLCanvasElement, premultipleAlpha?: boolean): GLTexture;
             static fromData(gl: WebGLRenderingContext, data: number[], width: number, height: number): GLTexture;
 
         }
