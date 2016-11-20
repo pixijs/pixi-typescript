@@ -1,0 +1,52 @@
+{
+  "name": "pixi.js",
+  "version": "4.2.2",
+  "description": "Pixi.js is a fast lightweight 2D library that works across all devices.",
+  "author": "Mat Groves",
+  "contributors": [
+    "Ivan Popelyshev <ivan.popelyshev@gmail.com>",
+    "Matt Karl <matt@mattkarl.com>",
+    "Chad Engler <chad@pantherdev.com>",
+    "Richard Davey <rdavey@gmail.com>"
+  ],
+  "main": "./lib/index.js",
+  "homepage": "http://goodboydigital.com/",
+  "bugs": "https://github.com/pixijs/pixi.js/issues",
+  "license": "MIT",
+  "scripts": {
+    "clean": "rimraf dist lib && mkdirp dist && mkdir lib",
+    "prestart": "npm run clean",
+    "start": "parallelshell \"npm run watch:build\"",
+    "watch:build": "tsc -w",
+    "build": "tsc",
+    "watch:dist": "pixify -p tsify -d dist -n PIXI -o pixi",
+    "dist": "pixify -w -p tsify -d dist -n PIXI -o pixi"
+  },
+  "files": [
+    "dist/",
+    "lib/",
+    "CONTRIBUTING.md",
+    "LICENSE",
+    "package.json",
+    "README.md"
+  ],
+  "dependencies": {
+    "@types/eventemitter3": "^1.2.0",
+    "bit-twiddle": "^1.0.2",
+    "earcut": "^2.0.7",
+    "eventemitter3": "^2.0.0",
+    "ismobilejs": "^0.4.0",
+    "object-assign": "^4.0.1",
+    "resource-loader": "^1.8.0"
+  },
+  "devDependencies": {
+    "del": "^2.2.0",
+    "mkdirp": "^0.5.1",
+    "parallelshell": "^2.0.0",
+    "pixify": "^1.7.0",
+    "rimraf": "^2.5.3",
+    "tsify": "^2.0.3",
+    "typescript": "^2.0.10",
+    "watch": "^0.19.1"
+  }
+}

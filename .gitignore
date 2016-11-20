@@ -27,3 +27,7 @@ node_modules
 # Jetbrains IntelliJ
 .idea
 *.iml
+
+# binary
+bin
+bin-ts
