@@ -1380,7 +1380,7 @@ declare module PIXI {
     }
     export class BaseTexture extends utils.EventEmitter {
 
-        constructor(source?: HTMLImageElement | HTMLCanvasElement, scaleMode?: number, resolution?: number);
+        constructor(source?: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement, scaleMode?: number, resolution?: number);
 
         protected uuid: number;
         protected touched: number;
@@ -1393,7 +1393,7 @@ declare module PIXI {
         hasLoaded: boolean;
         isLoading: boolean;
         wrapMode: number;
-        source: HTMLImageElement | HTMLCanvasElement;
+        source: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement;
         origSource: HTMLImageElement;
         imageType: string;
         sourceScale: number;
@@ -1412,7 +1412,7 @@ declare module PIXI {
         protected _loadSvgSourceUsingDataUri(dataUri: string): void;
         protected _loadSvgSourceUsingXhr(): void;
         protected _loadSvgSourceUsingString(svgString: string): void;
-        loadSource(source: HTMLImageElement | HTMLCanvasElement): void;
+        loadSource(source: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement): void;
         protected _sourceLoaded(): void;
         destroy(): void;
         dispose(): void;
