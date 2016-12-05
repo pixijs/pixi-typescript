@@ -237,7 +237,7 @@ declare module PIXI {
         getChildAt(index: number): DisplayObject;
         removeChild(child: DisplayObject): DisplayObject;
         removeChildAt(index: number): DisplayObject;
-        removeChildren(beginIndex?: number, endIndex?: number): DisplayObject | DisplayObject[];
+        removeChildren(beginIndex?: number, endIndex?: number): DisplayObject[];
         updateTransform(): void;
         calculateBounds(): void;
         protected _calculateBounds(): void;
