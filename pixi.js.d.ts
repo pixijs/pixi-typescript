@@ -1275,9 +1275,7 @@ declare module PIXI {
     }
 
     // text
-
-    export class TextStyle {
-
+    export interface ITextStyleStyle{
         align?: string;
         breakWords?: boolean;
         dropShadow?: boolean;
@@ -1303,8 +1301,14 @@ declare module PIXI {
         textBaseline?: string;
         wordWrap?: boolean;
         wordWrapWidth?: number;
-
     }
+
+    export class TextStyle {
+        public style: ITextStyleStyle;
+        public clone():TextStyle;
+        public reset();
+    }
+
     export class Text extends Sprite {
 
         static getFontStyle(style: TextStyle): string;
