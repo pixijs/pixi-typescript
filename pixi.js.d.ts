@@ -1337,16 +1337,16 @@ declare module PIXI {
         wordWrap: boolean;
         wordWrapWidth: number;
         constructor(style?: ITextStyleStyle);
-        public clone():TextStyle;
-        public reset();
+        public clone(): TextStyle;
+        public reset(): void;
     }
 
     export class Text extends Sprite {
 
-        static getFontStyle(style: TextStyle): string;
+        static getFontStyle(style: ITextStyleStyle): string;
         static calculateFontProperties(style: string): any;
 
-        constructor(text?: string, style?: TextStyle);
+        constructor(text?: string, style?: ITextStyleStyle);
 
         canvas: HTMLCanvasElement;
         context: CanvasRenderingContext2D;
