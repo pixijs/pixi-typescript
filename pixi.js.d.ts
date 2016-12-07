@@ -1195,6 +1195,7 @@ declare module PIXI {
         protected _tint: number;
         protected _tintRGB: number;
         blendMode: number;
+        pluginName: string;
         protected cachedTint: number;
         texture: Texture;
         protected textureDirty: boolean;
@@ -2139,6 +2140,7 @@ declare module PIXI {
             dirtyVertex: boolean;
             protected _geometryVersion: number;
             blendMode: number;
+            pluginName: string;
             canvasPadding: number;
             drawMode: number;
             texture: Texture;
