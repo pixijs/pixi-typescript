@@ -1558,6 +1558,8 @@ declare module PIXI {
         static fromUrl(videoSrc: string | any | string[] | any[]): VideoBaseTexture;
         static fromUrls(videoSrc: string | any | string[] | any[]): VideoBaseTexture;
 
+        source: HTMLVideoElement;
+        loadSource(source: HTMLVideoElement): void;
     }
 
     // ticker
