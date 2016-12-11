@@ -1442,7 +1442,7 @@ declare module PIXI {
         protected _loadSvgSourceUsingDataUri(dataUri: string): void;
         protected _loadSvgSourceUsingXhr(): void;
         protected _loadSvgSourceUsingString(svgString: string): void;
-        loadSource(source: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement): void;
+        protected loadSource(source: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement): void;
         protected _sourceLoaded(): void;
         destroy(): void;
         dispose(): void;
@@ -1559,7 +1559,7 @@ declare module PIXI {
         static fromUrls(videoSrc: string | any | string[] | any[]): VideoBaseTexture;
 
         source: HTMLVideoElement;
-        loadSource(source: HTMLVideoElement): void;
+        protected loadSource(source: HTMLVideoElement): void;
     }
 
     // ticker
