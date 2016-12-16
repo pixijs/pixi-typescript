@@ -1283,7 +1283,7 @@ declare module PIXI {
     }
 
     // text
-    export interface ITextStyleStyle{
+    export interface ITextStyleStyle {
         align?: string;
         breakWords?: boolean;
         dropShadow?: boolean;
@@ -2598,7 +2598,7 @@ declare module PIXI {
         export function hex2string(hex: number): string;
         export function rgb2hex(rgb: Number[]): number;
         export function canUseNewCanvasBlendModes(): boolean;
-        export function getResolutionOfUrl(url: string): number;
+        export function getResolutionOfUrl(url: string, defaultValue?: number): number;
         export function getSvgSize(svgString: string): any;
         export function decomposeDataUri(dataUri: string): IDecomposedDataUri;
         export function getUrlFileExtension(url: string): string;
