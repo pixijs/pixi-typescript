@@ -1293,7 +1293,7 @@ declare module PIXI {
         dropShadowDistance?: number;
         fill?: string | string[] | number | number[] | CanvasGradient | CanvasPattern;
         fillGradientType?: number;
-        fontFamily?: string;
+        fontFamily?: string | string[] ;
         fontSize?: number | string;
         fontStyle?: string;
         fontVariant?: string;
