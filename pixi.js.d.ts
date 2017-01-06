@@ -810,6 +810,7 @@ declare module PIXI {
         setBlendMode(blendMode: number): void;
         destroy(removeView?: boolean): void;
         resize(w: number, h: number): void;
+        clear(clearColor?: string): void;
 
         on(event: "prerender", fn: () => void, context?: any): utils.EventEmitter;
         on(event: "postrender", fn: () => void, context?: any): utils.EventEmitter;
@@ -1293,7 +1294,7 @@ declare module PIXI {
         dropShadowDistance?: number;
         fill?: string | string[] | number | number[] | CanvasGradient | CanvasPattern;
         fillGradientType?: number;
-        fontFamily?: string | string[] ;
+        fontFamily?: string | string[];
         fontSize?: number | string;
         fontStyle?: string;
         fontVariant?: string;
@@ -1321,7 +1322,7 @@ declare module PIXI {
         dropShadowDistance: number;
         fill: string | string[] | number | number[] | CanvasGradient | CanvasPattern;
         fillGradientType: number;
-        fontFamily: string;
+        fontFamily: string | string[];
         fontSize: number | string;
         fontStyle: string;
         fontVariant: string;
@@ -1347,7 +1348,7 @@ declare module PIXI {
         static getFontStyle(style: ITextStyleStyle): string;
         static calculateFontProperties(style: string): any;
 
-        constructor(text?: string, style?: ITextStyleStyle);
+        constructor(text?: string, style?: ITextStyleStyle, canvas?: HTMLCanvasElement);
 
         canvas: HTMLCanvasElement;
         context: CanvasRenderingContext2D;
@@ -1661,6 +1662,8 @@ declare module PIXI {
 
             constructor(text: string, style?: IBitmapTextStyle);
 
+            protected _textWidth: number;
+            protected _textHeight: number;
             textWidth: number;
             textHeight: number;
             protected _glyphs: Sprite[];
@@ -1742,6 +1745,7 @@ declare module PIXI {
             protected _height: number;
             protected _canvasPattern: CanvasPattern;
             uvTransform: TextureTransform;
+            uvRespectAnchor: boolean;
 
             clampMargin: number;
             tileScale: Point | ObservablePoint;
