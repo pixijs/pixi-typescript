@@ -2103,6 +2103,11 @@ declare module PIXI {
             protected _onComplete(): void;
             protected _onLoad(resource: Resource): void;
 
+            // these are added for spine support
+            spineAtlas: any;
+            spineData: any;
+            textures: ITextureDictionary;
+
         }
         export interface ITextureDictionary {
             [index: string]: PIXI.Texture;
