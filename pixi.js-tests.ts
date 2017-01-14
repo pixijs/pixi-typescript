@@ -190,7 +190,6 @@ namespace basics {
 
 
             PIXI.loader.add('shader', '../../_assets/basics/shader.frag');
-            PIXI.loader.once('complete', this.onLoaded, this);
             PIXI.loader.load();
 
         }

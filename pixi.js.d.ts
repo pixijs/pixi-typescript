@@ -2001,9 +2001,44 @@ declare module PIXI {
     //////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////LOADER/////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////
-    // extends
+
+    // pixi loader extends 
     // https://github.com/englercj/resource-loader/
-    // 1.6.4
+    // 2.0.3
+
+    class MiniSignalBinding {
+
+        constructor(fn: Function, once?: boolean, thisArg?: any);
+
+        protected _fn: Function;
+        protected _once: boolean;
+        protected _thisArg: any;
+        protected _next: MiniSignalBinding;
+        protected _prev: MiniSignalBinding;
+        protected _owner: MiniSignal;
+
+        detach(): boolean;
+
+    }
+    class MiniSignal {
+
+        constructor();
+
+        protected _head: MiniSignalBinding;
+        protected _tail: MiniSignalBinding;
+
+        handlers(exists?: boolean): MiniSignalBinding[] | boolean;
+        handlers(exists?: true): boolean;
+        handlers(exists?: false): MiniSignalBinding[];
+
+        has(node: MiniSignalBinding): boolean;
+        dispatch(): boolean;
+        add(fn: Function, thisArg?: any): void;
+        once(fn: Function, thisArg?: any): void;
+        detach(node: MiniSignalBinding): MiniSignal;
+        detachAll(): MiniSignal;
+
+    }
 
     export module loaders {
 
@@ -2013,6 +2048,8 @@ declare module PIXI {
             loadType?: number;
             xhrType?: string;
             metaData?: any;
+            loadElement?: HTMLImageElement | HTMLAudioElement | HTMLVideoElement;
+            skipSource?: boolean;
 
         }
         export interface IResourceDictionary {
@@ -2020,67 +2057,141 @@ declare module PIXI {
             [index: string]: PIXI.loaders.Resource;
 
         }
-        export class Loader extends utils.EventEmitter {
+        export class Loader {
 
-            protected static _pixiMiddleware: Function[];
+            // pixi overrides here
             static addPixiMiddleware(fn: Function): void;
+
+            // below this line is the original non-pixi loader
+
+            static Resource: any;
+            static async: any;
+            static base64: any;
 
             constructor(baseUrl?: string, concurrency?: number);
 
             baseUrl: string;
             progress: number;
             loading: boolean;
+            defaultQueryString: string;
+
+            protected _beforeMiddleware: Function[];
+            protected _afterMiddleware: Function[];
+            protected _boundLoadResource: (r: Resource, d: Function) => void;
+            protected _queue: any;
+
             resources: IResourceDictionary;
 
-            add(name: string, url: string, options?: ILoaderOptions, cb?: () => void): Loader;
-            add(url: string, options?: ILoaderOptions, cb?: () => void): Loader;
-            // todo I am not sure of object literal notional (or its options) so just allowing any but would love to improve this
-            add(obj: any, options?: ILoaderOptions, cb?: () => void): Loader;
+            onProgress: MiniSignal;
+            onError: MiniSignal;
+            onLoad: MiniSignal;
+            onStart: MiniSignal;
+            onComplete: MiniSignal;
 
-            on(event: "complete", fn: (loader: loaders.Loader, object: any) => void, context?: any): utils.EventEmitter;
-            on(event: "error", fn: (error: Error, loader: loaders.Loader, resource: Resource) => void, context?: any): utils.EventEmitter;
-            on(event: "load", fn: (loader: loaders.Loader, resource: Resource) => void, context?: any): utils.EventEmitter;
-            on(event: "progress", fn: (loader: loaders.Loader, resource: Resource) => void, context?: any): utils.EventEmitter;
-            on(event: "start", fn: (loader: loaders.Loader) => void, context?: any): utils.EventEmitter;
-            on(event: string, fn: Function, context?: any): utils.EventEmitter;
+            add(...params: any[]): this;
+            add(name: string, url: string, options?: ILoaderOptions, cb?: Function): this;
+            add(url: string, options?: ILoaderOptions, cb?: Function): this;
+            add(obj: any | any[], options?: ILoaderOptions, cb?: Function): this;
 
-            once(event: "complete", fn: (loader: loaders.Loader, object: any) => void, context?: any): utils.EventEmitter;
-            once(event: "error", fn: (error: Error, loader: loaders.Loader, resource: Resource) => void, context?: any): utils.EventEmitter;
-            once(event: "load", fn: (loader: loaders.Loader, resource: Resource) => void, context?: any): utils.EventEmitter;
-            once(event: "progress", fn: (loader: loaders.Loader, resource: Resource) => void, context?: any): utils.EventEmitter;
-            once(event: "start", fn: (loader: loaders.Loader) => void, context?: any): utils.EventEmitter;
-            once(event: string, fn: Function, context?: any): utils.EventEmitter;
+            pre(fn: Function): this;
+            use(fn: Function): this;
+            reset(): this;
+            load(cb?: Function): this;
 
-            before(fn: Function): Loader;
-            pre(fn: Function): Loader;
-
-            after(fn: Function): Loader;
-            use(fn: Function): Loader;
-
-            reset(): void;
-
-            load(cb?: (loader: loaders.Loader, object: any) => void): Loader;
+            protected _prepareUrl(url: string): string;
+            protected _loadResource(resource: Resource, dequeue: Function): void;
+            protected _onComplete(): void;
+            protected _onLoad(resource: Resource): void;
 
         }
         export interface ITextureDictionary {
             [index: string]: PIXI.Texture;
         }
+        export class Resource {
 
-        export class Resource extends utils.EventEmitter {
+            static setExtensionLoadType(extname: string, loadType: number): void;
+            static setExtensionXhrType(extname: string, xhrType: number): void;
+
+            constructor(name: string, url: string | string[], options?: ILoaderOptions);
+
+            protected _flags: number;
+
+            name: string;
+            url: string;
+            data: any;
+            crossOrigin: boolean | string;
+            loadType: number;
+            xhrType: string;
+            metadata: any;
+            error: Error;
+            xhr: XMLHttpRequest;
+            children: Resource[];
+            type: number;
+            progressChunk: number;
+
+            protected _dequeue: Function;
+            protected _onLoadBinding: Function;
+            protected _boundComplete: Function;
+            protected _boundOnError: Function;
+            protected _boundOnProgress: Function;
+            protected _boundXhrOnError: Function;
+            protected _boundXhrOnAbort: Function;
+            protected _boundXhrOnLoad: Function;
+            protected _boundXdrOnTimeout: Function;
+
+            onStart: MiniSignal;
+            onProgress: MiniSignal;
+            onComplete: MiniSignal;
+            onAfterMiddleware: MiniSignal;
+
+            isDataUrl: boolean;
+            isComplete: boolean;
+            isLoading: boolean;
+            complete(): void;
+            abort(message?: string): void;
+            load(cb?: Function): void;
+
+            protected _hasFlag(flag: number): boolean;
+            protected _setFlag(flag: number, value: boolean): void;
+            protected _loadElement(type: string): void;
+            protected _loadSourceElement(type: string): void;
+            protected _loadXhr(): void;
+            protected _loadXdr(): void;
+            protected _createSource(type: string, url: string, mime?: string): HTMLSourceElement;
+            protected _onError(event?: any): void;
+            protected _onProgress(event?: any): void;
+            protected _xhrOnError(): void;
+            protected _xhrOnAbort(): void;
+            protected _xdrOnTimeout(): void;
+            protected _xhrOnLoad(): void;
+            protected _determineCrossOrigin(url: string, loc: any): string;
+            protected _determineXhrType(): number;
+            protected _determineLoadType(): number;
+            protected _getExtension(): string;
+            protected _getMimeXhrType(type: number): string;
+
+            static STATUS_FLAGS: {
+                NONE: number;
+                DATA_URL: number;
+                COMPLETE: number;
+                LOADING: number;
+            };
+
+            static TYPE: {
+                UNKNOWN: number;
+                JSON: number;
+                XML: number;
+                IMAGE: number;
+                AUDIO: number;
+                VIDEO: number;
+                TEXT: number;
+            };
 
             static LOAD_TYPE: {
                 XHR: number;
                 IMAGE: number;
                 AUDIO: number;
                 VIDEO: number;
-            };
-
-            static XHR_READ_STATE: {
-                UNSENT: number;
-                OPENED: number;
-                HEADERS_RECIEVED: number;
-                LOADING: number;
-                DONE: number;
             };
 
             static XHR_RESPONSE_TYPE: {
@@ -2092,37 +2203,7 @@ declare module PIXI {
                 TEXT: number;
             };
 
-            constructor(name?: string, url?: string | string[], options?: ILoaderOptions);
-
-            protected _loadSourceElement(type: string): void;
-            isLoading: boolean;
-            isComplete: boolean;
-
-            isJson: boolean;
-            isXml: boolean;
-            isImage: boolean;
-            isAudio: boolean;
-            isVideo: boolean;
-
-            name: string;
-            texture: Texture;
-            textures: ITextureDictionary;
-            url: string;
-            data: any;
-            crossOrigin: boolean | string;
-            loadType: number;
-            xhrType: string;
-            error: Error;
-            xhr: XMLHttpRequest;
-            SVGMetadataElement: any;
-
-            metadata: any;
-            spineAtlas: any;
-            spineData: any;
-
-            complete(): void;
-            load(cb?: () => void): void;
-            abort(message: string): void;
+            static EMPTY_GIF: string;
 
         }
     }
