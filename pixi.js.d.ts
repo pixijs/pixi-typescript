@@ -2057,7 +2057,10 @@ declare module PIXI {
             [index: string]: PIXI.loaders.Resource;
 
         }
-        export class Loader {
+
+        // As of ResourceLoader v2 we no longer require EventEmitter
+        // However, for depreciation reasons, it remains. 
+        export class Loader extends utils.EventEmitter {
 
             // pixi overrides here
             static addPixiMiddleware(fn: Function): void;
@@ -2104,9 +2107,26 @@ declare module PIXI {
             protected _onLoad(resource: Resource): void;
 
             // these are added for spine support
+
             spineAtlas: any;
             spineData: any;
             textures: ITextureDictionary;
+
+            // depreciation 
+
+            on(event: "complete", fn: (loader: loaders.Loader, object: any) => void, context?: any): utils.EventEmitter;
+            on(event: "error", fn: (error: Error, loader: loaders.Loader, resource: Resource) => void, context?: any): utils.EventEmitter;
+            on(event: "load", fn: (loader: loaders.Loader, resource: Resource) => void, context?: any): utils.EventEmitter;
+            on(event: "progress", fn: (loader: loaders.Loader, resource: Resource) => void, context?: any): utils.EventEmitter;
+            on(event: "start", fn: (loader: loaders.Loader) => void, context?: any): utils.EventEmitter;
+            on(event: string, fn: Function, context?: any): utils.EventEmitter;
+
+            once(event: "complete", fn: (loader: loaders.Loader, object: any) => void, context?: any): utils.EventEmitter;
+            once(event: "error", fn: (error: Error, loader: loaders.Loader, resource: Resource) => void, context?: any): utils.EventEmitter;
+            once(event: "load", fn: (loader: loaders.Loader, resource: Resource) => void, context?: any): utils.EventEmitter;
+            once(event: "progress", fn: (loader: loaders.Loader, resource: Resource) => void, context?: any): utils.EventEmitter;
+            once(event: "start", fn: (loader: loaders.Loader) => void, context?: any): utils.EventEmitter;
+            once(event: string, fn: Function, context?: any): utils.EventEmitter;
 
         }
         export interface ITextureDictionary {

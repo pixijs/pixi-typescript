@@ -189,12 +189,14 @@ namespace basics {
             this.stage.addChild(this.background);
 
 
-            PIXI.loader.add('shader', '../../_assets/basics/shader.frag');
+            PIXI.loader.add('shader', '../../_assets/basics/shader.frag', this.onLoaded, this);
+            // depreciated
+            // PIXI.loader.once('complete', this.onLoaded, this);
             PIXI.loader.load();
 
         }
 
-        private onLoaded(loader: PIXI.loaders.Loader, res: any) {
+        private onLoaded = (loader: PIXI.loaders.Loader, res: any): void => {
 
             var fragmentSrc = res.shader.data;
 
