@@ -1,4 +1,4 @@
-// Type definitions for Pixi.js 4.3.0
+// Type definitions for Pixi.js 4.3.2
 // Project: https://github.com/pixijs/pixi.js/tree/dev
 // Definitions by: clark-stevenson <https://github.com/pixijs/pixi-typescript>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
@@ -191,6 +191,29 @@ declare module PIXI {
     }
 
     // display
+
+    export interface IApplicationOptions {
+
+        view?: HTMLCanvasElement;
+        transparent?: boolean;
+        antialias?: boolean;
+        preserveDrawingBuffer?: boolean;
+        resolution?: number;
+    }
+
+    export class Application {
+
+        constructor(width?: number, height?: number, options?: IApplicationOptions, noWebGL?: boolean);
+
+        renderer: PIXI.WebGLRenderer | PIXI.CanvasRenderer;
+        stage: Container;
+        ticker: ticker.Ticker;
+
+        stop(): void;
+        start(): void;
+        readonly view: HTMLCanvasElement;
+
+    }
 
     export interface IDestroyOptions {
         children?: boolean;

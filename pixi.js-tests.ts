@@ -436,6 +436,27 @@ namespace basics {
 
 namespace basics {
 
+    export class ApplicationTest {
+
+        private view: HTMLCanvasElement = document.createElement("canvas");
+
+        private app: PIXI.Application = new PIXI.Application(800, 600, {
+            antialias: true,
+            preserveDrawingBuffer: true,
+            transparent: false,
+            resolution: 10,
+            view: this.view
+        }, true);
+
+        constructor() {
+            this.app.start();
+            this.app.stop();
+            this.app.ticker;
+            this.app.view;
+        }
+
+    }
+
     export class Text {
 
         private renderer: PIXI.CanvasRenderer | PIXI.WebGLRenderer;
