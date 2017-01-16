@@ -1213,6 +1213,8 @@ declare module PIXI {
         protected _anchor: ObservablePoint;
         anchor: ObservablePoint;
         protected _texture: Texture;
+        protected _transformTrimmedID: number;
+        protected _textureTrimmedID: number;
         protected _width: number;
         protected _height: number;
         tint: number;
@@ -1717,8 +1719,9 @@ declare module PIXI {
         }
         export class AnimatedSprite extends Sprite {
 
-            constructor(textures: Texture[] | { texture: Texture, time?: number }[]);
+            constructor(textures: Texture[] | { texture: Texture, time?: number }[], autoUpdate?: boolean);
 
+            protected _autoUpdate: boolean;
             protected _textures: Texture[];
             protected _durations: number[];
             textures: Texture[] | { texture: Texture, time?: number }[];
