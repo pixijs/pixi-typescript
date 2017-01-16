@@ -2594,7 +2594,7 @@ declare module PIXI {
         }
         export class GLShader {
 
-            constructor(gl: WebGLRenderingContext, vertexSrc: string | string[], fragmentSrc: string | string[]);
+            constructor(gl: WebGLRenderingContext, vertexSrc: string | string[], fragmentSrc: string | string[], precision: string, attributeLocations: any);
 
             gl: WebGLRenderingContext;
             program: WebGLProgram;
@@ -2685,6 +2685,7 @@ declare module PIXI {
             clear(): VertexArrayObject;
             draw(type: number, size: number, start: number): VertexArrayObject;
             destroy(): void;
+            getSize(): number;
 
         }
 
