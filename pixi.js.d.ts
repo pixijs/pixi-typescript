@@ -211,6 +211,7 @@ declare module PIXI {
 
         stop(): void;
         start(): void;
+        destroy(removeView?:boolean): void;
         readonly view: HTMLCanvasElement;
 
     }
