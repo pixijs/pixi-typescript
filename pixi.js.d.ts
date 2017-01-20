@@ -2627,6 +2627,7 @@ declare module PIXI {
 
             gl: WebGLRenderingContext;
             program: WebGLProgram;
+            uniformData: any;
             uniforms: any;
             attributes: any;
 
