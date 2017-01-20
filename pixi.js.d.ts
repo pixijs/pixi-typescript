@@ -1,4 +1,4 @@
-// Type definitions for Pixi.js 4.3.2
+// Type definitions for Pixi.js 4.3.4
 // Project: https://github.com/pixijs/pixi.js/tree/dev
 // Definitions by: clark-stevenson <https://github.com/pixijs/pixi-typescript>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
