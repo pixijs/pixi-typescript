@@ -338,7 +338,7 @@ declare module PIXI {
         protected _lastBoundsID: number;
         protected _boundsRect: Rectangle;
         protected _localBoundsRect: Rectangle;
-        protected _mask: Rectangle;
+        protected _mask: PIXI.Graphics | PIXI.Sprite;
         x: number;
         y: number;
         worldTransform: Matrix;
@@ -2032,7 +2032,7 @@ declare module PIXI {
 
     // pixi loader extends 
     // https://github.com/englercj/resource-loader/
-    // 2.0.3
+    // 2.0.4
 
     class MiniSignalBinding {
 
@@ -2108,6 +2108,7 @@ declare module PIXI {
 
             protected _beforeMiddleware: Function[];
             protected _afterMiddleware: Function[];
+            protected _resourcesParsing: Resource[];
             protected _boundLoadResource: (r: Resource, d: Function) => void;
             protected _queue: any;
 
