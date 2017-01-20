@@ -211,7 +211,8 @@ declare module PIXI {
 
         stop(): void;
         start(): void;
-        destroy(removeView?:boolean): void;
+        render(): void;
+        destroy(removeView?: boolean): void;
         readonly view: HTMLCanvasElement;
 
     }
@@ -747,7 +748,7 @@ declare module PIXI {
         contains(x: number, y: number): boolean;
         pad(paddingX: number, paddingY: number): void;
         fit(rectangle: Rectangle): void;
-        enlarge(rect: Rectangle): void;
+        enlarge(rectangle: Rectangle): void;
 
     }
     export class RoundedRectangle {
