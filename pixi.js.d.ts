@@ -364,7 +364,7 @@ declare module PIXI {
         getLocalBounds(rect?: Rectangle): Rectangle;
         toGlobal(position: Point, point?: Point, skipUpdate?: boolean): Point;
         toLocal(position: Point, from?: DisplayObject, point?: Point, skipUpdate?: boolean): Point;
-        protected renderWebGL(renderer: WebGLRenderer): void;
+        renderWebGL(renderer: WebGLRenderer): void;
         renderCanvas(renderer: CanvasRenderer): void;
         setParent(container: Container): Container;
         setTransform(x?: number, y?: number, scaleX?: number, scaleY?: number, rotation?: number, skewX?: number, skewY?: number, pivotX?: number, pivotY?: number): DisplayObject;
@@ -2032,7 +2032,7 @@ declare module PIXI {
     ///////////////////////////////LOADER/////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////
 
-    // pixi loader extends 
+    // pixi loader extends
     // https://github.com/englercj/resource-loader/
     // 2.0.4
 
@@ -2089,7 +2089,7 @@ declare module PIXI {
         }
 
         // As of ResourceLoader v2 we no longer require EventEmitter
-        // However, for depreciation reasons, it remains. 
+        // However, for depreciation reasons, it remains.
         export class Loader extends utils.EventEmitter {
 
             // pixi overrides here
@@ -2143,7 +2143,7 @@ declare module PIXI {
             spineData: any;
             textures: ITextureDictionary;
 
-            // depreciation 
+            // depreciation
 
             on(event: "complete", fn: (loader: loaders.Loader, object: any) => void, context?: any): utils.EventEmitter;
             on(event: "error", fn: (error: Error, loader: loaders.Loader, resource: Resource) => void, context?: any): utils.EventEmitter;
