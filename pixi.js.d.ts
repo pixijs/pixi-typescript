@@ -192,13 +192,19 @@ declare module PIXI {
 
     // display
 
-    export interface IApplicationOptions {
+    export interface IApplicationOptions extends IRendererOptions {
 
         view?: HTMLCanvasElement;
         transparent?: boolean;
+        autoResize?: boolean;
         antialias?: boolean;
-        preserveDrawingBuffer?: boolean;
         resolution?: number;
+        clearBeforeRender?: boolean;
+        backgroundColor?: number;
+        roundPixels?: boolean;
+        context?: WebGLRenderingContext;
+        preserveDrawingBuffer?: boolean;
+
     }
 
     export class Application {
@@ -316,12 +322,11 @@ declare module PIXI {
 
         // begin interactive target
         interactive: boolean;
-        buttonMode: boolean;
-        hitArea: IHitArea;
         interactiveChildren: boolean;
+        hitArea: PIXI.Rectangle | PIXI.Circle | PIXI.Ellipse | PIXI.Polygon | PIXI.RoundedRectangle;
+        buttonMode: boolean;
         defaultCursor: string;
-        _isRightDown: boolean;
-        _isLeftDown: boolean;
+        getTrackedPointers(): { [key: number]: interaction.InteractionTrackingData; };
         // end interactive target
 
         transform: TransformBase;
@@ -820,6 +825,9 @@ declare module PIXI {
         destroyPlugins(): void;
         // plugintarget mixin end
 
+        // from InteractionManager
+        interaction: interaction.InteractionManager;
+
         constructor(width?: number, height?: number, options?: IRendererOptions);
 
         rootContext: CanvasRenderingContext2D;
@@ -895,6 +903,9 @@ declare module PIXI {
         initPlugins(): void;
         destroyPlugins(): void;
         // plugintarget mixin end
+
+        // from InteractionManager
+        interaction: interaction.InteractionManager;
 
         constructor(width?: number, height?: number, options?: IWebGLRendererOptions);
 
@@ -1182,13 +1193,13 @@ declare module PIXI {
 
         vertextSrc: string;
         fragmentSrc: string;
+        blendMode: number;
         protected uniformData: { [name: string]: IUniformData };
-        uniforms: { [name: string]: any };
+        uniforms: { [name: string]: any } | any;
         glShaders: any;
         glShaderKey: string;
         padding: number;
         resolution: number;
-        blendMode: number;
         enabled: boolean;
         apply(filterManager: FilterManager, input: RenderTarget, output: RenderTarget, clear?: boolean): void;
 
@@ -1321,6 +1332,7 @@ declare module PIXI {
         dropShadowDistance?: number;
         fill?: string | string[] | number | number[] | CanvasGradient | CanvasPattern;
         fillGradientType?: number;
+        fillGradientStops?: number[];
         fontFamily?: string | string[];
         fontSize?: number | string;
         fontStyle?: string;
@@ -1349,6 +1361,7 @@ declare module PIXI {
         dropShadowDistance: number;
         fill: string | string[] | number | number[] | CanvasGradient | CanvasPattern;
         fillGradientType: number;
+        fillGradientStops: number[];
         fontFamily: string | string[];
         fontSize: number | string;
         fontStyle: string;
@@ -1401,6 +1414,7 @@ declare module PIXI {
         renderWebGL(renderer: WebGLRenderer): void;
         protected _renderCanvas(renderer: CanvasRenderer): void;
         protected wordWrap(text: string): string;
+        getLocalBounds(rect?: Rectangle): Rectangle;
         protected _calculateBounds(): void;
         protected _onStyleChange: () => void;
         protected _generateFillStyle(style: TextStyle, lines: string[]): string | number | CanvasGradient;
@@ -1917,6 +1931,25 @@ declare module PIXI {
 
     export module interaction {
 
+        export interface InteractiveTarget {
+
+            interactive: boolean;
+            interactiveChildren: boolean;
+            hitArea: PIXI.Rectangle | PIXI.Circle | PIXI.Ellipse | PIXI.Polygon | PIXI.RoundedRectangle;
+            buttonMode: boolean;
+            defaultCursor: string;
+            getTrackedPointers(): { [key: number]: InteractionTrackingData; };
+
+        }
+        export interface InteractionTrackingData {
+
+            readonly pointerId: number;
+            flags: number;
+            over: boolean;
+            rightDown: boolean;
+            leftDown: boolean;
+
+        }
         export interface InteractionEvent {
 
             stopped: boolean;
@@ -1930,53 +1963,41 @@ declare module PIXI {
         export class InteractionData {
 
             global: Point;
-
-            protected _target: DisplayObject;
             target: DisplayObject;
-            targetProxy: DisplayObject;
             originalEvent: Event;
+            identifier: number;
 
             getLocalPosition(displayObject: DisplayObject, point?: Point, globalPos?: Point): Point;
 
         }
+        export interface InteractionManagerOptions {
+            autoPreventDefault?: boolean;
+            interactionFrequency?: number;
+        }
         export class InteractionManager extends utils.EventEmitter {
 
-            constructor(renderer: SystemRenderer, options?: { autoPreventDefault?: boolean; interactionFrequency?: number; });
+            constructor(renderer: SystemRenderer, options?: InteractionManagerOptions);
 
             renderer: SystemRenderer;
             autoPreventDefault: boolean;
             interactionFrequency: number;
             mouse: InteractionData;
-            pointer: InteractionData;
-            eventData: {
-                stopped: boolean;
-                target: any;
-                type: any;
-                data: InteractionData;
-                stopPropagination(): void;
-            };
-            interactiveDataPool: InteractionData[];
+            protected activeInteractionData: any;
+            protected interactionDataPool: InteractionData[];
+            eventData: InteractionEvent;
             protected interactionDOMElement: HTMLElement;
-            protected moveWhenInside: boolean;
+            moveWhenInside: boolean;
             protected eventsAdded: boolean;
-            mouseOverRenderer: boolean;
+            protected mouseOverRenderer: boolean;
             supportsTouchEvents: boolean;
             supportsPointerEvents: boolean;
             normalizeTouchEvents: boolean;
             normalizeMouseEvents: boolean;
 
-            protected onMouseUp: (event: MouseEvent) => void;
-            protected processMouseUp: (displayObject: DisplayObject, hit: boolean) => void;
-            protected onMouseDown: (event: MouseEvent) => void;
-            protected processMouseDown: (displayObject: DisplayObject, hit: boolean) => void;
-            protected onMouseMove: (event: MouseEvent) => void;
-            protected processMouseMove: (displayObject: DisplayObject, hit: boolean) => void;
-            protected onMouseOut: (event: MouseEvent) => void;
-            protected processMouseOverOut: (displayObject: DisplayObject, hit: boolean) => void;
-            protected onMouseOver: (event: MouseEvent) => void;
-
             protected onPointerUp: (event: PointerEvent) => void;
             protected processPointerUp: (displayObject: DisplayObject, hit: boolean) => void;
+            protected onPointerCancel: (event: PointerEvent) => void;
+            protected processPointerCancel: (displayObject: DisplayObject, hit: boolean) => void;
             protected onPointerDown: (event: PointerEvent) => void;
             protected processPointerDown: (displayObject: DisplayObject, hit: boolean) => void;
             protected onPointerMove: (event: PointerEvent) => void;
@@ -1985,43 +2006,24 @@ declare module PIXI {
             protected processPointerOut: (displayObject: DisplayObject, hit: boolean) => void;
             protected onPointerOver: (event: PointerEvent) => void;
 
-            protected onTouchStart: (event: TouchEvent) => void;
-            protected processTouchStart: (DisplayObject: DisplayObject, hit: boolean) => void;
-            protected onTouchEnd: (event: TouchEvent) => void;
-            protected processTouchEnd: (displayObject: DisplayObject, hit: boolean) => void;
-            protected onTouchMove: (event: TouchEvent) => void;
-            protected processTouchMove: (displayObject: DisplayObject, hit: boolean) => void;
             defaultCursorStyle: string;
             currentCursorStyle: string;
             protected _tempPoint: Point;
             resolution: number;
-            protected setTargetElement(element: HTMLElement, resolution: number): void;
+            protected setTargetElement(element: HTMLCanvasElement, resolution?: number): void;
             protected addEvents(): void;
             protected removeEvents(): void;
             update(deltaTime: number): void;
-            protected dispatchEvent(displayObject: DisplayObject, eventString: string, eventData: any): void;
+            protected dispatchEvent(displayObject: DisplayObject, eventString: string, eventData: InteractionData): void;
             mapPositionToPoint(point: Point, x: number, y: number): void;
-            protected processInteractive(point: Point, displayObject: DisplayObject, func: (displayObject: DisplayObject, hit: boolean) => void, hitTest: boolean, interactive: boolean): boolean;
-            protected _startInteractionProcess(): void;
-            protected _queueAdd(displayObject: DisplayObject, order: number): void;
-            protected _finishInteractionProcess(func: Function): void;
-            protected getTouchData(touchEvent: InteractionData): InteractionData;
-            protected returnTouchData(touchData: InteractionData): void;
-            protected normalizeToPointerData(Event: Event): void;
-
+            protected processInteractive(point: Point, displayObject: DisplayObject, func: (displayObject: DisplayObject, hit: boolean) => void, hitTest?: boolean, interactive?: boolean): boolean;
+            protected onPointerComplete(originalEvent: PointerEvent, cancelled: boolean, fun: Function): void;
+            protected getInteractionDataForPointerId(pointerId: number): InteractionData;
+            protected releaseInteractionDataForPointerId(pointerId: number): void;
+            protected configureInteractionEventForDOMEvent(interactionEvent: InteractionEvent, pointerEvent: PointerEvent, interactionData: InteractionData): InteractionEvent;
+            protected normalizeToPointerData(event: TouchEvent | MouseEvent | PointerEvent): PointerEvent[];
             destroy(): void;
 
-        }
-        export interface InteractiveTarget {
-
-            interactive: boolean;
-            interactiveChildren: boolean;
-            hitArea: IHitArea;
-            buttonMode: boolean;
-            defaultCursor: string;
-
-        }
-        export interface InteractiveTargetProxy extends InteractiveTarget {
         }
 
     }
