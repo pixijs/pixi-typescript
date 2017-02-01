@@ -2793,7 +2793,7 @@ declare module PIXI {
         // https://github.com/primus/eventemitter3
         export class EventEmitter {
 
-            listeners(event: string): Function[];
+            listeners(event: string, exists?: boolean): Function[];
             emit(event: string, ...args: any[]): boolean;
             on(event: string, fn: Function, context?: any): EventEmitter;
             once(event: string, fn: Function, context?: any): EventEmitter;
