@@ -2798,7 +2798,7 @@ declare module PIXI {
             on(event: string, fn: Function, context?: any): EventEmitter;
             once(event: string, fn: Function, context?: any): EventEmitter;
             removeListener(event: string, fn: Function, context?: any, once?: boolean): EventEmitter;
-            removeAllListeners(event: string): EventEmitter;
+            removeAllListeners(event?: string): EventEmitter;
             eventNames(): string[];
 
             off(event: string, fn: Function, context?: any, once?: boolean): EventEmitter;
