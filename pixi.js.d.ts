@@ -2174,6 +2174,7 @@ declare module PIXI {
 
             name: string;
             url: string;
+            extension: string;
             data: any;
             crossOrigin: boolean | string;
             loadType: number;
@@ -2251,12 +2252,12 @@ declare module PIXI {
             };
 
             static XHR_RESPONSE_TYPE: {
-                DEFAULT: number;
-                BUFFER: number;
-                BLOB: number;
-                DOCUMENT: number;
-                JSON: number;
-                TEXT: number;
+                DEFAULT: string;
+                BUFFER: string;
+                BLOB: string;
+                DOCUMENT: string;
+                JSON: string;
+                TEXT: string;
             };
 
             static EMPTY_GIF: string;
