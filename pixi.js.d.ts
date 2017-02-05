@@ -2166,7 +2166,7 @@ declare module PIXI {
         export class Resource {
 
             static setExtensionLoadType(extname: string, loadType: number): void;
-            static setExtensionXhrType(extname: string, xhrType: number): void;
+            static setExtensionXhrType(extname: string, xhrType: string): void;
 
             constructor(name: string, url: string | string[], options?: ILoaderOptions);
 
