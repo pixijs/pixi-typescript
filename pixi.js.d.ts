@@ -3,41 +3,41 @@
 // Definitions by: clark-stevenson <https://github.com/pixijs/pixi-typescript>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
-declare module PIXI {
+declare namespace PIXI {
 
     // from CONST
-    export var VERSION: typeof CONST.VERSION;
-    export var PI_2: typeof CONST.PI_2;
-    export var RAD_TO_DEG: typeof CONST.RAD_TO_DEG;
-    export var DEG_TO_RAD: typeof CONST.DEG_TO_RAD;
-    export var RENDERER_TYPE: typeof CONST.RENDERER_TYPE;
-    export var BLEND_MODES: typeof CONST.BLEND_MODES;
-    export var DRAW_MODES: typeof CONST.DRAW_MODES;
-    export var SCALE_MODES: typeof CONST.SCALE_MODES;
-    export var WRAP_MODES: typeof CONST.WRAP_MODES;
-    export var TRANSFORM_MODE: typeof CONST.TRANSFORM_MODE;
-    export var PRECISION: typeof CONST.PRECISION;
-    export var TEXT_STYLE_CHANGED: typeof CONST.TEXT_STYLE_CHANGED;
-    export var GC_MODES: typeof CONST.GC_MODES;
-    export var SHAPES: typeof CONST.SHAPES;
-    export var TEXT_GRADIENT: typeof CONST.TEXT_GRADIENT;
+    export const VERSION: typeof CONST.VERSION;
+    export const PI_2: typeof CONST.PI_2;
+    export const RAD_TO_DEG: typeof CONST.RAD_TO_DEG;
+    export const DEG_TO_RAD: typeof CONST.DEG_TO_RAD;
+    export const RENDERER_TYPE: typeof CONST.RENDERER_TYPE;
+    export const BLEND_MODES: typeof CONST.BLEND_MODES;
+    export const DRAW_MODES: typeof CONST.DRAW_MODES;
+    export const SCALE_MODES: typeof CONST.SCALE_MODES;
+    export const WRAP_MODES: typeof CONST.WRAP_MODES;
+    export const TRANSFORM_MODE: typeof CONST.TRANSFORM_MODE;
+    export const PRECISION: typeof CONST.PRECISION;
+    export const TEXT_STYLE_CHANGED: typeof CONST.TEXT_STYLE_CHANGED;
+    export const GC_MODES: typeof CONST.GC_MODES;
+    export const SHAPES: typeof CONST.SHAPES;
+    export const TEXT_GRADIENT: typeof CONST.TEXT_GRADIENT;
 
     export function autoDetectRenderer(width: number, height: number, options?: PIXI.IRendererOptions, noWebGL?: boolean): PIXI.WebGLRenderer | PIXI.CanvasRenderer;
-    export var loader: PIXI.loaders.Loader;
+    export const loader: PIXI.loaders.Loader;
 
     //////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////SETTINGS///////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////
 
-    export module settings {
-        export var TARGET_FPMS: number;
-        export var MIPMAP_TEXTURES: boolean;
-        export var RESOLUTION: number;
-        export var FILTER_RESOLUTION: number;
-        export var SPRITE_MAX_TEXTURES: number;
-        export var SPRITE_BATCH_SIZE: number;
-        export var RETINA_PREFIX: RegExp;
-        export var RENDER_OPTIONS: {
+    export namespace settings {
+        export const TARGET_FPMS: number;
+        export const MIPMAP_TEXTURES: boolean;
+        export const RESOLUTION: number;
+        export const FILTER_RESOLUTION: number;
+        export const SPRITE_MAX_TEXTURES: number;
+        export const SPRITE_BATCH_SIZE: number;
+        export const RETINA_PREFIX: RegExp;
+        export const RENDER_OPTIONS: {
             view: HTMLCanvasElement,
             antialias: boolean,
             forceFXAA: boolean,
@@ -48,22 +48,22 @@ declare module PIXI {
             preserveDrawingBuffer: boolean,
             roundPixels: boolean
         };
-        export var TRANSFORM_MODE: number;
-        export var GC_MODE: number;
-        export var GC_MAX_IDLE: number;
-        export var GC_MAX_CHECK_COUNT: number;
-        export var WRAP_MODE: number;
-        export var SCALE_MODE: number;
-        export var PRECISION: string;
-        export var UPLOADS_PER_FRAME: number;
-        export var CAN_UPLOAD_SAME_BUFFER: boolean;
+        export const TRANSFORM_MODE: number;
+        export const GC_MODE: number;
+        export const GC_MAX_IDLE: number;
+        export const GC_MAX_CHECK_COUNT: number;
+        export const WRAP_MODE: number;
+        export const SCALE_MODE: number;
+        export const PRECISION: string;
+        export const UPLOADS_PER_FRAME: number;
+        export const CAN_UPLOAD_SAME_BUFFER: boolean;
     }
 
     //////////////////////////////////////////////////////////////////////////////
     /////////////////////////////ACCESSIBILITY////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////
 
-    export module accessibility {
+    export namespace accessibility {
 
         // accessibility
         export class AccessibilityManager {
@@ -110,18 +110,18 @@ declare module PIXI {
 
     // const
 
-    export module CONST {
-        export var VERSION: string;
-        export var PI_2: number;
-        export var RAD_TO_DEG: number;
-        export var DEG_TO_RAD: number;
-        export var TARGET_FPMS: number;
-        export var RENDERER_TYPE: {
+    export namespace CONST {
+        export const VERSION: string;
+        export const PI_2: number;
+        export const RAD_TO_DEG: number;
+        export const DEG_TO_RAD: number;
+        export const TARGET_FPMS: number;
+        export const RENDERER_TYPE: {
             UNKNOWN: number;
             WEBGL: number;
             CANVAS: number;
         };
-        export var BLEND_MODES: {
+        export const BLEND_MODES: {
             NORMAL: number;
             ADD: number;
             MULTIPLY: number;
@@ -140,7 +140,7 @@ declare module PIXI {
             COLOR: number;
             LUMINOSITY: number;
         };
-        export var DRAW_MODES: {
+        export const DRAW_MODES: {
             POINTS: number;
             LINES: number;
             LINE_LOOP: number;
@@ -149,44 +149,44 @@ declare module PIXI {
             TRIANGLE_STRIP: number;
             TRIANGLE_FAN: number;
         };
-        export var SCALE_MODES: {
+        export const SCALE_MODES: {
             LINEAR: number,
             NEAREST: number
         };
-        export var GC_MODES: {
+        export const GC_MODES: {
             AUTO: number;
             MANUAL: number;
         };
-        export var WRAP_MODES: {
+        export const WRAP_MODES: {
             CLAMP: number;
             MIRRORED_REPEAT: number;
             REPEAT: number;
         };
-        export var TRANSFORM_MODE: {
+        export const TRANSFORM_MODE: {
             DEFAULT: number;
             DYNAMIC: number;
             STATIC: number;
         };
-        export var URL_FILE_EXTENSION: RegExp | string;
-        export var DATA_URI: RegExp | string;
-        export var SVG_SIZE: RegExp | string;
-        export var SHAPES: {
+        export const URL_FILE_EXTENSION: RegExp | string;
+        export const DATA_URI: RegExp | string;
+        export const SVG_SIZE: RegExp | string;
+        export const SHAPES: {
             POLY: number;
             RECT: number;
             CIRC: number;
             ELIP: number;
             RREC: number;
         };
-        export var PRECISION: {
+        export const PRECISION: {
             LOW: string;
             MEDIUM: string;
             HIGH: string;
         };
-        export var TEXT_GRADIENT: {
+        export const TEXT_GRADIENT: {
             LINEAR_VERTICAL: number;
             LINEAR_HORIZONTAL: number;
         };
-        export var TEXT_STYLE_CHANGED: string;
+        export const TEXT_STYLE_CHANGED: string;
 
     }
 
@@ -606,18 +606,18 @@ declare module PIXI {
 
     // math
 
-    export module GroupD8 {
+    export namespace GroupD8 {
 
-        export var E: number;
-        export var SE: number;
-        export var S: number;
-        export var SW: number;
-        export var W: number;
-        export var NW: number;
-        export var N: number;
-        export var NE: number;
-        export var MIRROR_HORIZONTAL: number;
-        export var MIRROR_VERTICAL: number;
+        export const E: number;
+        export const SE: number;
+        export const S: number;
+        export const SW: number;
+        export const W: number;
+        export const NW: number;
+        export const N: number;
+        export const NE: number;
+        export const MIRROR_HORIZONTAL: number;
+        export const MIRROR_VERTICAL: number;
 
         export function uX(ind: number): number;
         export function uY(ind: number): number;
@@ -1317,7 +1317,7 @@ declare module PIXI {
         destroy(): void;
 
     }
-    export module CanvasTinter {
+    export namespace CanvasTinter {
 
         export function getTintedTexture(sprite: Sprite, color: number): HTMLCanvasElement;
         export function tintWithMultiply(texture: Texture, color: number, canvas: HTMLCanvasElement): void;
@@ -1325,10 +1325,10 @@ declare module PIXI {
         export function tintWithPerPixel(texture: Texture, color: number, canvas: HTMLCanvasElement): void;
         export function roundColor(color: number): number;
 
-        export var cacheStepsPerColorChannel: number;
-        export var convertTintToImage: boolean;
-        export var canUseMultiply: boolean;
-        export var tintMethod: Function;
+        export let cacheStepsPerColorChannel: number;
+        export let convertTintToImage: boolean;
+        export let canUseMultiply: boolean;
+        export let tintMethod: Function;
 
     }
 
@@ -1644,9 +1644,9 @@ declare module PIXI {
 
     // ticker
 
-    module ticker {
+    namespace ticker {
 
-        export var shared: Ticker;
+        export const shared: Ticker;
 
         export class Ticker {
 
@@ -1688,7 +1688,7 @@ declare module PIXI {
     ////////////////////////////EXTRACT///////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////
 
-    export module extract {
+    export namespace extract {
 
         export class CanvasExtract {
 
@@ -1723,7 +1723,7 @@ declare module PIXI {
     ////////////////////////////EXTRAS////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////
 
-    export module extras {
+    export namespace extras {
 
         export interface IBitmapTextStyle {
 
@@ -1864,7 +1864,7 @@ declare module PIXI {
     ////////////////////////////FILTERS///////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////
 
-    export module filters {
+    export namespace filters {
 
         export class FXAAFilter extends Filter { }
         export class BlurFilter extends Filter {
@@ -1968,7 +1968,7 @@ declare module PIXI {
     ////////////////////////////INTERACTION///////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////
 
-    export module interaction {
+    export namespace interaction {
 
         export interface InteractiveTarget {
 
@@ -2026,7 +2026,7 @@ declare module PIXI {
             interactionFrequency: number;
             mouse: InteractionData;
             activeInteractionData: { [key: number]: InteractionData; };
-            interactionDataPool: InteractionData[]
+            interactionDataPool: InteractionData[];
             eventData: InteractionEvent;
             protected interactionDOMElement: HTMLElement;
             moveWhenInside: boolean;
@@ -2118,7 +2118,7 @@ declare module PIXI {
 
     }
 
-    export module loaders {
+    export namespace loaders {
 
         export interface ILoaderOptions {
 
@@ -2317,7 +2317,7 @@ declare module PIXI {
     ///////////////////////////////MESH///////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////
 
-    export module mesh {
+    export namespace mesh {
 
         export class Mesh extends Container {
 
@@ -2438,7 +2438,7 @@ declare module PIXI {
     /////////////////////////////PARTICLES////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////
 
-    export module particles {
+    export namespace particles {
 
         export interface IParticleContainerProperties {
 
@@ -2524,13 +2524,13 @@ declare module PIXI {
     ////////////////////////////PREPARE///////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////
 
-    export module prepare {
+    export namespace prepare {
 
-        interface addHook {
+        interface AddHook {
             (item: any, queue: any[]): boolean;
         }
-        interface uploadHook<UploadHookSource> {
-            (prepare: UploadHookSource, item: any): boolean
+        interface UploadHook<UploadHookSource> {
+            (prepare: UploadHookSource, item: any): boolean;
         }
         export abstract class BasePrepare<UploadHookSource>{
 
@@ -2540,8 +2540,8 @@ declare module PIXI {
             protected renderer: SystemRenderer;
             protected uploadHookHelper: UploadHookSource;
             protected queue: any[];
-            protected addHooks: addHook[];
-            protected uploadHooks: uploadHook<UploadHookSource>[];
+            protected addHooks: AddHook[];
+            protected uploadHooks: UploadHook<UploadHookSource>[];
             protected completes: Function[];
             protected ticking: boolean;
             protected delayedTick: () => void;
@@ -2549,7 +2549,7 @@ declare module PIXI {
             upload(item: Function | DisplayObject | Container | BaseTexture | Texture | Graphics | Text | any, done?: () => void): void;
             protected tick(): void;
             protected prepareItems(): void;
-            register(addHook?: addHook, uploadHook?: uploadHook<UploadHookSource>): this;
+            register(addHook?: AddHook, uploadHook?: UploadHook<UploadHookSource>): this;
             add(item: PIXI.DisplayObject | PIXI.Container | PIXI.BaseTexture | PIXI.Texture | PIXI.Graphics | PIXI.Text | any): this;
             destroy(): void;
 
@@ -2592,7 +2592,7 @@ declare module PIXI {
     // pixi-gl-core https://github.com/pixijs/pixi-gl-core
     // sharedArrayBuffer as a type is not available yet.
     // need to fully define what an `Attrib` is.
-    export module glCore {
+    export namespace glCore {
 
         export interface IContextOptions {
             /**
@@ -2783,7 +2783,7 @@ declare module PIXI {
         data: any;
     }
 
-    export module utils {
+    export namespace utils {
 
         export function uid(): number;
         export function hex2rgb(hex: number, out?: number[]): number[];
@@ -2799,44 +2799,44 @@ declare module PIXI {
         export function isWebGLSupported(): boolean;
         export function sign(n: number): number;
         export function removeItems<T>(arr: T[], startIdx: number, removeCount: number): void;
-        export var TextureCache: any;
-        export var BaseTextureCache: any;
+        export const TextureCache: any;
+        export const BaseTextureCache: any;
 
-        //https://github.com/kaimallea/isMobile
-        export module isMobile {
-            export var apple: {
+        // https://github.com/kaimallea/isMobile
+        export namespace isMobile {
+            export const apple: {
                 phone: boolean;
                 ipod: boolean;
                 tablet: boolean;
                 device: boolean;
             };
-            export var android: {
+            export const android: {
                 phone: boolean;
                 tablet: boolean;
                 device: boolean;
-            }
-            export var amazon: {
+            };
+            export const amazon: {
                 phone: boolean;
                 table: boolean;
                 device: boolean;
-            }
-            export var windows: {
+            };
+            export const windows: {
                 phone: boolean;
                 tablet: boolean;
                 device: boolean;
-            }
-            export var seven_inch: boolean;
-            export var other: {
+            };
+            export const seven_inch: boolean;
+            export const other: {
                 blackberry_10: boolean;
                 blackberry: boolean;
                 opera: boolean;
                 firefox: boolean;
                 chrome: boolean;
                 device: boolean;
-            }
-            export var any: boolean;
-            export var phone: boolean;
-            export var tablet: boolean;
+            };
+            export const any: boolean;
+            export const phone: boolean;
+            export const tablet: boolean;
         }
 
         // https://github.com/primus/eventemitter3
@@ -2861,7 +2861,7 @@ declare module PIXI {
     /////////////////////////////depreciation/////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////
     // not sure how to handle blendmodes scalemodes basetexturecache
-    module core {
+    namespace core {
 
         /**
          * @class
@@ -2943,7 +2943,7 @@ declare module PIXI {
          * @see PIXI.extras.MovieClip
          * @deprecated since version 3.0.0
          */
-        type MovieClip = extras.AnimatedSprite
+        type MovieClip = extras.AnimatedSprite;
 
         /**
          * @class
@@ -3067,7 +3067,7 @@ declare module PIXI {
 
     }
 
-    export module extras {
+    export namespace extras {
 
         /**
          * @class
@@ -3082,8 +3082,8 @@ declare module PIXI {
 
 }
 
-declare module pixi {
-    export var gl: typeof PIXI.glCore;
+declare namespace pixi {
+    export const gl: typeof PIXI.glCore;
 }
 
 declare module "pixi.js" {
