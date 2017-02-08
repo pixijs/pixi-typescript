@@ -1333,7 +1333,7 @@ declare namespace PIXI {
     }
 
     // text
-    export interface ITextStyleStyle {
+    export interface TextStyleOptions {
         align?: string;
         breakWords?: boolean;
         dropShadow?: boolean;
@@ -1357,50 +1357,84 @@ declare namespace PIXI {
         padding?: number;
         stroke?: string | number;
         strokeThickness?: number;
-        styleID?: number;
         textBaseline?: string;
+        trim?: boolean;
         wordWrap?: boolean;
         wordWrapWidth?: number;
     }
 
-    export class TextStyle implements ITextStyleStyle {
-        align: string;
-        breakWords: boolean;
-        dropShadow: boolean;
-        dropShadowAngle: number;
-        dropShadowBlur: number;
-        dropShadowColor: string | number;
-        dropShadowDistance: number;
-        fill: string | string[] | number | number[] | CanvasGradient | CanvasPattern;
-        fillGradientType: number;
-        fillGradientStops: number[];
-        fontFamily: string | string[];
-        fontSize: number | string;
-        fontStyle: string;
-        fontVariant: string;
-        fontWeight: string;
-        letterSpacing: number;
-        lineHeight: number;
-        lineJoin: string;
-        miterLimit: number;
-        padding: number;
-        stroke: string | number;
-        strokeThickness: number;
+    export class TextStyle implements TextStyleOptions {
+
+        constructor(style: TextStyleOptions)
+
         styleID: number;
+
+        clone(): TextStyle;
+        reset(): void;
+
+        protected _align: string;
+        align: string;
+        protected _breakWords: boolean;
+        breakWords: boolean;
+        protected _dropShadow: boolean;
+        dropShadow: boolean;
+        protected _dropShadowAlpha: number;
+        dropShadowAlpha: number;
+        protected _dropShadowAngle: number;
+        dropShadowAngle: number;
+        protected _dropShadowBlur: number;
+        dropShadowBlur: number;
+        protected _dropShadowColor: string | number;
+        dropShadowColor: string | number;
+        protected _dropShadowDistance: number;
+        dropShadowDistance: number;
+        protected _fill: string | string[] | number | number[] | CanvasGradient | CanvasPattern;
+        fill: string | string[] | number | number[] | CanvasGradient | CanvasPattern;
+        protected _fillGradientType: number;
+        fillGradientType: number;
+        protected _fillGradientStops: number[];
+        fillGradientStops: number[];
+        protected _fontFamily: string | string[];
+        fontFamily: string | string[];
+        protected _fontSize: number | string;
+        fontSize: number | string;
+        protected _fontStyle: string;
+        fontStyle: string;
+        protected _fontVariant: string;
+        fontVariant: string;
+        protected _fontWeight: string;
+        fontWeight: string;
+        protected _letterSpacing: number;
+        letterSpacing: number;
+        protected _lineHeight: number;
+        lineHeight: number;
+        protected _lineJoin: string;
+        lineJoin: string;
+        protected _miterLimit: number;
+        miterLimit: number;
+        protected _padding: number;
+        padding: number;
+        protected _stroke: string | number;
+        stroke: string | number;
+        protected _strokeThickness: number;
+        strokeThickness: number;
+        protected _textBaseline: string;
         textBaseline: string;
+        protected _trim: boolean;
+        trim: boolean;
+        protected _wordWrap: boolean;
         wordWrap: boolean;
+        protected _wordWrapWidth: number;
         wordWrapWidth: number;
-        constructor(style?: ITextStyleStyle);
-        public clone(): TextStyle;
-        public reset(): void;
+
     }
 
     export class Text extends Sprite {
 
-        static getFontStyle(style: ITextStyleStyle): string;
+        static getFontStyle(style: TextStyleOptions): string;
         static calculateFontProperties(style: string): any;
 
-        constructor(text?: string, style?: ITextStyleStyle, canvas?: HTMLCanvasElement);
+        constructor(text?: string, style?: TextStyleOptions, canvas?: HTMLCanvasElement);
 
         canvas: HTMLCanvasElement;
         context: CanvasRenderingContext2D;
