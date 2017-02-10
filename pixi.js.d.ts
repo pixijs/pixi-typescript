@@ -2339,6 +2339,10 @@ declare namespace PIXI {
 
             static EMPTY_GIF: string;
 
+            texture: Texture;
+            spineAtlas: any;
+            spineData: any;
+            textures?: ITextureDictionary;
         }
     }
 
