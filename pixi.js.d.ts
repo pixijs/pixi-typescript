@@ -95,8 +95,8 @@ declare namespace PIXI {
         export interface IAccessibleTarget {
 
             accessible: boolean;
-            accessibleTitle: string;
-            accessibleHint: string;
+            accessibleTitle: string | null;
+            accessibleHint: string | null;
             tabIndex: number;
 
         }
