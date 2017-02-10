@@ -2253,7 +2253,6 @@ declare namespace PIXI {
             url: string;
             extension: string;
             data: any;
-            texture: Texture;
             crossOrigin: boolean | string;
             loadType: number;
             xhrType: string;
