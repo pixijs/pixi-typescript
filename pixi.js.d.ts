@@ -2214,12 +2214,6 @@ declare namespace PIXI {
             protected _onComplete(): void;
             protected _onLoad(resource: Resource): void;
 
-            // these are added for spine support
-
-            spineAtlas: any;
-            spineData: any;
-            textures?: ITextureDictionary;
-
             // depreciation
 
             on(event: "complete", fn: (loader: loaders.Loader, object: any) => void, context?: any): utils.EventEmitter;
