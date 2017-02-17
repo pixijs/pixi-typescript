@@ -207,7 +207,9 @@ declare namespace PIXI {
 
     export class Application {
 
-        constructor(width?: number, height?: number, options?: IApplicationOptions, noWebGL?: boolean);
+        constructor(width?: number, height?: number, options?: IApplicationOptions, noWebGL?: boolean, useSharedTicker?: boolean);
+
+        private _ticker: ticker.Ticker;
 
         renderer: PIXI.WebGLRenderer | PIXI.CanvasRenderer;
         stage: Container;
@@ -951,7 +953,7 @@ declare namespace PIXI {
         clearRenderTexture(renderTexture: RenderTexture, clearColor?: number): WebGLRenderer;
         bindRenderTexture(renderTexture: RenderTexture, transform: Transform): WebGLRenderer;
         bindRenderTarget(renderTarget: RenderTarget): WebGLRenderer;
-        bindShader(shader: Shader): WebGLRenderer;
+        bindShader(shader: Shader, autoProject?: boolean): WebGLRenderer;
         bindTexture(texture: Texture | BaseTexture, location?: number, forceLocation?: boolean): number;
         unbindTexture(texture: Texture | BaseTexture): WebGLRenderer | undefined;
         createVao(): glCore.VertexArrayObject;
@@ -1493,6 +1495,8 @@ declare namespace PIXI {
     }
     export class BaseTexture extends utils.EventEmitter {
 
+        static from(source: string | HTMLImageElement | HTMLCanvasElement, scaleMode?: number, sourceScale?: number): BaseTexture;
+
         constructor(source?: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement, scaleMode?: number, resolution?: number);
 
         protected uuid?: number;
@@ -1561,6 +1565,8 @@ declare namespace PIXI {
 
     }
     export class Texture extends utils.EventEmitter {
+
+        static from(source: number | string | HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | PIXI.BaseTexture): Texture;
 
         constructor(baseTexture: BaseTexture, frame?: Rectangle, orig?: Rectangle, trim?: Rectangle, rotate?: number);
 
