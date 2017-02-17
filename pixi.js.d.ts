@@ -1,4 +1,4 @@
-// Type definitions for Pixi.js 4.3.4
+// Type definitions for Pixi.js 4.3.5
 // Project: https://github.com/pixijs/pixi.js/tree/dev
 // Definitions by: clark-stevenson <https://github.com/pixijs/pixi-typescript>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
@@ -1195,7 +1195,7 @@ declare namespace PIXI {
     }
     export class Filter {
 
-        constructor(vertexSrc?: string, fragmentSrc?: string, uniforms?: {[name: string]: IUniformData});
+        constructor(vertexSrc?: string, fragmentSrc?: string, uniforms?: { [name: string]: IUniformData });
 
         vertextSrc?: string;
         fragmentSrc: string;
