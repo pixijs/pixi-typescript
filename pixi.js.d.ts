@@ -29,13 +29,13 @@ declare namespace PIXI {
     //////////////////////////////////////////////////////////////////////////////
 
     export namespace settings {
-        export const TARGET_FPMS: number;
-        export const MIPMAP_TEXTURES: boolean;
-        export const RESOLUTION: number;
-        export const FILTER_RESOLUTION: number;
-        export const SPRITE_MAX_TEXTURES: number;
-        export const SPRITE_BATCH_SIZE: number;
-        export const RETINA_PREFIX: RegExp;
+        export let TARGET_FPMS: number;
+        export let MIPMAP_TEXTURES: boolean;
+        export let RESOLUTION: number;
+        export let FILTER_RESOLUTION: number;
+        export let SPRITE_MAX_TEXTURES: number;
+        export let SPRITE_BATCH_SIZE: number;
+        export let RETINA_PREFIX: RegExp;
         export const RENDER_OPTIONS: {
             view: HTMLCanvasElement | null,
             antialias: boolean,
@@ -47,15 +47,15 @@ declare namespace PIXI {
             preserveDrawingBuffer: boolean,
             roundPixels: boolean
         };
-        export const TRANSFORM_MODE: number;
-        export const GC_MODE: number;
-        export const GC_MAX_IDLE: number;
-        export const GC_MAX_CHECK_COUNT: number;
-        export const WRAP_MODE: number;
-        export const SCALE_MODE: number;
-        export const PRECISION: string;
-        export const UPLOADS_PER_FRAME: number;
-        export const CAN_UPLOAD_SAME_BUFFER: boolean;
+        export let TRANSFORM_MODE: number;
+        export let GC_MODE: number;
+        export let GC_MAX_IDLE: number;
+        export let GC_MAX_CHECK_COUNT: number;
+        export let WRAP_MODE: number;
+        export let SCALE_MODE: number;
+        export let PRECISION: string;
+        export let UPLOADS_PER_FRAME: number;
+        export let CAN_UPLOAD_SAME_BUFFER: boolean;
     }
 
     //////////////////////////////////////////////////////////////////////////////
