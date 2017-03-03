@@ -1,4 +1,4 @@
-// Type definitions for Pixi.js 4.3.5
+// Type definitions for Pixi.js 4.4.0
 // Project: https://github.com/pixijs/pixi.js/tree/dev
 // Definitions by: clark-stevenson <https://github.com/pixijs/pixi-typescript>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
@@ -53,6 +53,8 @@ declare namespace PIXI {
         export let GC_MAX_CHECK_COUNT: number;
         export let WRAP_MODE: number;
         export let SCALE_MODE: number;
+        export let PRECISION_VERTEX: string;
+        export let PRECISION_FRAGMENT: string;
         export let PRECISION: string;
         export let UPLOADS_PER_FRAME: number;
         export let CAN_UPLOAD_SAME_BUFFER: boolean;
@@ -1209,7 +1211,7 @@ declare namespace PIXI {
         padding: number;
         resolution: number;
         enabled: boolean;
-        apply(filterManager: FilterManager, input: RenderTarget, output: RenderTarget, clear?: boolean): void;
+        apply(filterManager: FilterManager, input: RenderTarget, output: RenderTarget, clear?: boolean, currentState?: any): void;
 
         static defaultVertexSrc: string;
         static defaultFragmentSrc: string;
@@ -1605,6 +1607,7 @@ declare namespace PIXI {
         height: number;
 
         static EMPTY: Texture;
+        static WHITE: Texture;
 
         on(event: "update", fn: (texture: Texture) => void, context?: any): this;
         on(event: string, fn: Function, context?: any): this;
@@ -3094,6 +3097,15 @@ declare namespace PIXI {
          * @deprecated since version 4.2.0
          */
         type DEFAULT_RENDER_OPTIONS = number;
+
+        /**
+         * @static
+         * @name PRECISION
+         * @memberof PIXI.settings
+         * @see PIXI.PRECISION
+         * @deprecated since version 4.4.0
+         */
+        type PRECISION = string;
 
     }
 
