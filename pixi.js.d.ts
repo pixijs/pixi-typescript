@@ -22,6 +22,7 @@ declare namespace PIXI {
     export const TEXT_GRADIENT: typeof CONST.TEXT_GRADIENT;
 
     export function autoDetectRenderer(width: number, height: number, options?: PIXI.IRendererOptions, noWebGL?: boolean): PIXI.WebGLRenderer | PIXI.CanvasRenderer;
+    export function autoDetectRenderer(options?: PIXI.IRendererOptions): PIXI.WebGLRenderer | PIXI.CanvasRenderer;
     export const loader: PIXI.loaders.Loader;
 
     //////////////////////////////////////////////////////////////////////////////
@@ -46,6 +47,9 @@ declare namespace PIXI {
             clearBeforeRender: boolean,
             preserveDrawingBuffer: boolean,
             roundPixels: boolean
+            width: number,
+            height: number,
+            legacy: boolean,
         };
         export let TRANSFORM_MODE: number;
         export let GC_MODE: number;
@@ -204,11 +208,16 @@ declare namespace PIXI {
         context?: WebGLRenderingContext;
         preserveDrawingBuffer?: boolean;
         legacy?: boolean;
+        width?: number;
+        height?: number;
+        forceCanvas?: boolean;
+        sharedTicker?: boolean;
 
     }
 
     export class Application {
 
+        constructor(options?: IApplicationOptions)
         constructor(width?: number, height?: number, options?: IApplicationOptions, noWebGL?: boolean, useSharedTicker?: boolean);
 
         private _ticker: ticker.Ticker;
@@ -796,13 +805,18 @@ declare namespace PIXI {
         backgroundColor?: number;
         roundPixels?: boolean;
         context?: WebGLRenderingContext;
+        width?: number;
+        height?: number;
+        forceCanvas?: boolean;
 
     }
     export class SystemRenderer extends utils.EventEmitter {
 
+        constructor(system: string, options?: IRendererOptions);
         constructor(system: string, screenWidth?: number, screenHeight?: number, options?: IRendererOptions);
 
         type: number;
+        options: IRendererOptions;
         screen: Rectangle;
         readonly width: number;
         readonly height: number;
@@ -840,6 +854,7 @@ declare namespace PIXI {
         // from InteractionManager
         interaction?: interaction.InteractionManager;
 
+        constructor(options?: IRendererOptions);
         constructor(screenWidth?: number, screenHeight?: number, options?: IRendererOptions);
 
         rootContext: CanvasRenderingContext2D;
@@ -919,6 +934,7 @@ declare namespace PIXI {
         // from InteractionManager
         interaction: interaction.InteractionManager;
 
+        constructor(options?: IWebGLRendererOptions);
         constructor(screenWidth?: number, screenHeight?: number, options?: IWebGLRendererOptions);
 
         protected _contextOptions: {
@@ -2101,7 +2117,7 @@ declare namespace PIXI {
             protected processInteractive(interactionEvent: InteractionEvent, displayObject: PIXI.Container | PIXI.Sprite | PIXI.extras.TilingSprite, func?: Function, hitTest?: boolean, interactive?: boolean): boolean;
             protected onPointerComplete(originalEvent: PointerEvent, cancelled: boolean, func: Function): void;
             protected getInteractionDataForPointerId(pointerId: number): InteractionData;
-            protected releaseInteractionDataForPointerId(pointerId: number): void;
+            protected releaseInteractionDataForPointerId(event: PointerEvent): void;
             protected configureInteractionEventForDOMEvent(interactionEvent: InteractionEvent, pointerEvent: PointerEvent, interactionData: InteractionData): InteractionEvent;
             protected normalizeToPointerData(event: TouchEvent | MouseEvent | PointerEvent): PointerEvent[];
             destroy(): void;
