@@ -67,11 +67,11 @@ namespace basics {
             this.container = new PIXI.Container();
             this.app.stage.addChild(this.container);
 
-            let texture = PIXI.Texture.fromImage("../../_assets/basics/bunny.png");
+            const texture = PIXI.Texture.fromImage("../../_assets/basics/bunny.png");
 
             for (let i = 0; i < 25; i++) {
 
-                let bunny = new PIXI.Sprite(texture);
+                const bunny = new PIXI.Sprite(texture);
                 bunny.anchor.set(0.5);
                 bunny.x = (i % 5) * 40;
                 bunny.y = Math.floor(i / 5) * 40;
@@ -105,11 +105,11 @@ namespace basics {
             this.container = new PIXI.Container();
             this.app.stage.addChild(this.container);
 
-            let texture = PIXI.Texture.fromImage("../../_assets/basics/bunny.png");
+            const texture = PIXI.Texture.fromImage("../../_assets/basics/bunny.png");
 
             for (let i = 0; i < 25; i++) {
 
-                let bunny = new PIXI.Sprite(texture);
+                const bunny = new PIXI.Sprite(texture);
                 bunny.anchor.set(0.5);
                 bunny.x = (i % 5) * 40;
                 bunny.y = Math.floor(i / 5) * 40;
@@ -180,7 +180,7 @@ namespace basics {
             this.app = new PIXI.Application(800, 600, { antialias: true });
             document.body.appendChild(this.app.view);
 
-            let graphics = new PIXI.Graphics();
+            const graphics = new PIXI.Graphics();
 
             // set a fill and line style
             graphics.beginFill(0xFF3300);
@@ -231,18 +231,18 @@ namespace basics {
             this.container = new PIXI.Container();
             this.app.stage.addChild(this.container);
 
-            let texture = PIXI.Texture.fromImage("required/assets/basics/bunny.png");
+            const texture = PIXI.Texture.fromImage("required/assets/basics/bunny.png");
 
             for (let i = 0; i < 25; i++) {
-                let bunny = new PIXI.Sprite(texture);
+                const bunny = new PIXI.Sprite(texture);
                 bunny.x = (i % 5) * 30;
                 bunny.y = Math.floor(i / 5) * 30;
                 bunny.rotation = Math.random() * (Math.PI * 2);
                 this.container.addChild(bunny);
             }
 
-            let brt = new PIXI.BaseRenderTexture(300, 300, PIXI.SCALE_MODES.LINEAR, 1);
-            let rt = new PIXI.RenderTexture(brt);
+            const brt = new PIXI.BaseRenderTexture(300, 300, PIXI.SCALE_MODES.LINEAR, 1);
+            const rt = new PIXI.RenderTexture(brt);
 
             this.sprite = new PIXI.Sprite(rt);
             this.sprite.x = 450;
@@ -270,11 +270,11 @@ namespace basics {
                 .add("required/assets/basics/fighter.json")
                 .load((loader: PIXI.loaders.Loader, resource: any) => {
 
-                    let frames = [];
+                    const frames = [];
 
                     for (let i = 0; i < 30; i++) {
 
-                        let val = i < 10 ? "0" + i : i;
+                        const val = i < 10 ? "0" + i : i;
 
                         frames.push(PIXI.Texture.fromFrame("rollSequence00" + val + ".png"));
 
@@ -315,7 +315,7 @@ namespace basics {
             this.basicText.y = 90;
             this.app.stage.addChild(this.basicText);
 
-            let style = new PIXI.TextStyle({
+            const style = new PIXI.TextStyle({
                 fontFamily: "Arial",
                 fontSize: 36,
                 fontStyle: "italic",
@@ -351,7 +351,7 @@ namespace basics {
 
         constructor() {
 
-            let ropeLength = 918 / 20;
+            const ropeLength = 918 / 20;
 
             for (let i = 0; i < 25; i++) {
                 this.points.push(new PIXI.Point(i * ropeLength, 0));
@@ -414,7 +414,7 @@ namespace basics {
             this.app = new PIXI.Application();
             document.body.appendChild(this.app.view);
 
-            let texture = PIXI.Texture.fromImage("required/assets/p2.jpeg");
+            const texture = PIXI.Texture.fromImage("required/assets/p2.jpeg");
 
             this.tilingSprite = new PIXI.extras.TilingSprite(
                 texture,
@@ -475,7 +475,7 @@ namespace basics {
 
                 this.button.destroy();
 
-                let texture = PIXI.Texture.fromVideo("required/assets/testVideo.mp4");
+                const texture = PIXI.Texture.fromVideo("required/assets/testVideo.mp4");
 
                 this.videoSprite = new PIXI.Sprite(texture);
                 this.videoSprite.width = this.app.renderer.width;
@@ -562,17 +562,17 @@ namespace demos {
                 .add("spritesheet", "required/assets/mc.json")
                 .load((): void => {
 
-                    let explosionTextures: PIXI.Texture[] = [];
+                    const explosionTextures: PIXI.Texture[] = [];
                     let i: number;
 
                     for (i = 0; i < 26; i++) {
-                        let texture = PIXI.Texture.fromFrame("Explosion_Sequence_A " + (i + 1) + ".png");
+                        const texture = PIXI.Texture.fromFrame("Explosion_Sequence_A " + (i + 1) + ".png");
                         explosionTextures.push(texture);
                     }
 
                     for (i = 0; i < 50; i++) {
 
-                        let explosion = new PIXI.extras.AnimatedSprite(explosionTextures);
+                        const explosion = new PIXI.extras.AnimatedSprite(explosionTextures);
 
                         explosion.x = Math.random() * this.app.renderer.width;
                         explosion.y = Math.random() * this.app.renderer.height;
@@ -615,13 +615,13 @@ namespace demos {
 
             this.maggots = [];
 
-            let totalSprites = this.app.renderer instanceof PIXI.WebGLRenderer ? 10000 : 100;
+            const totalSprites = this.app.renderer instanceof PIXI.WebGLRenderer ? 10000 : 100;
 
-            let dudeTexture = PIXI.Texture.fromImage("required/assets/tinyMaggot.png");
+            const dudeTexture = PIXI.Texture.fromImage("required/assets/tinyMaggot.png");
 
             for (let i = 0; i < totalSprites; i++) {
 
-                let dude = new Dude(dudeTexture);
+                const dude = new Dude(dudeTexture);
                 dude.tint = Math.random() * 0xE8D4CD;
                 dude.anchor.set(0.5);
                 dude.scale.set(0.8 + Math.random() * 0.3);
@@ -637,7 +637,7 @@ namespace demos {
 
             }
 
-            let dudeBoundsPadding = 100;
+            const dudeBoundsPadding = 100;
             this.dudeBounds = new PIXI.Rectangle(
                 -dudeBoundsPadding,
                 -dudeBoundsPadding,
@@ -651,7 +651,7 @@ namespace demos {
 
                 for (let i = 0; i < this.maggots.length; i++) {
 
-                    let dude = this.maggots[i];
+                    const dude = this.maggots[i];
                     dude.scale.y = 0.95 + Math.sin(this.tick + dude.offset) * 0.05;
                     dude.direction += dude.turningSpeed * 0.01;
                     dude.x += Math.sin(dude.direction) * (dude.speed * dude.scale.y);
@@ -661,15 +661,13 @@ namespace demos {
                     // wrap the maggots
                     if (dude.x < this.dudeBounds.x) {
                         dude.x += this.dudeBounds.width;
-                    }
-                    else if (dude.x > this.dudeBounds.x + this.dudeBounds.width) {
+                    } else if (dude.x > this.dudeBounds.x + this.dudeBounds.width) {
                         dude.x -= this.dudeBounds.width;
                     }
 
                     if (dude.y < this.dudeBounds.y) {
                         dude.y += this.dudeBounds.height;
-                    }
-                    else if (dude.y > this.dudeBounds.y + this.dudeBounds.height) {
+                    } else if (dude.y > this.dudeBounds.y + this.dudeBounds.height) {
                         dude.y -= this.dudeBounds.height;
                     }
                 }
@@ -711,12 +709,12 @@ namespace demos {
 
             this.dudeArray = [];
 
-            let totalDudes = 20;
-            let dudeTexture = PIXI.Texture.fromImage("required/assets/flowerTop.png");
+            const totalDudes = 20;
+            const dudeTexture = PIXI.Texture.fromImage("required/assets/flowerTop.png");
 
             for (let i = 0; i < totalDudes; i++) {
 
-                let dude = new Dude(dudeTexture);
+                const dude = new Dude(dudeTexture);
                 dude.anchor.set(0.5);
                 dude.scale.set(0.8 + Math.random() * 0.3);
                 dude.x = Math.floor(Math.random() * this.app.renderer.width);
@@ -731,7 +729,7 @@ namespace demos {
 
             }
 
-            let dudeBoundsPadding = 100;
+            const dudeBoundsPadding = 100;
             this.dudeBounds = new PIXI.Rectangle(
                 -dudeBoundsPadding,
                 -dudeBoundsPadding,
@@ -743,7 +741,7 @@ namespace demos {
 
                 for (let i = 0; i < this.dudeArray.length; i++) {
 
-                    let dude = this.dudeArray[i];
+                    const dude = this.dudeArray[i];
                     dude.direction += dude.turningSpeed * 0.01;
                     dude.x += Math.sin(dude.direction) * dude.speed;
                     dude.y += Math.cos(dude.direction) * dude.speed;
@@ -752,15 +750,13 @@ namespace demos {
                     // wrap the dudes by testing their bounds...
                     if (dude.x < this.dudeBounds.x) {
                         dude.x += this.dudeBounds.width;
-                    }
-                    else if (dude.x > this.dudeBounds.x + this.dudeBounds.width) {
+                    } else if (dude.x > this.dudeBounds.x + this.dudeBounds.width) {
                         dude.x -= this.dudeBounds.width;
                     }
 
                     if (dude.y < this.dudeBounds.y) {
                         dude.y += this.dudeBounds.height;
-                    }
-                    else if (dude.y > this.dudeBounds.y + this.dudeBounds.height) {
+                    } else if (dude.y > this.dudeBounds.y + this.dudeBounds.height) {
                         dude.y -= this.dudeBounds.height;
                     }
                 }
@@ -787,7 +783,7 @@ namespace demos {
             this.app.stop();
 
             this.aliens = [];
-            let alienFrames = [
+            const alienFrames = [
                 "eggHead.png",
                 "flowerTop.png",
                 "helmlok.png",
@@ -807,9 +803,9 @@ namespace demos {
 
                     for (let i = 0; i < 100; i++) {
 
-                        let frameName = alienFrames[i % 4];
+                        const frameName = alienFrames[i % 4];
 
-                        let alien = PIXI.Sprite.fromFrame(frameName);
+                        const alien = PIXI.Sprite.fromFrame(frameName);
                         alien.tint = Math.random() * 0xFFFFFF;
                         alien.x = Math.random() * 800 - 400;
                         alien.y = Math.random() * 600 - 300;
@@ -827,7 +823,7 @@ namespace demos {
 
                         // let"s rotate the aliens a little bit
                         for (let i = 0; i < 100; i++) {
-                            let alien = this.aliens[i];
+                            const alien = this.aliens[i];
                             alien.rotation += 0.1;
                         }
 
@@ -856,7 +852,7 @@ namespace demos {
             this.app = new PIXI.Application(800, 600, { backgroundColor: 0x1099bb });
             document.body.appendChild(this.app.view);
 
-            let texture = PIXI.Texture.fromImage("required/assets/bunny.png");
+            const texture = PIXI.Texture.fromImage("required/assets/bunny.png");
             texture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
 
             for (let i = 0; i < 10; i++) {
@@ -871,7 +867,7 @@ namespace demos {
 
         private createBunny(texture: PIXI.Texture, x: number, y: number): void {
 
-            let bunny = new PIXI.Sprite(texture);
+            const bunny = new PIXI.Sprite(texture);
             bunny.interactive = true;
             bunny.buttonMode = true;
             bunny.anchor.set(0.5);
@@ -901,7 +897,7 @@ namespace demos {
                 .on("pointermove", (event: PIXI.interaction.InteractionEvent): void => {
 
                     if (this.dragging) {
-                        let newPosition = this.data.getLocalPosition(bunny);
+                        const newPosition = this.data.getLocalPosition(bunny);
                         bunny.x = newPosition.x;
                         bunny.y = newPosition.y;
                     }
@@ -930,7 +926,7 @@ namespace demos {
             this.app.stage.interactive = true;
             document.body.appendChild(this.app.view);
 
-            let graphics = new PIXI.Graphics();
+            const graphics = new PIXI.Graphics();
 
             graphics.beginFill(0xFF3300);
             graphics.lineStyle(10, 0xffd900, 1);
@@ -1023,7 +1019,7 @@ namespace demos {
             this.app = new PIXI.Application();
             document.body.appendChild(this.app.view);
 
-            let background = PIXI.Sprite.fromImage("required/assets/button_test_BG.jpg");
+            const background = PIXI.Sprite.fromImage("required/assets/button_test_BG.jpg");
             background.width = this.app.renderer.width;
             background.height = this.app.renderer.height;
             this.background = background;
@@ -1031,7 +1027,7 @@ namespace demos {
 
             this.buttons = [];
 
-            let buttonPositions = [
+            const buttonPositions = [
                 175, 75,
                 655, 75,
                 410, 325,
@@ -1039,13 +1035,13 @@ namespace demos {
                 685, 445
             ];
 
-            let textureButton = PIXI.Texture.fromImage("../../_assets/button.png");
-            let textureButtonDown = PIXI.Texture.fromImage("../../_assets/buttonDown.png");
-            let textureButtonOver = PIXI.Texture.fromImage("../../_assets/buttonOver.png");
+            const textureButton = PIXI.Texture.fromImage("../../_assets/button.png");
+            const textureButtonDown = PIXI.Texture.fromImage("../../_assets/buttonDown.png");
+            const textureButtonOver = PIXI.Texture.fromImage("../../_assets/buttonOver.png");
 
             for (let i = 0; i < 5; i++) {
 
-                let button = new PIXI.Sprite(textureButton);
+                const button = new PIXI.Sprite(textureButton);
                 button.anchor.set(0.5);
                 button.x = buttonPositions[i * 2];
                 button.y = buttonPositions[i * 2 + 1];
@@ -1141,8 +1137,7 @@ namespace demos {
             this.app.stage.on("pointertap", (): void => {
                 if (!this.container.mask) {
                     this.container.mask = this.thing;
-                }
-                else {
+                } else {
                     this.container.mask = null;
                 }
             });
@@ -1220,7 +1215,7 @@ namespace demos {
             this.stuffContainer.y = 300;
             this.app.stage.addChild(this.stuffContainer);
 
-            let fruits = [
+            const fruits = [
                 "required/assets/spinObj_01.png",
                 "required/assets/spinObj_02.png",
                 "required/assets/spinObj_03.png",
@@ -1234,7 +1229,7 @@ namespace demos {
             this.items = [];
 
             for (let i = 0; i < 20; i++) {
-                let item = PIXI.Sprite.fromImage(fruits[i % fruits.length]);
+                const item = PIXI.Sprite.fromImage(fruits[i % fruits.length]);
                 item.x = Math.random() * 400 - 200;
                 item.y = Math.random() * 400 - 200;
                 item.anchor.set(0.5);
@@ -1247,13 +1242,13 @@ namespace demos {
             this.app.ticker.add((): void => {
 
                 for (let i = 0; i < this.items.length; i++) {
-                    let item = this.items[i];
+                    const item = this.items[i];
                     item.rotation += 0.1;
                 }
 
                 this.count += 0.01;
 
-                let temp = this.renderTexture;
+                const temp = this.renderTexture;
                 this.renderTexture = this.renderTexture2;
                 this.renderTexture2 = temp;
 
@@ -1285,7 +1280,7 @@ namespace demos {
 
             this.count = 0;
 
-            let ropeLength = 918 / 20;
+            const ropeLength = 918 / 20;
 
             this.points = [];
 
@@ -1424,15 +1419,15 @@ namespace demos {
 
         private init(): void {
 
-            let textures = [this.texture];
-            let D8 = PIXI.GroupD8;
+            const textures = [this.texture];
+            const D8 = PIXI.GroupD8;
             for (let rotate = 1; rotate < 16; rotate++) {
-                let h = D8.isSwapWidthHeight(rotate) ? this.texture.frame.width : this.texture.frame.height;
-                let w = D8.isSwapWidthHeight(rotate) ? this.texture.frame.height : this.texture.frame.width;
+                const h = D8.isSwapWidthHeight(rotate) ? this.texture.frame.width : this.texture.frame.height;
+                const w = D8.isSwapWidthHeight(rotate) ? this.texture.frame.height : this.texture.frame.width;
 
-                let frame = this.texture.frame;
-                let crop = new PIXI.Rectangle(this.texture.frame.x, this.texture.frame.y, w, h);
-                let trim = crop;
+                const frame = this.texture.frame;
+                const crop = new PIXI.Rectangle(this.texture.frame.x, this.texture.frame.y, w, h);
+                const trim = crop;
                 let rotatedTexture: PIXI.Texture;
                 if (rotate % 2 === 0) {
                     rotatedTexture = new PIXI.Texture(this.texture.baseTexture, frame, crop, trim, rotate);
@@ -1443,21 +1438,21 @@ namespace demos {
                 textures.push(rotatedTexture);
             }
 
-            let offsetX = this.app.renderer.width / 16 | 0;
-            let offsetY = this.app.renderer.height / 8 | 0;
-            let gridW = this.app.renderer.width / 4 | 0;
-            let gridH = this.app.renderer.height / 5 | 0;
+            const offsetX = this.app.renderer.width / 16 | 0;
+            const offsetY = this.app.renderer.height / 8 | 0;
+            const gridW = this.app.renderer.width / 4 | 0;
+            const gridH = this.app.renderer.height / 5 | 0;
 
             for (let i = 0; i < 16; i++) {
 
-                let dude = new PIXI.Sprite(textures[i < 8 ? i * 2 : (i - 8) * 2 + 1]);
+                const dude = new PIXI.Sprite(textures[i < 8 ? i * 2 : (i - 8) * 2 + 1]);
                 dude.scale.x = 0.5;
                 dude.scale.y = 0.5;
                 dude.x = offsetX + gridW * (i % 4);
                 dude.y = offsetY + gridH * (i / 4 | 0);
                 this.app.stage.addChild(dude);
 
-                let text = new PIXI.Text("rotate = " + dude.texture.rotate, { fontFamily: "Courier New", fontSize: "12px", fill: "white", align: "left" });
+                const text = new PIXI.Text("rotate = " + dude.texture.rotate, { fontFamily: "Courier New", fontSize: "12px", fill: "white", align: "left" });
                 text.x = dude.x;
                 text.y = dude.y - 20;
                 this.app.stage.addChild(text);
@@ -1499,8 +1494,7 @@ namespace demos {
                 this.bol = !this.bol;
                 if (this.bol) {
                     this.dude.texture = this.secondTexture;
-                }
-                else {
+                } else {
                     this.dude.texture = this.texture;
                 }
             });
@@ -1525,13 +1519,13 @@ namespace demos {
 
             this.aliens = [];
 
-            let totalDudes = 20;
+            const totalDudes = 20;
 
-            let dudeTexture = PIXI.Texture.fromImage("required/assets/eggHead.png");
+            const dudeTexture = PIXI.Texture.fromImage("required/assets/eggHead.png");
 
             for (let i = 0; i < totalDudes; i++) {
 
-                let dude = new Dude(dudeTexture);
+                const dude = new Dude(dudeTexture);
                 dude.anchor.set(0.5);
                 dude.scale.set(0.8 + Math.random() * 0.3);
                 dude.x = Math.random() * this.app.renderer.width;
@@ -1546,8 +1540,8 @@ namespace demos {
 
             }
 
-            let dudeBoundsPadding = 100;
-            let dudeBounds = new PIXI.Rectangle(-dudeBoundsPadding,
+            const dudeBoundsPadding = 100;
+            const dudeBounds = new PIXI.Rectangle(-dudeBoundsPadding,
                 -dudeBoundsPadding,
                 this.app.renderer.width + dudeBoundsPadding * 2,
                 this.app.renderer.height + dudeBoundsPadding * 2);
@@ -1556,7 +1550,7 @@ namespace demos {
 
                 for (let i = 0; i < this.aliens.length; i++) {
 
-                    let dude = this.aliens[i];
+                    const dude = this.aliens[i];
                     dude.direction += dude.turningSpeed * 0.01;
                     dude.x += Math.sin(dude.direction) * dude.speed;
                     dude.y += Math.cos(dude.direction) * dude.speed;
@@ -1564,15 +1558,13 @@ namespace demos {
 
                     if (dude.x < dudeBounds.x) {
                         dude.x += dudeBounds.width;
-                    }
-                    else if (dude.x > dudeBounds.x + dudeBounds.width) {
+                    } else if (dude.x > dudeBounds.x + dudeBounds.width) {
                         dude.x -= dudeBounds.width;
                     }
 
                     if (dude.y < dudeBounds.y) {
                         dude.y += dudeBounds.height;
-                    }
-                    else if (dude.y > dudeBounds.y + dudeBounds.height) {
+                    } else if (dude.y > dudeBounds.y + dudeBounds.height) {
                         dude.y -= dudeBounds.height;
                     }
                 }
@@ -1655,8 +1647,8 @@ namespace filters {
 
                 this.count += 0.005;
 
-                let blurAmount = Math.cos(this.count);
-                let blurAmount2 = Math.sin(this.count);
+                const blurAmount = Math.cos(this.count);
+                const blurAmount2 = Math.sin(this.count);
 
                 this.blurFilter1.blur = 20 * (blurAmount);
                 this.blurFilter2.blur = 20 * (blurAmount2);
@@ -1687,8 +1679,8 @@ namespace filters {
             this.container = new PIXI.Container();
             this.app.stage.addChild(this.container);
 
-            let padding = 100;
-            let bounds = new PIXI.Rectangle(
+            const padding = 100;
+            const bounds = new PIXI.Rectangle(
                 -padding,
                 -padding,
                 this.app.renderer.width + padding * 2,
@@ -1698,7 +1690,7 @@ namespace filters {
 
             for (let i = 0; i < 20; i++) {
 
-                let maggot = new DisplacementMapDude();
+                const maggot = new DisplacementMapDude();
                 maggot.anchor.set(0.5);
                 this.container.addChild(maggot);
 
@@ -1716,7 +1708,7 @@ namespace filters {
             }
 
             this.displacementSprite = PIXI.Sprite.fromImage("required/assets/displace.png");
-            let displacementFilter = new PIXI.filters.DisplacementFilter(this.displacementSprite);
+            const displacementFilter = new PIXI.filters.DisplacementFilter(this.displacementSprite);
             this.app.stage.addChild(this.displacementSprite);
 
             this.container.filters = [displacementFilter];
@@ -1747,7 +1739,7 @@ namespace filters {
 
                 for (let i = 0; i < this.maggots.length; i++) {
 
-                    let maggot = this.maggots[i];
+                    const maggot = this.maggots[i];
 
                     maggot.direction += maggot.turnSpeed * 0.01;
                     maggot.x += Math.sin(maggot.direction) * maggot.speed;
@@ -1758,15 +1750,13 @@ namespace filters {
 
                     if (maggot.x < bounds.x) {
                         maggot.x += bounds.width;
-                    }
-                    else if (maggot.x > bounds.x + bounds.width) {
+                    } else if (maggot.x > bounds.x + bounds.width) {
                         maggot.x -= bounds.width;
                     }
 
                     if (maggot.y < bounds.y) {
                         maggot.y += bounds.height;
-                    }
-                    else if (maggot.y > bounds.y + bounds.height) {
+                    } else if (maggot.y > bounds.y + bounds.height) {
                         maggot.y -= bounds.height;
                     }
                 }
@@ -1881,7 +1871,7 @@ namespace filters {
 
                 this.count += 0.1;
 
-                let matrix = this.filter.matrix;
+                const matrix = this.filter.matrix;
 
                 matrix[1] = Math.sin(this.count) * 3;
                 matrix[2] = Math.cos(this.count);

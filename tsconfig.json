@@ -1,15 +1,19 @@
 {
     "compilerOptions": {
         "module": "commonjs",
-        "target": "es6",
+        "lib": [
+            "es6",
+            "dom"
+        ],
         "noImplicitAny": true,
+        "noImplicitThis": true,
         "strictNullChecks": false,
         "types": [],
         "noEmit": true,
         "forceConsistentCasingInFileNames": true
     },
     "files": [
-        "./pixi.js.d.ts",
-        "./pixi.js-tests.ts"
+        "pixi.js.d.ts",
+        "pixi.js-tests.ts"
     ]
 }
