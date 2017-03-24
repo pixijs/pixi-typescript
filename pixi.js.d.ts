@@ -1845,7 +1845,7 @@ declare namespace PIXI {
 
             texture: Texture;
 
-            update(forceUpdate?: boolean): void;
+            update(forceUpdate?: boolean): boolean;
 
         }
         export class TilingSprite extends Sprite {
@@ -1862,6 +1862,8 @@ declare namespace PIXI {
             clampMargin: number;
             tileScale: Point | ObservablePoint;
             tilePosition: Point | ObservablePoint;
+
+            multiplyUvs(uvs: Float32Array, out: Float32Array): Float32Array;
 
             protected _onTextureUpdate(): void;
             protected _renderWebGL(renderer: WebGLRenderer): void;
@@ -2098,7 +2100,7 @@ declare namespace PIXI {
             protected dispatchEvent(displayObject: Container | Sprite | extras.TilingSprite, eventString: string, eventData: any): void;
             mapPositionToPoint(point: Point, x: number, y: number): void;
             //tslint:disable-next-line:ban-types forbidden-types
-            protected processInteractive(interactionEvent: InteractionEvent, displayObject: PIXI.Container | PIXI.Sprite | PIXI.extras.TilingSprite, func?: Function, hitTest?: boolean, interactive?: boolean): boolean;
+            protected processInteractive(interactionEvent: InteractionEvent, displayObject: PIXI.Container | PIXI.Sprite | PIXI.extras.TilingSprite, func?: Function, hitTest?: boolean, interactive?: boolean): number;
             //tslint:disable-next-line:ban-types forbidden-types
             protected onPointerComplete(originalEvent: PointerEvent, cancelled: boolean, func: Function): void;
             protected getInteractionDataForPointerId(pointerId: number): InteractionData;
@@ -2397,6 +2399,11 @@ declare namespace PIXI {
             texture: Texture;
             tintRgb: Float32Array;
             protected _glDatas: { [n: number]: any; };
+            protected _uvTransform: extras.TextureTransform;
+            uploadUvTransform: boolean;
+            multiplyUvs(): void;
+            refresh(forceUpdate?: boolean): void;
+            protected _refresh(): void;
             protected _renderWebGL(renderer: WebGLRenderer): void;
             protected _renderCanvas(renderer: CanvasRenderer): void;
             protected _onTextureUpdate(): void;
@@ -2484,13 +2491,13 @@ declare namespace PIXI {
 
             points: Point[];
             colors: number[];
-            protected _ready: boolean;
-            refresh(): void;
+            autoUpdate: boolean;
+            protected _refresh(): void;
 
-            protected _onTextureUpdate(): void;
-            updateTransform(): void;
+            refreshVertices(): void;
 
         }
+
     }
 
     //////////////////////////////////////////////////////////////////////////////
@@ -2606,9 +2613,14 @@ declare namespace PIXI {
             upload(item: Function | DisplayObject | Container | BaseTexture | Texture | Graphics | Text | any, done?: () => void): void;
             protected tick(): void;
             protected prepareItems(): void;
-            register(addHook?: AddHook, uploadHook?: UploadHook<UploadHookSource>): this;
+            registerFindHook(addHook: AddHook): this;
+            registerUploadHook(uploadHook: UploadHook<UploadHookSource>): this;
+            protected findMultipleBaseTextures(item: PIXI.DisplayObject, queue: any[]): boolean;
+            protected findBaseTexture(item: PIXI.DisplayObject, queue: any[]): boolean;
+            protected findTexture(item: PIXI.DisplayObject, queue: any[]): boolean;
             add(item: PIXI.DisplayObject | PIXI.Container | PIXI.BaseTexture | PIXI.Texture | PIXI.Graphics | PIXI.Text | any): this;
             destroy(): void;
+
 
         }
         export class CanvasPrepare extends BasePrepare<CanvasPrepare> {
