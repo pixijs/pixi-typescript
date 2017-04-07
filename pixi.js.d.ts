@@ -20,6 +20,7 @@ declare namespace PIXI {
     export const GC_MODES: typeof CONST.GC_MODES;
     export const SHAPES: typeof CONST.SHAPES;
     export const TEXT_GRADIENT: typeof CONST.TEXT_GRADIENT;
+    export const UPDATE_PRIORITY: typeof CONST.UPDATE_PRIORITY;
 
     export function autoDetectRenderer(width: number, height: number, options?: PIXI.RendererOptions, noWebGL?: boolean): PIXI.WebGLRenderer | PIXI.CanvasRenderer;
     export function autoDetectRenderer(options?: PIXI.RendererOptions): PIXI.WebGLRenderer | PIXI.CanvasRenderer;
@@ -191,6 +192,14 @@ declare namespace PIXI {
             LINEAR_VERTICAL: number;
             LINEAR_HORIZONTAL: number;
         };
+        export const UPDATE_PRIORITY: {
+            INTERACTION: number;
+            HIGH: number;
+            NORMAL: number;
+            LOW: number;
+            UTILITY: number;
+        };
+
     }
 
     // display
@@ -1126,7 +1135,7 @@ declare namespace PIXI {
         getRenderTarget(clear?: boolean, resolution?: number): RenderTarget;
         returnRenderTarget(renderTarget: RenderTarget): RenderTarget;
         calculateScreenSpaceMatrix(outputMatrix: Matrix): Matrix;
-        calculateNormalisedScreenSpaceMatrix(outputMatrix: Matrix): Matrix;
+        calculateNormalizedScreenSpaceMatrix(outputMatrix: Matrix): Matrix;
         calculateSpriteMatrix(outputMatrix: Matrix, sprite: Sprite): Matrix;
         destroy(): void;
         emptyPool(): void;
@@ -1203,6 +1212,7 @@ declare namespace PIXI {
         padding: number;
         resolution: number;
         enabled: boolean;
+        autoFit: boolean;
         apply(filterManager: FilterManager, input: RenderTarget, output: RenderTarget, clear?: boolean, currentState?: any): void;
 
         static defaultVertexSrc: string;
@@ -1675,16 +1685,30 @@ declare namespace PIXI {
 
         export const shared: Ticker;
 
+        export class TickerListener {
+
+            constructor(fn: (deltaTime: number) => void, context?: any, priority?: number, once?: boolean);
+
+            fn: (deltaTime: number) => void;
+            context: any;
+            priority: number;
+            once: boolean;
+            next: TickerListener;
+            previous: TickerListener;
+
+            protected _destroyed: boolean;
+            match(fn: (deltaTime: number) => void, context?: any): boolean;
+            emit(deltaTime: number): TickerListener;
+            connect(previous: TickerListener): void;
+            destroy(hard?: boolean): void;
+
+        }
         export class Ticker {
 
-            protected _tick(time: number): void;
-            protected _emitter: utils.EventEmitter;
+            protected _tick: (time: number) => void;
+            protected _head: TickerListener;
             protected _requestId: number | null;
             protected _maxElapsedMS: number;
-
-            protected _requestIfNeeded(): void;
-            protected _cancelIfNeeded(): void;
-            protected _startIfPossible(): void;
 
             autoStart: boolean;
             deltaTime: number;
@@ -1693,15 +1717,24 @@ declare namespace PIXI {
             speed: number;
             started: boolean;
 
-            FPS: number;
+            protected _requestIfNeeded(): void;
+            protected _cancelIfNeeded(): void;
+            protected _startIfPossible(): void;
+
+            add(fn: (deltaTime: number) => void, context?: any, priority?: number): Ticker;
+            addOnce(fn: (deltaTime: number) => void, context?: any, priority?: number): Ticker;
+            //tslint:disable-next-line:ban-types forbidden-types
+            remove(fn: Function, context?: any, priority?: number): Ticker;
+
+            protected _addListener(listener: TickerListener): Ticker;
+
+            readonly FPS: number;
             minFPS: number;
 
-            add(fn: (deltaTime: number) => void, context?: any): Ticker;
-            addOnce(fn: (deltaTime: number) => void, context?: any): Ticker;
-            remove(fn: (deltaTime: number) => void, context?: any): Ticker;
             start(): void;
             stop(): void;
-            update(): void;
+            destroy(): void;
+            update(currentTime?: number): void;
 
         }
 
@@ -2092,6 +2125,7 @@ declare namespace PIXI {
             cursor: string;
             protected _tempPoint: Point;
             resolution: number;
+            hitTest(globalPoint: Point, root?: Container): DisplayObject;
             protected setTargetElement(element: HTMLCanvasElement, resolution?: number): void;
             protected addEvents(): void;
             protected removeEvents(): void;
@@ -2100,7 +2134,7 @@ declare namespace PIXI {
             protected dispatchEvent(displayObject: Container | Sprite | extras.TilingSprite, eventString: string, eventData: any): void;
             mapPositionToPoint(point: Point, x: number, y: number): void;
             //tslint:disable-next-line:ban-types forbidden-types
-            protected processInteractive(interactionEvent: InteractionEvent, displayObject: PIXI.Container | PIXI.Sprite | PIXI.extras.TilingSprite, func?: Function, hitTest?: boolean, interactive?: boolean): number;
+            protected processInteractive(interactionEvent: InteractionEvent, displayObject: PIXI.Container | PIXI.Sprite | PIXI.extras.TilingSprite, func?: Function, hitTest?: boolean, interactive?: boolean): boolean;
             //tslint:disable-next-line:ban-types forbidden-types
             protected onPointerComplete(originalEvent: PointerEvent, cancelled: boolean, func: Function): void;
             protected getInteractionDataForPointerId(pointerId: number): InteractionData;
