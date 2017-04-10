@@ -896,6 +896,7 @@ declare namespace PIXI {
         forceFXAA?: boolean;
         resolution?: number;
         clearBeforeRender?: boolean;
+        backgroundColor?: number;
         preserveDrawingBuffer?: boolean;
         roundPixels?: boolean;
         legacy?: boolean;
@@ -2775,7 +2776,7 @@ declare namespace PIXI {
         }
         export class GLShader {
 
-            constructor(gl: WebGLRenderingContext, vertexSrc: string | string[], fragmentSrc: string | string[], precision: string, attributeLocations: { [key: string]: number });
+            constructor(gl: WebGLRenderingContext, vertexSrc: string | string[], fragmentSrc: string | string[], precision?: string, attributeLocations?: { [key: string]: number });
 
             gl: WebGLRenderingContext;
             program?: WebGLProgram | null;
@@ -2801,7 +2802,7 @@ declare namespace PIXI {
             type: number;
 
             upload(source: HTMLImageElement | ImageData | HTMLVideoElement | HTMLCanvasElement): void;
-            uploadData(data: number, width: number, height: number): void;
+            uploadData(data: ArrayBuffer | ArrayBufferView, width: number, height: number): void;
             bind(location?: number): void;
             unbind(): void;
             minFilter(linear: boolean): void;
@@ -2821,7 +2822,7 @@ declare namespace PIXI {
         export interface Attrib {
 
             attribute: {
-                location: boolean;
+                location: number;
                 size: number;
             };
             normalized: boolean;
