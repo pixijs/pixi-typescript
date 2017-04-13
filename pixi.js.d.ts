@@ -674,7 +674,7 @@ declare namespace PIXI {
         y: number;
 
         clone(): Point;
-        copy(p: Point): void;
+        copy(p: Point | ObservablePoint): void;
         equals(p: Point): boolean;
         set(x?: number, y?: number): void;
 
