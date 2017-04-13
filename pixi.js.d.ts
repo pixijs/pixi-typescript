@@ -1,4 +1,4 @@
-// Type definitions for Pixi.js 4.4
+// Type definitions for Pixi.js 4.5
 // Project: https://github.com/pixijs/pixi.js/tree/dev
 // Definitions by: clark-stevenson <https://github.com/pixijs/pixi-typescript>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
@@ -22,7 +22,7 @@ declare namespace PIXI {
     export const TEXT_GRADIENT: typeof CONST.TEXT_GRADIENT;
     export const UPDATE_PRIORITY: typeof CONST.UPDATE_PRIORITY;
 
-    export function autoDetectRenderer(width: number, height: number, options?: PIXI.RendererOptions, noWebGL?: boolean): PIXI.WebGLRenderer | PIXI.CanvasRenderer;
+    export function autoDetectRenderer(width: number, height: number, options?: PIXI.RendererOptions, forceCanvas?: boolean): PIXI.WebGLRenderer | PIXI.CanvasRenderer;
     export function autoDetectRenderer(options?: PIXI.RendererOptions): PIXI.WebGLRenderer | PIXI.CanvasRenderer;
     export const loader: PIXI.loaders.Loader;
 
@@ -221,13 +221,14 @@ declare namespace PIXI {
         height?: number;
         forceCanvas?: boolean;
         sharedTicker?: boolean;
+        sharedLoader?: boolean;
 
     }
 
     export class Application {
 
         constructor(options?: ApplicationOptions)
-        constructor(width?: number, height?: number, options?: ApplicationOptions, noWebGL?: boolean, useSharedTicker?: boolean);
+        constructor(width?: number, height?: number, options?: ApplicationOptions, noWebGL?: boolean, sharedTicker?: boolean, sharedLoader?: boolean);
 
         private _ticker: ticker.Ticker;
 
@@ -1363,6 +1364,7 @@ declare namespace PIXI {
         trim?: boolean;
         wordWrap?: boolean;
         wordWrapWidth?: number;
+
     }
 
     export class TextStyle implements TextStyleOptions {
@@ -1429,12 +1431,43 @@ declare namespace PIXI {
         protected _wordWrapWidth: number;
         wordWrapWidth: number;
 
+        toFontString(): string;
+
+    }
+
+    export class TextMetrics {
+
+        protected _canvas: HTMLCanvasElement;
+        protected _context: CanvasRenderingContext2D;
+        protected _fonts: FontMetrics;
+
+        text: string;
+        style: TextStyle;
+        width: number;
+        height: number;
+        lines: number[];
+        lineWidgets: number[];
+        lineHeight: number;
+        maxLineWidth: number;
+        fontProperties: any;
+
+        constructor(text: string, style: TextStyle, width: number, height: number, lines: number[], lineWidths: number[], lineHeight: number, maxLineWidth: number, fontProperties: any);
+
+        static measureText(text: string, style: TextStyle, wordWrap?: boolean, canvas?: HTMLCanvasElement): TextMetrics;
+        static wordWrap(text: string, style: TextStyle, canvas?: HTMLCanvasElement): string;
+        static measureFont(font: string): FontMetrics;
+
+    }
+
+    interface FontMetrics {
+
+        ascent: number;
+        descent: number;
+        fontSize: number;
+
     }
 
     export class Text extends Sprite {
-
-        static getFontStyle(style: TextStyleOptions): string;
-        static calculateFontProperties(style: string): any;
 
         constructor(text?: string, style?: TextStyleOptions, canvas?: HTMLCanvasElement);
 
@@ -1448,10 +1481,6 @@ declare namespace PIXI {
         protected _font: string;
         protected localStyleID: number;
 
-        static fontPropertiesCache: any;
-        static fontPropertiesCanvas: HTMLCanvasElement;
-        static fontPropertiesContext: CanvasRenderingContext2D;
-
         width: number;
         height: number;
         style: TextStyle;
@@ -1462,7 +1491,6 @@ declare namespace PIXI {
         protected updateTexture(): void;
         renderWebGL(renderer: WebGLRenderer): void;
         protected _renderCanvas(renderer: CanvasRenderer): void;
-        protected wordWrap(text: string): string;
         getLocalBounds(rect?: Rectangle): Rectangle;
         protected _calculateBounds(): void;
         protected _onStyleChange: () => void;
@@ -1529,6 +1557,9 @@ declare namespace PIXI {
         protected _glTextures: any;
         protected _enabled: number;
         protected _id?: number;
+        protected _virtualBoundId: number;
+        protected readonly _destroyed: boolean;
+        textureCacheIds: string[];
 
         update(): void;
         protected _updateDimensions(): void;
@@ -1544,7 +1575,9 @@ declare namespace PIXI {
         updateSourceImage(newSrc: string): void;
 
         static fromImage(imageUrl: string, crossorigin?: boolean, scaleMode?: number, sourceScale?: number): BaseTexture;
-        static fromCanvas(canvas: HTMLCanvasElement, scaleMode?: number): BaseTexture;
+        static fromCanvas(canvas: HTMLCanvasElement, scaleMode?: number, origin?: string): BaseTexture;
+        static addToCache(baseTexture: BaseTexture, id: string): void;
+        static removeFromCache(baseTexture: string | BaseTexture): BaseTexture;
 
         on(event: "update" | "loaded" | "error" | "dispose", fn: (baseTexture: BaseTexture) => void, context?: any): this;
         once(event: "update" | "loaded" | "error" | "dispose", fn: (baseTexture: BaseTexture) => void, context?: any): this;
@@ -1580,7 +1613,7 @@ declare namespace PIXI {
         orig: Rectangle;
         protected _updateID: number;
         transform: any;
-        textsureCacheId: string;
+        textureCacheIds: string[];
 
         update(): void;
         protected onBaseTextureLoaded(baseTexture: BaseTexture): void;
@@ -1591,13 +1624,17 @@ declare namespace PIXI {
 
         static fromImage(imageUrl: string, crossOrigin?: boolean, scaleMode?: number, sourceScale?: number): Texture;
         static fromFrame(frameId: string): Texture;
-        static fromCanvas(canvas: HTMLCanvasElement, scaleMode?: number): Texture;
+        static fromCanvas(canvas: HTMLCanvasElement, scaleMode?: number, origin?: string): Texture;
         static fromVideo(video: HTMLVideoElement | string, scaleMode?: number): Texture;
         static fromVideoUrl(videoUrl: string, scaleMode?: number): Texture;
         static from(source: number | string | HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | BaseTexture): Texture;
         static fromLoader(source: HTMLImageElement | HTMLCanvasElement, imageUrl: string, name?: string): Texture;
+        static addToCache(texture: Texture, id: string): void;
+        static removeFromCache(texture: string | Texture): Texture;
+
+        // depreciation
         static addTextureToCache(texture: Texture, id: string): void;
-        static removeTextureFromCache(id: string): Texture | undefined;
+        static removeTextureFromCache(id: string): Texture;
 
         frame: Rectangle;
         protected _rotate: boolean | 0;
@@ -2074,7 +2111,7 @@ declare namespace PIXI {
 
             global: Point;
             target: DisplayObject;
-            originalEvent: Event;
+            originalEvent: MouseEvent | TouchEvent | PointerEvent;
             identifier?: number;
 
             getLocalPosition(displayObject: DisplayObject, point?: Point, globalPos?: Point): Point;
@@ -2274,6 +2311,8 @@ declare namespace PIXI {
             protected _loadResource(resource: Resource, dequeue: Function): void;
             protected _onComplete(): void;
             protected _onLoad(resource: Resource): void;
+
+            destroy(): void;
 
             // depreciation
 
