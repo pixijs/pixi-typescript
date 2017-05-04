@@ -27,3 +27,6 @@ node_modules
 # Jetbrains IntelliJ
 .idea
 *.iml
+
+#VS CODE
+.history
