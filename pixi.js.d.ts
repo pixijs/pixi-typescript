@@ -1895,7 +1895,7 @@ declare namespace PIXI {
             gotoAndStop(frameNumber: number): void;
             gotoAndPlay(frameNumber: number): void;
             protected update(deltaTime: number): void;
-            destroy(): void;
+            destroy(options?: DestroyOptions | boolean): void;
 
             static fromFrames(frame: string[]): AnimatedSprite;
             static fromImages(images: string[]): AnimatedSprite;
@@ -1942,7 +1942,7 @@ declare namespace PIXI {
             protected _calculateBounds(): void;
             getLocalBounds(rect?: Rectangle): Rectangle;
             containsPoint(point: Point): boolean;
-            destroy(): void;
+            destroy(options?: DestroyOptions | boolean): void;
 
             static from(source: number | string | BaseTexture | HTMLCanvasElement | HTMLVideoElement, width?: number, height?: number): TilingSprite;
             static fromFrame(frameId: string, width?: number, height?: number): TilingSprite;
