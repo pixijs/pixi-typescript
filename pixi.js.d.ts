@@ -939,6 +939,7 @@ declare namespace PIXI {
         boundTextures: Texture[];
         filterManager: FilterManager;
         textureManager?: TextureManager;
+        textureGC?: TextureGarbageCollector;
         extract: extract.WebGLExtract;
         protected drawModes: any;
         protected _activeShader: Shader;
