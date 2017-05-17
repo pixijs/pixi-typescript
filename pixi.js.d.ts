@@ -675,10 +675,9 @@ declare namespace PIXI {
         x: number;
         y: number;
 
-        /*
-            This is weird and clone has been teporarily disabled. See https://github.com/pixijs/pixi-typescript/issues/156 
-            clone(): Point;
-        */
+        //this is weird and clone has been teporarily disabled. See https://github.com/pixijs/pixi-typescript/issues/156
+        //clone(): Point;
+
         copy(p: Point | ObservablePoint): void;
         equals(p: Point): boolean;
         set(x?: number, y?: number): void;
@@ -2123,7 +2122,24 @@ declare namespace PIXI {
             global: Point;
             target: DisplayObject;
             originalEvent: MouseEvent | TouchEvent | PointerEvent;
-            identifier?: number;
+            identifier: number;
+            isPrimary: boolean;
+            button: number;
+            buttons: number;
+            width: number;
+            height: number;
+            tiltX: number;
+            tiltY: number;
+            pointerType: string;
+            pressure: number;
+            rotationAngle: number;
+            twist: number;
+            tangentialPressure: number;
+
+            readonly pointerID: number;
+
+            protected _copyEvent(event: Touch | MouseEvent | PointerEvent): void;
+            protected _reset(): void;
 
             getLocalPosition(displayObject: DisplayObject, point?: Point, globalPos?: Point): Point;
 
@@ -2567,6 +2583,7 @@ declare namespace PIXI {
             updateHorizontalVertices(): void;
             updateVerticalVertices(): void;
             protected drawSegment(context: CanvasRenderingContext2D | WebGLRenderingContext, textureSource: any, w: number, h: number, x1: number, y1: number, x2: number, y2: number): void;
+            protected _refresh(): void;
 
         }
 
@@ -2604,6 +2621,9 @@ declare namespace PIXI {
 
             constructor(size?: number, properties?: ParticleContainerProperties, batchSize?: number);
 
+            protected _tint: number;
+            protected _tintRGB: number | any[];
+            tint: number;
             protected _properties: boolean[];
             protected _maxSize: number;
             protected _batchSize: number;
