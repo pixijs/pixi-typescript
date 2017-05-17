@@ -507,7 +507,7 @@ declare namespace PIXI {
         isMask: boolean;
         boundsPadding: number;
         protected _localBounds: Bounds;
-        dirty: boolean;
+        dirty: number;
         fastRectDirty: number;
         clearDirty: number;
         boundsDirty: number;
@@ -568,7 +568,7 @@ declare namespace PIXI {
         destroy(): void;
         render(graphics: Graphics): void;
         protected updateGraphics(graphics: PIXI.Graphics): void;
-        getWebGLData(webGL: WebGLRenderingContext, type: number): WebGLGraphicsData;
+        getWebGLData(webGL: WebGLRenderingContext, type: number, nativeLines: number): WebGLGraphicsData;
 
     }
     export class WebGLGraphicsData {
@@ -586,6 +586,7 @@ declare namespace PIXI {
         glIndices: number[];
         shader: glCore.GLShader;
         vao: glCore.VertexArrayObject;
+        nativeLines: boolean;
 
         reset(): void;
         upload(): void;
@@ -674,7 +675,10 @@ declare namespace PIXI {
         x: number;
         y: number;
 
-        clone(): Point;
+        /*
+            This is weird and clone has been teporarily disabled. See https://github.com/pixijs/pixi-typescript/issues/156 
+            clone(): Point;
+        */
         copy(p: Point | ObservablePoint): void;
         equals(p: Point): boolean;
         set(x?: number, y?: number): void;
@@ -901,6 +905,8 @@ declare namespace PIXI {
         preserveDrawingBuffer?: boolean;
         roundPixels?: boolean;
         legacy?: boolean;
+        width?: number;
+        height?: number;
 
     }
     export class WebGLRenderer extends SystemRenderer {
@@ -2024,6 +2030,7 @@ declare namespace PIXI {
             protected _colorMatrix(matrix: number[]): void;
 
             matrix: number[];
+            alpha: number;
 
             brightness(b: number, multiply?: boolean): void;
             greyscale(scale: number, multiply?: boolean): void;
@@ -2063,7 +2070,10 @@ declare namespace PIXI {
         // https://github.com/pixijs/pixi-filters/
         export class NoiseFilter extends Filter {
 
+            constructor(noise?: number, seed?: number);
+
             noise: number;
+            seed: number;
 
         }
 
@@ -3199,6 +3209,16 @@ declare namespace PIXI {
         /**
          * @class
          * @private
+         * @name BaseTextureCache
+         * @memberof PIXI
+         * @see PIXI.utils.BaseTextureCache
+         * @deprecated since version 3.0.0
+         */
+        type BaseTextureCache = any;
+
+        /**
+         * @class
+         * @private
          * @name BitmapText
          * @memberof PIXI
          * @see PIXI.extras.BitmapText
@@ -3327,6 +3347,19 @@ declare namespace PIXI {
          * @deprecated since version 4.2.0
          */
         type MovieClip = extras.AnimatedSprite;
+
+    }
+
+    export namespace settings {
+
+        /**
+         * @static
+         * @name PRECISION
+         * @memberof PIXI.settings
+         * @see PIXI.PRECISION
+         * @deprecated since version 4.4.0
+         */
+        type PRECISION = number;
 
     }
 

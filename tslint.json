@@ -1,5 +1,5 @@
 {
-     "rules": {
-         "prefer-for-of": false
-     }
+    "rules": {
+        "prefer-for-of": false
+    }
 }
