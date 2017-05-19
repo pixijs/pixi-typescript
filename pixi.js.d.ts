@@ -76,6 +76,9 @@ declare namespace PIXI {
 
             constructor(renderer: CanvasRenderer | WebGLRenderer);
 
+            public activate(): void;
+            public deactivate(): void;
+
             protected div: HTMLElement;
             protected pool: HTMLElement[];
             protected renderId: number;
@@ -84,8 +87,6 @@ declare namespace PIXI {
             protected children: AccessibleTarget[];
             protected isActive: boolean;
 
-            protected activate(): void;
-            protected deactivate(): void;
             protected updateAccessibleObjects(displayObject: DisplayObject): void;
             protected update(): void;
             protected capHitArea(hitArea: HitArea): void;
