@@ -146,6 +146,9 @@ declare namespace PIXI {
             SATURATION: number;
             COLOR: number;
             LUMINOSITY: number;
+            NORMAL_NPM: number;
+            ADD_NPM: number;
+            SCREEN_NPM: number;
         };
         export const DRAW_MODES: {
             POINTS: number;
@@ -676,8 +679,8 @@ declare namespace PIXI {
         x: number;
         y: number;
 
-        //this is weird and clone has been teporarily disabled. See https://github.com/pixijs/pixi-typescript/issues/156
-        //clone(): Point;
+        // See https://github.com/pixijs/pixi-typescript/issues/156
+        clone(): Point;
 
         copy(p: Point | ObservablePoint): void;
         equals(p: Point): boolean;
@@ -2623,7 +2626,7 @@ declare namespace PIXI {
             constructor(size?: number, properties?: ParticleContainerProperties, batchSize?: number);
 
             protected _tint: number;
-            protected _tintRGB: number | any[];
+            protected tintRgb: number | any[];
             tint: number;
             protected _properties: boolean[];
             protected _maxSize: number;
