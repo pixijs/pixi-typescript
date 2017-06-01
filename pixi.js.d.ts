@@ -394,13 +394,13 @@ declare namespace PIXI {
         getBounds(skipUpdate?: boolean, rect?: Rectangle): Rectangle;
         getLocalBounds(rect?: Rectangle): Rectangle;
         //creates and returns a new point
-        toGlobal(position: Point | ObservablePoint): Point;
+        toGlobal(position:PointLike): Point;
         //modifies the x and y of the passed point and returns it
-        toGlobal<T extends Point | ObservablePoint>(position: Point | ObservablePoint, point?: T, skipUpdate?: boolean): T;
+        toGlobal<T extends PointLike>(position: PointLike, point?: T, skipUpdate?: boolean): T;
         //creates and returns a new point
         toLocal(position: PointLike, from?: DisplayObject): Point;
         //modifies the x and y of the passed point and returns it
-        toLocal<T extends Point | ObservablePoint>(position: Point | ObservablePoint, from?: DisplayObject, point?: T, skipUpdate?: boolean): T;
+        toLocal<T extends PointLike>(position: PointLike, from?: DisplayObject, point?: T, skipUpdate?: boolean): T;
         renderWebGL(renderer: WebGLRenderer): void;
         renderCanvas(renderer: CanvasRenderer): void;
         setParent(container: Container): Container;
