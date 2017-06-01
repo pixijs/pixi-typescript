@@ -393,8 +393,14 @@ declare namespace PIXI {
         protected _recursivePostUpdateTransform(): void;
         getBounds(skipUpdate?: boolean, rect?: Rectangle): Rectangle;
         getLocalBounds(rect?: Rectangle): Rectangle;
-        toGlobal(position: Point, point?: Point, skipUpdate?: boolean): Point;
-        toLocal(position: Point, from?: DisplayObject, point?: Point, skipUpdate?: boolean): Point;
+        //creates and returns a new point
+        toGlobal(position:PointLike): Point;
+        //modifies the x and y of the passed point and returns it
+        toGlobal<T extends PointLike>(position: PointLike, point?: T, skipUpdate?: boolean): T;
+        //creates and returns a new point
+        toLocal(position: PointLike, from?: DisplayObject): Point;
+        //modifies the x and y of the passed point and returns it
+        toLocal<T extends PointLike>(position: PointLike, from?: DisplayObject, point?: T, skipUpdate?: boolean): T;
         renderWebGL(renderer: WebGLRenderer): void;
         renderCanvas(renderer: CanvasRenderer): void;
         setParent(container: Container): Container;
@@ -659,32 +665,32 @@ declare namespace PIXI {
         static TEMP_MATRIX: Matrix;
 
     }
-    export class ObservablePoint {
+
+    class PointLike {
+
+        x: number;
+        y: number;
+
+        set(x?: number, y?: number): void;
+        copy(point: PointLike): void;        
+
+    }
+
+    export class ObservablePoint extends PointLike {
 
         constructor(cb: () => any, scope?: any, x?: number, y?: number);
 
-        x: number;
-        y: number;
         cb: () => any;
         scope: any;
 
-        set(x?: number, y?: number): void;
-        copy(point: Point | ObservablePoint): void;
-
     }
-    export class Point {
+
+    export class Point extends PointLike {
 
         constructor(x?: number, y?: number);
 
-        x: number;
-        y: number;
-
-        // See https://github.com/pixijs/pixi-typescript/issues/156
         clone(): Point;
-
-        copy(p: Point | ObservablePoint): void;
-        equals(p: Point): boolean;
-        set(x?: number, y?: number): void;
+        equals(p: PointLike): boolean;
 
     }
 
