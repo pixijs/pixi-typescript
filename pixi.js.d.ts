@@ -394,7 +394,7 @@ declare namespace PIXI {
         getBounds(skipUpdate?: boolean, rect?: Rectangle): Rectangle;
         getLocalBounds(rect?: Rectangle): Rectangle;
         //creates and returns a new point
-        toGlobal(position:PointLike): Point;
+        toGlobal(position: PointLike): Point;
         //modifies the x and y of the passed point and returns it
         toGlobal<T extends PointLike>(position: PointLike, point?: T, skipUpdate?: boolean): T;
         //creates and returns a new point
@@ -672,7 +672,7 @@ declare namespace PIXI {
         y: number;
 
         set(x?: number, y?: number): void;
-        copy(point: PointLike): void;        
+        copy(point: PointLike): void;
 
     }
 
@@ -827,7 +827,6 @@ declare namespace PIXI {
         protected _backgroundColorString: string;
         protected _tempDisplayObjectParent: Container;
         protected _lastObjectRendered: DisplayObject;
-        backgroundColor: number;
 
         resize(screenWidth: number, screenHeight: number): void;
         generateTexture(displayObject: DisplayObject, scaleMode?: number, resolution?: number): RenderTexture;
@@ -1869,7 +1868,9 @@ declare namespace PIXI {
                 size?: number;
             };
             protected _text: string;
+            protected _maxWidth: number;
             maxWidth: number;
+            protected _maxLineHeight: number;
             maxLineHeight: number;
             protected _anchor: ObservablePoint;
             dirty: boolean;
@@ -1902,6 +1903,7 @@ declare namespace PIXI {
             loop: boolean;
             onComplete: () => void;
             onFrameChange: (currentFrame: number) => void;
+            onLoop: () => void;
             protected _currentTime: number;
             playing: boolean;
             totalFrames: number;

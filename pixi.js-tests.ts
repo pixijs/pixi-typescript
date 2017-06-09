@@ -1702,6 +1702,7 @@ namespace filters {
                 maggot.position.y = Math.random() * bounds.height;
 
                 maggot.scale.set(1 + Math.random() * 0.3);
+                maggot.original = (<PIXI.Point>maggot.scale).clone();
 
                 this.maggots.push(maggot);
 
