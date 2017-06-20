@@ -827,6 +827,7 @@ declare namespace PIXI {
         protected _backgroundColorString: string;
         protected _tempDisplayObjectParent: Container;
         protected _lastObjectRendered: DisplayObject;
+        backgroundColor: number;
 
         resize(screenWidth: number, screenHeight: number): void;
         generateTexture(displayObject: DisplayObject, scaleMode?: number, resolution?: number): RenderTexture;
