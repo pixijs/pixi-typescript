@@ -2803,6 +2803,9 @@ declare namespace PIXI {
             protected maxItemsPerFrame: number;
             protected itemsLeft: number;
 
+            beginFrame(): void;
+            allowedToUpload(): boolean;
+
         }
         export class TimeLimiter {
 
@@ -2810,6 +2813,9 @@ declare namespace PIXI {
 
             protected maxMilliseconds: number;
             protected frameStart: number;
+
+            beginFrame(): void;
+            allowedToUpload(): boolean;
 
         }
 
