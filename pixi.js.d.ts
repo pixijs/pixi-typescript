@@ -3455,7 +3455,7 @@ declare namespace pixi {
     export const gl: typeof PIXI.glCore;
 }
 
-//tslint:disable-next-line:no-single-declare-module
+//tslint:disable-next-line:no-single-declare-module 
 declare module "pixi.js" {
     export = PIXI;
 }
