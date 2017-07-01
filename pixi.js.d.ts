@@ -208,30 +208,9 @@ declare namespace PIXI {
 
     // display
 
-    export interface ApplicationOptions extends RendererOptions {
-
-        view?: HTMLCanvasElement;
-        transparent?: boolean;
-        autoResize?: boolean;
-        antialias?: boolean;
-        resolution?: number;
-        clearBeforeRender?: boolean;
-        backgroundColor?: number;
-        roundPixels?: boolean;
-        context?: WebGLRenderingContext;
-        preserveDrawingBuffer?: boolean;
-        legacy?: boolean;
-        width?: number;
-        height?: number;
-        forceCanvas?: boolean;
-        sharedTicker?: boolean;
-        sharedLoader?: boolean;
-
-    }
-
     export class Application {
 
-        constructor(options?: ApplicationOptions)
+        constructor(options?: ApplicationOptions);
         constructor(width?: number, height?: number, options?: ApplicationOptions, noWebGL?: boolean, sharedTicker?: boolean, sharedLoader?: boolean);
 
         private _ticker: ticker.Ticker;
@@ -790,20 +769,97 @@ declare namespace PIXI {
 
     export interface RendererOptions {
 
-        view?: HTMLCanvasElement;
-        transparent?: boolean;
-        autoResize?: boolean;
-        antialias?: boolean;
-        resolution?: number;
-        clearBeforeRender?: boolean;
-        backgroundColor?: number;
-        roundPixels?: boolean;
-        context?: WebGLRenderingContext;
+        /**
+         * the width of the renderers view [default=800]
+         */
         width?: number;
+
+        /**
+         * the height of the renderers view [default=600]
+         */
         height?: number;
+
+        /**
+         * the canvas to use as a view, optional
+         */
+        view?: HTMLCanvasElement;
+
+        /**
+         * If the render view is transparent, [default=false]
+         */
+        transparent?: boolean;
+
+        /**
+         * sets antialias (only applicable in chrome at the moment) [default=false]
+         */
+        antialias?: boolean;
+
+        /**
+         * enables drawing buffer preservation, enable this if you need to call toDataUrl on the webgl context [default=false]
+         */
+        preserveDrawingBuffer?: boolean;
+
+        /**
+         * The resolution / device pixel ratio of the renderer, retina would be 2 [default=1]
+         */
+        resolution?: number;
+
+        /**
+         * prevents selection of WebGL renderer, even if such is present [default=false]
+         */
         forceCanvas?: boolean;
 
+        /**
+         * The background color of the rendered area (shown if not transparent) [default=0x000000]
+         */
+        backgroundColor?: number;
+
+        /**
+         * This sets if the renderer will clear the canvas or not before the new render pass. [default=true]
+         */
+        clearBeforeRender?: boolean;
+
+        /**
+         * If true Pixi will Math.floor() x/ y values when rendering, stopping pixel interpolation. [default=false]
+         */
+        roundPixels?: boolean;
+
+        /**
+         * forces FXAA antialiasing to be used over native FXAA is faster, but may not always look as great ** webgl only** [default=false]
+         */
+        forceFXAA?: boolean;
+
+        /**
+         * `true` to ensure compatibility with older / less advanced devices. If you experience unexplained flickering try setting this to true. **webgl only** [default=false]
+         */
+        legacy?: boolean;
+
+        /**
+         * Depricated
+         */
+        context?: WebGLRenderingContext;
+
+        /**
+         * Depricated
+         */
+        autoResize?: boolean;
+
     }
+
+    export interface ApplicationOptions extends RendererOptions {
+
+        /**
+         * `true` to use PIXI.ticker.shared, `false` to create new ticker. [default=false]
+         */
+        sharedTicker?: boolean;
+
+        /**
+         * `true` to use PIXI.loaders.shared, `false` to create new Loader.
+         */
+        sharedLoader?: boolean;
+
+    }
+
     export class SystemRenderer extends utils.EventEmitter {
 
         constructor(system: string, options?: RendererOptions);
@@ -901,23 +957,9 @@ declare namespace PIXI {
 
     }
 
-    export interface WebGLRendererOptions {
-
-        view?: HTMLCanvasElement;
-        transparent?: boolean;
-        autoResize?: boolean;
-        antialias?: boolean;
-        forceFXAA?: boolean;
-        resolution?: number;
-        clearBeforeRender?: boolean;
-        backgroundColor?: number;
-        preserveDrawingBuffer?: boolean;
-        roundPixels?: boolean;
-        legacy?: boolean;
-        width?: number;
-        height?: number;
-
+    export interface WebGLRendererOptions extends RendererOptions {
     }
+
     export class WebGLRenderer extends SystemRenderer {
 
         // plugintarget mixin start
@@ -2983,6 +3025,11 @@ declare namespace PIXI {
         export function isWebGLSupported(): boolean;
         export function sign(n: number): number;
         export function removeItems<T>(arr: T[], startIdx: number, removeCount: number): void;
+        export function correctBlendMode(blendMode: number, premultiplied: boolean): number;
+        export function premultiplyTint(tint: number, alpha: number): number;
+        export function premultiplyRgba(rgb: Float32Array | number[], alpha: number, out?: Float32Array, premultiply?: boolean): Float32Array;
+        export function premultiplyTintToRgba(tint: number, alpha: number, out?: Float32Array, premultiply?: boolean): Float32Array;
+        export const premultiplyBlendMode: number[][];
         export const TextureCache: any;
         export const BaseTextureCache: any;
 
