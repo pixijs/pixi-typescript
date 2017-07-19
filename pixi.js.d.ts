@@ -1244,7 +1244,7 @@ declare namespace PIXI {
 
         constructor(renderer: WebGLRenderer);
 
-        renderer: SystemRenderer;
+        renderer: WebGLRenderer;
         onContextChange(): void;
         destroy(): void;
 
