@@ -2534,18 +2534,6 @@ declare namespace PIXI {
     ///////////////////////////////MESH///////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////
 
-    
-    export class Buffer {
-
-        constructor(size: number);
-
-        float32View: Float32Array;
-        uint32View: Uint32Array;
-
-        destroy(): void;
-
-    }
-
     export namespace mesh {
 
         export class Mesh extends Container {
@@ -2664,40 +2652,6 @@ declare namespace PIXI {
             protected _refresh(): void;
 
             refreshVertices(): void;
-
-        }
-
-        export class Attribute {
-
-            constructor(buffer: string, size?: number, normalised?: boolean, type?: number, stride?: number, start?: number, instance?: boolean);
-
-            destroy(): void;
-
-            static from(buffer: string, size?: number, stride?: number, start?: number, normalised?: boolean): Attribute;
-
-        }
-
-        export class Geometry {
-
-            constructor(buffers?: number[], attributes?: any);
-
-            buffers: number[];
-            attributes: any;
-            glVertexArrayObjects: any;
-            id: number;
-            instanced: boolean;
-            instanceCount: number;
-            _size: number | null;
-
-            addAttribute(id: string, buffer: Buffer | number[], size?: number, normalised?: boolean, type?: number, stride?: number, start?: number, instance?: boolean): Geometry;
-            getAttribute(id: string): Attribute;
-            addIndex(buffer: Buffer | number[]): Geometry;
-            getIndex(): Buffer;
-            interleave(): Geometry;
-            getSize(): number;
-            destroy(): void;
-            clone(): Geometry;
-            static merge(geometries: Geometry[]): Geometry;
 
         }
 
