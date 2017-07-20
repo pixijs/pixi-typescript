@@ -2981,7 +2981,7 @@ declare namespace PIXI {
 
             static FORCE_NATIVE: boolean;
 
-            constructor(gl: WebGLRenderingContext, state: WebGLState);
+            constructor(gl: WebGLRenderingContext, state?: WebGLState);
 
             protected nativeVaoExtension: any;
             protected nativeState: AttribState;
