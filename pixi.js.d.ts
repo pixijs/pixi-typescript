@@ -2872,7 +2872,7 @@ declare namespace PIXI {
             drawType: number;
             data: ArrayBuffer | ArrayBufferView | any;
 
-            upload(data: ArrayBuffer | ArrayBufferView | any, offset?: number, dontBind?: boolean): void;
+            upload(data?: ArrayBuffer | ArrayBufferView | any, offset?: number, dontBind?: boolean): void;
             bind(): void;
 
             static createVertexBuffer(gl: WebGLRenderingContext, data: ArrayBuffer | ArrayBufferView | any, drawType: number): GLBuffer;
@@ -2981,7 +2981,7 @@ declare namespace PIXI {
 
             static FORCE_NATIVE: boolean;
 
-            constructor(gl: WebGLRenderingContext, state: WebGLState);
+            constructor(gl: WebGLRenderingContext, state?: WebGLState);
 
             protected nativeVaoExtension: any;
             protected nativeState: AttribState;
