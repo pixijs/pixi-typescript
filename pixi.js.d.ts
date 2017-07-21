@@ -2203,7 +2203,8 @@ declare namespace PIXI {
         type InteractionPointerEvents = "pointerdown" | "pointercancel" | "pointerup" | "pointertap" | "pointerupoutside" | "pointermove" | "pointerover" | "pointerout";
         type InteractionTouchEvents = "touchstart" | "touchcancel" | "touchend" | "touchendoutside" | "touchmove" | "tap";
         type InteractionMouseEvents = "rightdown" | "mousedown" | "rightup" | "mouseup" | "rightclick" | "click" | "rightupoutside" | "mouseupoutside" | "mousemove" | "mouseover" | "mouseout" | "mouseover";
-        type InteractionEventTypes = InteractionPointerEvents | InteractionTouchEvents | InteractionMouseEvents;
+        type InteractionPixiEvents = "added" | "removed";
+        type InteractionEventTypes = InteractionPointerEvents | InteractionTouchEvents | InteractionMouseEvents | InteractionPixiEvents;
 
         export interface InteractionManagerOptions {
             autoPreventDefault?: boolean;
@@ -2277,7 +2278,7 @@ declare namespace PIXI {
 
     // pixi loader extends
     // https://github.com/englercj/resource-loader/
-    // 2.0.6
+    // 2.0.9
 
     class MiniSignalBinding {
 
@@ -2324,9 +2325,11 @@ declare namespace PIXI {
             crossOrigin?: boolean | string;
             loadType?: number;
             xhrType?: string;
-            metaData?: any;
-            loadElement?: HTMLImageElement | HTMLAudioElement | HTMLVideoElement;
-            skipSource?: boolean;
+            metaData?: {
+                loadElement?: HTMLImageElement | HTMLAudioElement | HTMLVideoElement;
+                skipSource?: boolean;
+                mimeType?: string | string[];
+            };
 
         }
         export interface ResourceDictionary {
@@ -3082,7 +3085,7 @@ declare namespace PIXI {
             static prefixed: string | boolean;
 
             static EventEmitter: {
-                new (): EventEmitter;
+                new(): EventEmitter;
                 prefixed: string | boolean;
             };
 
