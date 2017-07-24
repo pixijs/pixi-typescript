@@ -345,8 +345,8 @@ declare namespace PIXI {
         parent: Container;
         worldAlpha: number;
         filterArea: Rectangle;
-        protected _filters: Filter[] | null;
-        protected _enabledFilters: Filter[] | null;
+        protected _filters: Filter<any>[] | null;
+        protected _enabledFilters: Filter<any>[] | null;
         protected _bounds: Bounds;
         protected _boundsID: number;
         protected _lastBoundsID: number;
@@ -365,7 +365,7 @@ declare namespace PIXI {
         rotation: number;
         worldVisible: boolean;
         mask: PIXI.Graphics | PIXI.Sprite;
-        filters: Filter[] | null;
+        filters: Filter<any>[] | null;
 
         updateTransform(): void;
         protected displayObjectUpdateTransform(): void;
@@ -1173,7 +1173,7 @@ declare namespace PIXI {
         renderTarget: RenderTarget;
         sourceFrame: Rectangle;
         destinationFrame: Rectangle;
-        filters: Filter[];
+        filters: Filter<any>[];
         target: any;
         resolution: number;
     }
@@ -1188,10 +1188,10 @@ declare namespace PIXI {
         shaderCache: any;
         filterData: any;
 
-        pushFilter(target: RenderTarget, filters: Filter[]): void;
+        pushFilter(target: RenderTarget, filters: Filter<any>[]): void;
         popFilter(): void;
-        applyFilter(shader: glCore.GLShader | Filter, inputTarget: RenderTarget, outputTarget: RenderTarget, clear?: boolean): void;
-        syncUniforms(shader: glCore.GLShader, filter: Filter): void;
+        applyFilter(shader: glCore.GLShader | Filter<any>, inputTarget: RenderTarget, outputTarget: RenderTarget, clear?: boolean): void;
+        syncUniforms(shader: glCore.GLShader, filter: Filter<any>): void;
         getRenderTarget(clear?: boolean, resolution?: number): RenderTarget;
         returnRenderTarget(renderTarget: RenderTarget): RenderTarget;
         calculateScreenSpaceMatrix(outputMatrix: Matrix): Matrix;
@@ -1249,24 +1249,25 @@ declare namespace PIXI {
         destroy(): void;
 
     }
-    export interface UniformData {
+    export interface UniformData<V> {
 
         type: string;
-        value: any;
+        value: V;
 
         // name is set by pixi if uniforms were automatically extracted from shader code, but not used anywhere
         name?: string;
 
     }
-    export class Filter {
+    type UniformDataMap<U> = {[K in keyof U]: UniformData<U[K]>};
+    export class Filter<U extends object> {
 
-        constructor(vertexSrc?: string, fragmentSrc?: string, uniforms?: { [name: string]: UniformData });
+        constructor(vertexSrc?: string, fragmentSrc?: string, uniforms?: UniformDataMap<U>);
 
         vertextSrc?: string;
         fragmentSrc: string;
         blendMode: number;
-        protected uniformData: { [name: string]: UniformData };
-        uniforms: { [name: string]: any } | any;
+        protected uniformData: UniformDataMap<U>;
+        uniforms: U;
         glShaders: any;
         glShaderKey?: number;
         padding: number;
@@ -1279,7 +1280,13 @@ declare namespace PIXI {
         static defaultFragmentSrc: string;
 
     }
-    export class SpriteMaskFilter extends Filter {
+    type SpriteMaskFilterUniforms =
+    {
+        mask: Texture;
+        otherMatrix: Matrix;
+        alpha: number;
+    }
+    export class SpriteMaskFilter extends Filter<SpriteMaskFilterUniforms> {
 
         constructor(sprite: Sprite);
 
@@ -2031,8 +2038,8 @@ declare namespace PIXI {
 
     export namespace filters {
 
-        export class FXAAFilter extends Filter { }
-        export class BlurFilter extends Filter {
+        export class FXAAFilter extends Filter<{}> { }
+        export class BlurFilter extends Filter<{}> {
 
             constructor(strength?: number, quality?: number, resolution?: number, kernelSize?: number);
 
@@ -2047,7 +2054,11 @@ declare namespace PIXI {
             quality: number;
 
         }
-        export class BlurXFilter extends Filter {
+        type BlurXFilterUniforms =
+        {
+            strength: number;
+        }
+        export class BlurXFilter extends Filter<BlurXFilterUniforms> {
 
             constructor(strength?: number, quality?: number, resolution?: number, kernelSize?: number);
 
@@ -2061,7 +2072,11 @@ declare namespace PIXI {
             blur: number;
 
         }
-        export class BlurYFilter extends Filter {
+        type BlurYFilterUniforms =
+        {
+            strength: number;
+        }
+        export class BlurYFilter extends Filter<BlurYFilterUniforms> {
 
             constructor(strength?: number, quality?: number, resolution?: number, kernelSize?: number);
 
@@ -2075,7 +2090,12 @@ declare namespace PIXI {
             blur: number;
 
         }
-        export class ColorMatrixFilter extends Filter {
+        type ColorMatrixFilterUniforms =
+        {
+            m: Matrix;
+            uAlpha: number;
+        }
+        export class ColorMatrixFilter extends Filter<ColorMatrixFilterUniforms> {
 
             constructor();
 
@@ -2108,7 +2128,13 @@ declare namespace PIXI {
             reset(): void;
 
         }
-        export class DisplacementFilter extends Filter {
+        type DisplacementFilterUniforms =
+        {
+            mapSampler: Texture;
+            filterMatrix: Matrix;
+            scale: Point;
+        }
+        export class DisplacementFilter extends Filter<DisplacementFilterUniforms> {
 
             constructor(sprite: Sprite, scale?: number);
 
@@ -2116,13 +2142,18 @@ declare namespace PIXI {
             map: Texture;
 
         }
-        export class VoidFilter extends Filter {
+        export class VoidFilter extends Filter<{}> {
             glShaderKey: number;
         }
 
         // pixi-filters.d.ts todo
         // https://github.com/pixijs/pixi-filters/
-        export class NoiseFilter extends Filter {
+        type NoiseFilterUniforms =
+        {
+            uNoise: number;
+            uSeed: number;
+        }
+        export class NoiseFilter extends Filter<NoiseFilterUniforms> {
 
             constructor(noise?: number, seed?: number);
 
@@ -3332,7 +3363,7 @@ declare namespace PIXI {
          * @see PIXI.Filter
          * @deprecated since version 3.0.6
          */
-        type AbstractFilter = Filter;
+        type AbstractFilter<U extends object> = Filter<U>;
 
         /**
          * @class
