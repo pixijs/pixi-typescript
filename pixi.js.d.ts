@@ -860,10 +860,12 @@ declare namespace PIXI {
 
     }
 
-    export interface DefaultRendererPlugins {
+
+    interface DefaultRendererPlugins {
         accessibility: accessibility.AccessibilityManager;
         interaction: interaction.InteractionManager;
-
+    }
+    export interface RendererPlugins extends DefaultRendererPlugins {
     }
     export class SystemRenderer extends utils.EventEmitter {
 
@@ -896,17 +898,19 @@ declare namespace PIXI {
         destroy(removeView?: boolean): void;
 
     }
-    export interface DefaultCanvasRendererPlugins extends DefaultRendererPlugins {
+    interface DefaultCanvasRendererPlugins {
         extract: extract.CanvasExtract;
         prepare: prepare.CanvasPrepare;
 
     }
-    export class CanvasRenderer<Plugins extends object = DefaultCanvasRendererPlugins> extends SystemRenderer {
+    export interface CanvasRendererPlugins extends DefaultCanvasRendererPlugins, RendererPlugins {
+    }
+    export class CanvasRenderer extends SystemRenderer {
 
         // plugintarget mixin start
-        static __plugins: { [pluginName: string]: { new (renderer: CanvasRenderer<any>): any; } };
-        static registerPlugin(pluginName: string, ctor: { new (renderer: CanvasRenderer<any>): any; }): void;
-        plugins: Plugins;
+        static __plugins: { [pluginName: string]: { new (renderer: CanvasRenderer): any; } };
+        static registerPlugin(pluginName: string, ctor: { new (renderer: CanvasRenderer): any; }): void;
+        plugins: CanvasRendererPlugins;
         initPlugins(): void;
         destroyPlugins(): void;
         // plugintarget mixin end
@@ -965,17 +969,19 @@ declare namespace PIXI {
 
     export interface WebGLRendererOptions extends RendererOptions {
     }
-    export interface DefaultWebGLRendererPlugins extends DefaultRendererPlugins {
+    interface DefaultWebGLRendererPlugins {
         extract: extract.WebGLExtract;
         prepare: prepare.WebGLPrepare;
 
     }
-    export class WebGLRenderer<Plugins extends object = DefaultWebGLRendererPlugins> extends SystemRenderer {
+    export interface WebGLRendererPlugins extends DefaultWebGLRendererPlugins, RendererPlugins {
+    }
+    export class WebGLRenderer extends SystemRenderer {
 
         // plugintarget mixin start
-        static __plugins: { [pluginName: string]: { new (renderer: WebGLRenderer<any>): any; } };
-        static registerPlugin(pluginName: string, ctor: { new (renderer: WebGLRenderer<any>): any; }): void;
-        plugins: Plugins;
+        static __plugins: { [pluginName: string]: { new (renderer: WebGLRenderer): any; } };
+        static registerPlugin(pluginName: string, ctor: { new (renderer: WebGLRenderer): any; }): void;
+        plugins: WebGLRendererPlugins;
         initPlugins(): void;
         destroyPlugins(): void;
         // plugintarget mixin end
