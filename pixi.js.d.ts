@@ -901,7 +901,6 @@ declare namespace PIXI {
     interface DefaultCanvasRendererPlugins {
         extract: extract.CanvasExtract;
         prepare: prepare.CanvasPrepare;
-
     }
     export interface CanvasRendererPlugins extends DefaultCanvasRendererPlugins, RendererPlugins {
     }
@@ -972,7 +971,6 @@ declare namespace PIXI {
     interface DefaultWebGLRendererPlugins {
         extract: extract.WebGLExtract;
         prepare: prepare.WebGLPrepare;
-
     }
     export interface WebGLRendererPlugins extends DefaultWebGLRendererPlugins, RendererPlugins {
     }
