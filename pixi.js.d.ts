@@ -902,9 +902,6 @@ declare namespace PIXI {
         destroyPlugins(): void;
         // plugintarget mixin end
 
-        // from InteractionManager
-        interaction?: interaction.InteractionManager;
-
         constructor(options?: RendererOptions);
         constructor(screenWidth?: number, screenHeight?: number, options?: RendererOptions);
 
@@ -970,9 +967,6 @@ declare namespace PIXI {
         initPlugins(): void;
         destroyPlugins(): void;
         // plugintarget mixin end
-
-        // from InteractionManager
-        interaction: interaction.InteractionManager;
 
         constructor(options?: WebGLRendererOptions);
         constructor(screenWidth?: number, screenHeight?: number, options?: WebGLRendererOptions);
