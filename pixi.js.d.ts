@@ -860,6 +860,13 @@ declare namespace PIXI {
 
     }
 
+
+    interface DefaultRendererPlugins {
+        accessibility: accessibility.AccessibilityManager;
+        interaction: interaction.InteractionManager;
+    }
+    export interface RendererPlugins extends DefaultRendererPlugins {
+    }
     export class SystemRenderer extends utils.EventEmitter {
 
         constructor(system: string, options?: RendererOptions);
@@ -891,13 +898,18 @@ declare namespace PIXI {
         destroy(removeView?: boolean): void;
 
     }
+    interface DefaultCanvasRendererPlugins {
+        extract: extract.CanvasExtract;
+        prepare: prepare.CanvasPrepare;
+    }
+    export interface CanvasRendererPlugins extends DefaultCanvasRendererPlugins, RendererPlugins {
+    }
     export class CanvasRenderer extends SystemRenderer {
 
         // plugintarget mixin start
-        static __plugins: any;
-        //tslint:disable-next-line:ban-types forbidden-types
-        static registerPlugin(pluginName: string, ctor: Function): void;
-        plugins: any;
+        static __plugins: { [pluginName: string]: { new (renderer: CanvasRenderer): any; } };
+        static registerPlugin(pluginName: string, ctor: { new (renderer: CanvasRenderer): any; }): void;
+        plugins: CanvasRendererPlugins;
         initPlugins(): void;
         destroyPlugins(): void;
         // plugintarget mixin end
@@ -956,14 +968,18 @@ declare namespace PIXI {
 
     export interface WebGLRendererOptions extends RendererOptions {
     }
-
+    interface DefaultWebGLRendererPlugins {
+        extract: extract.WebGLExtract;
+        prepare: prepare.WebGLPrepare;
+    }
+    export interface WebGLRendererPlugins extends DefaultWebGLRendererPlugins, RendererPlugins {
+    }
     export class WebGLRenderer extends SystemRenderer {
 
         // plugintarget mixin start
-        static __plugins: any;
-        //tslint:disable-next-line:ban-types forbidden-types
-        static registerPlugin(pluginName: string, ctor: Function): void;
-        plugins: any;
+        static __plugins: { [pluginName: string]: { new (renderer: WebGLRenderer): any; } };
+        static registerPlugin(pluginName: string, ctor: { new (renderer: WebGLRenderer): any; }): void;
+        plugins: WebGLRendererPlugins;
         initPlugins(): void;
         destroyPlugins(): void;
         // plugintarget mixin end
