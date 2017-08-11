@@ -123,7 +123,7 @@ namespace basics {
         }
     }
 
-    export class CustomizedFilter extends PIXI.Filter {
+    export class CustomizedFilter extends PIXI.Filter<any> {
 
         constructor(fragmentSource: string) {
             super(null, fragmentSource, {
