@@ -907,8 +907,8 @@ declare namespace PIXI {
     export class CanvasRenderer extends SystemRenderer {
 
         // plugintarget mixin start
-        static __plugins: { [pluginName: string]: { new (renderer: CanvasRenderer): any; } };
-        static registerPlugin(pluginName: string, ctor: { new (renderer: CanvasRenderer): any; }): void;
+        static __plugins: { [pluginName: string]: { new(renderer: CanvasRenderer): any; } };
+        static registerPlugin(pluginName: string, ctor: { new(renderer: CanvasRenderer): any; }): void;
         plugins: CanvasRendererPlugins;
         initPlugins(): void;
         destroyPlugins(): void;
@@ -977,8 +977,8 @@ declare namespace PIXI {
     export class WebGLRenderer extends SystemRenderer {
 
         // plugintarget mixin start
-        static __plugins: { [pluginName: string]: { new (renderer: WebGLRenderer): any; } };
-        static registerPlugin(pluginName: string, ctor: { new (renderer: WebGLRenderer): any; }): void;
+        static __plugins: { [pluginName: string]: { new(renderer: WebGLRenderer): any; } };
+        static registerPlugin(pluginName: string, ctor: { new(renderer: WebGLRenderer): any; }): void;
         plugins: WebGLRendererPlugins;
         initPlugins(): void;
         destroyPlugins(): void;
@@ -1273,6 +1273,7 @@ declare namespace PIXI {
 
         constructor(vertexSrc?: string, fragmentSrc?: string, uniforms?: UniformDataMap<U>);
 
+        protected _blendMode: number;
         vertextSrc?: string;
         fragmentSrc: string;
         blendMode: number;
@@ -1291,11 +1292,11 @@ declare namespace PIXI {
 
     }
     type SpriteMaskFilterUniforms =
-    {
-        mask: Texture;
-        otherMatrix: Matrix;
-        alpha: number;
-    }
+        {
+            mask: Texture;
+            otherMatrix: Matrix;
+            alpha: number;
+        }
     export class SpriteMaskFilter extends Filter<SpriteMaskFilterUniforms> {
 
         constructor(sprite: Sprite);
@@ -2062,12 +2063,13 @@ declare namespace PIXI {
             blurX: number;
             blurY: number;
             quality: number;
-
+            blendMode: number
+            
         }
         type BlurXFilterUniforms =
-        {
-            strength: number;
-        }
+            {
+                strength: number;
+            }
         export class BlurXFilter extends Filter<BlurXFilterUniforms> {
 
             constructor(strength?: number, quality?: number, resolution?: number, kernelSize?: number);
@@ -2083,9 +2085,9 @@ declare namespace PIXI {
 
         }
         type BlurYFilterUniforms =
-        {
-            strength: number;
-        }
+            {
+                strength: number;
+            }
         export class BlurYFilter extends Filter<BlurYFilterUniforms> {
 
             constructor(strength?: number, quality?: number, resolution?: number, kernelSize?: number);
@@ -2101,10 +2103,10 @@ declare namespace PIXI {
 
         }
         type ColorMatrixFilterUniforms =
-        {
-            m: Matrix;
-            uAlpha: number;
-        }
+            {
+                m: Matrix;
+                uAlpha: number;
+            }
         export class ColorMatrixFilter extends Filter<ColorMatrixFilterUniforms> {
 
             constructor();
@@ -2139,11 +2141,11 @@ declare namespace PIXI {
 
         }
         type DisplacementFilterUniforms =
-        {
-            mapSampler: Texture;
-            filterMatrix: Matrix;
-            scale: Point;
-        }
+            {
+                mapSampler: Texture;
+                filterMatrix: Matrix;
+                scale: Point;
+            }
         export class DisplacementFilter extends Filter<DisplacementFilterUniforms> {
 
             constructor(sprite: Sprite, scale?: number);
@@ -2159,10 +2161,10 @@ declare namespace PIXI {
         // pixi-filters.d.ts todo
         // https://github.com/pixijs/pixi-filters/
         type NoiseFilterUniforms =
-        {
-            uNoise: number;
-            uSeed: number;
-        }
+            {
+                uNoise: number;
+                uSeed: number;
+            }
         export class NoiseFilter extends Filter<NoiseFilterUniforms> {
 
             constructor(noise?: number, seed?: number);
