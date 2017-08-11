@@ -520,7 +520,7 @@ declare namespace PIXI {
         drawRoundedRect(x: number, y: number, width: number, height: number, radius: number): Graphics;
         drawCircle(x: number, y: number, radius: number): Graphics;
         drawEllipse(x: number, y: number, width: number, height: number): Graphics;
-        drawPolygon(path: number[] | Point[]): Graphics;
+        drawPolygon(path: number[] | Point[] | Polygon): Graphics;
         clear(): Graphics;
         isFastRect(): boolean;
         protected _renderCanvas(renderer: CanvasRenderer): void;
@@ -844,6 +844,11 @@ declare namespace PIXI {
          */
         autoResize?: boolean;
 
+        /**
+         * Parameter passed to webgl context, set to "high-performance" for devices with dual graphics card
+         */
+        powerPreference?: string;
+
     }
 
     export interface ApplicationOptions extends RendererOptions {
@@ -857,6 +862,13 @@ declare namespace PIXI {
          * `true` to use PIXI.loaders.shared, `false` to create new Loader.
          */
         sharedLoader?: boolean;
+
+        /**
+         * automatically starts the rendering after the construction.
+         * Note that setting this parameter to false does NOT stop the shared ticker even if you set
+         * options.sharedTicker to true in case that it is already started. Stop it by your own.
+         */
+        autoStart?: boolean;
 
     }
 
@@ -917,6 +929,7 @@ declare namespace PIXI {
         constructor(options?: RendererOptions);
         constructor(screenWidth?: number, screenHeight?: number, options?: RendererOptions);
 
+        protected _activeBlendMode: number;
         rootContext: CanvasRenderingContext2D;
         rootResolution?: number;
         refresh: boolean;
@@ -930,6 +943,7 @@ declare namespace PIXI {
         setBlendMode(blendMode: number): void;
         destroy(removeView?: boolean): void;
         clear(clearColor?: string): void;
+        invalidateBlendMode(): void;
 
         on(event: "prerender" | "postrender", fn: () => void, context?: any): this;
         once(event: "prerender" | "postrender", fn: () => void, context?: any): this;
@@ -1440,6 +1454,7 @@ declare namespace PIXI {
         trim?: boolean;
         wordWrap?: boolean;
         wordWrapWidth?: number;
+        leading?: number;
 
     }
 
@@ -2064,7 +2079,7 @@ declare namespace PIXI {
             blurY: number;
             quality: number;
             blendMode: number
-            
+
         }
         type BlurXFilterUniforms =
             {
