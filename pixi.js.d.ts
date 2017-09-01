@@ -2033,6 +2033,7 @@ declare namespace PIXI {
 
             multiplyUvs(uvs: Float32Array, out: Float32Array): Float32Array;
 
+            protected _textureDirtyFlag: boolean;
             protected _onTextureUpdate(): void;
             protected _renderWebGL(renderer: WebGLRenderer): void;
             protected _renderCanvas(renderer: CanvasRenderer): void;
