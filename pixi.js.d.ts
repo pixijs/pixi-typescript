@@ -1458,7 +1458,6 @@ declare namespace PIXI {
         wordWrap?: boolean;
         wordWrapWidth?: number;
         leading?: number;
-
     }
 
     export class TextStyle implements TextStyleOptions {
@@ -1502,6 +1501,8 @@ declare namespace PIXI {
         fontVariant: string;
         protected _fontWeight: string;
         fontWeight: string;
+        protected _leading: number;
+        leading: number;
         protected _letterSpacing: number;
         letterSpacing: number;
         protected _lineHeight: number;
