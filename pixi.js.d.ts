@@ -1291,7 +1291,7 @@ declare namespace PIXI {
         constructor(vertexSrc?: string, fragmentSrc?: string, uniforms?: UniformDataMap<U>);
 
         protected _blendMode: number;
-        vertextSrc?: string;
+        vertexSrc?: string;
         fragmentSrc: string;
         blendMode: number;
         protected uniformData: UniformDataMap<U>;
