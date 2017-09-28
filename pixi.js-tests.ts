@@ -609,7 +609,7 @@ namespace demos {
                 position: true,
                 rotation: true,
                 uvs: true,
-                alpha: true
+                tint: true
             });
             this.app.stage.addChild(this.sprites);
 
