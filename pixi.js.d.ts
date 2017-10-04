@@ -330,7 +330,7 @@ declare namespace PIXI {
         // begin interactive target
         interactive: boolean;
         interactiveChildren: boolean;
-        hitArea: PIXI.Rectangle | PIXI.Circle | PIXI.Ellipse | PIXI.Polygon | PIXI.RoundedRectangle;
+        hitArea: PIXI.Rectangle | PIXI.Circle | PIXI.Ellipse | PIXI.Polygon | PIXI.RoundedRectangle | PIXI.HitArea;
         buttonMode: boolean;
         cursor: string;
         trackedPointers(): { [key: number]: interaction.InteractionTrackingData; };
@@ -678,7 +678,7 @@ declare namespace PIXI {
         contains(x: number, y: number): boolean;
 
     }
-    export class Circle {
+    export class Circle implements HitArea {
 
         constructor(x?: number, y?: number, radius?: number);
 
@@ -692,7 +692,7 @@ declare namespace PIXI {
         getBounds(): Rectangle;
 
     }
-    export class Ellipse {
+    export class Ellipse implements HitArea {
 
         constructor(x?: number, y?: number, width?: number, height?: number);
 
@@ -707,7 +707,7 @@ declare namespace PIXI {
         getBounds(): Rectangle;
 
     }
-    export class Polygon {
+    export class Polygon implements HitArea {
 
         constructor(points: Point[] | number[]);
         // Note - Rest Params cannot be combined with |
@@ -725,7 +725,7 @@ declare namespace PIXI {
         close(): void;
 
     }
-    export class Rectangle {
+    export class Rectangle implements HitArea {
 
         constructor(x?: number, y?: number, width?: number, height?: number);
 
@@ -749,7 +749,7 @@ declare namespace PIXI {
         enlarge(rectangle: Rectangle): void;
 
     }
-    export class RoundedRectangle {
+    export class RoundedRectangle implements HitArea {
 
         constructor(x?: number, y?: number, width?: number, height?: number, radius?: number);
 
@@ -2205,7 +2205,7 @@ declare namespace PIXI {
 
             interactive: boolean;
             interactiveChildren: boolean;
-            hitArea: PIXI.Rectangle | PIXI.Circle | PIXI.Ellipse | PIXI.Polygon | PIXI.RoundedRectangle;
+            hitArea: PIXI.Rectangle | PIXI.Circle | PIXI.Ellipse | PIXI.Polygon | PIXI.RoundedRectangle | PIXI.HitArea;
             buttonMode: boolean;
             cursor: string;
             trackedPointers(): { [key: number]: InteractionTrackingData; };
