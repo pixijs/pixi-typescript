@@ -1805,7 +1805,7 @@ declare namespace PIXI {
         protected _isSourceReady(): boolean;
 
         static fromVideo(video: HTMLVideoElement, scaleMode?: number): VideoBaseTexture;
-        static fromUrl(videoSrc: string | any | string[] | any[]): VideoBaseTexture;
+        static fromUrl(videoSrc: string | any | string[] | any[], crossOrigin?: boolean): VideoBaseTexture;
         static fromUrls(videoSrc: string | any | string[] | any[]): VideoBaseTexture;
 
         source: HTMLVideoElement;
