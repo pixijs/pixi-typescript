@@ -1892,7 +1892,7 @@ declare namespace PIXI {
             image(target?: DisplayObject | RenderTexture): HTMLImageElement;
             base64(target?: DisplayObject | RenderTexture): string;
             canvas(target?: DisplayObject | RenderTexture): HTMLCanvasElement;
-            pixels(renderTexture?: DisplayObject | RenderTexture): number[];
+            pixels(renderTexture?: DisplayObject | RenderTexture): Uint8ClampedArray;
 
             destroy(): void;
 
@@ -1905,7 +1905,7 @@ declare namespace PIXI {
             image(target?: DisplayObject | RenderTexture): HTMLImageElement;
             base64(target?: DisplayObject | RenderTexture): string;
             canvas(target?: DisplayObject | RenderTexture): HTMLCanvasElement;
-            pixels(renderTexture?: DisplayObject | RenderTexture): number[];
+            pixels(renderTexture?: DisplayObject | RenderTexture): Uint8Array;
 
             destroy(): void;
         }
