@@ -1542,7 +1542,7 @@ declare namespace PIXI {
         width: number;
         height: number;
         lines: number[];
-        lineWidgets: number[];
+        lineWidths: number[];
         lineHeight: number;
         maxLineWidth: number;
         fontProperties: any;
@@ -3520,7 +3520,7 @@ declare namespace PIXI {
         type VoidFilter = filters.AlphaFilter;
 
     }
-    
+
     export namespace settings {
 
         /**
