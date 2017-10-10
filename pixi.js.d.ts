@@ -1024,6 +1024,7 @@ declare namespace PIXI {
         extract: extract.WebGLExtract;
         protected drawModes: any;
         protected _activeShader: Shader;
+        protected _activeVao: glCore.VertexArrayObject;
         _activeRenderTarget: RenderTarget;
         protected _initContext(): void;
 
@@ -2173,7 +2174,8 @@ declare namespace PIXI {
             map: Texture;
 
         }
-        export class VoidFilter extends Filter<{}> {
+        export class AlphaFilter extends Filter<{}> {
+            alpha: number;
             glShaderKey: number;
         }
 
@@ -2735,6 +2737,7 @@ declare namespace PIXI {
             rotation?: boolean;
             uvs?: boolean;
             tint?: boolean;
+            alpha?: boolean;
 
         }
         export class ParticleContainer extends Container {
@@ -2805,6 +2808,7 @@ declare namespace PIXI {
             uploadRotation(children: DisplayObject[], startIndex: number, amount: number, array: number[], stride: number, offset: number): void;
             uploadUvs(children: DisplayObject[], startIndex: number, amount: number, array: number[], stride: number, offset: number): void;
             uploadTint(children: DisplayObject[], startIndex: number, amount: number, array: number[], stride: number, offset: number): void;
+            uploadAlpha(children: DisplayObject[], startIndex: number, amount: number, array: number[], stride: number, offset: number): void;
             destroy(): void;
 
             indices: Uint16Array;
@@ -3504,6 +3508,19 @@ declare namespace PIXI {
 
     }
 
+    export namespace filters {
+
+        /**
+        * @class
+        * @private
+        * @name PIXI.filters.VoidFilter
+        * @see PIXI.filters.AlphaFilter
+        * @deprecated since version 4.5.7
+        */
+        type VoidFilter = filters.AlphaFilter;
+
+    }
+    
     export namespace settings {
 
         /**
