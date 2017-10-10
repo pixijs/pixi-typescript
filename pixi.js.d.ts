@@ -607,7 +607,7 @@ declare namespace PIXI {
         export function add(rotationSecond: number, rotationFirst: number): number;
         export function sub(rotationSecond: number, rotationFirst: number): number;
         export function rotate180(rotation: number): number;
-        export function isSwapWidthHeight(rotation: number): boolean;
+        export function isVertical(rotation: number): boolean;
         export function byDirection(dx: number, dy: number): number;
         export function matrixAppendRotationInv(matrix: Matrix, rotation: number, tx: number, ty: number): void;
 
@@ -2005,9 +2005,9 @@ declare namespace PIXI {
             constructor(texture: Texture, clampMargin?: number);
 
             protected _texture: Texture;
-            protected mapCoord: Matrix;
-            protected uClampFrame: Float32Array;
-            protected uClampOffset: Float32Array;
+            public mapCoord: Matrix;
+            public uClampFrame: Float32Array;
+            public uClampOffset: Float32Array;
             protected _lastTextureID: number;
 
             clampOffset: number;
@@ -2016,6 +2016,7 @@ declare namespace PIXI {
             texture: Texture;
 
             update(forceUpdate?: boolean): boolean;
+            multiplyUvs(uvs: Float32Array, out?: Float32Array): Float32Array;
 
         }
         export class TilingSprite extends Sprite {
