@@ -2005,9 +2005,9 @@ declare namespace PIXI {
             constructor(texture: Texture, clampMargin?: number);
 
             protected _texture: Texture;
-            public mapCoord: Matrix;
-            public uClampFrame: Float32Array;
-            public uClampOffset: Float32Array;
+            mapCoord: Matrix;
+            uClampFrame: Float32Array;
+            uClampOffset: Float32Array;
             protected _lastTextureID: number;
 
             clampOffset: number;
@@ -3506,6 +3506,20 @@ declare namespace PIXI {
          * @deprecated since version 4.2.0
          */
         type MovieClip = extras.AnimatedSprite;
+
+    }
+
+    export namespace GroupD8 {
+
+        /**
+         * @method
+         * @name PIXI.GroupD8.isSwapWidthHeight
+         * @see PIXI.GroupD8.isVertical
+         * @param {number} rotation - The number to check.
+         * @returns {boolean} Whether or not the direction is vertical
+         * @deprecated since version 4.6.0
+         */
+        export function isSwapWidthHeight(rotation: number): boolean;
 
     }
 
