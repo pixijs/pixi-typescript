@@ -1,4 +1,4 @@
-// Type definitions for Pixi.js 4.5
+// Type definitions for Pixi.js 4.6
 // Project: https://github.com/pixijs/pixi.js/tree/dev
 // Definitions by: clark-stevenson <https://github.com/pixijs/pixi-typescript>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
@@ -389,7 +389,7 @@ declare namespace PIXI {
         on(event: interaction.InteractionEventTypes, fn: (event: interaction.InteractionEvent) => void, context?: any): this;
         once(event: interaction.InteractionEventTypes, fn: (event: interaction.InteractionEvent) => void, context?: any): this;
         removeListener(event: interaction.InteractionEventTypes, fn?: (event: interaction.InteractionEvent) => void, context?: any): this;
-        removeAllListeners(event: interaction.InteractionEventTypes): this;
+        removeAllListeners(event?: interaction.InteractionEventTypes): this;
         off(event: interaction.InteractionEventTypes, fn?: (event: interaction.InteractionEvent) => void, context?: any): this;
         addListener(event: interaction.InteractionEventTypes, fn: (event: interaction.InteractionEvent) => void, context?: any): this;
 
@@ -948,7 +948,7 @@ declare namespace PIXI {
         on(event: "prerender" | "postrender", fn: () => void, context?: any): this;
         once(event: "prerender" | "postrender", fn: () => void, context?: any): this;
         removeListener(event: "prerender" | "postrender", fn?: () => void, context?: any): this;
-        removeAllListeners(event: "prerender" | "postrender"): this;
+        removeAllListeners(event?: "prerender" | "postrender"): this;
         off(event: "prerender" | "postrender", fn?: () => void, context?: any): this;
         addListener(event: "prerender" | "postrender", fn: () => void, context?: any): this;
 
@@ -1053,7 +1053,7 @@ declare namespace PIXI {
         once(event: "context", fn: (gl: WebGLRenderingContext) => void, context?: any): this;
         removeListener(event: "prerender" | "postrender", fn?: () => void, context?: any): this;
         removeListener(event: "context", fn?: (gl: WebGLRenderingContext) => void, context?: any): this;
-        removeAllListeners(event: "prerender" | "postrender" | "context"): this;
+        removeAllListeners(event?: "prerender" | "postrender" | "context"): this;
         off(event: "prerender" | "postrender", fn?: () => void, context?: any): this;
         off(event: "context", fn?: (gl: WebGLRenderingContext) => void, context?: any): this;
         addListener(event: "prerender" | "postrender", fn: () => void, context?: any): this;
@@ -1619,7 +1619,7 @@ declare namespace PIXI {
         on(event: "update", fn: (baseRenderTexture: BaseRenderTexture) => void, context?: any): this;
         once(event: "update", fn: (baseRenderTexture: BaseRenderTexture) => void, context?: any): this;
         removeListener(event: "update", fn?: (baseRenderTexture: BaseRenderTexture) => void, context?: any): this;
-        removeAllListeners(event: "update"): this;
+        removeAllListeners(event?: "update"): this;
         off(event: "update", fn?: (baseRenderTexture: BaseRenderTexture) => void, context?: any): this;
         addListener(event: "update", fn: (baseRenderTexture: BaseRenderTexture) => void, context?: any): this;
 
@@ -1678,7 +1678,7 @@ declare namespace PIXI {
         on(event: "update" | "loaded" | "error" | "dispose", fn: (baseTexture: BaseTexture) => void, context?: any): this;
         once(event: "update" | "loaded" | "error" | "dispose", fn: (baseTexture: BaseTexture) => void, context?: any): this;
         removeListener(event: "update" | "loaded" | "error" | "dispose", fn?: (baseTexture: BaseTexture) => void, context?: any): this;
-        removeAllListeners(event: "update" | "loaded" | "error" | "dispose"): this;
+        removeAllListeners(event?: "update" | "loaded" | "error" | "dispose"): this;
         off(event: "update" | "loaded" | "error" | "dispose", fn?: (baseTexture: BaseTexture) => void, context?: any): this;
         addListener(event: "update" | "loaded" | "error" | "dispose", fn: (baseTexture: BaseTexture) => void, context?: any): this;
 
@@ -1708,7 +1708,7 @@ declare namespace PIXI {
         protected _uvs: TextureUvs;
         orig: Rectangle;
         protected _updateID: number;
-        transform: any;
+        transform: TextureMatrix;
         textureCacheIds: string[];
 
         update(): void;
@@ -1716,7 +1716,7 @@ declare namespace PIXI {
         protected onBaseTextureUpdated(baseTexture: BaseTexture): void;
         destroy(destroyBase?: boolean): void;
         clone(): Texture;
-        protected _updateUvs(): void;
+        _updateUvs(): void;
 
         static fromImage(imageUrl: string, crossOrigin?: boolean, scaleMode?: number, sourceScale?: number): Texture;
         static fromFrame(frameId: string): Texture;
@@ -1744,9 +1744,28 @@ declare namespace PIXI {
         on(event: "update", fn: (texture: Texture) => void, context?: any): this;
         once(event: "update", fn: (texture: Texture) => void, context?: any): this;
         removeListener(event: "update", fn?: (texture: Texture) => void, context?: any): this;
-        removeAllListeners(event: "update"): this;
+        removeAllListeners(event?: "update"): this;
         off(event: "update", fn?: (texture: Texture) => void, context?: any): this;
         addListener(event: "update", fn: (texture: Texture) => void, context?: any): this;
+
+    }
+    export class TextureMatrix {
+
+        constructor(texture: Texture, clampMargin?: number);
+
+        protected _texture: Texture;
+        mapCoord: Matrix;
+        uClampFrame: Float32Array;
+        uClampOffset: Float32Array;
+        protected _lastTextureID: number;
+
+        clampOffset: number;
+        clampMargin: number;
+
+        texture: Texture;
+
+        update(forceUpdate?: boolean): boolean;
+        multiplyUvs(uvs: Float32Array, out?: Float32Array): Float32Array;
 
     }
     export class TextureUvs {
@@ -2000,25 +2019,6 @@ declare namespace PIXI {
             static fromImages(images: string[]): AnimatedSprite;
 
         }
-        export class TextureTransform {
-
-            constructor(texture: Texture, clampMargin?: number);
-
-            protected _texture: Texture;
-            mapCoord: Matrix;
-            uClampFrame: Float32Array;
-            uClampOffset: Float32Array;
-            protected _lastTextureID: number;
-
-            clampOffset: number;
-            clampMargin: number;
-
-            texture: Texture;
-
-            update(forceUpdate?: boolean): boolean;
-            multiplyUvs(uvs: Float32Array, out?: Float32Array): Float32Array;
-
-        }
         export class TilingSprite extends Sprite {
 
             constructor(texture: Texture, width?: number, height?: number);
@@ -2027,7 +2027,7 @@ declare namespace PIXI {
             protected _width: number;
             protected _height: number;
             protected _canvasPattern: CanvasPattern;
-            uvTransform: TextureTransform;
+            uvTransform: TextureMatrix;
             uvRespectAnchor: boolean;
 
             clampMargin: number;
@@ -2176,6 +2176,9 @@ declare namespace PIXI {
 
         }
         export class AlphaFilter extends Filter<{}> {
+            
+            constructor(alpha?: number);
+
             alpha: number;
             glShaderKey: number;
         }
@@ -2623,7 +2626,7 @@ declare namespace PIXI {
             texture: Texture;
             tintRgb: Float32Array;
             protected _glDatas: { [n: number]: any; };
-            protected _uvTransform: extras.TextureTransform;
+            protected _uvTransform: TextureMatrix;
             uploadUvTransform: boolean;
             multiplyUvs(): void;
             refresh(forceUpdate?: boolean): void;
@@ -3506,6 +3509,15 @@ declare namespace PIXI {
          * @deprecated since version 4.2.0
          */
         type MovieClip = extras.AnimatedSprite;
+
+        /**
+         * @class
+         * @name TextureTransform
+         * @memberof PIXI.extras
+         * @see PIXI.TextureMatrix
+         * @deprecated since version 4.6.0
+         */
+        type TextureTranform = TextureMatrix;
 
     }
 
