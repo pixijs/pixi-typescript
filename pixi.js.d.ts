@@ -1114,7 +1114,7 @@ declare namespace PIXI {
 
         update(): void;
         run(): void;
-        unload(): void;
+        unload(displayObject: DisplayObject): void;
 
     }
     export abstract class ObjectRenderer extends WebGLManager {
