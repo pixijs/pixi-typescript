@@ -2315,7 +2315,7 @@ declare namespace PIXI {
             protected _tempPoint: Point;
             resolution: number;
             hitTest(globalPoint: Point, root?: Container): DisplayObject;
-            protected setTargetElement(element: HTMLCanvasElement, resolution?: number): void;
+            setTargetElement(element: HTMLCanvasElement, resolution?: number): void;
             protected addEvents(): void;
             protected removeEvents(): void;
             update(deltaTime?: number): void;
