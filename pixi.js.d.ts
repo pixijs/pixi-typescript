@@ -905,7 +905,7 @@ declare namespace PIXI {
         backgroundColor: number;
 
         resize(screenWidth: number, screenHeight: number): void;
-        generateTexture(displayObject: DisplayObject, scaleMode?: number, resolution?: number): RenderTexture;
+        generateTexture(displayObject: DisplayObject, scaleMode?: number, resolution?: number, region?: Rectangle): RenderTexture;
         render(...args: any[]): void;
         destroy(removeView?: boolean): void;
 
@@ -1024,7 +1024,6 @@ declare namespace PIXI {
         extract: extract.WebGLExtract;
         protected drawModes: any;
         protected _activeShader: Shader;
-        protected _activeVao: glCore.VertexArrayObject;
         _activeRenderTarget: RenderTarget;
         protected _initContext(): void;
 
@@ -2176,7 +2175,7 @@ declare namespace PIXI {
 
         }
         export class AlphaFilter extends Filter<{}> {
-            
+
             constructor(alpha?: number);
 
             alpha: number;
@@ -2900,7 +2899,7 @@ declare namespace PIXI {
     //////////////////////////////////////////////////////////////////////////////
     /////////////////////////////pixi-gl-core/////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////
-    // pixi-gl-core 1.1.2 https://github.com/pixijs/pixi-gl-core 
+    // pixi-gl-core 1.1.4 https://github.com/pixijs/pixi-gl-core 
     // sharedArrayBuffer as a type is not available yet.
     // need to fully define what an `Attrib` is.
     export namespace glCore {
@@ -3067,13 +3066,13 @@ declare namespace PIXI {
             indexBuffer: GLBuffer;
             dirty: boolean;
 
-            bind(): VertexArrayObject;
-            unbind(): VertexArrayObject;
-            activate(): VertexArrayObject;
-            addAttribute(buffer: GLBuffer, attribute: Attrib, type: number, normalized: boolean, stride: number, start: number): VertexArrayObject;
-            addIndex(buffer: GLBuffer, options?: any): VertexArrayObject;
-            clear(): VertexArrayObject;
-            draw(type: number, size: number, start: number): VertexArrayObject;
+            bind(): this;
+            unbind(): this;
+            activate(): this;
+            addAttribute(buffer: GLBuffer, attribute: Attrib, type?: number, normalized?: boolean, stride?: number, start?: number): this;
+            addIndex(buffer: GLBuffer, options?: any): this;
+            clear(): this;
+            draw(type: number, size?: number, start?: number): this;
             destroy(): void;
 
         }
