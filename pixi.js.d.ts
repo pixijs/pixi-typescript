@@ -2735,7 +2735,11 @@ declare namespace PIXI {
 
         export interface ParticleContainerProperties {
 
+            /**
+             * DEPRECIATED - Use `vertices`
+             */
             scale?: boolean;
+            vertices?: boolean;
             position?: boolean;
             rotation?: boolean;
             uvs?: boolean;
