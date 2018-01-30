@@ -835,12 +835,12 @@ declare namespace PIXI {
         legacy?: boolean;
 
         /**
-         * Depricated
+         * Deprecated
          */
         context?: WebGLRenderingContext;
 
         /**
-         * Depricated
+         * Deprecated
          */
         autoResize?: boolean;
 
@@ -2903,7 +2903,7 @@ declare namespace PIXI {
     //////////////////////////////////////////////////////////////////////////////
     /////////////////////////////pixi-gl-core/////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////
-    // pixi-gl-core 1.1.4 https://github.com/pixijs/pixi-gl-core 
+    // pixi-gl-core 1.1.4 https://github.com/pixijs/pixi-gl-core
     // sharedArrayBuffer as a type is not available yet.
     // need to fully define what an `Attrib` is.
     export namespace glCore {
