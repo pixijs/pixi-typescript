@@ -346,7 +346,7 @@ declare namespace PIXI {
         renderable: boolean;
         parent: Container;
         worldAlpha: number;
-        filterArea: Rectangle;
+        filterArea: Rectangle | null;
         protected _filters: Filter<any>[] | null;
         protected _enabledFilters: Filter<any>[] | null;
         protected _bounds: Bounds;
