@@ -354,7 +354,7 @@ declare namespace PIXI {
         protected _lastBoundsID: number;
         protected _boundsRect: Rectangle;
         protected _localBoundsRect: Rectangle;
-        protected _mask: PIXI.Graphics | PIXI.Sprite;
+        protected _mask: PIXI.Graphics | PIXI.Sprite | null;
         protected readonly _destroyed: boolean;
         x: number;
         y: number;
@@ -366,7 +366,7 @@ declare namespace PIXI {
         skew: ObservablePoint;
         rotation: number;
         worldVisible: boolean;
-        mask: PIXI.Graphics | PIXI.Sprite;
+        mask: PIXI.Graphics | PIXI.Sprite | null;
         filters: Filter<any>[] | null;
 
         updateTransform(): void;
