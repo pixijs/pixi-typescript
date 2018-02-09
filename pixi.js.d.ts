@@ -533,8 +533,8 @@ declare namespace PIXI {
         updateLocalBounds(): void;
         drawShape(shape: Circle | Rectangle | Ellipse | Polygon | RoundedRectangle | any): GraphicsData;
         generateCanvasTexture(scaleMode?: number, resolution?: number): Texture;
-        protected closePath(): Graphics;
-        protected addHole(): Graphics;
+        closePath(): Graphics;
+        addHole(): Graphics;
         destroy(options?: DestroyOptions | boolean): void;
 
     }
