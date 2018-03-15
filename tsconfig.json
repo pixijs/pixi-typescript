@@ -15,6 +15,7 @@
     },
     "files": [
         "pixi.js.d.ts",
+        "pixi-filters.d.ts",
         "pixi.js-tests.ts"
     ]
 }
