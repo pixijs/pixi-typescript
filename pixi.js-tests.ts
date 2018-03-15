@@ -127,10 +127,7 @@ namespace basics {
 
         constructor(fragmentSource: string) {
             super(null, fragmentSource, {
-                customUniform: {
-                    type: "1f",
-                    value: 0
-                }
+                customUniform: 0
             });
         }
 
@@ -153,9 +150,9 @@ namespace basics {
 
             this.app.stop();
 
-            PIXI.loader.add("shader", "_assets/basics/shader.frag")
+            PIXI.Loader.shared.add("shader", "_assets/basics/shader.frag")
 
-                .load((loader: PIXI.loaders.Loader, resource: any): void => {
+                .load((loader: PIXI.Loader, resource: any): void => {
 
                     this.filter = new PIXI.Filter(null, resource.shader.data);
                     this.background.filters = [this.filter];
@@ -241,7 +238,7 @@ namespace basics {
                 this.container.addChild(bunny);
             }
 
-            const brt = new PIXI.BaseRenderTexture(300, 300, PIXI.SCALE_MODES.LINEAR, 1);
+            const brt = new PIXI.BaseRenderTexture({ width: 300, height: 300, scaleMode: PIXI.SCALE_MODES.LINEAR, resolution: 1 });
             const rt = new PIXI.RenderTexture(brt);
 
             this.sprite = new PIXI.Sprite(rt);
@@ -262,13 +259,13 @@ namespace basics {
     export class SpriteSheet {
 
         private app: PIXI.Application;
-        private anim: PIXI.extras.AnimatedSprite;
+        private anim: PIXI.AnimatedSprite;
 
         constructor() {
 
-            PIXI.loader
+            PIXI.Loader.shared
                 .add("required/assets/basics/fighter.json")
-                .load((loader: PIXI.loaders.Loader, resource: any) => {
+                .load((loader: PIXI.Loader, resource: any) => {
 
                     const frames = [];
 
@@ -280,7 +277,7 @@ namespace basics {
 
                     }
 
-                    this.anim = new PIXI.extras.AnimatedSprite(frames);
+                    this.anim = new PIXI.AnimatedSprite(frames);
 
                     this.anim.x = this.app.renderer.width / 2;
                     this.anim.y = this.app.renderer.height / 2;
@@ -346,7 +343,7 @@ namespace basics {
         private app: PIXI.Application;
         private count: number;
         private points: PIXI.Point[];
-        private strip: PIXI.mesh.Rope;
+        private strip: PIXI.Rope;
         private graphics: PIXI.Graphics;
 
         constructor() {
@@ -357,7 +354,7 @@ namespace basics {
                 this.points.push(new PIXI.Point(i * ropeLength, 0));
             }
 
-            this.strip = new PIXI.mesh.Rope(PIXI.Texture.fromImage("required/assets/snake.png"), this.points);
+            this.strip = new PIXI.Rope(PIXI.Texture.fromImage("required/assets/snake.png"), this.points);
             this.strip.x = -40;
             this.strip.y = 300;
             this.app.stage.addChild(this.strip);
@@ -406,7 +403,7 @@ namespace basics {
     export class TilingSprite {
 
         private app: PIXI.Application;
-        private tilingSprite: PIXI.extras.TilingSprite;
+        private tilingSprite: PIXI.TilingSprite;
         private count: number;
 
         constructor() {
@@ -416,7 +413,7 @@ namespace basics {
 
             const texture = PIXI.Texture.fromImage("required/assets/p2.jpeg");
 
-            this.tilingSprite = new PIXI.extras.TilingSprite(
+            this.tilingSprite = new PIXI.TilingSprite(
                 texture,
                 this.app.renderer.width,
                 this.app.renderer.height
@@ -558,7 +555,7 @@ namespace demos {
             this.app.stop();
             document.body.appendChild(this.app.view);
 
-            PIXI.loader
+            PIXI.Loader.shared
                 .add("spritesheet", "required/assets/mc.json")
                 .load((): void => {
 
@@ -572,7 +569,7 @@ namespace demos {
 
                     for (i = 0; i < 50; i++) {
 
-                        const explosion = new PIXI.extras.AnimatedSprite(explosionTextures);
+                        const explosion = new PIXI.AnimatedSprite(explosionTextures);
 
                         explosion.x = Math.random() * this.app.renderer.width;
                         explosion.y = Math.random() * this.app.renderer.height;
@@ -594,7 +591,7 @@ namespace demos {
     export class Batch {
 
         private app: PIXI.Application;
-        private sprites: PIXI.particles.ParticleContainer;
+        private sprites: PIXI.ParticleContainer;
         private maggots: Dude[];
         private dudeBounds: PIXI.Rectangle;
         private tick: number;
@@ -604,7 +601,7 @@ namespace demos {
             this.app = new PIXI.Application();
             document.body.appendChild(this.app.view);
 
-            this.sprites = new PIXI.particles.ParticleContainer(10000, {
+            this.sprites = new PIXI.ParticleContainer(10000, {
                 scale: true,
                 position: true,
                 rotation: true,
@@ -615,7 +612,7 @@ namespace demos {
 
             this.maggots = [];
 
-            const totalSprites = this.app.renderer instanceof PIXI.WebGLRenderer ? 10000 : 100;
+            const totalSprites = this.app.renderer instanceof PIXI.Renderer ? 10000 : 100;
 
             const dudeTexture = PIXI.Texture.fromImage("required/assets/tinyMaggot.png");
 
@@ -797,7 +794,7 @@ namespace demos {
             this.alienContainer.y = 300;
             this.app.stage.addChild(this.alienContainer);
 
-            PIXI.loader
+            PIXI.Loader.shared
                 .add("spritesheet", "required/assets/monsters.json")
                 .load((): void => {
 
@@ -1194,14 +1191,14 @@ namespace demos {
             this.app = new PIXI.Application();
             document.body.appendChild(this.app.view);
 
-            this.renderTexture = PIXI.RenderTexture.create(
-                this.app.renderer.width,
-                this.app.renderer.height
-            );
-            this.renderTexture2 = PIXI.RenderTexture.create(
-                this.app.renderer.width,
-                this.app.renderer.height
-            );
+            this.renderTexture = PIXI.RenderTexture.create({
+                width: this.app.renderer.width,
+                height: this.app.renderer.height
+            });
+            this.renderTexture2 = PIXI.RenderTexture.create({
+                width: this.app.renderer.width,
+                height: this.app.renderer.height
+            });
             this.currentTexture = this.renderTexture;
 
             this.outputSprite = new PIXI.Sprite(this.currentTexture);
@@ -1270,7 +1267,7 @@ namespace demos {
         private app: PIXI.Application;
         private count: number;
         private points: PIXI.Point[];
-        private strip: PIXI.mesh.Rope;
+        private strip: PIXI.Rope;
         private snakeContainer: PIXI.Container;
 
         constructor() {
@@ -1288,7 +1285,7 @@ namespace demos {
                 this.points.push(new PIXI.Point(i * ropeLength, 0));
             }
 
-            this.strip = new PIXI.mesh.Rope(PIXI.Texture.fromImage("required/assets/snake.png"), this.points);
+            this.strip = new PIXI.Rope(PIXI.Texture.fromImage("required/assets/snake.png"), this.points);
             this.strip.x = -459;
 
             this.snakeContainer = new PIXI.Container();
@@ -1313,7 +1310,7 @@ namespace demos {
     export class TextDemo {
 
         private app: PIXI.Application;
-        private bitmapFontText: PIXI.extras.BitmapText;
+        private bitmapFontText: PIXI.BitmapText;
         private background: PIXI.Sprite;
         private textSample: PIXI.Text;
         private spinningText: PIXI.Text;
@@ -1325,11 +1322,11 @@ namespace demos {
             this.app = new PIXI.Application();
             document.body.appendChild(this.app.view);
 
-            PIXI.loader
+            PIXI.Loader.shared
                 .add("desyrel", "required/assets/desyrel.xml")
                 .load((): void => {
 
-                    this.bitmapFontText = new PIXI.extras.BitmapText("bitmap fonts are\n now supported!", { font: "35px Desyrel", align: "right" });
+                    this.bitmapFontText = new PIXI.BitmapText("bitmap fonts are\n now supported!", { font: "35px Desyrel", align: "right" });
                     this.bitmapFontText.x = this.app.renderer.width - this.bitmapFontText.textWidth - 20;
                     this.bitmapFontText.y = 20;
                     this.app.stage.addChild(this.bitmapFontText);
@@ -1409,8 +1406,8 @@ namespace demos {
 
             this.bol = false;
 
-            PIXI.loader.add("flowerTop", "required/assets/flowerTop.png");
-            PIXI.loader.load((loader: PIXI.loaders.Loader, resources: any) => {
+            PIXI.Loader.shared.add("flowerTop", "required/assets/flowerTop.png");
+            PIXI.Loader.shared.load((loader: PIXI.Loader, resources: any) => {
                 this.texture = resources.flowerTop.texture;
                 this.init();
             });
