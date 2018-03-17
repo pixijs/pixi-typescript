@@ -1,4 +1,4 @@
-/// <reference path="pixi.js.d.ts" />
+/// <reference types="pixi.js-legacy" />
 
 namespace basics {
 
