@@ -3125,6 +3125,8 @@ declare namespace PIXI {
         export function premultiplyTint(tint: number, alpha: number): number;
         export function premultiplyRgba(rgb: Float32Array | number[], alpha: number, out?: Float32Array, premultiply?: boolean): Float32Array;
         export function premultiplyTintToRgba(tint: number, alpha: number, out?: Float32Array, premultiply?: boolean): Float32Array;
+        export function clearTextureCache(): void;
+        export function destroyTextureCache(): void;
         export const premultiplyBlendMode: number[][];
         export const TextureCache: any;
         export const BaseTextureCache: any;
