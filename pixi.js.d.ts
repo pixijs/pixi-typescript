@@ -1208,6 +1208,9 @@ declare namespace PIXI {
 
         constructor(renderer: WebGLRenderer);
 
+        protected _screenWidth: number;
+        protected _screenHeight: number;
+
         gl: WebGLRenderingContext;
         quad: Quad;
         stack: FilterManagerStackItem[];
@@ -1215,6 +1218,7 @@ declare namespace PIXI {
         shaderCache: any;
         filterData: any;
 
+        onPrerender(): void;
         pushFilter(target: RenderTarget, filters: Filter<any>[]): void;
         popFilter(): void;
         applyFilter(shader: glCore.GLShader | Filter<any>, inputTarget: RenderTarget, outputTarget: RenderTarget, clear?: boolean): void;
@@ -1288,7 +1292,7 @@ declare namespace PIXI {
         name?: string;
 
     }
-    type UniformDataMap<U> = {[K in keyof U]: UniformData<U[K]>};
+    type UniformDataMap<U> = { [K in keyof U]: UniformData<U[K]> };
     export class Filter<U extends object> {
 
         constructor(vertexSrc?: string, fragmentSrc?: string, uniforms?: UniformDataMap<U>);
@@ -1551,9 +1555,11 @@ declare namespace PIXI {
 
         constructor(text: string, style: TextStyle, width: number, height: number, lines: number[], lineWidths: number[], lineHeight: number, maxLineWidth: number, fontProperties: any);
 
+        static addLine(line: string, newLine?: boolean): string;
         static measureText(text: string, style: TextStyle, wordWrap?: boolean, canvas?: HTMLCanvasElement): TextMetrics;
         static wordWrap(text: string, style: TextStyle, canvas?: HTMLCanvasElement): string;
         static measureFont(font: string): FontMetrics;
+        static getFromCache(key: string, letterSpacing: number, cache: any, context: CanvasRenderingContext2D): number;
 
     }
 
@@ -2244,6 +2250,7 @@ declare namespace PIXI {
             type: string;
             data: InteractionData;
             stopPropagation(): void;
+            reset(): void;
 
         }
         export class InteractionData {
@@ -2267,8 +2274,8 @@ declare namespace PIXI {
 
             readonly pointerID: number;
 
-            protected _copyEvent(event: Touch | MouseEvent | PointerEvent): void;
-            protected _reset(): void;
+            copyEvent(event: Touch | MouseEvent | PointerEvent): void;
+            reset(): void;
 
             getLocalPosition(displayObject: DisplayObject, point?: Point, globalPos?: Point): Point;
 
@@ -2769,7 +2776,8 @@ declare namespace PIXI {
             protected _maxSize: number;
             protected _batchSize: number;
             protected _glBuffers: { [n: number]: WebGLBuffer; };
-            protected _bufferToUpdate: number;
+            protected _bufferUpdateIDs: number[];
+            protected _updateID: number;
             interactiveChildren: boolean;
             blendMode: number;
             autoResize: boolean;
@@ -2798,6 +2806,8 @@ declare namespace PIXI {
             dynamicBuffer: any;
             dynamicData: any;
             dynamicDataUint32: any;
+
+            protected _updateID: number;
 
             destroy(): void;
 
