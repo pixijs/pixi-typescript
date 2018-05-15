@@ -462,9 +462,10 @@ declare namespace PIXI {
 
     export class GraphicsData {
 
-        constructor(lineWidth: number, lineColor: number, lineAlpha: number, fillColor: number, fillAlpha: number, fill: boolean, nativeLines: boolean, shape: Circle | Rectangle | Ellipse | Polygon | RoundedRectangle | any);
+        constructor(lineWidth: number, lineColor: number, lineAlpha: number, fillColor: number, fillAlpha: number, fill: boolean, nativeLines: boolean, shape: Circle | Rectangle | Ellipse | Polygon | RoundedRectangle | any, lineAlignment?: number);
 
         lineWidth: number;
+        lineAlignment: number;
         nativeLines: boolean;
         lineColor: number;
         lineAlpha: number;
@@ -489,6 +490,7 @@ declare namespace PIXI {
         lineWidth: number;
         nativeLines: boolean;
         lineColor: number;
+        lineAlignment: number;
         protected graphicsData: GraphicsData[];
         tint: number;
         protected _prevTint: number;
@@ -509,7 +511,7 @@ declare namespace PIXI {
         static _SPRITE_TEXTURE: Texture;
 
         clone(): Graphics;
-        lineStyle(lineWidth?: number, color?: number, alpha?: number): Graphics;
+        lineStyle(lineWidth?: number, color?: number, alpha?: number, alignment?: number): Graphics;
         moveTo(x: number, y: number): Graphics;
         lineTo(x: number, y: number): Graphics;
         quadraticCurveTo(cpX: number, cpY: number, toX: number, toY: number): Graphics;
@@ -1154,6 +1156,8 @@ declare namespace PIXI {
     }
     export class RenderTarget {
 
+        protected filterPoolKey: string;
+        
         constructor(gl: WebGLRenderingContext, width: number, height: number, scaleMode: number, resolution: number, root?: boolean);
 
         gl: WebGLRenderingContext;
@@ -1462,6 +1466,7 @@ declare namespace PIXI {
         strokeThickness?: number;
         textBaseline?: string;
         trim?: boolean;
+        whiteSpace?: string;
         wordWrap?: boolean;
         wordWrapWidth?: number;
         leading?: number;
@@ -1528,6 +1533,8 @@ declare namespace PIXI {
         textBaseline: string;
         protected _trim: boolean;
         trim: boolean;
+        protected _whiteSpace: string;
+        whiteSpace: string;
         protected _wordWrap: boolean;
         wordWrap: boolean;
         protected _wordWrapWidth: number;
@@ -1539,9 +1546,11 @@ declare namespace PIXI {
 
     export class TextMetrics {
 
-        protected _canvas: HTMLCanvasElement;
-        protected _context: CanvasRenderingContext2D;
-        protected _fonts: FontMetrics;
+        static _canvas: HTMLCanvasElement;
+        static _context: CanvasRenderingContext2D;
+        static _fonts: FontMetrics;
+        static _newLines: Array<number>;
+        static _breakingSpaces: Array<number>;
 
         text: string;
         style: TextStyle;
@@ -1555,11 +1564,19 @@ declare namespace PIXI {
 
         constructor(text: string, style: TextStyle, width: number, height: number, lines: number[], lineWidths: number[], lineHeight: number, maxLineWidth: number, fontProperties: any);
 
-        static addLine(line: string, newLine?: boolean): string;
         static measureText(text: string, style: TextStyle, wordWrap?: boolean, canvas?: HTMLCanvasElement): TextMetrics;
         static wordWrap(text: string, style: TextStyle, canvas?: HTMLCanvasElement): string;
-        static measureFont(font: string): FontMetrics;
+        static addLine(line: string, newLine?: boolean): string;
         static getFromCache(key: string, letterSpacing: number, cache: any, context: CanvasRenderingContext2D): number;
+        static collapseSpaces(whiteSpace?: string): boolean;
+        static collapseNewlines(whiteSpace?: string): boolean;
+        static trimRight(text?: string): string;
+        static isNewline(char?: string): boolean;
+        static isBreakingSpace(char?: string): boolean;
+        static tokenize(text?: string): Array<string>;
+        static canBreakWords(token?: string, breakWords?: boolean): boolean;
+        static canBreakChars(char: string, nextChar: string, token: string, index: number, breakWords?: boolean): boolean;
+        static measureFont(font: string): FontMetrics;
 
     }
 
@@ -2634,6 +2651,8 @@ declare namespace PIXI {
             indices: Uint16Array;
             dirty: number;
             indexDirty: number;
+            vertexDirty: number;
+            autoUpdate: boolean;
             dirtyVertex: boolean;
             protected _geometryVersion: number;
             blendMode: number;
