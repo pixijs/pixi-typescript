@@ -981,7 +981,9 @@ namespace demos {
                 this.graphics.bezierCurveTo(
                     Math.random() * 800, Math.random() * 600,
                     Math.random() * 800, Math.random() * 600,
-                    Math.random() * 800, Math.random() * 600
+                    Math.random() * 800, Math.random() * 600,
+                    Math.random() * 800, Math.random() * 600,
+                    Math.random() * 800
                 );
 
             });

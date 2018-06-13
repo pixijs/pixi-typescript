@@ -1,4 +1,4 @@
-// Type definitions for Pixi.js 4.7
+// Type definitions for Pixi.js 4.8.1
 // Project: https://github.com/pixijs/pixi.js/tree/dev
 // Definitions by: clark-stevenson <https://github.com/pixijs/pixi-typescript>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
@@ -96,7 +96,7 @@ declare namespace PIXI {
             protected _onFocus(e: interaction.InteractionEvent): void;
             protected _onFocusOut(e: interaction.InteractionEvent): void;
             protected _onKeyDown(e: interaction.InteractionEvent): void;
-            protected _onMouseMove(): void;
+            protected _onMouseMove(e: MouseEvent): void;
 
             destroy(): void;
 
@@ -209,6 +209,12 @@ declare namespace PIXI {
 
     // display
 
+    export interface StageOptions{
+        children?: boolean;
+        texture?: boolean;
+        baseTexture? : boolean;
+    }
+
     export class Application {
 
         constructor(options?: ApplicationOptions);
@@ -225,7 +231,7 @@ declare namespace PIXI {
         stop(): void;
         start(): void;
         render(): void;
-        destroy(removeView?: boolean): void;
+        destroy(removeView?: boolean, stageOptions?: StageOptions | boolean): void;
         readonly view: HTMLCanvasElement;
 
     }
@@ -484,6 +490,13 @@ declare namespace PIXI {
     }
     export class Graphics extends Container {
 
+        static CURVES: {
+            adaptive: boolean;
+            maxLength: number;
+            minSegments: number;
+            maxSegments: number;
+        }
+
         constructor(nativeLines?: boolean);
 
         fillAlpha: number;
@@ -507,15 +520,18 @@ declare namespace PIXI {
         protected cachedSpriteDirty: boolean;
         protected _spriteRect: Rectangle;
         protected _fastRect: boolean;
-
+        
         static _SPRITE_TEXTURE: Texture;
-
+        
         clone(): Graphics;
+        protected _quadraticCurveLength(fromX: number, fromY: number, cpX: number, cpY: number, toX: number, toY: number): number;
+        protected _bezierCurveLength(fromX: number, fromY: number, cpX: number, cpY: number, cpX2: number, cpY2: number, toX: number, toY: number): number
+        protected _segmentsCount(length: number): number;
         lineStyle(lineWidth?: number, color?: number, alpha?: number, alignment?: number): Graphics;
         moveTo(x: number, y: number): Graphics;
         lineTo(x: number, y: number): Graphics;
         quadraticCurveTo(cpX: number, cpY: number, toX: number, toY: number): Graphics;
-        bezierCurveTo(cpX: number, cpY: number, cpX2: number, cpY2: number, toX: number, toY: number): Graphics;
+        bezierCurveTo(fromX: number, fromY: number, cpX: number, cpY: number, cpX2: number, cpY2: number, toX: number, toY: number, n: number, path?:{x: number, y: number}[]): {x: number, y: number}[];
         arcTo(x1: number, y1: number, x2: number, y2: number, radius: number): Graphics;
         arc(cx: number, cy: number, radius: number, startAngle: number, endAngle: number, anticlockwise?: boolean): Graphics;
         beginFill(color: number, alpha?: number): Graphics;
@@ -538,6 +554,7 @@ declare namespace PIXI {
         closePath(): Graphics;
         addHole(): Graphics;
         destroy(options?: DestroyOptions | boolean): void;
+
 
     }
     export class CanvasGraphicsRenderer {
@@ -1546,12 +1563,16 @@ declare namespace PIXI {
 
     export class TextMetrics {
 
+        static METRICS_STRING: string;
+        static BASELINE_SYMBOL: string;
+        static BASELINE_MULTIPLIER: number;
+
         static _canvas: HTMLCanvasElement;
         static _context: CanvasRenderingContext2D;
         static _fonts: FontMetrics;
         static _newLines: Array<number>;
         static _breakingSpaces: Array<number>;
-
+        
         text: string;
         style: TextStyle;
         width: number;
@@ -1561,9 +1582,9 @@ declare namespace PIXI {
         lineHeight: number;
         maxLineWidth: number;
         fontProperties: any;
-
+        
         constructor(text: string, style: TextStyle, width: number, height: number, lines: number[], lineWidths: number[], lineHeight: number, maxLineWidth: number, fontProperties: any);
-
+        
         static measureText(text: string, style: TextStyle, wordWrap?: boolean, canvas?: HTMLCanvasElement): TextMetrics;
         static wordWrap(text: string, style: TextStyle, canvas?: HTMLCanvasElement): string;
         static addLine(line: string, newLine?: boolean): string;
@@ -1577,7 +1598,8 @@ declare namespace PIXI {
         static canBreakWords(token?: string, breakWords?: boolean): boolean;
         static canBreakChars(char: string, nextChar: string, token: string, index: number, breakWords?: boolean): boolean;
         static measureFont(font: string): FontMetrics;
-
+        static clearMetrics(font: string): void;
+        
     }
 
     interface FontMetrics {
@@ -1979,10 +2001,12 @@ declare namespace PIXI {
         }
         export class BitmapText extends Container {
 
-            static registerFont(xml: XMLDocument, texture: Texture): any;
+            static registerFont(xml: XMLDocument, textures: Texture | Texture[] | {[key: string]: Texture}): any;
 
             constructor(text: string, style?: BitmapTextStyle);
 
+            letterSpacing: number;
+            protected _letterSpacing: number;
             protected _textWidth: number;
             protected _textHeight: number;
             textWidth: number;
