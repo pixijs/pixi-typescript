@@ -982,8 +982,6 @@ namespace demos {
                     Math.random() * 800, Math.random() * 600,
                     Math.random() * 800, Math.random() * 600,
                     Math.random() * 800, Math.random() * 600,
-                    Math.random() * 800, Math.random() * 600,
-                    Math.random() * 800
                 );
 
             });

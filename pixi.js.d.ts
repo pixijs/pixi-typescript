@@ -531,7 +531,7 @@ declare namespace PIXI {
         moveTo(x: number, y: number): Graphics;
         lineTo(x: number, y: number): Graphics;
         quadraticCurveTo(cpX: number, cpY: number, toX: number, toY: number): Graphics;
-        bezierCurveTo(fromX: number, fromY: number, cpX: number, cpY: number, cpX2: number, cpY2: number, toX: number, toY: number, n: number, path?:{x: number, y: number}[]): {x: number, y: number}[];
+        bezierCurveTo(cpX: number, cpY: number, cpX2: number, cpY2: number, toX: number, toY: number): Graphics;
         arcTo(x1: number, y1: number, x2: number, y2: number, radius: number): Graphics;
         arc(cx: number, cy: number, radius: number, startAngle: number, endAngle: number, anticlockwise?: boolean): Graphics;
         beginFill(color: number, alpha?: number): Graphics;
