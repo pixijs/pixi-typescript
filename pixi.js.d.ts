@@ -254,9 +254,9 @@ declare namespace PIXI {
 
         getRectangle(rect?: Rectangle): Rectangle;
         addPoint(point: Point): void;
-        addQuad(vertices: number[]): Bounds | undefined;
+        addQuad(vertices: ArrayLike<number>): Bounds | undefined;
         addFrame(transform: Transform, x0: number, y0: number, x1: number, y1: number): void;
-        addVertices(transform: Transform, vertices: number[], beginOffset: number, endOffset: number): void;
+        addVertices(transform: Transform, vertices: ArrayLike<number>, beginOffset: number, endOffset: number): void;
         addBounds(bounds: Bounds): void;
         addBoundsMask(bounds: Bounds, mask: Bounds): void;
         addBoundsArea(bounds: Bounds, area: Rectangle): void;
@@ -520,9 +520,9 @@ declare namespace PIXI {
         protected cachedSpriteDirty: boolean;
         protected _spriteRect: Rectangle;
         protected _fastRect: boolean;
-        
+
         static _SPRITE_TEXTURE: Texture;
-        
+
         clone(): Graphics;
         protected _quadraticCurveLength(fromX: number, fromY: number, cpX: number, cpY: number, toX: number, toY: number): number;
         protected _bezierCurveLength(fromX: number, fromY: number, cpX: number, cpY: number, cpX2: number, cpY2: number, toX: number, toY: number): number
@@ -1174,7 +1174,7 @@ declare namespace PIXI {
     export class RenderTarget {
 
         protected filterPoolKey: string;
-        
+
         constructor(gl: WebGLRenderingContext, width: number, height: number, scaleMode: number, resolution: number, root?: boolean);
 
         gl: WebGLRenderingContext;
@@ -1572,7 +1572,7 @@ declare namespace PIXI {
         static _fonts: FontMetrics;
         static _newLines: Array<number>;
         static _breakingSpaces: Array<number>;
-        
+
         text: string;
         style: TextStyle;
         width: number;
@@ -1582,9 +1582,9 @@ declare namespace PIXI {
         lineHeight: number;
         maxLineWidth: number;
         fontProperties: any;
-        
+
         constructor(text: string, style: TextStyle, width: number, height: number, lines: number[], lineWidths: number[], lineHeight: number, maxLineWidth: number, fontProperties: any);
-        
+
         static measureText(text: string, style: TextStyle, wordWrap?: boolean, canvas?: HTMLCanvasElement): TextMetrics;
         static wordWrap(text: string, style: TextStyle, canvas?: HTMLCanvasElement): string;
         static addLine(line: string, newLine?: boolean): string;
@@ -1599,7 +1599,7 @@ declare namespace PIXI {
         static canBreakChars(char: string, nextChar: string, token: string, index: number, breakWords?: boolean): boolean;
         static measureFont(font: string): FontMetrics;
         static clearMetrics(font: string): void;
-        
+
     }
 
     interface FontMetrics {
@@ -2040,7 +2040,7 @@ declare namespace PIXI {
             static fonts: any;
 
         }
-        interface AnimatedSpriteTextureTimeObject {
+        interface AnimatedSpriteTaddextureTimeObject {
             texture: Texture;
             time?: number;
         }
