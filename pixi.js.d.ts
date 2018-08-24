@@ -514,6 +514,7 @@ declare namespace PIXI {
         boundsPadding: number;
         protected _localBounds: Bounds;
         dirty: number;
+        canvasTintDirty: number;
         fastRectDirty: number;
         clearDirty: number;
         boundsDirty: number;
@@ -961,7 +962,7 @@ declare namespace PIXI {
 
         context: CanvasRenderingContext2D | null;
 
-        render(displayObject: PIXI.DisplayObject, renderTexture?: PIXI.RenderTexture, clear?: boolean, transform?: PIXI.Transform, skipUpdateTransform?: boolean): void
+        render(displayObject: PIXI.DisplayObject, renderTexture?: PIXI.RenderTexture, clear?: boolean, transform?: PIXI.Matrix, skipUpdateTransform?: boolean): void
         setBlendMode(blendMode: number): void;
         destroy(removeView?: boolean): void;
         clear(clearColor?: string): void;
@@ -1049,14 +1050,14 @@ declare namespace PIXI {
         _activeRenderTarget: RenderTarget;
         protected _initContext(): void;
 
-        render(displayObject: PIXI.DisplayObject, renderTexture?: PIXI.RenderTexture, clear?: boolean, transform?: PIXI.Transform, skipUpdateTransform?: boolean): void
+        render(displayObject: PIXI.DisplayObject, renderTexture?: PIXI.RenderTexture, clear?: boolean, transform?: PIXI.Matrix, skipUpdateTransform?: boolean): void
         setObjectRenderer(objectRenderer: ObjectRenderer): void;
         flush(): void;
         setBlendMode(blendMode: number): void;
         clear(clearColor?: number): void;
         setTransform(matrix: Matrix): void;
         clearRenderTexture(renderTexture: RenderTexture, clearColor?: number): WebGLRenderer;
-        bindRenderTexture(renderTexture: RenderTexture, transform: Transform): WebGLRenderer;
+        bindRenderTexture(renderTexture: RenderTexture, transform: Matrix): WebGLRenderer;
         bindRenderTarget(renderTarget: RenderTarget): WebGLRenderer;
         bindShader(shader: Shader, autoProject?: boolean): WebGLRenderer;
         bindTexture(texture: Texture | BaseTexture, location?: number, forceLocation?: boolean): number;
@@ -1744,7 +1745,7 @@ declare namespace PIXI {
     }
     export class Texture extends utils.EventEmitter {
 
-        constructor(baseTexture: BaseTexture, frame?: Rectangle, orig?: Rectangle, trim?: Rectangle, rotate?: number);
+        constructor(baseTexture: BaseTexture, frame?: Rectangle, orig?: Rectangle, trim?: Rectangle, rotate?: number, anchor?: Point);
 
         noFrame: boolean;
         baseTexture: BaseTexture;
@@ -1754,6 +1755,7 @@ declare namespace PIXI {
         requiresUpdate: boolean;
         protected _uvs: TextureUvs;
         orig: Rectangle;
+        defaultAnchor: Point;
         protected _updateID: number;
         transform: TextureMatrix;
         textureCacheIds: string[];
@@ -1839,6 +1841,7 @@ declare namespace PIXI {
         constructor(baseTexture: BaseTexture, data: any, resolutionFilename?: string);
 
         baseTexture: BaseTexture;
+        animations: { [key: string]: Texture; };
         textures: { [key: string]: Texture; };
         data: any;
         resolution: number;
@@ -1850,6 +1853,7 @@ declare namespace PIXI {
         parse(callback: (spriteSheet: this, textures: { [key: string]: Texture; }) => void): void;
         protected _processFrames(initialFrameIndex: number): void;
         protected _parseComplete(): void;
+        protected _processAnimations(): void;
         protected _nextBatch(): void;
         destroy(destroyBase?: boolean): void;
 
@@ -2040,7 +2044,7 @@ declare namespace PIXI {
             static fonts: any;
 
         }
-        interface AnimatedSpriteTaddextureTimeObject {
+        interface AnimatedSpriteTextureTimeObject {
             texture: Texture;
             time?: number;
         }
