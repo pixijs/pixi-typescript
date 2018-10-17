@@ -1,4 +1,4 @@
-// Type definitions for Pixi.js 4.8.1
+// Type definitions for Pixi.js 4.8.2
 // Project: https://github.com/pixijs/pixi.js/tree/dev
 // Definitions by: clark-stevenson <https://github.com/pixijs/pixi-typescript>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
@@ -682,6 +682,8 @@ declare namespace PIXI {
 
         constructor(cb: () => any, scope?: any, x?: number, y?: number);
 
+        clone(cb?: Function, scope?: any): ObservablePoint;
+        equals(p: Point | ObservablePoint | PointLike): boolean;
         cb: () => any;
         scope: any;
 
@@ -1770,8 +1772,8 @@ declare namespace PIXI {
         static fromImage(imageUrl: string, crossOrigin?: boolean, scaleMode?: number, sourceScale?: number): Texture;
         static fromFrame(frameId: string): Texture;
         static fromCanvas(canvas: HTMLCanvasElement, scaleMode?: number, origin?: string): Texture;
-        static fromVideo(video: HTMLVideoElement | string, scaleMode?: number): Texture;
-        static fromVideoUrl(videoUrl: string, scaleMode?: number): Texture;
+        static fromVideo(video: HTMLVideoElement | string, scaleMode?: number, crossorigin?: boolean, autoPlay?: boolean): Texture;
+        static fromVideoUrl(videoUrl: string, scaleMode?: number, crossorigin?: boolean, autoPlay?: boolean): Texture;
         static from(source: number | string | HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | BaseTexture): Texture;
         static fromLoader(source: HTMLImageElement | HTMLCanvasElement, imageUrl: string, name?: string): Texture;
         static addToCache(texture: Texture, id: string): void;
@@ -1861,7 +1863,7 @@ declare namespace PIXI {
 
     export class VideoBaseTexture extends BaseTexture {
 
-        constructor(source: HTMLVideoElement, scaleMode?: number);
+        constructor(source: HTMLVideoElement, scaleMode?: number, autoPlay?: boolean);
 
         autoUpdate: boolean;
         autoPlay: boolean;
@@ -1875,8 +1877,8 @@ declare namespace PIXI {
         protected _isSourcePlaying(): boolean;
         protected _isSourceReady(): boolean;
 
-        static fromVideo(video: HTMLVideoElement, scaleMode?: number): VideoBaseTexture;
-        static fromUrl(videoSrc: string | any | string[] | any[], crossOrigin?: boolean): VideoBaseTexture;
+        static fromVideo(video: HTMLVideoElement, scaleMode?: number, autoPlay?: boolean): VideoBaseTexture;
+        static fromUrl(videoSrc: string | any | string[] | any[], crossorigin?: boolean, autoPlay?: boolean): VideoBaseTexture;
         static fromUrls(videoSrc: string | any | string[] | any[]): VideoBaseTexture;
 
         source: HTMLVideoElement;
