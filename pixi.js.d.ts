@@ -338,7 +338,7 @@ declare namespace PIXI {
         hitArea: PIXI.Rectangle | PIXI.Circle | PIXI.Ellipse | PIXI.Polygon | PIXI.RoundedRectangle | PIXI.HitArea;
         buttonMode: boolean;
         cursor: string;
-        trackedPointers(): { [key: number]: interaction.InteractionTrackingData };
+        trackedPointers: { [key: number]: interaction.InteractionTrackingData };
         // depricated
         defaultCursor: string;
         // end interactive target
@@ -2178,7 +2178,7 @@ declare namespace PIXI {
             hitArea: PIXI.Rectangle | PIXI.Circle | PIXI.Ellipse | PIXI.Polygon | PIXI.RoundedRectangle | PIXI.HitArea;
             buttonMode: boolean;
             cursor: string;
-            trackedPointers(): { [key: number]: InteractionTrackingData };
+            trackedPointers: { [key: number]: InteractionTrackingData };
 
             // depricated
             defaultCursor: string;
