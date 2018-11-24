@@ -1780,7 +1780,7 @@ declare namespace PIXI {
         constructor(baseTexture: BaseTexture, data: any, resolutionFilename?: string);
 
         baseTexture: BaseTexture;
-        animations: { [key: string]: Texture };
+        animations: { [key: string]: Texture[]};
         textures: { [key: string]: Texture };
         data: any;
         resolution: number;
@@ -2593,6 +2593,7 @@ declare namespace PIXI {
             spineAtlas: any;
             spineData: any;
             textures?: TextureDictionary;
+            spritesheet?: Spritesheet;
         }
         const shared: Loader;
     }
