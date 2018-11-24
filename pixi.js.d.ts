@@ -1780,7 +1780,7 @@ declare namespace PIXI {
         constructor(baseTexture: BaseTexture, data: any, resolutionFilename?: string);
 
         baseTexture: BaseTexture;
-        animations: { [key: string]: Texture };
+        animations: { [key: string]: Array<PIXI.Texture>};
         textures: { [key: string]: Texture };
         data: any;
         resolution: number;
