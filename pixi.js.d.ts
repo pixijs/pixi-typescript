@@ -2593,6 +2593,7 @@ declare namespace PIXI {
             spineAtlas: any;
             spineData: any;
             textures?: TextureDictionary;
+            spritesheet?: PIXI.Spritesheet;
         }
         const shared: Loader;
     }
