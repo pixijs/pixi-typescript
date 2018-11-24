@@ -1281,7 +1281,7 @@ declare namespace PIXI {
     }
     type UniformDataMap<U> = { [K in keyof U]: UniformData<U[K]> };
     export class Filter<U extends object> {
-        constructor(vertexSrc?: string, fragmentSrc?: string, uniforms?: UniformDataMap<U>);
+        constructor(vertexSrc?: string, fragmentSrc?: string, uniformData?: UniformDataMap<U>);
 
         protected _blendMode: number;
         vertexSrc?: string;
