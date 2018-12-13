@@ -264,7 +264,7 @@ declare namespace PIXI {
     }
     export class Container extends DisplayObject {
         // begin extras.getChildByName
-        getChildByName(name: string): DisplayObject;
+        getChildByName<T extends DisplayObject>(name: string): T;
         // end extras.getChildByName
 
         children: DisplayObject[];
@@ -277,10 +277,10 @@ declare namespace PIXI {
         swapChildren(child: DisplayObject, child2: DisplayObject): void;
         getChildIndex(child: DisplayObject): number;
         setChildIndex(child: DisplayObject, index: number): void;
-        getChildAt(index: number): DisplayObject;
-        removeChild(child: DisplayObject): DisplayObject;
-        removeChildAt(index: number): DisplayObject;
-        removeChildren(beginIndex?: number, endIndex?: number): DisplayObject[];
+        getChildAt<T extends DisplayObject>(index: number): T;
+        removeChild<T extends DisplayObject>(child: DisplayObject): T;
+        removeChildAt<T extends DisplayObject>(index: number): T;
+        removeChildren<T extends DisplayObject>(beginIndex?: number, endIndex?: number): T[];
         updateTransform(): void;
         calculateBounds(): void;
         protected _calculateBounds(): void;
