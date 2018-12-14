@@ -1,4 +1,4 @@
-// Type definitions for Pixi.js 4.8.2
+// Type definitions for Pixi.js 4.8.3
 // Project: https://github.com/pixijs/pixi.js/tree/dev
 // Definitions by: clark-stevenson <https://github.com/pixijs/pixi-typescript>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
@@ -264,7 +264,7 @@ declare namespace PIXI {
     }
     export class Container extends DisplayObject {
         // begin extras.getChildByName
-        getChildByName<T extends DisplayObject>(name: string): T;
+        getChildByName<T extends DisplayObject = Container>(name: string): T;
         // end extras.getChildByName
 
         children: DisplayObject[];
@@ -277,10 +277,10 @@ declare namespace PIXI {
         swapChildren(child: DisplayObject, child2: DisplayObject): void;
         getChildIndex(child: DisplayObject): number;
         setChildIndex(child: DisplayObject, index: number): void;
-        getChildAt<T extends DisplayObject>(index: number): T;
-        removeChild<T extends DisplayObject>(child: DisplayObject): T;
-        removeChildAt<T extends DisplayObject>(index: number): T;
-        removeChildren<T extends DisplayObject>(beginIndex?: number, endIndex?: number): T[];
+        getChildAt<T extends DisplayObject = Container>(index: number): T;
+        removeChild<T extends DisplayObject = Container>(child: DisplayObject): T;
+        removeChildAt<T extends DisplayObject = Container>(index: number): T;
+        removeChildren<T extends DisplayObject = Container>(beginIndex?: number, endIndex?: number): T[];
         updateTransform(): void;
         calculateBounds(): void;
         protected _calculateBounds(): void;
@@ -722,7 +722,7 @@ declare namespace PIXI {
         getBounds(): Rectangle;
     }
     export class Ellipse implements HitArea {
-        constructor(x?: number, y?: number, width?: number, height?: number);
+        constructor(x?: number, y?: number, halfWidth?: number, halfHeight?: number);
 
         x: number;
         y: number;
