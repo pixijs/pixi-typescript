@@ -292,10 +292,10 @@ declare namespace PIXI {
         renderCanvas(renderer: CanvasRenderer): void;
         destroy(options?: DestroyOptions | boolean): void;
 
-        once(event: 'added' | 'removed', fn: (displayObject: DisplayObject) => void, context?: any): this;
+        once(event: interaction.InteractionEventTypes | 'added' | 'removed', fn: (displayObject: DisplayObject) => void, context?: any): this;
         //tslint:disable-next-line:ban-types forbidden-types
         once(event: string, fn: Function, context?: any): this;
-        on(event: 'added' | 'removed', fn: (displayObject: DisplayObject) => void, context?: any): this;
+        on(event: interaction.InteractionEventTypes | 'added' | 'removed', fn: (displayObject: DisplayObject) => void, context?: any): this;
         //tslint:disable-next-line:ban-types forbidden-types
         on(event: string, fn: Function, context?: any): this;
         //tslint:disable-next-line:ban-types forbidden-types
