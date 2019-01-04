@@ -10,10 +10,10 @@ namespace basics {
 
         constructor() {
 
-            this.app = new PIXI.Application(800, 600, { backgroundColor: 0x1099bb });
+            this.app = new PIXI.Application({width: 800, height: 600, backgroundColor: 0x1099bb });
             document.body.appendChild(this.app.view);
 
-            this.bunny = PIXI.Sprite.fromImage("required/assets/basics/bunny.png");
+            this.bunny = PIXI.Sprite.from("required/assets/basics/bunny.png");
             this.bunny.anchor.set(0.5);
             this.bunny.x = this.app.renderer.width / 2;
             this.bunny.y = this.app.renderer.height / 2;
@@ -35,10 +35,10 @@ namespace basics {
 
         constructor() {
 
-            this.app = new PIXI.Application(800, 600, { backgroundColor: 0x1099bb });
+            this.app = new PIXI.Application({width: 800, height: 600, backgroundColor: 0x1099bb });
             document.body.appendChild(this.app.view);
 
-            this.sprite = PIXI.Sprite.fromImage("../../_assets/basics/bunny.png");
+            this.sprite = PIXI.Sprite.from("../../_assets/basics/bunny.png");
             this.sprite.texture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
             this.sprite.anchor.set(0.5);
             this.sprite.x = this.app.renderer.width / 2;
@@ -61,13 +61,13 @@ namespace basics {
 
         constructor() {
 
-            this.app = new PIXI.Application(800, 600, { backgroundColor: 0x1099bb });
+            this.app = new PIXI.Application({width: 800, height: 600, backgroundColor: 0x1099bb });
             document.body.appendChild(this.app.view);
 
             this.container = new PIXI.Container();
             this.app.stage.addChild(this.container);
 
-            const texture = PIXI.Texture.fromImage("../../_assets/basics/bunny.png");
+            const texture = PIXI.Texture.from("../../_assets/basics/bunny.png");
 
             for (let i = 0; i < 25; i++) {
 
@@ -99,13 +99,13 @@ namespace basics {
 
         constructor() {
 
-            this.app = new PIXI.Application(800, 600, { backgroundColor: 0x1099bb });
+            this.app = new PIXI.Application({ width: 800, height: 600, backgroundColor: 0x1099bb });
             document.body.appendChild(this.app.view);
 
             this.container = new PIXI.Container();
             this.app.stage.addChild(this.container);
 
-            const texture = PIXI.Texture.fromImage("../../_assets/basics/bunny.png");
+            const texture = PIXI.Texture.from("../../_assets/basics/bunny.png");
 
             for (let i = 0; i < 25; i++) {
 
@@ -123,7 +123,7 @@ namespace basics {
         }
     }
 
-    export class CustomizedFilter extends PIXI.Filter<any> {
+    export class CustomizedFilter extends PIXI.Filter {
 
         constructor(fragmentSource: string) {
             super(null, fragmentSource, {
@@ -143,10 +143,10 @@ namespace basics {
 
         constructor() {
 
-            this.app = new PIXI.Application(800, 600, { backgroundColor: 0x1099bb });
+            this.app = new PIXI.Application({width: 800, height: 600, backgroundColor: 0x1099bb });
             document.body.appendChild(this.app.view);
 
-            this.background = PIXI.Sprite.fromImage("required/assets/bkg-grass.jpg");
+            this.background = PIXI.Sprite.from("required/assets/bkg-grass.jpg");
             this.background.width = this.app.renderer.width;
             this.background.height = this.app.renderer.height;
             this.app.stage.addChild(this.background);
@@ -177,7 +177,7 @@ namespace basics {
 
         constructor() {
 
-            this.app = new PIXI.Application(800, 600, { antialias: true });
+            this.app = new PIXI.Application({width: 800, height: 600, antialias: true });
             document.body.appendChild(this.app.view);
 
             const graphics = new PIXI.Graphics();
@@ -225,13 +225,13 @@ namespace basics {
 
         constructor() {
 
-            this.app = new PIXI.Application(800, 600, { backgroundColor: 0x1099bb });
+            this.app = new PIXI.Application({width: 800, height: 600, backgroundColor: 0x1099bb });
             document.body.appendChild(this.app.view);
 
             this.container = new PIXI.Container();
             this.app.stage.addChild(this.container);
 
-            const texture = PIXI.Texture.fromImage("required/assets/basics/bunny.png");
+            const texture = PIXI.Texture.from("required/assets/basics/bunny.png");
 
             for (let i = 0; i < 25; i++) {
                 const bunny = new PIXI.Sprite(texture);
@@ -241,7 +241,7 @@ namespace basics {
                 this.container.addChild(bunny);
             }
 
-            const brt = new PIXI.BaseRenderTexture(300, 300, PIXI.SCALE_MODES.LINEAR, 1);
+            const brt = new PIXI.BaseRenderTexture({ width: 300, height: 300, scaleMode: PIXI.SCALE_MODES.LINEAR, resolution: 1});
             const rt = new PIXI.RenderTexture(brt);
 
             this.sprite = new PIXI.Sprite(rt);
@@ -262,7 +262,7 @@ namespace basics {
     export class SpriteSheet {
 
         private app: PIXI.Application;
-        private anim: PIXI.extras.AnimatedSprite;
+        private anim: PIXI.AnimatedSprite;
 
         constructor() {
 
@@ -276,11 +276,11 @@ namespace basics {
 
                         const val = i < 10 ? "0" + i : i;
 
-                        frames.push(PIXI.Texture.fromFrame("rollSequence00" + val + ".png"));
+                        frames.push(PIXI.Texture.from("rollSequence00" + val + ".png"));
 
                     }
 
-                    this.anim = new PIXI.extras.AnimatedSprite(frames);
+                    this.anim = new PIXI.AnimatedSprite(frames);
 
                     this.anim.x = this.app.renderer.width / 2;
                     this.anim.y = this.app.renderer.height / 2;
@@ -307,7 +307,7 @@ namespace basics {
 
         constructor() {
 
-            this.app = new PIXI.Application(800, 600, { backgroundColor: 0x1099bb });
+            this.app = new PIXI.Application({width: 800, height: 600, backgroundColor: 0x1099bb });
             document.body.appendChild(this.app.view);
 
             this.basicText = new PIXI.Text("Basic text in pixi");
@@ -346,7 +346,7 @@ namespace basics {
         private app: PIXI.Application;
         private count: number;
         private points: PIXI.Point[];
-        private strip: PIXI.mesh.Rope;
+        private strip: PIXI.SimpleRope;
         private graphics: PIXI.Graphics;
 
         constructor() {
@@ -357,7 +357,7 @@ namespace basics {
                 this.points.push(new PIXI.Point(i * ropeLength, 0));
             }
 
-            this.strip = new PIXI.mesh.Rope(PIXI.Texture.fromImage("required/assets/snake.png"), this.points);
+            this.strip = new PIXI.SimpleRope(PIXI.Texture.from("required/assets/snake.png"), this.points);
             this.strip.x = -40;
             this.strip.y = 300;
             this.app.stage.addChild(this.strip);
@@ -406,7 +406,7 @@ namespace basics {
     export class TilingSprite {
 
         private app: PIXI.Application;
-        private tilingSprite: PIXI.extras.TilingSprite;
+        private tilingSprite: PIXI.TilingSprite;
         private count: number;
 
         constructor() {
@@ -414,9 +414,9 @@ namespace basics {
             this.app = new PIXI.Application();
             document.body.appendChild(this.app.view);
 
-            const texture = PIXI.Texture.fromImage("required/assets/p2.jpeg");
+            const texture = PIXI.Texture.from("required/assets/p2.jpeg");
 
-            this.tilingSprite = new PIXI.extras.TilingSprite(
+            this.tilingSprite = new PIXI.TilingSprite(
                 texture,
                 this.app.renderer.width,
                 this.app.renderer.height
@@ -448,7 +448,7 @@ namespace basics {
 
         constructor() {
 
-            this.app = new PIXI.Application(800, 600, { transparent: true });
+            this.app = new PIXI.Application({width: 800, height: 600, transparent: true });
             document.body.appendChild(this.app.view);
 
             this.button = new PIXI.Graphics()
@@ -475,7 +475,7 @@ namespace basics {
 
                 this.button.destroy();
 
-                const texture = PIXI.Texture.fromVideo("required/assets/testVideo.mp4");
+                const texture = PIXI.Texture.from("required/assets/testVideo.mp4");
 
                 this.videoSprite = new PIXI.Sprite(texture);
                 this.videoSprite.width = this.app.renderer.width;
@@ -506,13 +506,13 @@ namespace demos {
             this.app.stage.interactive = true;
             document.body.appendChild(this.app.view);
 
-            this.bg = PIXI.Sprite.fromImage("required/assets/bkg.jpg");
+            this.bg = PIXI.Sprite.from("required/assets/bkg.jpg");
             this.app.stage.addChild(this.bg);
 
-            this.cells = PIXI.Sprite.fromImage("required/assets/cells.png");
+            this.cells = PIXI.Sprite.from("required/assets/cells.png");
             this.cells.scale.set(1.5);
 
-            this.mask = PIXI.Sprite.fromImage("required/assets/flowerTop.png");
+            this.mask = PIXI.Sprite.from("required/assets/flowerTop.png");
             this.mask.anchor.set(0.5);
             this.mask.x = 310;
             this.mask.y = 190;
@@ -566,13 +566,13 @@ namespace demos {
                     let i: number;
 
                     for (i = 0; i < 26; i++) {
-                        const texture = PIXI.Texture.fromFrame("Explosion_Sequence_A " + (i + 1) + ".png");
+                        const texture = PIXI.Texture.from("Explosion_Sequence_A " + (i + 1) + ".png");
                         explosionTextures.push(texture);
                     }
 
                     for (i = 0; i < 50; i++) {
 
-                        const explosion = new PIXI.extras.AnimatedSprite(explosionTextures);
+                        const explosion = new PIXI.AnimatedSprite(explosionTextures);
 
                         explosion.x = Math.random() * this.app.renderer.width;
                         explosion.y = Math.random() * this.app.renderer.height;
@@ -594,7 +594,7 @@ namespace demos {
     export class Batch {
 
         private app: PIXI.Application;
-        private sprites: PIXI.particles.ParticleContainer;
+        private sprites: PIXI.ParticleContainer;
         private maggots: Dude[];
         private dudeBounds: PIXI.Rectangle;
         private tick: number;
@@ -604,8 +604,8 @@ namespace demos {
             this.app = new PIXI.Application();
             document.body.appendChild(this.app.view);
 
-            this.sprites = new PIXI.particles.ParticleContainer(10000, {
-                scale: true,
+            this.sprites = new PIXI.ParticleContainer(10000, {
+                vertices: true,
                 position: true,
                 rotation: true,
                 uvs: true,
@@ -617,7 +617,7 @@ namespace demos {
 
             const totalSprites = this.app.renderer instanceof PIXI.WebGLRenderer ? 10000 : 100;
 
-            const dudeTexture = PIXI.Texture.fromImage("required/assets/tinyMaggot.png");
+            const dudeTexture = PIXI.Texture.from("required/assets/tinyMaggot.png");
 
             for (let i = 0; i < totalSprites; i++) {
 
@@ -704,13 +704,13 @@ namespace demos {
             this.app = new PIXI.Application();
             document.body.appendChild(this.app.view);
 
-            this.background = PIXI.Sprite.fromImage("required/assets/BGrotate.jpg");
+            this.background = PIXI.Sprite.from("required/assets/BGrotate.jpg");
             this.app.stage.addChild(this.background);
 
             this.dudeArray = [];
 
             const totalDudes = 20;
-            const dudeTexture = PIXI.Texture.fromImage("required/assets/flowerTop.png");
+            const dudeTexture = PIXI.Texture.from("required/assets/flowerTop.png");
 
             for (let i = 0; i < totalDudes; i++) {
 
@@ -805,7 +805,7 @@ namespace demos {
 
                         const frameName = alienFrames[i % 4];
 
-                        const alien = PIXI.Sprite.fromFrame(frameName);
+                        const alien = PIXI.Sprite.from(frameName);
                         alien.tint = Math.random() * 0xFFFFFF;
                         alien.x = Math.random() * 800 - 400;
                         alien.y = Math.random() * 600 - 300;
@@ -849,10 +849,10 @@ namespace demos {
 
         constructor() {
 
-            this.app = new PIXI.Application(800, 600, { backgroundColor: 0x1099bb });
+            this.app = new PIXI.Application({width: 800, height: 600, backgroundColor: 0x1099bb });
             document.body.appendChild(this.app.view);
 
-            const texture = PIXI.Texture.fromImage("required/assets/bunny.png");
+            const texture = PIXI.Texture.from("required/assets/bunny.png");
             texture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
 
             for (let i = 0; i < 10; i++) {
@@ -922,7 +922,7 @@ namespace demos {
 
         constructor() {
 
-            this.app = new PIXI.Application(800, 600, { antialias: true });
+            this.app = new PIXI.Application({width: 800, height: 600, antialias: true });
             this.app.stage.interactive = true;
             document.body.appendChild(this.app.view);
 
@@ -1019,7 +1019,7 @@ namespace demos {
             this.app = new PIXI.Application();
             document.body.appendChild(this.app.view);
 
-            const background = PIXI.Sprite.fromImage("required/assets/button_test_BG.jpg");
+            const background = PIXI.Sprite.from("required/assets/button_test_BG.jpg");
             background.width = this.app.renderer.width;
             background.height = this.app.renderer.height;
             this.background = background;
@@ -1035,9 +1035,9 @@ namespace demos {
                 685, 445
             ];
 
-            const textureButton = PIXI.Texture.fromImage("../../_assets/button.png");
-            const textureButtonDown = PIXI.Texture.fromImage("../../_assets/buttonDown.png");
-            const textureButtonOver = PIXI.Texture.fromImage("../../_assets/buttonOver.png");
+            const textureButton = PIXI.Texture.from("../../_assets/button.png");
+            const textureButtonDown = PIXI.Texture.from("../../_assets/buttonDown.png");
+            const textureButtonOver = PIXI.Texture.from("../../_assets/buttonOver.png");
 
             for (let i = 0; i < 5; i++) {
 
@@ -1094,11 +1094,11 @@ namespace demos {
 
         constructor() {
 
-            this.app = new PIXI.Application(800, 600, { antialias: true });
+            this.app = new PIXI.Application({width: 800, height: 600, antialias: true });
             this.app.stage.interactive = true;
             document.body.appendChild(this.app.view);
 
-            this.bg = PIXI.Sprite.fromImage("required/assets/BGrotate.jpg");
+            this.bg = PIXI.Sprite.from("required/assets/BGrotate.jpg");
             this.bg.anchor.set(0.5);
             this.bg.x = this.app.renderer.width / 2;
             this.bg.y = this.app.renderer.height / 2;
@@ -1109,16 +1109,16 @@ namespace demos {
             this.container.y = this.app.renderer.height / 2;
             this.app.stage.addChild(this.container);
 
-            this.bgFront = PIXI.Sprite.fromImage("required/assets/SceneRotate.jpg");
+            this.bgFront = PIXI.Sprite.from("required/assets/SceneRotate.jpg");
             this.bgFront.anchor.set(0.5);
 
-            this.light2 = PIXI.Sprite.fromImage("required/assets/LightRotate2.png");
+            this.light2 = PIXI.Sprite.from("required/assets/LightRotate2.png");
             this.light2.anchor.set(0.5);
 
-            this.light1 = PIXI.Sprite.fromImage("required/assets/LightRotate1.png");
+            this.light1 = PIXI.Sprite.from("required/assets/LightRotate1.png");
             this.light1.anchor.set(0.5);
 
-            this.panda = PIXI.Sprite.fromImage("required/assets/panda.png");
+            this.panda = PIXI.Sprite.from("required/assets/panda.png");
             this.panda.anchor.set(0.5);
 
             this.container.addChild(this.bgFront, this.light2, this.light1, this.panda);
@@ -1195,13 +1195,13 @@ namespace demos {
             document.body.appendChild(this.app.view);
 
             this.renderTexture = PIXI.RenderTexture.create(
-                this.app.renderer.width,
-                this.app.renderer.height
+			{width: this.app.renderer.width,
+			height: this.app.renderer.height }
             );
-            this.renderTexture2 = PIXI.RenderTexture.create(
-                this.app.renderer.width,
-                this.app.renderer.height
-            );
+            this.renderTexture2 = PIXI.RenderTexture.create({
+                width: this.app.renderer.width,
+                height: this.app.renderer.height
+            });
             this.currentTexture = this.renderTexture;
 
             this.outputSprite = new PIXI.Sprite(this.currentTexture);
@@ -1229,7 +1229,7 @@ namespace demos {
             this.items = [];
 
             for (let i = 0; i < 20; i++) {
-                const item = PIXI.Sprite.fromImage(fruits[i % fruits.length]);
+                const item = PIXI.Sprite.from(fruits[i % fruits.length]);
                 item.x = Math.random() * 400 - 200;
                 item.y = Math.random() * 400 - 200;
                 item.anchor.set(0.5);
@@ -1270,7 +1270,7 @@ namespace demos {
         private app: PIXI.Application;
         private count: number;
         private points: PIXI.Point[];
-        private strip: PIXI.mesh.Rope;
+        private strip: PIXI.SimpleRope;
         private snakeContainer: PIXI.Container;
 
         constructor() {
@@ -1288,7 +1288,7 @@ namespace demos {
                 this.points.push(new PIXI.Point(i * ropeLength, 0));
             }
 
-            this.strip = new PIXI.mesh.Rope(PIXI.Texture.fromImage("required/assets/snake.png"), this.points);
+            this.strip = new PIXI.SimpleRope(PIXI.Texture.from("required/assets/snake.png"), this.points);
             this.strip.x = -459;
 
             this.snakeContainer = new PIXI.Container();
@@ -1313,7 +1313,7 @@ namespace demos {
     export class TextDemo {
 
         private app: PIXI.Application;
-        private bitmapFontText: PIXI.extras.BitmapText;
+        private bitmapFontText: PIXI.BitmapText;
         private background: PIXI.Sprite;
         private textSample: PIXI.Text;
         private spinningText: PIXI.Text;
@@ -1329,14 +1329,14 @@ namespace demos {
                 .add("desyrel", "required/assets/desyrel.xml")
                 .load((): void => {
 
-                    this.bitmapFontText = new PIXI.extras.BitmapText("bitmap fonts are\n now supported!", { font: "35px Desyrel", align: "right" });
+                    this.bitmapFontText = new PIXI.BitmapText("bitmap fonts are\n now supported!", { font: { size: 35, name: "Desyrel" }, align: "right" });
                     this.bitmapFontText.x = this.app.renderer.width - this.bitmapFontText.textWidth - 20;
                     this.bitmapFontText.y = 20;
                     this.app.stage.addChild(this.bitmapFontText);
 
                 });
 
-            this.background = PIXI.Sprite.fromImage("required/assets/textDemoBG.jpg");
+            this.background = PIXI.Sprite.from("required/assets/textDemoBG.jpg");
             this.background.width = this.app.renderer.width;
             this.background.height = this.app.renderer.height;
             this.app.stage.addChild(this.background);
@@ -1478,9 +1478,9 @@ namespace demos {
 
             this.bol = false;
 
-            this.texture = PIXI.Texture.fromImage("required/assets/flowerTop.png");
+            this.texture = PIXI.Texture.from("required/assets/flowerTop.png");
 
-            this.secondTexture = PIXI.Texture.fromImage("required/assets/eggHead.png");
+            this.secondTexture = PIXI.Texture.from("required/assets/eggHead.png");
 
             this.dude = new PIXI.Sprite(this.texture);
             this.dude.anchor.set(0.5);
@@ -1521,7 +1521,7 @@ namespace demos {
 
             const totalDudes = 20;
 
-            const dudeTexture = PIXI.Texture.fromImage("required/assets/eggHead.png");
+            const dudeTexture = PIXI.Texture.from("required/assets/eggHead.png");
 
             for (let i = 0; i < totalDudes; i++) {
 
@@ -1581,10 +1581,10 @@ namespace demos {
 
         constructor() {
 
-            this.app = new PIXI.Application(800, 600, { transparent: true });
+            this.app = new PIXI.Application({width: 800, height: 600, transparent: true });
             document.body.appendChild(this.app.view);
 
-            this.bunny = PIXI.Sprite.fromImage("required/assets/bunny.png");
+            this.bunny = PIXI.Sprite.from("required/assets/bunny.png");
 
             this.bunny.anchor.set(0.5);
 
@@ -1617,20 +1617,20 @@ namespace filters {
 
         constructor() {
 
-            this.app = new PIXI.Application(800, 600);
+            this.app = new PIXI.Application({width: 800, height: 600});
             document.body.appendChild(this.app.view);
 
-            this.bg = PIXI.Sprite.fromImage("required/assets/depth_blur_BG.jpg");
+            this.bg = PIXI.Sprite.from("required/assets/depth_blur_BG.jpg");
             this.bg.width = this.app.renderer.width;
             this.bg.height = this.app.renderer.height;
             this.app.stage.addChild(this.bg);
 
-            this.littleDudes = PIXI.Sprite.fromImage("required/assets/depth_blur_dudes.jpg");
+            this.littleDudes = PIXI.Sprite.from("required/assets/depth_blur_dudes.jpg");
             this.littleDudes.x = (this.app.renderer.width / 2) - 315;
             this.littleDudes.y = 200;
             this.app.stage.addChild(this.littleDudes);
 
-            this.littleRobot = PIXI.Sprite.fromImage("required/assets/depth_blur_moby.jpg");
+            this.littleRobot = PIXI.Sprite.from("required/assets/depth_blur_moby.jpg");
             this.littleRobot.x = (this.app.renderer.width / 2) - 200;
             this.littleRobot.y = 100;
             this.app.stage.addChild(this.littleRobot);
@@ -1672,7 +1672,7 @@ namespace filters {
 
         constructor() {
 
-            this.app = new PIXI.Application(800, 600);
+            this.app = new PIXI.Application({width: 800, height: 600});
             this.app.stage.interactive = true;
             document.body.appendChild(this.app.view);
 
@@ -1708,7 +1708,7 @@ namespace filters {
 
             }
 
-            this.displacementSprite = PIXI.Sprite.fromImage("required/assets/displace.png");
+            this.displacementSprite = PIXI.Sprite.from("required/assets/displace.png");
             const displacementFilter = new PIXI.filters.DisplacementFilter(this.displacementSprite);
             this.app.stage.addChild(this.displacementSprite);
 
@@ -1717,12 +1717,12 @@ namespace filters {
             displacementFilter.scale.x = 110;
             displacementFilter.scale.y = 110;
 
-            this.ring = PIXI.Sprite.fromImage("required/assets/ring.png");
+            this.ring = PIXI.Sprite.from("required/assets/ring.png");
             this.ring.anchor.set(0.5);
             this.ring.visible = false;
             this.app.stage.addChild(this.ring);
 
-            this.bg = PIXI.Sprite.fromImage("required/assets/bkg-grass.jpg");
+            this.bg = PIXI.Sprite.from("required/assets/bkg-grass.jpg");
             this.bg.width = this.app.renderer.width;
             this.bg.height = this.app.renderer.height;
             this.bg.alpha = 0.4;
@@ -1786,7 +1786,7 @@ namespace filters {
 
         constructor() {
 
-            super(PIXI.Texture.fromImage("../../_assets/maggot.png"));
+            super(PIXI.Texture.from("../../_assets/maggot.png"));
 
         }
 
@@ -1812,7 +1812,7 @@ namespace filters {
             this.app.stage.interactive = true;
             document.body.appendChild(this.app.view);
 
-            this.bg = PIXI.Sprite.fromImage("required/assets/BGrotate.jpg");
+            this.bg = PIXI.Sprite.from("required/assets/BGrotate.jpg");
             this.bg.anchor.set(0.5);
             this.bg.x = this.app.renderer.width / 2;
             this.bg.y = this.app.renderer.height / 2;
@@ -1824,19 +1824,19 @@ namespace filters {
             this.container.position.y = this.app.renderer.height / 2;
             this.app.stage.addChild(this.container);
 
-            this.bgFront = PIXI.Sprite.fromImage("required/assets/SceneRotate.jpg");
+            this.bgFront = PIXI.Sprite.from("required/assets/SceneRotate.jpg");
             this.bgFront.anchor.set(0.5);
             this.container.addChild(this.bgFront);
 
-            this.light2 = PIXI.Sprite.fromImage("required/assets/LightRotate2.png");
+            this.light2 = PIXI.Sprite.from("required/assets/LightRotate2.png");
             this.light2.anchor.set(0.5);
             this.container.addChild(this.light2);
 
-            this.light1 = PIXI.Sprite.fromImage("../../_assets/LightRotate1.png");
+            this.light1 = PIXI.Sprite.from("../../_assets/LightRotate1.png");
             this.light1.anchor.set(0.5);
             this.container.addChild(this.light1);
 
-            this.panda = PIXI.Sprite.fromImage("required/assets/panda.png");
+            this.panda = PIXI.Sprite.from("required/assets/panda.png");
             this.panda.anchor.set(0.5);
             this.container.addChild(this.panda);
 
