@@ -3,272 +3,6 @@
  */
 declare namespace PIXI {
     /**
-     * @constant {RegExp|string} SVG_SIZE
-     * @memberof PIXI
-     * @see PIXI.resources.SVGResource.SVG_SIZE
-     * @deprecated since 5.0.0
-     */
-    var SVG_SIZE: RegExp | string;
-    /**
-     * @class PIXI.TransformStatic
-     * @deprecated since 5.0.0
-     * @see PIXI.Transform
-     */
-    class TransformStatic {
-    }
-    /**
-     * @class PIXI.TransformBase
-     * @deprecated since 5.0.0
-     * @see PIXI.Transform
-     */
-    class TransformBase {
-    }
-    /**
-     * Constants that specify the transform type.
-     *
-     * @static
-     * @constant
-     * @name TRANSFORM_MODE
-     * @memberof PIXI
-     * @enum {number}
-     * @deprecated since 5.0.0
-     * @property {number} STATIC
-     * @property {number} DYNAMIC
-     */
-    enum TRANSFORM_MODE {
-        STATIC,
-        DYNAMIC
-    }
-    /**
-     * @class PIXI.WebGLRenderer
-     * @see PIXI.Renderer
-     * @deprecated since 5.0.0
-     */
-    class WebGLRenderer {
-    }
-    /**
-     * @class PIXI.CanvasRenderTarget
-     * @see PIXI.utils.CanvasRenderTarget
-     * @deprecated since 5.0.0
-     */
-    class CanvasRenderTarget {
-    }
-    /**
-     * @memberof PIXI
-     * @name loader
-     * @type {PIXI.Loader}
-     * @see PIXI.Loader.shared
-     * @deprecated since 5.0.0
-     */
-    var loader: PIXI.Loader;
-    /**
-     * @class PIXI.FilterManager
-     * @see PIXI.systems.FilterSystem
-     * @deprecated since 5.0.0
-     */
-    class FilterManager {
-        /**
-         * @method PIXI.FilterManager#getRenderTarget
-         * @deprecated since 5.0.0
-         * @see PIXI.systems.FilterSystem#getFilterTexture
-         */
-        getRenderTarget(): void;
-        /**
-         * @method PIXI.FilterManager#returnRenderTarget
-         * @deprecated since 5.0.0
-         * @see PIXI.systems.FilterSystem#returnFilterTexture
-         */
-        returnRenderTarget(): void;
-    }
-    /**
-     * This namespace has been removed. All classes previous nested
-     * under this namespace have been moved to the top-level `PIXI` object.
-     * @namespace PIXI.extras
-     * @deprecated since 5.0.0
-     */
-    namespace extras {
-        /**
-         * @class PIXI.extras.TilingSprite
-         * @see PIXI.TilingSprite
-         * @deprecated since 5.0.0
-         */
-        class TilingSprite {
-        }
-        /**
-         * @class PIXI.extras.TilingSpriteRenderer
-         * @see PIXI.TilingSpriteRenderer
-         * @deprecated since 5.0.0
-         */
-        class TilingSpriteRenderer {
-        }
-        /**
-         * @class PIXI.extras.AnimatedSprite
-         * @see PIXI.AnimatedSprite
-         * @deprecated since 5.0.0
-         */
-        class AnimatedSprite {
-        }
-        /**
-         * @class PIXI.extras.BitmapText
-         * @see PIXI.BitmapText
-         * @deprecated since 5.0.0
-         */
-        class BitmapText {
-        }
-    }
-    /**
-     * All classes on this namespace have moved to the high-level `PIXI` object.
-     * @namespace PIXI.mesh
-     * @deprecated since 5.0.0
-     */
-    namespace mesh {
-        /**
-         * @class PIXI.mesh.Mesh
-         * @see PIXI.SimpleMesh
-         * @deprecated since 5.0.0
-         */
-        class Mesh {
-        }
-        /**
-         * @class PIXI.mesh.NineSlicePlane
-         * @see PIXI.NineSlicePlane
-         * @deprecated since 5.0.0
-         */
-        class NineSlicePlane {
-        }
-        /**
-         * @class PIXI.mesh.Plane
-         * @see PIXI.SimplePlane
-         * @deprecated since 5.0.0
-         */
-        class Plane {
-        }
-        /**
-         * @class PIXI.mesh.Rope
-         * @see PIXI.SimpleRope
-         * @deprecated since 5.0.0
-         */
-        class Rope {
-        }
-        /**
-         * @class PIXI.mesh.RawMesh
-         * @see PIXI.Mesh
-         * @deprecated since 5.0.0
-         */
-        class RawMesh {
-        }
-        /**
-         * @class PIXI.mesh.CanvasMeshRenderer
-         * @see PIXI.CanvasMeshRenderer
-         * @deprecated since 5.0.0
-         */
-        class CanvasMeshRenderer {
-        }
-        /**
-         * @class PIXI.mesh.MeshRenderer
-         * @see PIXI.MeshRenderer
-         * @deprecated since 5.0.0
-         */
-        class MeshRenderer {
-        }
-    }
-    /**
-     * This namespace has been removed and items have been moved to
-     * the top-level `PIXI` object.
-     * @namespace PIXI.particles
-     * @deprecated since 5.0.0
-     */
-    namespace particles {
-        /**
-         * @class PIXI.particles.ParticleContainer
-         * @deprecated since 5.0.0
-         * @see PIXI.ParticleContainer
-         */
-        class ParticleContainer {
-        }
-        /**
-         * @class PIXI.particles.ParticleRenderer
-         * @deprecated since 5.0.0
-         * @see PIXI.ParticleRenderer
-         */
-        class ParticleRenderer {
-        }
-    }
-    /**
-     * This namespace has been removed and items have been moved to
-     * the top-level `PIXI` object.
-     * @namespace PIXI.ticker
-     * @deprecated since 5.0.0
-     */
-    namespace ticker {
-        /**
-         * @class PIXI.ticker.Ticker
-         * @deprecated since 5.0.0
-         * @see PIXI.Ticker
-         */
-        class Ticker {
-        }
-        /**
-         * @name PIXI.ticker.shared
-         * @type {PIXI.Ticker}
-         * @deprecated since 5.0.0
-         * @see PIXI.Ticker.shared
-         */
-        var shared: PIXI.Ticker;
-    }
-    /**
-     * All classes on this namespace have moved to the high-level `PIXI` object.
-     * @namespace PIXI.loaders
-     * @deprecated since 5.0.0
-     */
-    namespace loaders {
-        /**
-         * @class PIXI.loaders.Loader
-         * @see PIXI.Loader
-         * @deprecated since 5.0.0
-         */
-        class Loader {
-            /**
-             * @function PIXI.loaders.Loader.addPixiMiddleware
-             * @see PIXI.Loader.registerPlugin
-             * @deprecated since 5.0.0
-             * @param {function} middleware
-             */
-            static addPixiMiddleware(middleware: (...params: any[]) => any): void;
-        }
-        /**
-         * @class PIXI.loaders.Resource
-         * @see PIXI.LoaderResource
-         * @deprecated since 5.0.0
-         */
-        class Resource {
-        }
-        /**
-         * @function PIXI.loaders.bitmapFontParser
-         * @see PIXI.BitmapFontLoader.use
-         * @deprecated since 5.0.0
-         */
-        function bitmapFontParser(): void;
-        /**
-         * @function PIXI.loaders.parseBitmapFontData
-         * @see PIXI.BitmapFontLoader.parse
-         * @deprecated since 5.0.0
-         */
-        function parseBitmapFontData(): void;
-        /**
-         * @function PIXI.loaders.spritesheetParser
-         * @see PIXI.SpritesheetLoader.use
-         * @deprecated since 5.0.0
-         */
-        function spritesheetParser(): void;
-        /**
-         * @function PIXI.loaders.getResourcePath
-         * @see PIXI.SpritesheetLoader.getResourcePath
-         * @deprecated since 5.0.0
-         */
-        function getResourcePath(): void;
-    }
-    /**
      * String of the current PIXI version.
      *
      * @static
@@ -306,22 +40,6 @@ declare namespace PIXI {
      * @namespace PIXI.filters
      */
     namespace filters {
-        /**
-         * @class BlurXFilter
-         * @memberof PIXI.filters
-         * @deprecated since 5.0.0
-         * @see PIXI.filters.BlurFilterPass
-         */
-        class BlurXFilter {
-        }
-        /**
-         * @class BlurYFilter
-         * @memberof PIXI.filters
-         * @deprecated since 5.0.0
-         * @see PIXI.filters.BlurFilterPass
-         */
-        class BlurYFilter {
-        }
         /**
          * Simplest filter - applies alpha
          *
@@ -390,7 +108,7 @@ declare namespace PIXI {
             /**
              * Applies the filter
              *
-             * @param {PIXI.FilterManager} filterManager - The renderer to retrieve the filter from
+             * @param {PIXI.systems.FilterSystem} filterManager - The renderer to retrieve the filter from
              * @param {PIXI.RenderTexture} input - The input render target.
              * @param {PIXI.RenderTexture} output - The target to output to.
              * @param {boolean} clear - Should the output be cleared before rendering to it
@@ -398,7 +116,7 @@ declare namespace PIXI {
              *        There are some useful properties in the currentState :
              *        target, filters, sourceFrame, destinationFrame, renderTarget, resolution
              */
-            apply(filterManager: PIXI.FilterManager, input: PIXI.RenderTexture, output: PIXI.RenderTexture, clear: boolean, currentState?: any): void;
+            apply(filterManager: PIXI.systems.FilterSystem, input: PIXI.RenderTexture, output: PIXI.RenderTexture, clear: boolean, currentState?: any): void;
             /**
              * Sets the blendmode of the filter
              *
@@ -426,11 +144,11 @@ declare namespace PIXI {
             /**
              * Applies the filter.
              *
-             * @param {PIXI.FilterManager} filterManager - The manager.
+             * @param {PIXI.systems.FilterSystem} filterManager - The manager.
              * @param {PIXI.RenderTexture} input - The input target.
              * @param {PIXI.RenderTexture} output - The output target.
              */
-            apply(filterManager: PIXI.FilterManager, input: PIXI.RenderTexture, output: PIXI.RenderTexture): void;
+            apply(filterManager: PIXI.systems.FilterSystem, input: PIXI.RenderTexture, output: PIXI.RenderTexture): void;
             /**
              * Sets the strength of both the blurX and blurY properties simultaneously
              *
@@ -585,7 +303,7 @@ declare namespace PIXI {
             /**
              * Applies the filter
              *
-             * @param {PIXI.FilterManager} filterManager - The renderer to retrieve the filter from
+             * @param {PIXI.systems.FilterSystem} filterManager - The renderer to retrieve the filter from
              * @param {PIXI.RenderTexture} input - The input render target.
              * @param {PIXI.RenderTexture} output - The target to output to.
              * @param {boolean} clear - Should the output be cleared before rendering to it
@@ -593,7 +311,7 @@ declare namespace PIXI {
              *        There are some useful properties in the currentState :
              *        target, filters, sourceFrame, destinationFrame, renderTarget, resolution
              */
-            apply(filterManager: PIXI.FilterManager, input: PIXI.RenderTexture, output: PIXI.RenderTexture, clear: boolean, currentState?: any): void;
+            apply(filterManager: PIXI.systems.FilterSystem, input: PIXI.RenderTexture, output: PIXI.RenderTexture, clear: boolean, currentState?: any): void;
             /**
              * Sets the blendmode of the filter
              *
@@ -849,7 +567,7 @@ declare namespace PIXI {
             /**
              * Applies the filter
              *
-             * @param {PIXI.FilterManager} filterManager - The renderer to retrieve the filter from
+             * @param {PIXI.systems.FilterSystem} filterManager - The renderer to retrieve the filter from
              * @param {PIXI.RenderTexture} input - The input render target.
              * @param {PIXI.RenderTexture} output - The target to output to.
              * @param {boolean} clear - Should the output be cleared before rendering to it
@@ -857,7 +575,7 @@ declare namespace PIXI {
              *        There are some useful properties in the currentState :
              *        target, filters, sourceFrame, destinationFrame, renderTarget, resolution
              */
-            apply(filterManager: PIXI.FilterManager, input: PIXI.RenderTexture, output: PIXI.RenderTexture, clear: boolean, currentState?: any): void;
+            apply(filterManager: PIXI.systems.FilterSystem, input: PIXI.RenderTexture, output: PIXI.RenderTexture, clear: boolean, currentState?: any): void;
             /**
              * Sets the blendmode of the filter
              *
@@ -893,11 +611,11 @@ declare namespace PIXI {
             /**
              * Applies the filter.
              *
-             * @param {PIXI.FilterManager} filterManager - The manager.
+             * @param {PIXI.systems.FilterSystem} filterManager - The manager.
              * @param {PIXI.RenderTexture} input - The input target.
              * @param {PIXI.RenderTexture} output - The output target.
              */
-            apply(filterManager: PIXI.FilterManager, input: PIXI.RenderTexture, output: PIXI.RenderTexture): void;
+            apply(filterManager: PIXI.systems.FilterSystem, input: PIXI.RenderTexture, output: PIXI.RenderTexture): void;
             /**
              * The texture used for the displacement map. Must be power of 2 sized texture.
              *
@@ -1014,7 +732,7 @@ declare namespace PIXI {
             /**
              * Applies the filter
              *
-             * @param {PIXI.FilterManager} filterManager - The renderer to retrieve the filter from
+             * @param {PIXI.systems.FilterSystem} filterManager - The renderer to retrieve the filter from
              * @param {PIXI.RenderTexture} input - The input render target.
              * @param {PIXI.RenderTexture} output - The target to output to.
              * @param {boolean} clear - Should the output be cleared before rendering to it
@@ -1022,7 +740,7 @@ declare namespace PIXI {
              *        There are some useful properties in the currentState :
              *        target, filters, sourceFrame, destinationFrame, renderTarget, resolution
              */
-            apply(filterManager: PIXI.FilterManager, input: PIXI.RenderTexture, output: PIXI.RenderTexture, clear: boolean, currentState?: any): void;
+            apply(filterManager: PIXI.systems.FilterSystem, input: PIXI.RenderTexture, output: PIXI.RenderTexture, clear: boolean, currentState?: any): void;
             /**
              * Sets the blendmode of the filter
              *
@@ -1101,7 +819,7 @@ declare namespace PIXI {
             /**
              * Applies the filter
              *
-             * @param {PIXI.FilterManager} filterManager - The renderer to retrieve the filter from
+             * @param {PIXI.systems.FilterSystem} filterManager - The renderer to retrieve the filter from
              * @param {PIXI.RenderTexture} input - The input render target.
              * @param {PIXI.RenderTexture} output - The target to output to.
              * @param {boolean} clear - Should the output be cleared before rendering to it
@@ -1109,7 +827,7 @@ declare namespace PIXI {
              *        There are some useful properties in the currentState :
              *        target, filters, sourceFrame, destinationFrame, renderTarget, resolution
              */
-            apply(filterManager: PIXI.FilterManager, input: PIXI.RenderTexture, output: PIXI.RenderTexture, clear: boolean, currentState?: any): void;
+            apply(filterManager: PIXI.systems.FilterSystem, input: PIXI.RenderTexture, output: PIXI.RenderTexture, clear: boolean, currentState?: any): void;
             /**
              * Sets the blendmode of the filter
              *
@@ -1148,7 +866,7 @@ declare namespace PIXI {
          * @memberof PIXI.accessibility
          */
         class AccessibilityManager {
-            constructor(renderer: PIXI.CanvasRenderer | PIXI.Renderer);
+            constructor(renderer: PIXI.Renderer);
             /**
              * Setting this to true will visually show the divs.
              *
@@ -1233,7 +951,7 @@ declare namespace PIXI {
          * WebGL renderer if available, otherwise CanvasRenderer.
          * @member {PIXI.Renderer|PIXI.CanvasRenderer} PIXI.Application#renderer
          */
-        renderer: PIXI.Renderer | PIXI.CanvasRenderer;
+        renderer: PIXI.Renderer;
         /**
          * The root display container that's rendered.
          * @member {PIXI.Container} PIXI.Application#stage
@@ -1336,538 +1054,6 @@ declare namespace PIXI {
             init: (...params: any[]) => any;
             destroy: (...params: any[]) => any;
         };
-    }
-    /**
-     * Renderer dedicated to drawing and batching graphics objects.
-     *
-     * @class
-     * @protected
-     * @memberof PIXI
-     */
-    class CanvasGraphicsRenderer {
-        constructor(renderer: PIXI.CanvasRenderer);
-        /**
-         * Renders a Graphics object to a canvas.
-         *
-         * @param {PIXI.Graphics} graphics - the actual graphics object to render
-         */
-        render(graphics: PIXI.Graphics): void;
-        /**
-         * Updates the tint of a graphics object
-         *
-         * @protected
-         * @param {PIXI.Graphics} graphics - the graphics that will have its tint updated
-         */
-        protected updateGraphicsTint(graphics: PIXI.Graphics): void;
-        /**
-         * Renders a polygon.
-         *
-         * @param {PIXI.Point[]} points - The points to render
-         * @param {boolean} close - Should the polygon be closed
-         * @param {CanvasRenderingContext2D} context - The rendering context to use
-         */
-        renderPolygon(points: PIXI.Point[], close: boolean, context: CanvasRenderingContext2D): void;
-        /**
-         * destroy graphics object
-         *
-         */
-        destroy(): void;
-    }
-    /**
-     * Renderer dedicated to meshes.
-     *
-     * @class
-     * @protected
-     * @memberof PIXI
-     */
-    class CanvasMeshRenderer {
-        constructor(renderer: PIXI.CanvasRenderer);
-        /**
-         * Renders the Mesh
-         *
-         * @param {PIXI.Mesh} mesh - the Mesh to render
-         */
-        render(mesh: PIXI.Mesh): void;
-        /**
-         * destroy the the renderer.
-         *
-         */
-        destroy(): void;
-    }
-    /**
-     * This helper function will automatically detect which renderer you should be using.
-     * WebGL is the preferred renderer as it is a lot faster. If webGL is not supported by
-     * the browser then this function will return a canvas renderer
-     *
-     * @memberof PIXI
-     * @function autoDetectRenderer
-     * @param {object} [options] - The optional renderer parameters
-     * @param {number} [options.width=800] - the width of the renderers view
-     * @param {number} [options.height=600] - the height of the renderers view
-     * @param {HTMLCanvasElement} [options.view] - the canvas to use as a view, optional
-     * @param {boolean} [options.transparent=false] - If the render view is transparent, default false
-     * @param {boolean} [options.autoDensity=false] - Resizes renderer view in CSS pixels to allow for
-     *   resolutions other than 1
-     * @param {boolean} [options.antialias=false] - sets antialias (only applicable in chrome at the moment)
-     * @param {boolean} [options.preserveDrawingBuffer=false] - enables drawing buffer preservation, enable this if you
-     *  need to call toDataUrl on the webgl context
-     * @param {number} [options.backgroundColor=0x000000] - The background color of the rendered area
-     *  (shown if not transparent).
-     * @param {boolean} [options.clearBeforeRender=true] - This sets if the renderer will clear the canvas or
-     *   not before the new render pass.
-     * @param {number} [options.resolution=1] - The resolution / device pixel ratio of the renderer, retina would be 2
-     * @param {boolean} [options.forceCanvas=false] - prevents selection of WebGL renderer, even if such is present
-     * @param {boolean} [options.forceFXAA=false] - forces FXAA antialiasing to be used over native.
-     *  FXAA is faster, but may not always look as great **webgl only**
-     * @param {string} [options.powerPreference] - Parameter passed to webgl context, set to "high-performance"
-     *  for devices with dual graphics card **webgl only**
-     * @return {PIXI.Renderer|PIXI.CanvasRenderer} Returns WebGL renderer if available, otherwise CanvasRenderer
-     */
-    function autoDetectRenderer(options?: {
-        width?: number;
-        height?: number;
-        view?: HTMLCanvasElement;
-        transparent?: boolean;
-        autoDensity?: boolean;
-        antialias?: boolean;
-        preserveDrawingBuffer?: boolean;
-        backgroundColor?: number;
-        clearBeforeRender?: boolean;
-        resolution?: number;
-        forceCanvas?: boolean;
-        forceFXAA?: boolean;
-        powerPreference?: string;
-    }): PIXI.Renderer | PIXI.CanvasRenderer;
-    /**
-     * The CanvasRenderer draws the scene and all its content onto a 2d canvas. This renderer should
-     * be used for browsers that do not support WebGL. Don't forget to add the CanvasRenderer.view to
-     * your DOM or you will not see anything :)
-     *
-     * @class
-     * @memberof PIXI
-     * @extends PIXI.AbstractRenderer
-     */
-    class CanvasRenderer extends PIXI.AbstractRenderer {
-        constructor(options?: {
-            width?: number;
-            height?: number;
-            view?: HTMLCanvasElement;
-            transparent?: boolean;
-            autoDensity?: boolean;
-            antialias?: boolean;
-            resolution?: number;
-            preserveDrawingBuffer?: boolean;
-            clearBeforeRender?: boolean;
-            backgroundColor?: number;
-        });
-        /**
-         * Collection of methods for extracting data (image, pixels, etc.) from a display object or render texture
-         *
-         * @member {PIXI.extract.CanvasExtract} extract
-         * @memberof PIXI.CanvasRenderer#
-         * @see PIXI.extract.CanvasExtract
-         */
-        extract: PIXI.extract.CanvasExtract;
-        /**
-         * The root canvas 2d context that everything is drawn with.
-         *
-         * @member {CanvasRenderingContext2D} PIXI.CanvasRenderer#rootContext
-         */
-        rootContext: CanvasRenderingContext2D;
-        /**
-         * The currently active canvas 2d context (could change with renderTextures)
-         *
-         * @member {CanvasRenderingContext2D} PIXI.CanvasRenderer#context
-         */
-        context: CanvasRenderingContext2D;
-        /**
-         * Boolean flag controlling canvas refresh.
-         *
-         * @member {boolean} PIXI.CanvasRenderer#refresh
-         */
-        refresh: boolean;
-        /**
-         * Instance of a CanvasMaskManager, handles masking when using the canvas renderer.
-         *
-         * @member {PIXI.CanvasMaskManager} PIXI.CanvasRenderer#maskManager
-         */
-        maskManager: PIXI.CanvasMaskManager;
-        /**
-         * The canvas property used to set the canvas smoothing property.
-         *
-         * @member {string} PIXI.CanvasRenderer#smoothProperty
-         */
-        smoothProperty: string;
-        /**
-         * Tracks the blend modes useful for this renderer.
-         *
-         * @member {object<number, string>} PIXI.CanvasRenderer#blendModes
-         */
-        blendModes: {
-            [key: number]: string;
-        };
-        /**
-         * Renders the object to this canvas view
-         *
-         * @param {PIXI.DisplayObject} displayObject - The object to be rendered
-         * @param {PIXI.RenderTexture} [renderTexture] - A render texture to be rendered to.
-         *  If unset, it will render to the root context.
-         * @param {boolean} [clear=false] - Whether to clear the canvas before drawing
-         * @param {PIXI.Matrix} [transform] - A transformation to be applied
-         * @param {boolean} [skipUpdateTransform=false] - Whether to skip the update transform
-         */
-        render(displayObject: PIXI.DisplayObject, renderTexture?: PIXI.RenderTexture, clear?: boolean, transform?: PIXI.Matrix, skipUpdateTransform?: boolean): void;
-        /**
-         * Clear the canvas of renderer.
-         *
-         * @param {string} [clearColor] - Clear the canvas with this color, except the canvas is transparent.
-         */
-        clear(clearColor?: string): void;
-        /**
-         * Sets the blend mode of the renderer.
-         *
-         * @param {number} blendMode - See {@link PIXI.BLEND_MODES} for valid values.
-         */
-        setBlendMode(blendMode: number): void;
-        /**
-         * Removes everything from the renderer and optionally removes the Canvas DOM element.
-         *
-         * @param {boolean} [removeView=false] - Removes the Canvas element from the DOM.
-         */
-        destroy(removeView?: boolean): void;
-        /**
-         * Resizes the canvas view to the specified width and height.
-         *
-         * @extends PIXI.AbstractRenderer#resize
-         *
-         * @param {number} screenWidth - the new width of the screen
-         * @param {number} screenHeight - the new height of the screen
-         */
-        resize(screenWidth: number, screenHeight: number): void;
-        /**
-         * Checks if blend mode has changed.
-         */
-        invalidateBlendMode(): void;
-        /**
-         * Collection of installed plugins. These are included by default in PIXI, but can be excluded
-         * by creating a custom build. Consult the README for more information about creating custom
-         * builds and excluding plugins.
-         * @name PIXI.CanvasRenderer#plugins
-         * @type {object}
-         * @readonly
-         * @property {PIXI.accessibility.AccessibilityManager} accessibility Support tabbing interactive elements.
-         * @property {PIXI.extract.CanvasExtract} extract Extract image data from renderer.
-         * @property {PIXI.interaction.InteractionManager} interaction Handles mouse, touch and pointer events.
-         * @property {PIXI.prepare.CanvasPrepare} prepare Pre-render display objects.
-         */
-        readonly plugins: {
-            accessibility: PIXI.accessibility.AccessibilityManager;
-            extract: PIXI.extract.CanvasExtract;
-            interaction: PIXI.interaction.InteractionManager;
-            prepare: PIXI.prepare.CanvasPrepare;
-        };
-        /**
-         * Adds a plugin to the renderer.
-         *
-         * @method
-         * @param {string} pluginName - The name of the plugin.
-         * @param {Function} ctor - The constructor function or class for the plugin.
-         */
-        static registerPlugin(pluginName: string, ctor: (...params: any[]) => any): void;
-        /**
-         * @deprecated since 5.0.0
-         * @member {boolean} PIXI.AbstractRenderer#autoResize
-         * @see PIXI.AbstractRenderer#autoDensity
-         */
-        autoResize: boolean;
-        /**
-         * The supplied constructor options.
-         *
-         * @member {Object} PIXI.AbstractRenderer#options
-         * @readOnly
-         */
-        readonly options: any;
-        /**
-         * The type of the renderer.
-         *
-         * @member {number} PIXI.AbstractRenderer#type
-         * @default PIXI.RENDERER_TYPE.UNKNOWN
-         * @see PIXI.RENDERER_TYPE
-         */
-        type: number;
-        /**
-         * Measurements of the screen. (0, 0, screenWidth, screenHeight).
-         *
-         * Its safe to use as filterArea or hitArea for the whole stage.
-         *
-         * @member {PIXI.Rectangle} PIXI.AbstractRenderer#screen
-         */
-        screen: PIXI.Rectangle;
-        /**
-         * The canvas element that everything is drawn to.
-         *
-         * @member {HTMLCanvasElement} PIXI.AbstractRenderer#view
-         */
-        view: HTMLCanvasElement;
-        /**
-         * The resolution / device pixel ratio of the renderer.
-         *
-         * @member {number} PIXI.AbstractRenderer#resolution
-         * @default 1
-         */
-        resolution: number;
-        /**
-         * Whether the render view is transparent.
-         *
-         * @member {boolean} PIXI.AbstractRenderer#transparent
-         */
-        transparent: boolean;
-        /**
-         * Whether CSS dimensions of canvas view should be resized to screen dimensions automatically.
-         *
-         * @member {boolean} PIXI.AbstractRenderer#autoDensity
-         */
-        autoDensity: boolean;
-        /**
-         * The value of the preserveDrawingBuffer flag affects whether or not the contents of
-         * the stencil buffer is retained after rendering.
-         *
-         * @member {boolean} PIXI.AbstractRenderer#preserveDrawingBuffer
-         */
-        preserveDrawingBuffer: boolean;
-        /**
-         * This sets if the CanvasRenderer will clear the canvas or not before the new render pass.
-         * If the scene is NOT transparent PixiJS will use a canvas sized fillRect operation every
-         * frame to set the canvas background color. If the scene is transparent PixiJS will use clearRect
-         * to clear the canvas every frame. Disable this by setting this to false. For example, if
-         * your game has a canvas filling background image you often don't need this set.
-         *
-         * @member {boolean} PIXI.AbstractRenderer#clearBeforeRender
-         * @default
-         */
-        clearBeforeRender: boolean;
-        /**
-         * The background color as a number.
-         *
-         * @member {number} PIXI.AbstractRenderer#_backgroundColor
-         * @protected
-         */
-        protected _backgroundColor: number;
-        /**
-         * The background color as an [R, G, B] array.
-         *
-         * @member {number[]} PIXI.AbstractRenderer#_backgroundColorRgba
-         * @protected
-         */
-        protected _backgroundColorRgba: number[];
-        /**
-         * The background color as a string.
-         *
-         * @member {string} PIXI.AbstractRenderer#_backgroundColorString
-         * @protected
-         */
-        protected _backgroundColorString: string;
-        /**
-         * This temporary display object used as the parent of the currently being rendered item.
-         *
-         * @member {PIXI.DisplayObject} PIXI.AbstractRenderer#_tempDisplayObjectParent
-         * @protected
-         */
-        protected _tempDisplayObjectParent: PIXI.DisplayObject;
-        /**
-         * The last root object that the renderer tried to render.
-         *
-         * @member {PIXI.DisplayObject} PIXI.AbstractRenderer#_lastObjectRendered
-         * @protected
-         */
-        protected _lastObjectRendered: PIXI.DisplayObject;
-        /**
-         * Initialize the plugins.
-         *
-         * @protected
-         * @param {object} staticMap - The dictionary of statically saved plugins.
-         */
-        protected initPlugins(staticMap: any): void;
-        /**
-         * Same as view.width, actual number of pixels in the canvas by horizontal.
-         *
-         * @member {number}
-         * @readonly
-         * @default 800
-         */
-        readonly width: number;
-        /**
-         * Same as view.height, actual number of pixels in the canvas by vertical.
-         *
-         * @member {number}
-         * @readonly
-         * @default 600
-         */
-        readonly height: number;
-        /**
-         * Useful function that returns a texture of the display object that can then be used to create sprites
-         * This can be quite useful if your displayObject is complicated and needs to be reused multiple times.
-         *
-         * @param {PIXI.DisplayObject} displayObject - The displayObject the object will be generated from.
-         * @param {number} scaleMode - Should be one of the scaleMode consts.
-         * @param {number} resolution - The resolution / device pixel ratio of the texture being generated.
-         * @param {PIXI.Rectangle} [region] - The region of the displayObject, that shall be rendered,
-         *        if no region is specified, defaults to the local bounds of the displayObject.
-         * @return {PIXI.Texture} A texture of the graphics object.
-         */
-        generateTexture(displayObject: PIXI.DisplayObject, scaleMode: number, resolution: number, region?: PIXI.Rectangle): PIXI.Texture;
-        /**
-         * The background color to fill if not transparent
-         *
-         * @member {number}
-         */
-        backgroundColor: number;
-    }
-    /**
-     * A set of functions used to handle masking.
-     *
-     * @class
-     * @memberof PIXI
-     */
-    class CanvasMaskManager {
-        constructor(renderer: PIXI.CanvasRenderer);
-        /**
-         * This method adds it to the current stack of masks.
-         *
-         * @param {object} maskData - the maskData that will be pushed
-         */
-        pushMask(maskData: any): void;
-        /**
-         * Renders a PIXI.Graphics shape.
-         *
-         * @param {PIXI.Graphics} graphics - The object to render.
-         */
-        renderGraphicsShape(graphics: PIXI.Graphics): void;
-        /**
-         * Restores the current drawing context to the state it was before the mask was applied.
-         *
-         * @param {PIXI.CanvasRenderer} renderer - The renderer context to use.
-         */
-        popMask(renderer: PIXI.CanvasRenderer): void;
-        /**
-         * Destroys this canvas mask manager.
-         *
-         */
-        destroy(): void;
-    }
-    /**
-     * Renderer dedicated to drawing and batching sprites.
-     *
-     * @class
-     * @protected
-     * @memberof PIXI
-     */
-    class CanvasSpriteRenderer {
-        constructor(renderer: PIXI.Renderer);
-        /**
-         * Renders the sprite object.
-         *
-         * @param {PIXI.Sprite} sprite - the sprite to render when using this spritebatch
-         */
-        render(sprite: PIXI.Sprite): void;
-        /**
-         * destroy the sprite object.
-         *
-         */
-        destroy(): void;
-    }
-    /**
-     * Utility methods for Sprite/Texture tinting.
-     *
-     * @class
-     * @memberof PIXI
-     */
-    class CanvasTinter {
-        constructor();
-        /**
-         * Basically this method just needs a sprite and a color and tints the sprite with the given color.
-         *
-         * @memberof PIXI.CanvasTinter
-         * @param {PIXI.Sprite} sprite - the sprite to tint
-         * @param {number} color - the color to use to tint the sprite with
-         * @return {HTMLCanvasElement} The tinted canvas
-         */
-        static getTintedTexture(sprite: PIXI.Sprite, color: number): HTMLCanvasElement;
-        /**
-         * Tint a texture using the 'multiply' operation.
-         *
-         * @memberof PIXI.CanvasTinter
-         * @param {PIXI.Texture} texture - the texture to tint
-         * @param {number} color - the color to use to tint the sprite with
-         * @param {HTMLCanvasElement} canvas - the current canvas
-         */
-        static tintWithMultiply(texture: PIXI.Texture, color: number, canvas: HTMLCanvasElement): void;
-        /**
-         * Tint a texture using the 'overlay' operation.
-         *
-         * @memberof PIXI.CanvasTinter
-         * @param {PIXI.Texture} texture - the texture to tint
-         * @param {number} color - the color to use to tint the sprite with
-         * @param {HTMLCanvasElement} canvas - the current canvas
-         */
-        static tintWithOverlay(texture: PIXI.Texture, color: number, canvas: HTMLCanvasElement): void;
-        /**
-         * Tint a texture pixel per pixel.
-         *
-         * @memberof PIXI.CanvasTinter
-         * @param {PIXI.Texture} texture - the texture to tint
-         * @param {number} color - the color to use to tint the sprite with
-         * @param {HTMLCanvasElement} canvas - the current canvas
-         */
-        static tintWithPerPixel(texture: PIXI.Texture, color: number, canvas: HTMLCanvasElement): void;
-        /**
-         * Rounds the specified color according to the CanvasTinter.cacheStepsPerColorChannel.
-         *
-         * @memberof PIXI.CanvasTinter
-         * @param {number} color - the color to round, should be a hex color
-         * @return {number} The rounded color.
-         */
-        static roundColor(color: number): number;
-        /**
-         * Number of steps which will be used as a cap when rounding colors.
-         *
-         * @memberof PIXI.CanvasTinter
-         * @type {number}
-         */
-        static cacheStepsPerColorChannel: number;
-        /**
-         * Tint cache boolean flag.
-         *
-         * @memberof PIXI.CanvasTinter
-         * @type {boolean}
-         */
-        static convertTintToImage: boolean;
-        /**
-         * Whether or not the Canvas BlendModes are supported, consequently the ability to tint using the multiply method.
-         *
-         * @memberof PIXI.CanvasTinter
-         * @type {boolean}
-         */
-        static canUseMultiply: boolean;
-        /**
-         * The tinting method that will be used.
-         *
-         * @memberof PIXI.CanvasTinter
-         * @type {Function}
-         */
-        static tintMethod(): void;
-    }
-    module CanvasTinter {
-        /**
-         * The tintMethod type.
-         *
-         * @memberof PIXI.CanvasTinter
-         * @callback tintMethodFunctionType
-         * @param texture {PIXI.Texture} the texture to tint
-         * @param color {number} the color to use to tint the sprite with
-         * @param canvas {HTMLCanvasElement} the current canvas
-         */
-        type tintMethodFunctionType = (texture: PIXI.Texture, color: number, canvas: HTMLCanvasElement) => void;
     }
     /**
      * Different types of environments for WebGL.
@@ -2152,12 +1338,6 @@ declare namespace PIXI {
             backgroundColor?: number;
         });
         /**
-         * @deprecated since 5.0.0
-         * @member {boolean} PIXI.AbstractRenderer#autoResize
-         * @see PIXI.AbstractRenderer#autoDensity
-         */
-        autoResize: boolean;
-        /**
          * The supplied constructor options.
          *
          * @member {Object} PIXI.AbstractRenderer#options
@@ -2319,6 +1499,380 @@ declare namespace PIXI {
          * @member {number}
          */
         backgroundColor: number;
+    }
+    /**
+     * The Renderer draws the scene and all its content onto a WebGL enabled canvas. This renderer
+     * should be used for browsers that support WebGL. This renderer works by automatically managing WebGLBatches.
+     * So no need for Sprite Batches or Sprite Clouds.
+     * Don't forget to add the view to your DOM or you will not see anything :).
+     *
+     * @class
+     * @memberof PIXI
+     * @extends PIXI.AbstractRenderer
+     */
+    class Renderer extends PIXI.AbstractRenderer {
+        constructor(options?: {
+            width?: number;
+            height?: number;
+            view?: HTMLCanvasElement;
+            transparent?: boolean;
+            autoDensity?: boolean;
+            antialias?: boolean;
+            forceFXAA?: boolean;
+            resolution?: number;
+            clearBeforeRender?: boolean;
+            preserveDrawingBuffer?: boolean;
+            backgroundColor?: number;
+            powerPreference?: string;
+            context?: any;
+        });
+        /**
+         * The type of this renderer as a standardized const
+         *
+         * @member {number} PIXI.Renderer#type
+         * @see PIXI.RENDERER_TYPE
+         */
+        type: number;
+        /**
+         * Global uniforms
+         * @member {PIXI.UniformGroup} PIXI.Renderer#globalUniforms
+         */
+        globalUniforms: PIXI.UniformGroup;
+        /**
+         * Mask system instance
+         * @member {PIXI.systems.MaskSystem} mask
+         * @memberof PIXI.Renderer#
+         * @readonly
+         */
+        readonly mask: PIXI.systems.MaskSystem;
+        /**
+         * Context system instance
+         * @member {PIXI.systems.ContextSystem} context
+         * @memberof PIXI.Renderer#
+         * @readonly
+         */
+        readonly context: PIXI.systems.ContextSystem;
+        /**
+         * State system instance
+         * @member {PIXI.systems.StateSystem} state
+         * @memberof PIXI.Renderer#
+         * @readonly
+         */
+        readonly state: PIXI.systems.StateSystem;
+        /**
+         * Shader system instance
+         * @member {PIXI.systems.ShaderSystem} shader
+         * @memberof PIXI.Renderer#
+         * @readonly
+         */
+        readonly shader: PIXI.systems.ShaderSystem;
+        /**
+         * Texture system instance
+         * @member {PIXI.systems.TextureSystem} texture
+         * @memberof PIXI.Renderer#
+         * @readonly
+         */
+        readonly texture: PIXI.systems.TextureSystem;
+        /**
+         * Geometry system instance
+         * @member {PIXI.systems.GeometrySystem} geometry
+         * @memberof PIXI.Renderer#
+         * @readonly
+         */
+        readonly geometry: PIXI.systems.GeometrySystem;
+        /**
+         * Framebuffer system instance
+         * @member {PIXI.systems.FramebufferSystem} framebuffer
+         * @memberof PIXI.Renderer#
+         * @readonly
+         */
+        readonly framebuffer: PIXI.systems.FramebufferSystem;
+        /**
+         * Stencil system instance
+         * @member {PIXI.systems.StencilSystem} stencil
+         * @memberof PIXI.Renderer#
+         * @readonly
+         */
+        readonly stencil: PIXI.systems.StencilSystem;
+        /**
+         * Projection system instance
+         * @member {PIXI.systems.ProjectionSystem} projection
+         * @memberof PIXI.Renderer#
+         * @readonly
+         */
+        readonly projection: PIXI.systems.ProjectionSystem;
+        /**
+         * Texture garbage collector system instance
+         * @member {PIXI.systems.TextureGCSystem} textureGC
+         * @memberof PIXI.Renderer#
+         * @readonly
+         */
+        readonly textureGC: PIXI.systems.TextureGCSystem;
+        /**
+         * Filter system instance
+         * @member {PIXI.systems.FilterSystem} filter
+         * @memberof PIXI.Renderer#
+         * @readonly
+         */
+        readonly filter: PIXI.systems.FilterSystem;
+        /**
+         * RenderTexture system instance
+         * @member {PIXI.systems.RenderTextureSystem} renderTexture
+         * @memberof PIXI.Renderer#
+         * @readonly
+         */
+        readonly renderTexture: PIXI.systems.RenderTextureSystem;
+        /**
+         * Batch system instance
+         * @member {PIXI.systems.BatchSystem} batch
+         * @memberof PIXI.Renderer#
+         * @readonly
+         */
+        readonly batch: PIXI.systems.BatchSystem;
+        /**
+         * Flag if we are rendering to the screen vs renderTexture
+         * @member {boolean} PIXI.Renderer#renderingToScreen
+         * @readonly
+         * @default true
+         */
+        readonly renderingToScreen: boolean;
+        /**
+         * Add a new system to the renderer.
+         * @param {Function} ClassRef - Class reference
+         * @param {string} [name] - Property name for system, if not specified
+         *        will use a static `name` property on the class itself. This
+         *        name will be assigned as s property on the Renderer so make
+         *        sure it doesn't collide with properties on Renderer.
+         * @return {PIXI.Renderer} Return instance of renderer
+         */
+        addSystem(ClassRef: (...params: any[]) => any, name?: string): PIXI.Renderer;
+        /**
+         * Renders the object to its WebGL view
+         *
+         * @param {PIXI.DisplayObject} displayObject - The object to be rendered.
+         * @param {PIXI.RenderTexture} renderTexture - The render texture to render to.
+         * @param {boolean} [clear] - Should the canvas be cleared before the new render.
+         * @param {PIXI.Matrix} [transform] - A transform to apply to the render texture before rendering.
+         * @param {boolean} [skipUpdateTransform] - Should we skip the update transform pass?
+         */
+        render(displayObject: PIXI.DisplayObject, renderTexture: PIXI.RenderTexture, clear?: boolean, transform?: PIXI.Matrix, skipUpdateTransform?: boolean): void;
+        /**
+         * Resizes the WebGL view to the specified width and height.
+         *
+         * @param {number} screenWidth - The new width of the screen.
+         * @param {number} screenHeight - The new height of the screen.
+         */
+        resize(screenWidth: number, screenHeight: number): void;
+        /**
+         * Resets the WebGL state so you can render things however you fancy!
+         *
+         * @return {PIXI.Renderer} Returns itself.
+         */
+        reset(): PIXI.Renderer;
+        /**
+         * Clear the frame buffer
+         */
+        clear(): void;
+        /**
+         * Removes everything from the renderer (event listeners, spritebatch, etc...)
+         *
+         * @param {boolean} [removeView=false] - Removes the Canvas element from the DOM.
+         *  See: https://github.com/pixijs/pixi.js/issues/2233
+         */
+        destroy(removeView?: boolean): void;
+        /**
+         * Collection of installed plugins. These are included by default in PIXI, but can be excluded
+         * by creating a custom build. Consult the README for more information about creating custom
+         * builds and excluding plugins.
+         * @name PIXI.Renderer#plugins
+         * @type {object}
+         * @readonly
+         * @property {PIXI.accessibility.AccessibilityManager} accessibility Support tabbing interactive elements.
+         * @property {PIXI.extract.Extract} extract Extract image data from renderer.
+         * @property {PIXI.interaction.InteractionManager} interaction Handles mouse, touch and pointer events.
+         * @property {PIXI.prepare.Prepare} prepare Pre-render display objects.
+         */
+        readonly plugins: {
+            accessibility: PIXI.accessibility.AccessibilityManager;
+            extract: PIXI.extract.Extract;
+            interaction: PIXI.interaction.InteractionManager;
+            prepare: PIXI.prepare.Prepare;
+        };
+        /**
+         * Adds a plugin to the renderer.
+         *
+         * @method
+         * @param {string} pluginName - The name of the plugin.
+         * @param {Function} ctor - The constructor function or class for the plugin.
+         */
+        static registerPlugin(pluginName: string, ctor: (...params: any[]) => any): void;
+        /**
+         * Collection of methods for extracting data (image, pixels, etc.) from a display object or render texture
+         *
+         * @member {PIXI.extract.Extract} extract
+         * @memberof PIXI.Renderer#
+         * @see PIXI.extract.Extract
+         */
+        extract: PIXI.extract.Extract;
+        /**
+         * The supplied constructor options.
+         *
+         * @member {Object} PIXI.AbstractRenderer#options
+         * @readOnly
+         */
+        readonly options: any;
+        /**
+         * Measurements of the screen. (0, 0, screenWidth, screenHeight).
+         *
+         * Its safe to use as filterArea or hitArea for the whole stage.
+         *
+         * @member {PIXI.Rectangle} PIXI.AbstractRenderer#screen
+         */
+        screen: PIXI.Rectangle;
+        /**
+         * The canvas element that everything is drawn to.
+         *
+         * @member {HTMLCanvasElement} PIXI.AbstractRenderer#view
+         */
+        view: HTMLCanvasElement;
+        /**
+         * The resolution / device pixel ratio of the renderer.
+         *
+         * @member {number} PIXI.AbstractRenderer#resolution
+         * @default 1
+         */
+        resolution: number;
+        /**
+         * Whether the render view is transparent.
+         *
+         * @member {boolean} PIXI.AbstractRenderer#transparent
+         */
+        transparent: boolean;
+        /**
+         * Whether CSS dimensions of canvas view should be resized to screen dimensions automatically.
+         *
+         * @member {boolean} PIXI.AbstractRenderer#autoDensity
+         */
+        autoDensity: boolean;
+        /**
+         * The value of the preserveDrawingBuffer flag affects whether or not the contents of
+         * the stencil buffer is retained after rendering.
+         *
+         * @member {boolean} PIXI.AbstractRenderer#preserveDrawingBuffer
+         */
+        preserveDrawingBuffer: boolean;
+        /**
+         * This sets if the CanvasRenderer will clear the canvas or not before the new render pass.
+         * If the scene is NOT transparent PixiJS will use a canvas sized fillRect operation every
+         * frame to set the canvas background color. If the scene is transparent PixiJS will use clearRect
+         * to clear the canvas every frame. Disable this by setting this to false. For example, if
+         * your game has a canvas filling background image you often don't need this set.
+         *
+         * @member {boolean} PIXI.AbstractRenderer#clearBeforeRender
+         * @default
+         */
+        clearBeforeRender: boolean;
+        /**
+         * The background color as a number.
+         *
+         * @member {number} PIXI.AbstractRenderer#_backgroundColor
+         * @protected
+         */
+        protected _backgroundColor: number;
+        /**
+         * The background color as an [R, G, B] array.
+         *
+         * @member {number[]} PIXI.AbstractRenderer#_backgroundColorRgba
+         * @protected
+         */
+        protected _backgroundColorRgba: number[];
+        /**
+         * The background color as a string.
+         *
+         * @member {string} PIXI.AbstractRenderer#_backgroundColorString
+         * @protected
+         */
+        protected _backgroundColorString: string;
+        /**
+         * This temporary display object used as the parent of the currently being rendered item.
+         *
+         * @member {PIXI.DisplayObject} PIXI.AbstractRenderer#_tempDisplayObjectParent
+         * @protected
+         */
+        protected _tempDisplayObjectParent: PIXI.DisplayObject;
+        /**
+         * The last root object that the renderer tried to render.
+         *
+         * @member {PIXI.DisplayObject} PIXI.AbstractRenderer#_lastObjectRendered
+         * @protected
+         */
+        protected _lastObjectRendered: PIXI.DisplayObject;
+        /**
+         * Initialize the plugins.
+         *
+         * @protected
+         * @param {object} staticMap - The dictionary of statically saved plugins.
+         */
+        protected initPlugins(staticMap: any): void;
+        /**
+         * Same as view.width, actual number of pixels in the canvas by horizontal.
+         *
+         * @member {number}
+         * @readonly
+         * @default 800
+         */
+        readonly width: number;
+        /**
+         * Same as view.height, actual number of pixels in the canvas by vertical.
+         *
+         * @member {number}
+         * @readonly
+         * @default 600
+         */
+        readonly height: number;
+        /**
+         * Useful function that returns a texture of the display object that can then be used to create sprites
+         * This can be quite useful if your displayObject is complicated and needs to be reused multiple times.
+         *
+         * @param {PIXI.DisplayObject} displayObject - The displayObject the object will be generated from.
+         * @param {number} scaleMode - Should be one of the scaleMode consts.
+         * @param {number} resolution - The resolution / device pixel ratio of the texture being generated.
+         * @param {PIXI.Rectangle} [region] - The region of the displayObject, that shall be rendered,
+         *        if no region is specified, defaults to the local bounds of the displayObject.
+         * @return {PIXI.Texture} A texture of the graphics object.
+         */
+        generateTexture(displayObject: PIXI.DisplayObject, scaleMode: number, resolution: number, region?: PIXI.Rectangle): PIXI.Texture;
+        /**
+         * The background color to fill if not transparent
+         *
+         * @member {number}
+         */
+        backgroundColor: number;
+    }
+    /**
+     * System is a base class used for extending systems used by the {@link PIXI.Renderer}
+     * @see PIXI.Renderer#addSystem
+     * @class
+     * @memberof PIXI
+     */
+    class System {
+        constructor(renderer: PIXI.Renderer);
+        /**
+         * The renderer this manager works for.
+         *
+         * @member {PIXI.Renderer} PIXI.System#renderer
+         */
+        renderer: PIXI.Renderer;
+        /**
+         * Generic method called when there is a WebGL context change.
+         * @param {WebGLRenderingContext} gl new webgl context
+         */
+        contextChange(gl: WebGLRenderingContext): void;
+        /**
+         * Generic destroy methods to be overridden by the subclass
+         *
+         */
+        destroy(): void;
     }
     /**
      * @class
@@ -2680,7 +2234,7 @@ declare namespace PIXI {
         /**
          * Applies the filter
          *
-         * @param {PIXI.FilterManager} filterManager - The renderer to retrieve the filter from
+         * @param {PIXI.systems.FilterSystem} filterManager - The renderer to retrieve the filter from
          * @param {PIXI.RenderTexture} input - The input render target.
          * @param {PIXI.RenderTexture} output - The target to output to.
          * @param {boolean} clear - Should the output be cleared before rendering to it
@@ -2688,7 +2242,7 @@ declare namespace PIXI {
          *        There are some useful properties in the currentState :
          *        target, filters, sourceFrame, destinationFrame, renderTarget, resolution
          */
-        apply(filterManager: PIXI.FilterManager, input: PIXI.RenderTexture, output: PIXI.RenderTexture, clear: boolean, currentState?: any): void;
+        apply(filterManager: PIXI.systems.FilterSystem, input: PIXI.RenderTexture, output: PIXI.RenderTexture, clear: boolean, currentState?: any): void;
         /**
          * Sets the blendmode of the filter
          *
@@ -2749,11 +2303,11 @@ declare namespace PIXI {
         /**
          * Applies the filter
          *
-         * @param {PIXI.FilterManager} filterManager - The renderer to retrieve the filter from
+         * @param {PIXI.systems.FilterSystem} filterManager - The renderer to retrieve the filter from
          * @param {PIXI.RenderTexture} input - The input render target.
          * @param {PIXI.RenderTexture} output - The target to output to.
          */
-        apply(filterManager: PIXI.FilterManager, input: PIXI.RenderTexture, output: PIXI.RenderTexture): void;
+        apply(filterManager: PIXI.systems.FilterSystem, input: PIXI.RenderTexture, output: PIXI.RenderTexture): void;
         /**
          * The padding of the filter. Some filters require extra space to breath such as a blur.
          * Increasing this will add extra width and height to the bounds of the object that the
@@ -2967,361 +2521,6 @@ declare namespace PIXI {
         static merge(geometries: PIXI.Geometry[]): PIXI.Geometry;
     }
     /**
-     * The Renderer draws the scene and all its content onto a WebGL enabled canvas. This renderer
-     * should be used for browsers that support WebGL. This renderer works by automatically managing WebGLBatches.
-     * So no need for Sprite Batches or Sprite Clouds.
-     * Don't forget to add the view to your DOM or you will not see anything :).
-     *
-     * @class
-     * @memberof PIXI
-     * @extends PIXI.AbstractRenderer
-     */
-    class Renderer extends PIXI.AbstractRenderer {
-        constructor(options?: {
-            width?: number;
-            height?: number;
-            view?: HTMLCanvasElement;
-            transparent?: boolean;
-            autoDensity?: boolean;
-            antialias?: boolean;
-            forceFXAA?: boolean;
-            resolution?: number;
-            clearBeforeRender?: boolean;
-            preserveDrawingBuffer?: boolean;
-            backgroundColor?: number;
-            powerPreference?: string;
-            context?: any;
-        });
-        /**
-         * The type of this renderer as a standardized const
-         *
-         * @member {number} PIXI.Renderer#type
-         * @see PIXI.RENDERER_TYPE
-         */
-        type: number;
-        /**
-         * Global uniforms
-         * @member {PIXI.UniformGroup} PIXI.Renderer#globalUniforms
-         */
-        globalUniforms: PIXI.UniformGroup;
-        /**
-         * Mask system instance
-         * @member {PIXI.systems.MaskSystem} mask
-         * @memberof PIXI.Renderer#
-         * @readonly
-         */
-        readonly mask: PIXI.systems.MaskSystem;
-        /**
-         * Context system instance
-         * @member {PIXI.systems.ContextSystem} context
-         * @memberof PIXI.Renderer#
-         * @readonly
-         */
-        readonly context: PIXI.systems.ContextSystem;
-        /**
-         * State system instance
-         * @member {PIXI.systems.StateSystem} state
-         * @memberof PIXI.Renderer#
-         * @readonly
-         */
-        readonly state: PIXI.systems.StateSystem;
-        /**
-         * Shader system instance
-         * @member {PIXI.systems.ShaderSystem} shader
-         * @memberof PIXI.Renderer#
-         * @readonly
-         */
-        readonly shader: PIXI.systems.ShaderSystem;
-        /**
-         * Texture system instance
-         * @member {PIXI.systems.TextureSystem} texture
-         * @memberof PIXI.Renderer#
-         * @readonly
-         */
-        readonly texture: PIXI.systems.TextureSystem;
-        /**
-         * Geometry system instance
-         * @member {PIXI.systems.GeometrySystem} geometry
-         * @memberof PIXI.Renderer#
-         * @readonly
-         */
-        readonly geometry: PIXI.systems.GeometrySystem;
-        /**
-         * Framebuffer system instance
-         * @member {PIXI.systems.FramebufferSystem} framebuffer
-         * @memberof PIXI.Renderer#
-         * @readonly
-         */
-        readonly framebuffer: PIXI.systems.FramebufferSystem;
-        /**
-         * Stencil system instance
-         * @member {PIXI.systems.StencilSystem} stencil
-         * @memberof PIXI.Renderer#
-         * @readonly
-         */
-        readonly stencil: PIXI.systems.StencilSystem;
-        /**
-         * Projection system instance
-         * @member {PIXI.systems.ProjectionSystem} projection
-         * @memberof PIXI.Renderer#
-         * @readonly
-         */
-        readonly projection: PIXI.systems.ProjectionSystem;
-        /**
-         * Texture garbage collector system instance
-         * @member {PIXI.systems.TextureGCSystem} textureGC
-         * @memberof PIXI.Renderer#
-         * @readonly
-         */
-        readonly textureGC: PIXI.systems.TextureGCSystem;
-        /**
-         * Filter system instance
-         * @member {PIXI.systems.FilterSystem} filter
-         * @memberof PIXI.Renderer#
-         * @readonly
-         */
-        readonly filter: PIXI.systems.FilterSystem;
-        /**
-         * RenderTexture system instance
-         * @member {PIXI.systems.RenderTextureSystem} renderTexture
-         * @memberof PIXI.Renderer#
-         * @readonly
-         */
-        readonly renderTexture: PIXI.systems.RenderTextureSystem;
-        /**
-         * Batch system instance
-         * @member {PIXI.systems.BatchSystem} batch
-         * @memberof PIXI.Renderer#
-         * @readonly
-         */
-        readonly batch: PIXI.systems.BatchSystem;
-        /**
-         * Flag if we are rendering to the screen vs renderTexture
-         * @member {boolean} PIXI.Renderer#renderingToScreen
-         * @readonly
-         * @default true
-         */
-        readonly renderingToScreen: boolean;
-        /**
-         * Add a new system to the renderer.
-         * @param {Function} ClassRef - Class reference
-         * @param {string} [name] - Property name for system, if not specified
-         *        will use a static `name` property on the class itself. This
-         *        name will be assigned as s property on the Renderer so make
-         *        sure it doesn't collide with properties on Renderer.
-         * @return {PIXI.Renderer} Return instance of renderer
-         */
-        addSystem(ClassRef: (...params: any[]) => any, name?: string): PIXI.Renderer;
-        /**
-         * Renders the object to its WebGL view
-         *
-         * @param {PIXI.DisplayObject} displayObject - The object to be rendered.
-         * @param {PIXI.RenderTexture} renderTexture - The render texture to render to.
-         * @param {boolean} [clear] - Should the canvas be cleared before the new render.
-         * @param {PIXI.Matrix} [transform] - A transform to apply to the render texture before rendering.
-         * @param {boolean} [skipUpdateTransform] - Should we skip the update transform pass?
-         */
-        render(displayObject: PIXI.DisplayObject, renderTexture: PIXI.RenderTexture, clear?: boolean, transform?: PIXI.Matrix, skipUpdateTransform?: boolean): void;
-        /**
-         * Resizes the WebGL view to the specified width and height.
-         *
-         * @param {number} screenWidth - The new width of the screen.
-         * @param {number} screenHeight - The new height of the screen.
-         */
-        resize(screenWidth: number, screenHeight: number): void;
-        /**
-         * Resets the WebGL state so you can render things however you fancy!
-         *
-         * @return {PIXI.Renderer} Returns itself.
-         */
-        reset(): PIXI.Renderer;
-        /**
-         * Clear the frame buffer
-         */
-        clear(): void;
-        /**
-         * Removes everything from the renderer (event listeners, spritebatch, etc...)
-         *
-         * @param {boolean} [removeView=false] - Removes the Canvas element from the DOM.
-         *  See: https://github.com/pixijs/pixi.js/issues/2233
-         */
-        destroy(removeView?: boolean): void;
-        /**
-         * Collection of installed plugins. These are included by default in PIXI, but can be excluded
-         * by creating a custom build. Consult the README for more information about creating custom
-         * builds and excluding plugins.
-         * @name PIXI.Renderer#plugins
-         * @type {object}
-         * @readonly
-         * @property {PIXI.accessibility.AccessibilityManager} accessibility Support tabbing interactive elements.
-         * @property {PIXI.extract.WebGLExtract} extract Extract image data from renderer.
-         * @property {PIXI.interaction.InteractionManager} interaction Handles mouse, touch and pointer events.
-         * @property {PIXI.prepare.WebGLPrepare} prepare Pre-render display objects.
-         */
-        readonly plugins: {
-            accessibility: PIXI.accessibility.AccessibilityManager;
-            extract: PIXI.extract.WebGLExtract;
-            interaction: PIXI.interaction.InteractionManager;
-            prepare: PIXI.prepare.WebGLPrepare;
-        };
-        /**
-         * Adds a plugin to the renderer.
-         *
-         * @method
-         * @param {string} pluginName - The name of the plugin.
-         * @param {Function} ctor - The constructor function or class for the plugin.
-         */
-        static registerPlugin(pluginName: string, ctor: (...params: any[]) => any): void;
-        /**
-         * Collection of methods for extracting data (image, pixels, etc.) from a display object or render texture
-         *
-         * @member {PIXI.extract.Extract} extract
-         * @memberof PIXI.Renderer#
-         * @see PIXI.extract.Extract
-         */
-        extract: PIXI.extract.Extract;
-        /**
-         * @deprecated since 5.0.0
-         * @member {boolean} PIXI.AbstractRenderer#autoResize
-         * @see PIXI.AbstractRenderer#autoDensity
-         */
-        autoResize: boolean;
-        /**
-         * The supplied constructor options.
-         *
-         * @member {Object} PIXI.AbstractRenderer#options
-         * @readOnly
-         */
-        readonly options: any;
-        /**
-         * Measurements of the screen. (0, 0, screenWidth, screenHeight).
-         *
-         * Its safe to use as filterArea or hitArea for the whole stage.
-         *
-         * @member {PIXI.Rectangle} PIXI.AbstractRenderer#screen
-         */
-        screen: PIXI.Rectangle;
-        /**
-         * The canvas element that everything is drawn to.
-         *
-         * @member {HTMLCanvasElement} PIXI.AbstractRenderer#view
-         */
-        view: HTMLCanvasElement;
-        /**
-         * The resolution / device pixel ratio of the renderer.
-         *
-         * @member {number} PIXI.AbstractRenderer#resolution
-         * @default 1
-         */
-        resolution: number;
-        /**
-         * Whether the render view is transparent.
-         *
-         * @member {boolean} PIXI.AbstractRenderer#transparent
-         */
-        transparent: boolean;
-        /**
-         * Whether CSS dimensions of canvas view should be resized to screen dimensions automatically.
-         *
-         * @member {boolean} PIXI.AbstractRenderer#autoDensity
-         */
-        autoDensity: boolean;
-        /**
-         * The value of the preserveDrawingBuffer flag affects whether or not the contents of
-         * the stencil buffer is retained after rendering.
-         *
-         * @member {boolean} PIXI.AbstractRenderer#preserveDrawingBuffer
-         */
-        preserveDrawingBuffer: boolean;
-        /**
-         * This sets if the CanvasRenderer will clear the canvas or not before the new render pass.
-         * If the scene is NOT transparent PixiJS will use a canvas sized fillRect operation every
-         * frame to set the canvas background color. If the scene is transparent PixiJS will use clearRect
-         * to clear the canvas every frame. Disable this by setting this to false. For example, if
-         * your game has a canvas filling background image you often don't need this set.
-         *
-         * @member {boolean} PIXI.AbstractRenderer#clearBeforeRender
-         * @default
-         */
-        clearBeforeRender: boolean;
-        /**
-         * The background color as a number.
-         *
-         * @member {number} PIXI.AbstractRenderer#_backgroundColor
-         * @protected
-         */
-        protected _backgroundColor: number;
-        /**
-         * The background color as an [R, G, B] array.
-         *
-         * @member {number[]} PIXI.AbstractRenderer#_backgroundColorRgba
-         * @protected
-         */
-        protected _backgroundColorRgba: number[];
-        /**
-         * The background color as a string.
-         *
-         * @member {string} PIXI.AbstractRenderer#_backgroundColorString
-         * @protected
-         */
-        protected _backgroundColorString: string;
-        /**
-         * This temporary display object used as the parent of the currently being rendered item.
-         *
-         * @member {PIXI.DisplayObject} PIXI.AbstractRenderer#_tempDisplayObjectParent
-         * @protected
-         */
-        protected _tempDisplayObjectParent: PIXI.DisplayObject;
-        /**
-         * The last root object that the renderer tried to render.
-         *
-         * @member {PIXI.DisplayObject} PIXI.AbstractRenderer#_lastObjectRendered
-         * @protected
-         */
-        protected _lastObjectRendered: PIXI.DisplayObject;
-        /**
-         * Initialize the plugins.
-         *
-         * @protected
-         * @param {object} staticMap - The dictionary of statically saved plugins.
-         */
-        protected initPlugins(staticMap: any): void;
-        /**
-         * Same as view.width, actual number of pixels in the canvas by horizontal.
-         *
-         * @member {number}
-         * @readonly
-         * @default 800
-         */
-        readonly width: number;
-        /**
-         * Same as view.height, actual number of pixels in the canvas by vertical.
-         *
-         * @member {number}
-         * @readonly
-         * @default 600
-         */
-        readonly height: number;
-        /**
-         * Useful function that returns a texture of the display object that can then be used to create sprites
-         * This can be quite useful if your displayObject is complicated and needs to be reused multiple times.
-         *
-         * @param {PIXI.DisplayObject} displayObject - The displayObject the object will be generated from.
-         * @param {number} scaleMode - Should be one of the scaleMode consts.
-         * @param {number} resolution - The resolution / device pixel ratio of the texture being generated.
-         * @param {PIXI.Rectangle} [region] - The region of the displayObject, that shall be rendered,
-         *        if no region is specified, defaults to the local bounds of the displayObject.
-         * @return {PIXI.Texture} A texture of the graphics object.
-         */
-        generateTexture(displayObject: PIXI.DisplayObject, scaleMode: number, resolution: number, region?: PIXI.Rectangle): PIXI.Texture;
-        /**
-         * The background color to fill if not transparent
-         *
-         * @member {number}
-         */
-        backgroundColor: number;
-    }
-    /**
      * A BaseRenderTexture is a special texture that allows any PixiJS display object to be rendered to it.
      *
      * __Hint__: All DisplayObjects (i.e. Sprites) that render to a BaseRenderTexture should be preloaded
@@ -3399,14 +2598,6 @@ declare namespace PIXI {
          *
          */
         destroy(): void;
-        /**
-         * Get the drawable source, such as HTMLCanvasElement or HTMLImageElement suitable
-         * for rendering with CanvasRenderer. Provided by **@pixi/canvas-renderer** package.
-         * @method getDrawableSource
-         * @memberof PIXI.BaseTexture#
-         * @return {ICanvasImageSource} Source to render with CanvasRenderer
-         */
-        getDrawableSource(): ICanvasImageSource;
         /**
          * The width of the base texture set when the image has loaded
          *
@@ -3654,20 +2845,6 @@ declare namespace PIXI {
      */
     class RenderTexture extends PIXI.Texture {
         constructor(baseRenderTexture: PIXI.BaseRenderTexture, frame?: PIXI.Rectangle);
-        /**
-         * @name PIXI.RenderTexture#sourceFrame
-         * @type {PIXI.Rectangle}
-         * @deprecated since 5.0.0
-         * @readonly
-         */
-        readonly sourceFrame: PIXI.Rectangle;
-        /**
-         * @name PIXI.RenderTexture#size
-         * @type {PIXI.Rectangle}
-         * @deprecated since 5.0.0
-         * @readonly
-         */
-        readonly size: PIXI.Rectangle;
         /**
          * This will let the renderer know if the texture is valid. If it's not then it cannot be rendered.
          *
@@ -4050,31 +3227,6 @@ declare namespace PIXI {
          * @default 0
          */
         polygonOffset: number;
-    }
-    /**
-     * System is a base class used for extending systems used by the {@link PIXI.Renderer}
-     * @see PIXI.Renderer#addSystem
-     * @class
-     * @memberof PIXI
-     */
-    class System {
-        constructor(renderer: PIXI.Renderer);
-        /**
-         * The renderer this manager works for.
-         *
-         * @member {PIXI.Renderer} PIXI.System#renderer
-         */
-        renderer: PIXI.Renderer;
-        /**
-         * Generic method called when there is a WebGL context change.
-         * @param {WebGLRenderingContext} gl new webgl context
-         */
-        contextChange(gl: WebGLRenderingContext): void;
-        /**
-         * Generic destroy methods to be overridden by the subclass
-         *
-         */
-        destroy(): void;
     }
     /**
      * Systems are individual components to the Renderer pipeline.
@@ -5237,38 +4389,6 @@ declare namespace PIXI {
             resourceOptions?: any;
         });
         /**
-         * @method fromImage
-         * @static
-         * @memberof PIXI.BaseTexture
-         * @deprecated since 5.0.0
-         * @see PIXI.BaseTexture.from
-         */
-        static fromImage(): void;
-        /**
-         * @method fromCanvas
-         * @static
-         * @memberof PIXI.BaseTexture
-         * @deprecated since 5.0.0
-         * @see PIXI.BaseTexture.from
-         */
-        static fromCanvas(): void;
-        /**
-         * @method fromSVG
-         * @static
-         * @memberof PIXI.BaseTexture
-         * @deprecated since 5.0.0
-         * @see PIXI.BaseTexture.from
-         */
-        static fromSVG(): void;
-        /**
-         * Get the drawable source, such as HTMLCanvasElement or HTMLImageElement suitable
-         * for rendering with CanvasRenderer. Provided by **@pixi/canvas-renderer** package.
-         * @method getDrawableSource
-         * @memberof PIXI.BaseTexture#
-         * @return {ICanvasImageSource} Source to render with CanvasRenderer
-         */
-        getDrawableSource(): ICanvasImageSource;
-        /**
          * The width of the base texture set when the image has loaded
          *
          * @readonly
@@ -5531,7 +4651,7 @@ declare namespace PIXI {
      * @memberof PIXI
      */
     class CubeTexture extends PIXI.BaseTexture {
-		static from(resources: string|HTMLImageElement|HTMLCanvasElement|SVGElement|HTMLVideoElement, options?: any): BaseTexture;
+        static from(resources: string|HTMLImageElement|HTMLCanvasElement|SVGElement|HTMLVideoElement, options?: any): BaseTexture;
         /**
          * Generate a new CubeTexture.
          * @static
@@ -5542,14 +4662,6 @@ declare namespace PIXI {
          * @returns {PIXI.CubeTexture} new cube texture
          */
         static from(resources: string[] | PIXI.resources.Resource[], options?: any): PIXI.CubeTexture;
-        /**
-         * Get the drawable source, such as HTMLCanvasElement or HTMLImageElement suitable
-         * for rendering with CanvasRenderer. Provided by **@pixi/canvas-renderer** package.
-         * @method getDrawableSource
-         * @memberof PIXI.BaseTexture#
-         * @return {ICanvasImageSource} Source to render with CanvasRenderer
-         */
-        getDrawableSource(): ICanvasImageSource;
         /**
          * The width of the base texture set when the image has loaded
          *
@@ -5798,6 +4910,330 @@ declare namespace PIXI {
         wrapMode: number;
     }
     /**
+     * A texture stores the information that represents an image or part of an image. It cannot be added
+     * to the display list directly. Instead use it as the texture for a Sprite. If no frame is provided
+     * then the whole image is used.
+     *
+     * You can directly create a texture from an image and then reuse it multiple times like this :
+     *
+     * ```js
+     * let texture = PIXI.Texture.from('assets/image.png');
+     * let sprite1 = new PIXI.Sprite(texture);
+     * let sprite2 = new PIXI.Sprite(texture);
+     * ```
+     *
+     * Textures made from SVGs, loaded or not, cannot be used before the file finishes processing.
+     * You can check for this by checking the sprite's _textureID property.
+     * ```js
+     * var texture = PIXI.Texture.from('assets/image.svg');
+     * var sprite1 = new PIXI.Sprite(texture);
+     * //sprite1._textureID should not be undefined if the texture has finished processing the SVG file
+     * ```
+     * You can use a ticker or rAF to ensure your sprites load the finished textures after processing. See issue #3068.
+     *
+     * @class
+     * @extends PIXI.utils.EventEmitter
+     * @memberof PIXI
+     */
+    class Texture extends PIXI.utils.EventEmitter {
+        constructor(baseTexture: PIXI.BaseTexture, frame?: PIXI.Rectangle, orig?: PIXI.Rectangle, trim?: PIXI.Rectangle, rotate?: number, anchor?: PIXI.Point);
+        /**
+         * Does this Texture have any frame data assigned to it?
+         *
+         * @member {boolean} PIXI.Texture#noFrame
+         */
+        noFrame: boolean;
+        /**
+         * The base texture that this texture uses.
+         *
+         * @member {PIXI.BaseTexture} PIXI.Texture#baseTexture
+         */
+        baseTexture: PIXI.BaseTexture;
+        /**
+         * This is the area of the BaseTexture image to actually copy to the Canvas / WebGL when rendering,
+         * irrespective of the actual frame size or placement (which can be influenced by trimmed texture atlases)
+         *
+         * @member {PIXI.Rectangle} PIXI.Texture#_frame
+         */
+        _frame: PIXI.Rectangle;
+        /**
+         * This is the trimmed area of original texture, before it was put in atlas
+         * Please call `updateUvs()` after you change coordinates of `trim` manually.
+         *
+         * @member {PIXI.Rectangle} PIXI.Texture#trim
+         */
+        trim: PIXI.Rectangle;
+        /**
+         * This will let the renderer know if the texture is valid. If it's not then it cannot be rendered.
+         *
+         * @member {boolean} PIXI.Texture#valid
+         */
+        valid: boolean;
+        /**
+         * This will let a renderer know that a texture has been updated (used mainly for webGL uv updates)
+         *
+         * @member {boolean} PIXI.Texture#requiresUpdate
+         */
+        requiresUpdate: boolean;
+        /**
+         * The WebGL UV data cache. Can be used as quad UV
+         *
+         * @member {PIXI.TextureUvs} PIXI.Texture#_uvs
+         * @protected
+         */
+        protected _uvs: PIXI.TextureUvs;
+        /**
+         * Default TextureMatrix instance for this texture
+         * By default that object is not created because its heavy
+         *
+         * @member {PIXI.TextureMatrix} PIXI.Texture#uvMatrix
+         */
+        uvMatrix: PIXI.TextureMatrix;
+        /**
+         * This is the area of original texture, before it was put in atlas
+         *
+         * @member {PIXI.Rectangle} PIXI.Texture#orig
+         */
+        orig: PIXI.Rectangle;
+        /**
+         * Anchor point that is used as default if sprite is created with this texture.
+         * Changing the `defaultAnchor` at a later point of time will not update Sprite's anchor point.
+         * @member {PIXI.Point} PIXI.Texture#defaultAnchor
+         * @default {0,0}
+         */
+        defaultAnchor: PIXI.Point;
+        /**
+         * Update ID is observed by sprites and TextureMatrix instances.
+         * Call updateUvs() to increment it.
+         *
+         * @member {number} PIXI.Texture#_updateID
+         * @protected
+         */
+        protected _updateID: number;
+        /**
+         * The ids under which this Texture has been added to the texture cache. This is
+         * automatically set as long as Texture.addToCache is used, but may not be set if a
+         * Texture is added directly to the TextureCache array.
+         *
+         * @member {string[]} PIXI.Texture#textureCacheIds
+         */
+        textureCacheIds: string[];
+        /**
+         * Updates this texture on the gpu.
+         *
+         */
+        update(): void;
+        /**
+         * Called when the base texture is updated
+         *
+         * @protected
+         * @param {PIXI.BaseTexture} baseTexture - The base texture.
+         */
+        protected onBaseTextureUpdated(baseTexture: PIXI.BaseTexture): void;
+        /**
+         * Destroys this texture
+         *
+         * @param {boolean} [destroyBase=false] Whether to destroy the base texture as well
+         */
+        destroy(destroyBase?: boolean): void;
+        /**
+         * Creates a new texture object that acts the same as this one.
+         *
+         * @return {PIXI.Texture} The new texture
+         */
+        clone(): PIXI.Texture;
+        /**
+         * Updates the internal WebGL UV cache. Use it after you change `frame` or `trim` of the texture.
+         * Call it after changing the frame
+         */
+        updateUvs(): void;
+        /**
+         * Helper function that creates a new Texture based on the source you provide.
+         * The source can be - frame id, image url, video url, canvas element, video element, base texture
+         *
+         * @static
+         * @param {number|string|HTMLImageElement|HTMLCanvasElement|HTMLVideoElement|PIXI.BaseTexture}
+         *        source - Source to create texture from
+         * @param {object} [options] See {@link PIXI.BaseTexture}'s constructor for options.
+         * @return {PIXI.Texture} The newly created texture
+         */
+        static from(source: number | string | HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | PIXI.BaseTexture, options?: any): PIXI.Texture;
+        /**
+         * Create a new Texture with a BufferResource from a Float32Array.
+         * RGBA values are floats from 0 to 1.
+         * @static
+         * @param {Float32Array|Uint8Array} buffer The optional array to use, if no data
+         *        is provided, a new Float32Array is created.
+         * @param {number} width - Width of the resource
+         * @param {number} height - Height of the resource
+         * @param {object} [options] See {@link PIXI.BaseTexture}'s constructor for options.
+         * @return {PIXI.Texture} The resulting new BaseTexture
+         */
+        static fromBuffer(buffer: Float32Array | Uint8Array, width: number, height: number, options?: any): PIXI.Texture;
+        /**
+         * Create a texture from a source and add to the cache.
+         *
+         * @static
+         * @param {HTMLImageElement|HTMLCanvasElement} source - The input source.
+         * @param {String} imageUrl - File name of texture, for cache and resolving resolution.
+         * @param {String} [name] - Human readable name for the texture cache. If no name is
+         *        specified, only `imageUrl` will be used as the cache ID.
+         * @return {PIXI.Texture} Output texture
+         */
+        static fromLoader(source: HTMLImageElement | HTMLCanvasElement, imageUrl: string, name?: string): PIXI.Texture;
+        /**
+         * Adds a Texture to the global TextureCache. This cache is shared across the whole PIXI object.
+         *
+         * @static
+         * @param {PIXI.Texture} texture - The Texture to add to the cache.
+         * @param {string} id - The id that the Texture will be stored against.
+         */
+        static addToCache(texture: PIXI.Texture, id: string): void;
+        /**
+         * Remove a Texture from the global TextureCache.
+         *
+         * @static
+         * @param {string|PIXI.Texture} texture - id of a Texture to be removed, or a Texture instance itself
+         * @return {PIXI.Texture|null} The Texture that was removed
+         */
+        static removeFromCache(texture: string | PIXI.Texture): PIXI.Texture | null;
+        /**
+         * The frame specifies the region of the base texture that this texture uses.
+         * Please call `updateUvs()` after you change coordinates of `frame` manually.
+         *
+         * @member {PIXI.Rectangle}
+         */
+        frame: PIXI.Rectangle;
+        /**
+         * Indicates whether the texture is rotated inside the atlas
+         * set to 2 to compensate for texture packer rotation
+         * set to 6 to compensate for spine packer rotation
+         * can be used to rotate or mirror sprites
+         * See {@link PIXI.GroupD8} for explanation
+         *
+         * @member {number}
+         */
+        rotate: number;
+        /**
+         * The width of the Texture in pixels.
+         *
+         * @member {number}
+         */
+        width: number;
+        /**
+         * The height of the Texture in pixels.
+         *
+         * @member {number}
+         */
+        height: number;
+        /**
+         * An empty texture, used often to not have to create multiple empty textures.
+         * Can not be destroyed.
+         *
+         * @static
+         * @constant
+         * @member {PIXI.Texture}
+         */
+        static EMPTY: PIXI.Texture;
+        /**
+         * A white texture of 10x10 size, used for graphics and other things
+         * Can not be destroyed.
+         *
+         * @static
+         * @constant
+         * @member {PIXI.Texture}
+         */
+        static WHITE: PIXI.Texture;
+    }
+    /**
+     * Class controls uv mapping from Texture normal space to BaseTexture normal space.
+     * Takes `trim` and `rotate` into account.
+     * May contain clamp settings for Meshes and TilingSprite.
+     *
+     * Can be used in Texture `uvMatrix` field, or separately, you can use different clamp settings on the same texture.
+     * If you want to add support for texture region of certain feature or filter, that's what you're looking for.
+     *
+     * Takes track of Texture changes through `_lastTextureID` private field.
+     * Use `update()` method call to track it from outside.
+     *
+     * @see PIXI.Texture
+     * @see PIXI.Mesh
+     * @see PIXI.TilingSprite
+     * @class
+     * @memberof PIXI
+     */
+    class TextureMatrix {
+        constructor(texture: PIXI.Texture, clampMargin?: number);
+        /**
+         * Tracks Texture frame changes
+         * @member {number} PIXI.TextureMatrix#_updateID
+         * @protected
+         */
+        protected _updateID: number;
+        /**
+         * Changes frame clamping
+         * Works with TilingSprite and Mesh
+         * Change to 1.5 if you texture has repeated right and bottom lines, that leads to smoother borders
+         *
+         * @default 0
+         * @member {number} PIXI.TextureMatrix#clampOffset
+         */
+        clampOffset: number;
+        /**
+         * Changes frame clamping
+         * Works with TilingSprite and Mesh
+         * Change to -0.5 to add a pixel to the edge, recommended for transparent trimmed textures in atlas
+         *
+         * @default 0.5
+         * @member {number} PIXI.TextureMatrix#clampMargin
+         */
+        clampMargin: number;
+        /**
+         * If texture size is the same as baseTexture
+         * @member {boolean} PIXI.TextureMatrix#isSimple
+         * @default false
+         * @readonly
+         */
+        readonly isSimple: boolean;
+        /**
+         * texture property
+         * @member {PIXI.Texture}
+         */
+        texture: PIXI.Texture;
+        /**
+         * Multiplies uvs array to transform
+         * @param {Float32Array} uvs mesh uvs
+         * @param {Float32Array} [out=uvs] output
+         * @returns {Float32Array} output
+         */
+        multiplyUvs(uvs: Float32Array, out?: Float32Array): Float32Array;
+        /**
+         * updates matrices if texture was changed
+         * @param {boolean} forceUpdate if true, matrices will be updated any case
+         * @returns {boolean} whether or not it was updated
+         */
+        update(forceUpdate: boolean): boolean;
+    }
+    /**
+     * A standard object to store the Uvs of a texture
+     *
+     * @class
+     * @protected
+     * @memberof PIXI
+     */
+    class TextureUvs {
+        constructor();
+        /**
+         * Sets the texture Uvs based on the given frame information.
+         *
+         * @protected
+         * @param {PIXI.Rectangle} frame - The frame of the texture
+         * @param {PIXI.Rectangle} baseFrame - The base frame of the texture
+         * @param {number} rotate - Rotation of frame, see {@link PIXI.GroupD8}
+         */
+        protected set(frame: PIXI.Rectangle, baseFrame: PIXI.Rectangle, rotate: number): void;
+    }
+    /**
      * Collection of base resource types supported by PixiJS.
      * Resources are used by {@link PIXI.BaseTexture} to handle different media types
      * such as images, video, SVG graphics, etc. In most use-cases, you should not
@@ -5957,67 +5393,6 @@ declare namespace PIXI {
              */
             destroy(): void;
         }
-        /**
-         * Collection of installed resource types, class must extend {@link PIXI.resources.Resource}.
-         * @example
-         * class CustomResource extends PIXI.resources.Resource {
-         *   // MUST have source, options constructor signature
-         *   // for auto-detected resources to be created.
-         *   constructor(source, options) {
-         *     super();
-         *   }
-         *   upload(renderer, baseTexture, glTexture) {
-         *     // upload with GL
-         *     return true;
-         *   }
-         *   // used to auto-detect resource
-         *   static test(source, extension) {
-         *     return extension === 'xyz'|| source instanceof SomeClass;
-         *   }
-         * }
-         * // Install the new resource type
-         * PIXI.resources.INSTALLED.push(CustomResource);
-         *
-         * @name PIXI.resources.INSTALLED
-         * @type {Array<*>}
-         * @static
-         * @readonly
-         */
-        var INSTALLED: any[];
-        /**
-         * Create a resource element from a single source element. This
-         * auto-detects which type of resource to create. All resources that
-         * are auto-detectable must have a static `test` method and a constructor
-         * with the arguments `(source, options?)`. Currently, the supported
-         * resources for auto-detection include:
-         *  - {@link PIXI.resources.ImageResource}
-         *  - {@link PIXI.resources.CanvasResource}
-         *  - {@link PIXI.resources.VideoResource}
-         *  - {@link PIXI.resources.SVGResource}
-         *  - {@link PIXI.resources.BufferResource}
-         * @static
-         * @function PIXI.resources.autoDetectResource
-         * @param {string|*} source - Resource source, this can be the URL to the resource,
-         *        a typed-array (for BufferResource), HTMLVideoElement, SVG data-uri
-         *        or any other resource that can be auto-detected. If not resource is
-         *        detected, it's assumed to be an ImageResource.
-         * @param {object} [options] - Pass-through options to use for Resource
-         * @param {number} [options.width] - BufferResource's width
-         * @param {number} [options.height] - BufferResource's height
-         * @param {boolean} [options.autoLoad=true] - Image, SVG and Video flag to start loading
-         * @param {number} [options.scale=1] - SVG source scale
-         * @param {boolean} [options.createBitmap=true] - Image option to create Bitmap object
-         * @param {boolean} [options.crossorigin=true] - Image and Video option to set crossOrigin
-         * @return {PIXI.resources.Resource} The created resource.
-         */
-        function autoDetectResource(source: string | any, options?: {
-            width?: number;
-            height?: number;
-            autoLoad?: boolean;
-            scale?: number;
-            createBitmap?: boolean;
-            crossorigin?: boolean;
-        }): PIXI.resources.Resource;
         /**
          * Base for all the image/canvas resources
          * @class
@@ -7175,365 +6550,67 @@ declare namespace PIXI {
              */
             destroy(): void;
         }
-    }
-    /**
-     * A texture stores the information that represents an image or part of an image. It cannot be added
-     * to the display list directly. Instead use it as the texture for a Sprite. If no frame is provided
-     * then the whole image is used.
-     *
-     * You can directly create a texture from an image and then reuse it multiple times like this :
-     *
-     * ```js
-     * let texture = PIXI.Texture.from('assets/image.png');
-     * let sprite1 = new PIXI.Sprite(texture);
-     * let sprite2 = new PIXI.Sprite(texture);
-     * ```
-     *
-     * Textures made from SVGs, loaded or not, cannot be used before the file finishes processing.
-     * You can check for this by checking the sprite's _textureID property.
-     * ```js
-     * var texture = PIXI.Texture.from('assets/image.svg');
-     * var sprite1 = new PIXI.Sprite(texture);
-     * //sprite1._textureID should not be undefined if the texture has finished processing the SVG file
-     * ```
-     * You can use a ticker or rAF to ensure your sprites load the finished textures after processing. See issue #3068.
-     *
-     * @class
-     * @extends PIXI.utils.EventEmitter
-     * @memberof PIXI
-     */
-    class Texture extends PIXI.utils.EventEmitter {
-        constructor(baseTexture: PIXI.BaseTexture, frame?: PIXI.Rectangle, orig?: PIXI.Rectangle, trim?: PIXI.Rectangle, rotate?: number, anchor?: PIXI.Point);
         /**
-         * @deprecated since 5.0.0
-         * @method PIXI.Texture.fromImage
-         * @see PIXI.Texture.from
-         * @return {PIXI.Texture}
-         */
-        static fromImage(): PIXI.Texture;
-        /**
-         * @deprecated since 5.0.0
-         * @method PIXI.Texture.fromSVG
-         * @see PIXI.Texture.from
-         * @return {PIXI.Texture}
-         */
-        static fromSVG(): PIXI.Texture;
-        /**
-         * @deprecated since 5.0.0
-         * @method PIXI.Texture.fromCanvas
-         * @see PIXI.Texture.from
-         * @return {PIXI.Texture}
-         */
-        static fromCanvas(): PIXI.Texture;
-        /**
-         * @deprecated since 5.0.0
-         * @method PIXI.Texture.fromVideo
-         * @see PIXI.Texture.from
-         * @return {PIXI.Texture}
-         */
-        static fromVideo(): PIXI.Texture;
-        /**
-         * @deprecated since 5.0.0
-         * @method PIXI.Texture.fromFrame
-         * @see PIXI.Texture.from
-         * @return {PIXI.Texture}
-         */
-        static fromFrame(): PIXI.Texture;
-        /**
-         * Does this Texture have any frame data assigned to it?
+         * Collection of installed resource types, class must extend {@link PIXI.resources.Resource}.
+         * @example
+         * class CustomResource extends PIXI.resources.Resource {
+         *   // MUST have source, options constructor signature
+         *   // for auto-detected resources to be created.
+         *   constructor(source, options) {
+         *     super();
+         *   }
+         *   upload(renderer, baseTexture, glTexture) {
+         *     // upload with GL
+         *     return true;
+         *   }
+         *   // used to auto-detect resource
+         *   static test(source, extension) {
+         *     return extension === 'xyz'|| source instanceof SomeClass;
+         *   }
+         * }
+         * // Install the new resource type
+         * PIXI.resources.INSTALLED.push(CustomResource);
          *
-         * @member {boolean} PIXI.Texture#noFrame
-         */
-        noFrame: boolean;
-        /**
-         * The base texture that this texture uses.
-         *
-         * @member {PIXI.BaseTexture} PIXI.Texture#baseTexture
-         */
-        baseTexture: PIXI.BaseTexture;
-        /**
-         * This is the area of the BaseTexture image to actually copy to the Canvas / WebGL when rendering,
-         * irrespective of the actual frame size or placement (which can be influenced by trimmed texture atlases)
-         *
-         * @member {PIXI.Rectangle} PIXI.Texture#_frame
-         */
-        _frame: PIXI.Rectangle;
-        /**
-         * This is the trimmed area of original texture, before it was put in atlas
-         * Please call `updateUvs()` after you change coordinates of `trim` manually.
-         *
-         * @member {PIXI.Rectangle} PIXI.Texture#trim
-         */
-        trim: PIXI.Rectangle;
-        /**
-         * This will let the renderer know if the texture is valid. If it's not then it cannot be rendered.
-         *
-         * @member {boolean} PIXI.Texture#valid
-         */
-        valid: boolean;
-        /**
-         * This will let a renderer know that a texture has been updated (used mainly for webGL uv updates)
-         *
-         * @member {boolean} PIXI.Texture#requiresUpdate
-         */
-        requiresUpdate: boolean;
-        /**
-         * The WebGL UV data cache. Can be used as quad UV
-         *
-         * @member {PIXI.TextureUvs} PIXI.Texture#_uvs
-         * @protected
-         */
-        protected _uvs: PIXI.TextureUvs;
-        /**
-         * Default TextureMatrix instance for this texture
-         * By default that object is not created because its heavy
-         *
-         * @member {PIXI.TextureMatrix} PIXI.Texture#uvMatrix
-         */
-        uvMatrix: PIXI.TextureMatrix;
-        /**
-         * This is the area of original texture, before it was put in atlas
-         *
-         * @member {PIXI.Rectangle} PIXI.Texture#orig
-         */
-        orig: PIXI.Rectangle;
-        /**
-         * Anchor point that is used as default if sprite is created with this texture.
-         * Changing the `defaultAnchor` at a later point of time will not update Sprite's anchor point.
-         * @member {PIXI.Point} PIXI.Texture#defaultAnchor
-         * @default {0,0}
-         */
-        defaultAnchor: PIXI.Point;
-        /**
-         * Update ID is observed by sprites and TextureMatrix instances.
-         * Call updateUvs() to increment it.
-         *
-         * @member {number} PIXI.Texture#_updateID
-         * @protected
-         */
-        protected _updateID: number;
-        /**
-         * The ids under which this Texture has been added to the texture cache. This is
-         * automatically set as long as Texture.addToCache is used, but may not be set if a
-         * Texture is added directly to the TextureCache array.
-         *
-         * @member {string[]} PIXI.Texture#textureCacheIds
-         */
-        textureCacheIds: string[];
-        /**
-         * Updates this texture on the gpu.
-         *
-         */
-        update(): void;
-        /**
-         * Called when the base texture is updated
-         *
-         * @protected
-         * @param {PIXI.BaseTexture} baseTexture - The base texture.
-         */
-        protected onBaseTextureUpdated(baseTexture: PIXI.BaseTexture): void;
-        /**
-         * Destroys this texture
-         *
-         * @param {boolean} [destroyBase=false] Whether to destroy the base texture as well
-         */
-        destroy(destroyBase?: boolean): void;
-        /**
-         * Creates a new texture object that acts the same as this one.
-         *
-         * @return {PIXI.Texture} The new texture
-         */
-        clone(): PIXI.Texture;
-        /**
-         * Updates the internal WebGL UV cache. Use it after you change `frame` or `trim` of the texture.
-         * Call it after changing the frame
-         */
-        updateUvs(): void;
-        /**
-         * Helper function that creates a new Texture based on the source you provide.
-         * The source can be - frame id, image url, video url, canvas element, video element, base texture
-         *
+         * @name PIXI.resources.INSTALLED
+         * @type {Array<*>}
          * @static
-         * @param {number|string|HTMLImageElement|HTMLCanvasElement|HTMLVideoElement|PIXI.BaseTexture}
-         *        source - Source to create texture from
-         * @param {object} [options] See {@link PIXI.BaseTexture}'s constructor for options.
-         * @return {PIXI.Texture} The newly created texture
-         */
-        static from(source: number | string | HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | PIXI.BaseTexture, options?: any): PIXI.Texture;
-        /**
-         * Create a new Texture with a BufferResource from a Float32Array.
-         * RGBA values are floats from 0 to 1.
-         * @static
-         * @param {Float32Array|Uint8Array} buffer The optional array to use, if no data
-         *        is provided, a new Float32Array is created.
-         * @param {number} width - Width of the resource
-         * @param {number} height - Height of the resource
-         * @param {object} [options] See {@link PIXI.BaseTexture}'s constructor for options.
-         * @return {PIXI.Texture} The resulting new BaseTexture
-         */
-        static fromBuffer(buffer: Float32Array | Uint8Array, width: number, height: number, options?: any): PIXI.Texture;
-        /**
-         * Create a texture from a source and add to the cache.
-         *
-         * @static
-         * @param {HTMLImageElement|HTMLCanvasElement} source - The input source.
-         * @param {String} imageUrl - File name of texture, for cache and resolving resolution.
-         * @param {String} [name] - Human readable name for the texture cache. If no name is
-         *        specified, only `imageUrl` will be used as the cache ID.
-         * @return {PIXI.Texture} Output texture
-         */
-        static fromLoader(source: HTMLImageElement | HTMLCanvasElement, imageUrl: string, name?: string): PIXI.Texture;
-        /**
-         * Adds a Texture to the global TextureCache. This cache is shared across the whole PIXI object.
-         *
-         * @static
-         * @param {PIXI.Texture} texture - The Texture to add to the cache.
-         * @param {string} id - The id that the Texture will be stored against.
-         */
-        static addToCache(texture: PIXI.Texture, id: string): void;
-        /**
-         * Remove a Texture from the global TextureCache.
-         *
-         * @static
-         * @param {string|PIXI.Texture} texture - id of a Texture to be removed, or a Texture instance itself
-         * @return {PIXI.Texture|null} The Texture that was removed
-         */
-        static removeFromCache(texture: string | PIXI.Texture): PIXI.Texture | null;
-        /**
-         * The frame specifies the region of the base texture that this texture uses.
-         * Please call `updateUvs()` after you change coordinates of `frame` manually.
-         *
-         * @member {PIXI.Rectangle}
-         */
-        frame: PIXI.Rectangle;
-        /**
-         * Indicates whether the texture is rotated inside the atlas
-         * set to 2 to compensate for texture packer rotation
-         * set to 6 to compensate for spine packer rotation
-         * can be used to rotate or mirror sprites
-         * See {@link PIXI.GroupD8} for explanation
-         *
-         * @member {number}
-         */
-        rotate: number;
-        /**
-         * The width of the Texture in pixels.
-         *
-         * @member {number}
-         */
-        width: number;
-        /**
-         * The height of the Texture in pixels.
-         *
-         * @member {number}
-         */
-        height: number;
-        /**
-         * An empty texture, used often to not have to create multiple empty textures.
-         * Can not be destroyed.
-         *
-         * @static
-         * @constant
-         * @member {PIXI.Texture}
-         */
-        static EMPTY: PIXI.Texture;
-        /**
-         * A white texture of 10x10 size, used for graphics and other things
-         * Can not be destroyed.
-         *
-         * @static
-         * @constant
-         * @member {PIXI.Texture}
-         */
-        static WHITE: PIXI.Texture;
-    }
-    /**
-     * Class controls uv mapping from Texture normal space to BaseTexture normal space.
-     * Takes `trim` and `rotate` into account.
-     * May contain clamp settings for Meshes and TilingSprite.
-     *
-     * Can be used in Texture `uvMatrix` field, or separately, you can use different clamp settings on the same texture.
-     * If you want to add support for texture region of certain feature or filter, that's what you're looking for.
-     *
-     * Takes track of Texture changes through `_lastTextureID` private field.
-     * Use `update()` method call to track it from outside.
-     *
-     * @see PIXI.Texture
-     * @see PIXI.Mesh
-     * @see PIXI.TilingSprite
-     * @class
-     * @memberof PIXI
-     */
-    class TextureMatrix {
-        constructor(texture: PIXI.Texture, clampMargin?: number);
-        /**
-         * Tracks Texture frame changes
-         * @member {number} PIXI.TextureMatrix#_updateID
-         * @protected
-         */
-        protected _updateID: number;
-        /**
-         * Changes frame clamping
-         * Works with TilingSprite and Mesh
-         * Change to 1.5 if you texture has repeated right and bottom lines, that leads to smoother borders
-         *
-         * @default 0
-         * @member {number} PIXI.TextureMatrix#clampOffset
-         */
-        clampOffset: number;
-        /**
-         * Changes frame clamping
-         * Works with TilingSprite and Mesh
-         * Change to -0.5 to add a pixel to the edge, recommended for transparent trimmed textures in atlas
-         *
-         * @default 0.5
-         * @member {number} PIXI.TextureMatrix#clampMargin
-         */
-        clampMargin: number;
-        /**
-         * If texture size is the same as baseTexture
-         * @member {boolean} PIXI.TextureMatrix#isSimple
-         * @default false
          * @readonly
          */
-        readonly isSimple: boolean;
+        var INSTALLED: any[];
         /**
-         * texture property
-         * @member {PIXI.Texture}
+         * Create a resource element from a single source element. This
+         * auto-detects which type of resource to create. All resources that
+         * are auto-detectable must have a static `test` method and a constructor
+         * with the arguments `(source, options?)`. Currently, the supported
+         * resources for auto-detection include:
+         *  - {@link PIXI.resources.ImageResource}
+         *  - {@link PIXI.resources.CanvasResource}
+         *  - {@link PIXI.resources.VideoResource}
+         *  - {@link PIXI.resources.SVGResource}
+         *  - {@link PIXI.resources.BufferResource}
+         * @static
+         * @function PIXI.resources.autoDetectResource
+         * @param {string|*} source - Resource source, this can be the URL to the resource,
+         *        a typed-array (for BufferResource), HTMLVideoElement, SVG data-uri
+         *        or any other resource that can be auto-detected. If not resource is
+         *        detected, it's assumed to be an ImageResource.
+         * @param {object} [options] - Pass-through options to use for Resource
+         * @param {number} [options.width] - BufferResource's width
+         * @param {number} [options.height] - BufferResource's height
+         * @param {boolean} [options.autoLoad=true] - Image, SVG and Video flag to start loading
+         * @param {number} [options.scale=1] - SVG source scale
+         * @param {boolean} [options.createBitmap=true] - Image option to create Bitmap object
+         * @param {boolean} [options.crossorigin=true] - Image and Video option to set crossOrigin
+         * @return {PIXI.resources.Resource} The created resource.
          */
-        texture: PIXI.Texture;
-        /**
-         * Multiplies uvs array to transform
-         * @param {Float32Array} uvs mesh uvs
-         * @param {Float32Array} [out=uvs] output
-         * @returns {Float32Array} output
-         */
-        multiplyUvs(uvs: Float32Array, out?: Float32Array): Float32Array;
-        /**
-         * updates matrices if texture was changed
-         * @param {boolean} forceUpdate if true, matrices will be updated any case
-         * @returns {boolean} whether or not it was updated
-         */
-        update(forceUpdate: boolean): boolean;
-    }
-    /**
-     * A standard object to store the Uvs of a texture
-     *
-     * @class
-     * @protected
-     * @memberof PIXI
-     */
-    class TextureUvs {
-        constructor();
-        /**
-         * Sets the texture Uvs based on the given frame information.
-         *
-         * @protected
-         * @param {PIXI.Rectangle} frame - The frame of the texture
-         * @param {PIXI.Rectangle} baseFrame - The base frame of the texture
-         * @param {number} rotate - Rotation of frame, see {@link PIXI.GroupD8}
-         */
-        protected set(frame: PIXI.Rectangle, baseFrame: PIXI.Rectangle, rotate: number): void;
+        function autoDetectResource(source: string | any, options?: {
+            width?: number;
+            height?: number;
+            autoLoad?: boolean;
+            scale?: number;
+            createBitmap?: boolean;
+            crossorigin?: boolean;
+        }): PIXI.resources.Resource;
     }
     /**
      * Helper class to create a quad
@@ -7642,13 +6719,13 @@ declare namespace PIXI {
         /**
          * Adds sprite frame, transformed.
          *
-         * @param {PIXI.TransformBase} transform - TODO
+         * @param {PIXI.Transform} transform - TODO
          * @param {number} x0 - TODO
          * @param {number} y0 - TODO
          * @param {number} x1 - TODO
          * @param {number} y1 - TODO
          */
-        addFrame(transform: PIXI.TransformBase, x0: number, y0: number, x1: number, y1: number): void;
+        addFrame(transform: PIXI.Transform, x0: number, y0: number, x1: number, y1: number): void;
         /**
          * Adds screen vertices from array
          *
@@ -7660,12 +6737,12 @@ declare namespace PIXI {
         /**
          * Add an array of mesh vertices
          *
-         * @param {PIXI.TransformBase} transform - mesh transform
+         * @param {PIXI.Transform} transform - mesh transform
          * @param {Float32Array} vertices - mesh coordinates in array
          * @param {number} beginOffset - begin offset
          * @param {number} endOffset - end offset, excluded
          */
-        addVertices(transform: PIXI.TransformBase, vertices: Float32Array, beginOffset: number, endOffset: number): void;
+        addVertices(transform: PIXI.Transform, vertices: Float32Array, beginOffset: number, endOffset: number): void;
         /**
          * Adds other Bounds
          *
@@ -7702,42 +6779,6 @@ declare namespace PIXI {
      */
     class Container extends PIXI.DisplayObject {
         constructor();
-        /**
-         * @method PIXI.Container#renderWebGL
-         * @deprecated since 5.0.0
-         * @see PIXI.Container#render
-         * @param {PIXI.Renderer} renderer Instance of renderer
-         */
-        renderWebGL(renderer: PIXI.Renderer): void;
-        /**
-         * @method PIXI.Container#renderAdvancedWebGL
-         * @deprecated since 5.0.0
-         * @see PIXI.Container#renderAdvanced
-         * @param {PIXI.Renderer} renderer Instance of renderer
-         */
-        renderAdvancedWebGL(renderer: PIXI.Renderer): void;
-        /**
-         * To be overridden by the subclass
-         * @method _renderCanvas
-         * @memberof PIXI.Container#
-         * @protected
-         * @param {PIXI.CanvasRenderer} renderer - The renderer
-         */
-        protected _renderCanvas(renderer: PIXI.CanvasRenderer): void;
-        /**
-         * Renders the object using the Canvas renderer
-         * @method renderCanvas
-         * @memberof PIXI.Container#
-         * @param {PIXI.CanvasRenderer} renderer - The renderer
-         */
-        renderCanvas(renderer: PIXI.CanvasRenderer): void;
-        /**
-         * Renders the object using the Canvas renderer
-         * @method renderCanvas
-         * @memberof PIXI.Container#
-         * @param {PIXI.CanvasRenderer} renderer - The renderer
-         */
-        renderCanvas(renderer: PIXI.CanvasRenderer): void;
         /**
          * The array of children of this container.
          *
@@ -7967,9 +7008,9 @@ declare namespace PIXI {
          * World transform and local transform of this object.
          * This will become read-only later, please do not assign anything there unless you know what are you doing.
          *
-         * @member {PIXI.TransformBase} PIXI.DisplayObject#transform
+         * @member {PIXI.Transform} PIXI.DisplayObject#transform
          */
-        transform: PIXI.TransformBase;
+        transform: PIXI.Transform;
         /**
          * The opacity of the object.
          *
@@ -8339,13 +7380,6 @@ declare namespace PIXI {
     class DisplayObject extends PIXI.utils.EventEmitter {
         constructor();
         /**
-         * @method PIXI.DisplayObject#renderWebGL
-         * @deprecated since 5.0.0
-         * @see PIXI.DisplayObject#render
-         * @param {PIXI.Renderer} renderer Instance of renderer
-         */
-        renderWebGL(renderer: PIXI.Renderer): void;
-        /**
          *  Flag for if the object is accessible. If true AccessibilityManager will overlay a
          *   shadow div with attributes set
          *
@@ -8384,9 +7418,9 @@ declare namespace PIXI {
          * World transform and local transform of this object.
          * This will become read-only later, please do not assign anything there unless you know what are you doing.
          *
-         * @member {PIXI.TransformBase} PIXI.DisplayObject#transform
+         * @member {PIXI.Transform} PIXI.DisplayObject#transform
          */
-        transform: PIXI.TransformBase;
+        transform: PIXI.Transform;
         /**
          * The opacity of the object.
          *
@@ -8787,63 +7821,6 @@ declare namespace PIXI {
      */
     namespace extract {
         /**
-         * @class PIXI.extract.WebGLExtract
-         * @deprecated since 5.0.0
-         * @see PIXI.extract.Prepare
-         */
-        class WebGLExtract {
-        }
-        /**
-         * The extract manager provides functionality to export content from the renderers.
-         *
-         * An instance of this class is automatically created by default, and can be found at renderer.plugins.extract
-         *
-         * @class
-         * @memberof PIXI.extract
-         */
-        class CanvasExtract {
-            constructor(renderer: PIXI.CanvasRenderer);
-            /**
-             * Will return a HTML Image of the target
-             *
-             * @param {PIXI.DisplayObject|PIXI.RenderTexture} target - A displayObject or renderTexture
-             *  to convert. If left empty will use use the main renderer
-             * @return {HTMLImageElement} HTML Image of the target
-             */
-            image(target: PIXI.DisplayObject | PIXI.RenderTexture): HTMLImageElement;
-            /**
-             * Will return a a base64 encoded string of this target. It works by calling
-             *  `CanvasExtract.getCanvas` and then running toDataURL on that.
-             *
-             * @param {PIXI.DisplayObject|PIXI.RenderTexture} target - A displayObject or renderTexture
-             *  to convert. If left empty will use use the main renderer
-             * @return {string} A base64 encoded string of the texture.
-             */
-            base64(target: PIXI.DisplayObject | PIXI.RenderTexture): string;
-            /**
-             * Creates a Canvas element, renders this target to it and then returns it.
-             *
-             * @param {PIXI.DisplayObject|PIXI.RenderTexture} target - A displayObject or renderTexture
-             *  to convert. If left empty will use use the main renderer
-             * @return {HTMLCanvasElement} A Canvas element with the texture rendered on.
-             */
-            canvas(target: PIXI.DisplayObject | PIXI.RenderTexture): HTMLCanvasElement;
-            /**
-             * Will return a one-dimensional array containing the pixel data of the entire texture in RGBA
-             * order, with integer values between 0 and 255 (included).
-             *
-             * @param {PIXI.DisplayObject|PIXI.RenderTexture} target - A displayObject or renderTexture
-             *  to convert. If left empty will use use the main renderer
-             * @return {Uint8ClampedArray} One-dimensional array containing the pixel data of the entire texture
-             */
-            pixels(target: PIXI.DisplayObject | PIXI.RenderTexture): Uint8ClampedArray;
-            /**
-             * Destroys the extract
-             *
-             */
-            destroy(): void;
-        }
-        /**
          * The extract manager provides functionality to export content from the renderers.
          *
          * An instance of this class is automatically created by default, and can be found at renderer.plugins.extract
@@ -8857,7 +7834,7 @@ declare namespace PIXI {
              * Will return a HTML Image of the target
              *
              * @param {PIXI.DisplayObject|PIXI.RenderTexture} target - A displayObject or renderTexture
-             *  to convert. If left empty will use use the main renderer
+             *  to convert. If left empty will use the main renderer
              * @return {HTMLImageElement} HTML Image of the target
              */
             image(target: PIXI.DisplayObject | PIXI.RenderTexture): HTMLImageElement;
@@ -8866,7 +7843,7 @@ declare namespace PIXI {
              *  `Extract.getCanvas` and then running toDataURL on that.
              *
              * @param {PIXI.DisplayObject|PIXI.RenderTexture} target - A displayObject or renderTexture
-             *  to convert. If left empty will use use the main renderer
+             *  to convert. If left empty will use the main renderer
              * @return {string} A base64 encoded string of the texture.
              */
             base64(target: PIXI.DisplayObject | PIXI.RenderTexture): string;
@@ -8874,7 +7851,7 @@ declare namespace PIXI {
              * Creates a Canvas element, renders this target to it and then returns it.
              *
              * @param {PIXI.DisplayObject|PIXI.RenderTexture} target - A displayObject or renderTexture
-             *  to convert. If left empty will use use the main renderer
+             *  to convert. If left empty will use the main renderer
              * @return {HTMLCanvasElement} A Canvas element with the texture rendered on.
              */
             canvas(target: PIXI.DisplayObject | PIXI.RenderTexture): HTMLCanvasElement;
@@ -8883,7 +7860,7 @@ declare namespace PIXI {
              * order, with integer values between 0 and 255 (included).
              *
              * @param {PIXI.DisplayObject|PIXI.RenderTexture} target - A displayObject or renderTexture
-             *  to convert. If left empty will use use the main renderer
+             *  to convert. If left empty will use the main renderer
              * @return {Uint8ClampedArray} One-dimensional array containing the pixel data of the entire texture
              */
             pixels(target: PIXI.DisplayObject | PIXI.RenderTexture): Uint8ClampedArray;
@@ -8895,27 +7872,6 @@ declare namespace PIXI {
         }
     }
     /**
-     * Graphics curves resolution settings. If `adaptive` flag is set to `true`,
-     * the resolution is calculated based on the curve's length to ensure better visual quality.
-     * Adaptive draw works with `bezierCurveTo` and `quadraticCurveTo`.
-     *
-     * @static
-     * @constant
-     * @memberof PIXI
-     * @name GRAPHICS_CURVES
-     * @type {object}
-     * @property {boolean} adaptive=false - flag indicating if the resolution should be adaptive
-     * @property {number} maxLength=10 - maximal length of a single segment of the curve (if adaptive = false, ignored)
-     * @property {number} minSegments=8 - minimal number of segments in the curve (if adaptive = false, ignored)
-     * @property {number} maxSegments=2048 - maximal number of segments in the curve (if adaptive = false, ignored)
-     */
-    var GRAPHICS_CURVES: {
-        adaptive: boolean;
-        maxLength: number;
-        minSegments: number;
-        maxSegments: number;
-    };
-    /**
      * The Graphics class contains methods used to draw primitive shapes such as lines, circles and
      * rectangles to the display, and to color and fill them.
      *
@@ -8925,15 +7881,6 @@ declare namespace PIXI {
      */
     class Graphics extends PIXI.Container {
         constructor(geometry?: PIXI.GraphicsGeometry);
-        /**
-         * Generates a canvas texture.
-         * @method generateCanvasTexture
-         * @memberof PIXI.Graphics#
-         * @param {number} scaleMode - The scale mode of the texture.
-         * @param {number} resolution - The resolution of the texture.
-         * @return {PIXI.Texture} The new texture.
-         */
-        generateCanvasTexture(scaleMode: number, resolution: number): PIXI.Texture;
         /**
          * Includes vertex positions, face indices, normals, colors, UVs, and
          * custom attributes within buffers, reducing the cost of passing all
@@ -9361,27 +8308,6 @@ declare namespace PIXI {
             geometry?: boolean;
         }): void;
         /**
-         * @method PIXI.Container#renderWebGL
-         * @deprecated since 5.0.0
-         * @see PIXI.Container#render
-         * @param {PIXI.Renderer} renderer Instance of renderer
-         */
-        renderWebGL(renderer: PIXI.Renderer): void;
-        /**
-         * @method PIXI.Container#renderAdvancedWebGL
-         * @deprecated since 5.0.0
-         * @see PIXI.Container#renderAdvanced
-         * @param {PIXI.Renderer} renderer Instance of renderer
-         */
-        renderAdvancedWebGL(renderer: PIXI.Renderer): void;
-        /**
-         * Renders the object using the Canvas renderer
-         * @method renderCanvas
-         * @memberof PIXI.Container#
-         * @param {PIXI.CanvasRenderer} renderer - The renderer
-         */
-        renderCanvas(renderer: PIXI.CanvasRenderer): void;
-        /**
          * The array of children of this container.
          *
          * @member {PIXI.DisplayObject[]} PIXI.Container#children
@@ -9578,9 +8504,9 @@ declare namespace PIXI {
          * World transform and local transform of this object.
          * This will become read-only later, please do not assign anything there unless you know what are you doing.
          *
-         * @member {PIXI.TransformBase} PIXI.DisplayObject#transform
+         * @member {PIXI.Transform} PIXI.DisplayObject#transform
          */
-        transform: PIXI.TransformBase;
+        transform: PIXI.Transform;
         /**
          * The opacity of the object.
          *
@@ -10257,6 +9183,27 @@ declare namespace PIXI {
         protected _indexBuffer: PIXI.Buffer;
     }
     /**
+     * Graphics curves resolution settings. If `adaptive` flag is set to `true`,
+     * the resolution is calculated based on the curve's length to ensure better visual quality.
+     * Adaptive draw works with `bezierCurveTo` and `quadraticCurveTo`.
+     *
+     * @static
+     * @constant
+     * @memberof PIXI
+     * @name GRAPHICS_CURVES
+     * @type {object}
+     * @property {boolean} adaptive=false - flag indicating if the resolution should be adaptive
+     * @property {number} maxLength=10 - maximal length of a single segment of the curve (if adaptive = false, ignored)
+     * @property {number} minSegments=8 - minimal number of segments in the curve (if adaptive = false, ignored)
+     * @property {number} maxSegments=2048 - maximal number of segments in the curve (if adaptive = false, ignored)
+     */
+    var GRAPHICS_CURVES: {
+        adaptive: boolean;
+        maxLength: number;
+        minSegments: number;
+        maxSegments: number;
+    };
+    /**
      * Fill style object for Graphics.
      * @class
      * @memberof PIXI
@@ -10652,7 +9599,7 @@ declare namespace PIXI {
          * @memberof PIXI.interaction
          */
         class InteractionManager extends PIXI.utils.EventEmitter {
-            constructor(renderer: PIXI.CanvasRenderer | PIXI.Renderer, options?: {
+            constructor(renderer: PIXI.Renderer, options?: {
                 autoPreventDefault?: boolean;
                 interactionFrequency?: number;
             });
@@ -10842,15 +9789,6 @@ declare namespace PIXI {
     class AppLoaderPlugin {
     }
     /**
-     * Reference to **{@link https://github.com/englercj/resource-loader
-     * resource-loader}**'s Resource class.
-     * @see http://englercj.github.io/resource-loader/Resource.html
-     * @class LoaderResource
-     * @memberof PIXI
-     */
-    class LoaderResource {
-    }
-    /**
      * Plugin to be installed for handling specific Loader resources.
      *
      * @memberof PIXI
@@ -10967,50 +9905,14 @@ declare namespace PIXI {
         static use(resource: PIXI.LoaderResource, next: (...params: any[]) => any): void;
     }
     /**
-     * Two Pi.
-     *
-     * @static
-     * @constant {number} PI_2
+     * Reference to **{@link https://github.com/englercj/resource-loader
+     * resource-loader}**'s Resource class.
+     * @see http://englercj.github.io/resource-loader/Resource.html
+     * @class LoaderResource
      * @memberof PIXI
      */
-    var PI_2: number;
-    /**
-     * Conversion factor for converting radians to degrees.
-     *
-     * @static
-     * @constant {number} RAD_TO_DEG
-     * @memberof PIXI
-     */
-    var RAD_TO_DEG: number;
-    /**
-     * Conversion factor for converting degrees to radians.
-     *
-     * @static
-     * @constant {number} DEG_TO_RAD
-     * @memberof PIXI
-     */
-    var DEG_TO_RAD: number;
-    /**
-     * Constants that identify shapes, mainly to prevent `instanceof` calls.
-     *
-     * @static
-     * @constant
-     * @name SHAPES
-     * @memberof PIXI
-     * @type {object}
-     * @property {number} POLY Polygon
-     * @property {number} RECT Rectangle
-     * @property {number} CIRC Circle
-     * @property {number} ELIP Ellipse
-     * @property {number} RREC Rounded Rectangle
-     */
-    var SHAPES: {
-        POLY: number;
-        RECT: number;
-        CIRC: number;
-        ELIP: number;
-        RREC: number;
-    };
+    class LoaderResource {
+    }
     /**
      * Implements Dihedral Group D_8, see [group D4]{@link http://mathworld.wolfram.com/DihedralGroupD4.html},
      * D8 is the same but with diagonals. Used for texture rotations.
@@ -11075,12 +9977,6 @@ declare namespace PIXI {
      */
     class Matrix {
         constructor(a?: number, b?: number, c?: number, d?: number, tx?: number, ty?: number);
-        /**
-         * @method PIXI.Matrix#copy
-         * @deprecated since 5.0.0
-         * @see PIXI.Matrix#copyTo
-         */
-        copy(): void;
         /**
          * @member {number} PIXI.Matrix#a
          * @default 1
@@ -11288,12 +10184,6 @@ declare namespace PIXI {
     class ObservablePoint {
         constructor(cb: (...params: any[]) => any, scope: any, x?: number, y?: number);
         /**
-         * @method PIXI.ObservablePoint#copy
-         * @deprecated since 5.0.0
-         * @see PIXI.ObservablePoint#copyFrom
-         */
-        copy(): void;
-        /**
          * Creates a clone of this point.
          * The callback and scope params can be overidden otherwise they will default
          * to the clone object's values.
@@ -11356,12 +10246,6 @@ declare namespace PIXI {
     class Point {
         constructor(x?: number, y?: number);
         /**
-         * @method PIXI.Point#copy
-         * @deprecated since 5.0.0
-         * @see PIXI.Point#copyFrom
-         */
-        copy(): void;
-        /**
          * @member {number} PIXI.Point#x
          * @default 0
          */
@@ -11407,6 +10291,118 @@ declare namespace PIXI {
          */
         set(x?: number, y?: number): void;
     }
+    /**
+     * Transform that takes care about its versions
+     *
+     * @class
+     * @memberof PIXI
+     */
+    class Transform {
+        constructor();
+        /**
+         * The global matrix transform. It can be swapped temporarily by some functions like getLocalBounds()
+         *
+         * @member {PIXI.Matrix} PIXI.Transform#worldTransform
+         */
+        worldTransform: PIXI.Matrix;
+        /**
+         * The local matrix transform
+         *
+         * @member {PIXI.Matrix} PIXI.Transform#localTransform
+         */
+        localTransform: PIXI.Matrix;
+        /**
+         * The coordinate of the object relative to the local coordinates of the parent.
+         *
+         * @member {PIXI.ObservablePoint} PIXI.Transform#position
+         */
+        position: PIXI.ObservablePoint;
+        /**
+         * The scale factor of the object.
+         *
+         * @member {PIXI.ObservablePoint} PIXI.Transform#scale
+         */
+        scale: PIXI.ObservablePoint;
+        /**
+         * The pivot point of the displayObject that it rotates around.
+         *
+         * @member {PIXI.ObservablePoint} PIXI.Transform#pivot
+         */
+        pivot: PIXI.ObservablePoint;
+        /**
+         * The skew amount, on the x and y axis.
+         *
+         * @member {PIXI.ObservablePoint} PIXI.Transform#skew
+         */
+        skew: PIXI.ObservablePoint;
+        /**
+         * Updates only local matrix
+         */
+        updateLocalTransform(): void;
+        /**
+         * Updates the values of the object and applies the parent's transform.
+         *
+         * @param {PIXI.Transform} parentTransform - The transform of the parent of this object
+         */
+        updateTransform(parentTransform: PIXI.Transform): void;
+        /**
+         * Decomposes a matrix and sets the transforms properties based on it.
+         *
+         * @param {PIXI.Matrix} matrix - The matrix to decompose
+         */
+        setFromMatrix(matrix: PIXI.Matrix): void;
+        /**
+         * The rotation of the object in radians.
+         *
+         * @member {number}
+         */
+        rotation: number;
+    }
+    /**
+     * Two Pi.
+     *
+     * @static
+     * @constant {number} PI_2
+     * @memberof PIXI
+     */
+    var PI_2: number;
+    /**
+     * Conversion factor for converting radians to degrees.
+     *
+     * @static
+     * @constant {number} RAD_TO_DEG
+     * @memberof PIXI
+     */
+    var RAD_TO_DEG: number;
+    /**
+     * Conversion factor for converting degrees to radians.
+     *
+     * @static
+     * @constant {number} DEG_TO_RAD
+     * @memberof PIXI
+     */
+    var DEG_TO_RAD: number;
+    /**
+     * Constants that identify shapes, mainly to prevent `instanceof` calls.
+     *
+     * @static
+     * @constant
+     * @name SHAPES
+     * @memberof PIXI
+     * @type {object}
+     * @property {number} POLY Polygon
+     * @property {number} RECT Rectangle
+     * @property {number} CIRC Circle
+     * @property {number} ELIP Ellipse
+     * @property {number} RREC Rounded Rectangle
+     */
+    var SHAPES: {
+        POLY: number;
+        RECT: number;
+        CIRC: number;
+        ELIP: number;
+        RREC: number;
+    };
     /**
      * The Circle object can be used to specify a hit area for displayObjects
      *
@@ -11568,12 +10564,6 @@ declare namespace PIXI {
      */
     class Rectangle {
         constructor(x?: number, y?: number, width?: number, height?: number);
-        /**
-         * @method PIXI.Rectangle#copy
-         * @deprecated since 5.0.0
-         * @see PIXI.Rectangle#copyFrom
-         */
-        copy(): void;
         /**
          * @member {number} PIXI.Rectangle#x
          * @default 0
@@ -11749,73 +10739,6 @@ declare namespace PIXI {
         contains(x: number, y: number): boolean;
     }
     /**
-     * Transform that takes care about its versions
-     *
-     * @class
-     * @memberof PIXI
-     */
-    class Transform {
-        constructor();
-        /**
-         * The global matrix transform. It can be swapped temporarily by some functions like getLocalBounds()
-         *
-         * @member {PIXI.Matrix} PIXI.Transform#worldTransform
-         */
-        worldTransform: PIXI.Matrix;
-        /**
-         * The local matrix transform
-         *
-         * @member {PIXI.Matrix} PIXI.Transform#localTransform
-         */
-        localTransform: PIXI.Matrix;
-        /**
-         * The coordinate of the object relative to the local coordinates of the parent.
-         *
-         * @member {PIXI.ObservablePoint} PIXI.Transform#position
-         */
-        position: PIXI.ObservablePoint;
-        /**
-         * The scale factor of the object.
-         *
-         * @member {PIXI.ObservablePoint} PIXI.Transform#scale
-         */
-        scale: PIXI.ObservablePoint;
-        /**
-         * The pivot point of the displayObject that it rotates around.
-         *
-         * @member {PIXI.ObservablePoint} PIXI.Transform#pivot
-         */
-        pivot: PIXI.ObservablePoint;
-        /**
-         * The skew amount, on the x and y axis.
-         *
-         * @member {PIXI.ObservablePoint} PIXI.Transform#skew
-         */
-        skew: PIXI.ObservablePoint;
-        /**
-         * Updates only local matrix
-         */
-        updateLocalTransform(): void;
-        /**
-         * Updates the values of the object and applies the parent's transform.
-         *
-         * @param {PIXI.Transform} parentTransform - The transform of the parent of this object
-         */
-        updateTransform(parentTransform: PIXI.Transform): void;
-        /**
-         * Decomposes a matrix and sets the transforms properties based on it.
-         *
-         * @param {PIXI.Matrix} matrix - The matrix to decompose
-         */
-        setFromMatrix(matrix: PIXI.Matrix): void;
-        /**
-         * The rotation of the object in radians.
-         *
-         * @member {number}
-         */
-        rotation: number;
-    }
-    /**
      * Base mesh class
      * The reason for this class is to empower you to have maximum flexibility to render any kind of webGL you can think of.
      * This class assumes a certain level of webGL knowledge.
@@ -11832,15 +10755,6 @@ declare namespace PIXI {
      */
     class Mesh extends PIXI.Container {
         constructor(geometry: PIXI.Geometry, shader: PIXI.Shader | PIXI.MeshMaterial, state?: PIXI.State, drawMode?: number);
-        /**
-         * Renders the object using the Canvas renderer
-         *
-         * @protected
-         * @method _renderCanvas
-         * @memberof PIXI.Mesh#
-         * @param {PIXI.CanvasRenderer} renderer - The canvas renderer.
-         */
-        protected _renderCanvas(renderer: PIXI.CanvasRenderer): void;
         /**
          * Includes vertex positions, face indices, normals, colors, UVs, and
          * custom attributes within buffers, reducing the cost of passing all
@@ -11988,27 +10902,6 @@ declare namespace PIXI {
          * @member {number} BATCHABLE_SIZE
          */
         static BATCHABLE_SIZE: number;
-        /**
-         * @method PIXI.Container#renderWebGL
-         * @deprecated since 5.0.0
-         * @see PIXI.Container#render
-         * @param {PIXI.Renderer} renderer Instance of renderer
-         */
-        renderWebGL(renderer: PIXI.Renderer): void;
-        /**
-         * @method PIXI.Container#renderAdvancedWebGL
-         * @deprecated since 5.0.0
-         * @see PIXI.Container#renderAdvanced
-         * @param {PIXI.Renderer} renderer Instance of renderer
-         */
-        renderAdvancedWebGL(renderer: PIXI.Renderer): void;
-        /**
-         * Renders the object using the Canvas renderer
-         * @method renderCanvas
-         * @memberof PIXI.Container#
-         * @param {PIXI.CanvasRenderer} renderer - The renderer
-         */
-        renderCanvas(renderer: PIXI.CanvasRenderer): void;
         /**
          * The array of children of this container.
          *
@@ -12206,9 +11099,9 @@ declare namespace PIXI {
          * World transform and local transform of this object.
          * This will become read-only later, please do not assign anything there unless you know what are you doing.
          *
-         * @member {PIXI.TransformBase} PIXI.DisplayObject#transform
+         * @member {PIXI.Transform} PIXI.DisplayObject#transform
          */
-        transform: PIXI.TransformBase;
+        transform: PIXI.Transform;
         /**
          * The opacity of the object.
          *
@@ -12694,16 +11587,6 @@ declare namespace PIXI {
             uniforms?: any;
         });
         /**
-         * Renders the mesh using the Canvas renderer
-         *
-         * @protected
-         * @method render
-         * @memberof PIXI.MeshMaterial#
-         * @param {PIXI.CanvasRenderer} renderer - The canvas renderer.
-         * @param {PIXI.Mesh} mesh - Mesh to render.
-         */
-        protected render(renderer: PIXI.CanvasRenderer, mesh: PIXI.Mesh): void;
-        /**
          * TextureMatrix instance for this Mesh, used to track Texture changes
          *
          * @member {PIXI.TextureMatrix} PIXI.MeshMaterial#uvMatrix
@@ -12754,94 +11637,6 @@ declare namespace PIXI {
         readonly uniforms: any;
     }
     /**
-     * The rope allows you to draw a texture across several points and them manipulate these points
-     *
-     *```js
-     * for (let i = 0; i < 20; i++) {
-     *     points.push(new PIXI.Point(i * 50, 0));
-     * };
-     * let rope = new PIXI.Rope(PIXI.Texture.from("snake.png"), points);
-     *  ```
-     *
-     * @class
-     * @extends PIXI.MeshGeometry
-     * @memberof PIXI
-     *
-     */
-    class RopeGeometry extends PIXI.MeshGeometry {
-        constructor(texture: PIXI.Texture, points: PIXI.Point[]);
-        /**
-         * An array of points that determine the rope
-         * @member {PIXI.Point[]} PIXI.RopeGeometry#points
-         */
-        points: PIXI.Point[];
-        /**
-         * refreshes vertices of Rope mesh
-         */
-        updateVertices(): void;
-        /**
-         * A map of renderer IDs to webgl VAOs
-         *
-         * @protected
-         * @type {Array<OES_vertex_array_object>}
-         */
-        protected glVertexArrayObjects: OES_vertex_array_object[];
-        /**
-         *
-         * Adds an attribute to the geometry
-         *
-         * @param {String} id - the name of the attribute (matching up to a shader)
-         * @param {PIXI.Buffer} [buffer] the buffer that holds the data of the attribute . You can also provide an Array and a buffer will be created from it.
-         * @param {Number} [size=0] the size of the attribute. If you have 2 floats per vertex (eg position x and y) this would be 2
-         * @param {Boolean} [normalized=false] should the data be normalized.
-         * @param {Number} [type=PIXI.TYPES.FLOAT] what type of number is the attribute. Check {PIXI.TYPES} to see the ones available
-         * @param {Number} [stride=0] How far apart (in floats) the start of each value is. (used for interleaving data)
-         * @param {Number} [start=0] How far into the array to start reading values (used for interleaving data)
-         *
-         * @return {PIXI.Geometry} returns self, useful for chaining.
-         */
-        addAttribute(id: string, buffer?: PIXI.Buffer, size?: number, normalized?: boolean, type?: number, stride?: number, start?: number): PIXI.Geometry;
-        /**
-         * returns the requested attribute
-         *
-         * @param {String} id  the name of the attribute required
-         * @return {PIXI.Attribute} the attribute requested.
-         */
-        getAttribute(id: string): PIXI.Attribute;
-        /**
-         *
-         * Adds an index buffer to the geometry
-         * The index buffer contains integers, three for each triangle in the geometry, which reference the various attribute buffers (position, colour, UV coordinates, other UV coordinates, normal, …). There is only ONE index buffer.
-         *
-         * @param {PIXI.Buffer} [buffer] the buffer that holds the data of the index buffer. You can also provide an Array and a buffer will be created from it.
-         * @return {PIXI.Geometry} returns self, useful for chaining.
-         */
-        addIndex(buffer?: PIXI.Buffer): PIXI.Geometry;
-        /**
-         * returns the index buffer
-         *
-         * @return {PIXI.Buffer} the index buffer.
-         */
-        getIndex(): PIXI.Buffer;
-        /**
-         * this function modifies the structure so that all current attributes become interleaved into a single buffer
-         * This can be useful if your model remains static as it offers a little performance boost
-         *
-         * @return {PIXI.Geometry} returns self, useful for chaining.
-         */
-        interleave(): PIXI.Geometry;
-        /**
-         * Destroys the geometry.
-         */
-        destroy(): void;
-        /**
-         * returns a clone of the geometry
-         *
-         * @returns {PIXI.Geometry} a new clone of this geometry
-         */
-        clone(): PIXI.Geometry;
-    }
-    /**
      * The NineSlicePlane allows you to stretch a texture using 9-slice scaling. The corners will remain unscaled (useful
      * for buttons with rounded corners for example) and the other areas will be scaled horizontally and or vertically
      *
@@ -12874,23 +11669,6 @@ declare namespace PIXI {
      */
     class NineSlicePlane extends PIXI.SimplePlane {
         constructor(texture: PIXI.Texture, leftWidth?: number, topHeight?: number, rightWidth?: number, bottomHeight?: number);
-        /**
-         * Renders one segment of the plane.
-         * to mimic the exact drawing behavior of stretching the image like WebGL does, we need to make sure
-         * that the source area is at least 1 pixel in size, otherwise nothing gets drawn when a slice size of 0 is used.
-         *
-         * @method drawSegment
-         * @memberof PIXI.NineSlicePlane#
-         * @param {CanvasRenderingContext2D} context - The context to draw with.
-         * @param {ICanvasImageSource} textureSource - The source to draw.
-         * @param {number} w - width of the texture
-         * @param {number} h - height of the texture
-         * @param {number} x1 - x index 1
-         * @param {number} y1 - y index 1
-         * @param {number} x2 - x index 2
-         * @param {number} y2 - y index 2
-         */
-        drawSegment(context: CanvasRenderingContext2D, textureSource: ICanvasImageSource, w: number, h: number, x1: number, y1: number, x2: number, y2: number): void;
         /**
          * The width of the NineSlicePlane, setting this will actually modify the vertices and UV's of this plane
          *
@@ -13100,27 +11878,6 @@ declare namespace PIXI {
             children?: boolean;
         }): void;
         /**
-         * @method PIXI.Container#renderWebGL
-         * @deprecated since 5.0.0
-         * @see PIXI.Container#render
-         * @param {PIXI.Renderer} renderer Instance of renderer
-         */
-        renderWebGL(renderer: PIXI.Renderer): void;
-        /**
-         * @method PIXI.Container#renderAdvancedWebGL
-         * @deprecated since 5.0.0
-         * @see PIXI.Container#renderAdvanced
-         * @param {PIXI.Renderer} renderer Instance of renderer
-         */
-        renderAdvancedWebGL(renderer: PIXI.Renderer): void;
-        /**
-         * Renders the object using the Canvas renderer
-         * @method renderCanvas
-         * @memberof PIXI.Container#
-         * @param {PIXI.CanvasRenderer} renderer - The renderer
-         */
-        renderCanvas(renderer: PIXI.CanvasRenderer): void;
-        /**
          * The array of children of this container.
          *
          * @member {PIXI.DisplayObject[]} PIXI.Container#children
@@ -13305,9 +12062,9 @@ declare namespace PIXI {
          * World transform and local transform of this object.
          * This will become read-only later, please do not assign anything there unless you know what are you doing.
          *
-         * @member {PIXI.TransformBase} PIXI.DisplayObject#transform
+         * @member {PIXI.Transform} PIXI.DisplayObject#transform
          */
-        transform: PIXI.TransformBase;
+        transform: PIXI.Transform;
         /**
          * The opacity of the object.
          *
@@ -13677,16 +12434,6 @@ declare namespace PIXI {
     class SimpleMesh extends PIXI.Mesh {
         constructor(texture?: PIXI.Texture, vertices?: Float32Array, uvs?: Float32Array, indices?: Uint16Array, drawMode?: number);
         /**
-         * Triangles in canvas mode are automatically antialiased, use this value to force triangles
-         * to overlap a bit with each other. To set the global default, set {@link PIXI.settings.MESH_CANVAS_PADDING}
-         *
-         * @see PIXI.settings.MESH_CANVAS_PADDING
-         * @member {number} canvasPadding
-         * @memberof PIXI.SimpleMesh#
-         * @default 0
-         */
-        canvasPadding: number;
-        /**
          * upload vertices buffer each frame
          * @member {boolean} PIXI.SimpleMesh#autoUpdate
          */
@@ -13835,27 +12582,6 @@ declare namespace PIXI {
         destroy(options?: {
             children?: boolean;
         }): void;
-        /**
-         * @method PIXI.Container#renderWebGL
-         * @deprecated since 5.0.0
-         * @see PIXI.Container#render
-         * @param {PIXI.Renderer} renderer Instance of renderer
-         */
-        renderWebGL(renderer: PIXI.Renderer): void;
-        /**
-         * @method PIXI.Container#renderAdvancedWebGL
-         * @deprecated since 5.0.0
-         * @see PIXI.Container#renderAdvanced
-         * @param {PIXI.Renderer} renderer Instance of renderer
-         */
-        renderAdvancedWebGL(renderer: PIXI.Renderer): void;
-        /**
-         * Renders the object using the Canvas renderer
-         * @method renderCanvas
-         * @memberof PIXI.Container#
-         * @param {PIXI.CanvasRenderer} renderer - The renderer
-         */
-        renderCanvas(renderer: PIXI.CanvasRenderer): void;
         /**
          * The array of children of this container.
          *
@@ -14053,9 +12779,9 @@ declare namespace PIXI {
          * World transform and local transform of this object.
          * This will become read-only later, please do not assign anything there unless you know what are you doing.
          *
-         * @member {PIXI.TransformBase} PIXI.DisplayObject#transform
+         * @member {PIXI.Transform} PIXI.DisplayObject#transform
          */
-        transform: PIXI.TransformBase;
+        transform: PIXI.Transform;
         /**
          * The opacity of the object.
          *
@@ -14576,27 +13302,6 @@ declare namespace PIXI {
             children?: boolean;
         }): void;
         /**
-         * @method PIXI.Container#renderWebGL
-         * @deprecated since 5.0.0
-         * @see PIXI.Container#render
-         * @param {PIXI.Renderer} renderer Instance of renderer
-         */
-        renderWebGL(renderer: PIXI.Renderer): void;
-        /**
-         * @method PIXI.Container#renderAdvancedWebGL
-         * @deprecated since 5.0.0
-         * @see PIXI.Container#renderAdvanced
-         * @param {PIXI.Renderer} renderer Instance of renderer
-         */
-        renderAdvancedWebGL(renderer: PIXI.Renderer): void;
-        /**
-         * Renders the object using the Canvas renderer
-         * @method renderCanvas
-         * @memberof PIXI.Container#
-         * @param {PIXI.CanvasRenderer} renderer - The renderer
-         */
-        renderCanvas(renderer: PIXI.CanvasRenderer): void;
-        /**
          * The array of children of this container.
          *
          * @member {PIXI.DisplayObject[]} PIXI.Container#children
@@ -14793,9 +13498,9 @@ declare namespace PIXI {
          * World transform and local transform of this object.
          * This will become read-only later, please do not assign anything there unless you know what are you doing.
          *
-         * @member {PIXI.TransformBase} PIXI.DisplayObject#transform
+         * @member {PIXI.Transform} PIXI.DisplayObject#transform
          */
-        transform: PIXI.TransformBase;
+        transform: PIXI.Transform;
         /**
          * The opacity of the object.
          *
@@ -15316,27 +14021,6 @@ declare namespace PIXI {
             children?: boolean;
         }): void;
         /**
-         * @method PIXI.Container#renderWebGL
-         * @deprecated since 5.0.0
-         * @see PIXI.Container#render
-         * @param {PIXI.Renderer} renderer Instance of renderer
-         */
-        renderWebGL(renderer: PIXI.Renderer): void;
-        /**
-         * @method PIXI.Container#renderAdvancedWebGL
-         * @deprecated since 5.0.0
-         * @see PIXI.Container#renderAdvanced
-         * @param {PIXI.Renderer} renderer Instance of renderer
-         */
-        renderAdvancedWebGL(renderer: PIXI.Renderer): void;
-        /**
-         * Renders the object using the Canvas renderer
-         * @method renderCanvas
-         * @memberof PIXI.Container#
-         * @param {PIXI.CanvasRenderer} renderer - The renderer
-         */
-        renderCanvas(renderer: PIXI.CanvasRenderer): void;
-        /**
          * The array of children of this container.
          *
          * @member {PIXI.DisplayObject[]} PIXI.Container#children
@@ -15533,9 +14217,9 @@ declare namespace PIXI {
          * World transform and local transform of this object.
          * This will become read-only later, please do not assign anything there unless you know what are you doing.
          *
-         * @member {PIXI.TransformBase} PIXI.DisplayObject#transform
+         * @member {PIXI.Transform} PIXI.DisplayObject#transform
          */
-        transform: PIXI.TransformBase;
+        transform: PIXI.Transform;
         /**
          * The opacity of the object.
          *
@@ -15895,6 +14579,94 @@ declare namespace PIXI {
         getGlobalPosition(point: Point, skipUpdate: boolean): Point;
     }
     /**
+     * The rope allows you to draw a texture across several points and them manipulate these points
+     *
+     *```js
+     * for (let i = 0; i < 20; i++) {
+     *     points.push(new PIXI.Point(i * 50, 0));
+     * };
+     * let rope = new PIXI.Rope(PIXI.Texture.from("snake.png"), points);
+     *  ```
+     *
+     * @class
+     * @extends PIXI.MeshGeometry
+     * @memberof PIXI
+     *
+     */
+    class RopeGeometry extends PIXI.MeshGeometry {
+        constructor(texture: PIXI.Texture, points: PIXI.Point[]);
+        /**
+         * An array of points that determine the rope
+         * @member {PIXI.Point[]} PIXI.RopeGeometry#points
+         */
+        points: PIXI.Point[];
+        /**
+         * refreshes vertices of Rope mesh
+         */
+        updateVertices(): void;
+        /**
+         * A map of renderer IDs to webgl VAOs
+         *
+         * @protected
+         * @type {Array<OES_vertex_array_object>}
+         */
+        protected glVertexArrayObjects: OES_vertex_array_object[];
+        /**
+         *
+         * Adds an attribute to the geometry
+         *
+         * @param {String} id - the name of the attribute (matching up to a shader)
+         * @param {PIXI.Buffer} [buffer] the buffer that holds the data of the attribute . You can also provide an Array and a buffer will be created from it.
+         * @param {Number} [size=0] the size of the attribute. If you have 2 floats per vertex (eg position x and y) this would be 2
+         * @param {Boolean} [normalized=false] should the data be normalized.
+         * @param {Number} [type=PIXI.TYPES.FLOAT] what type of number is the attribute. Check {PIXI.TYPES} to see the ones available
+         * @param {Number} [stride=0] How far apart (in floats) the start of each value is. (used for interleaving data)
+         * @param {Number} [start=0] How far into the array to start reading values (used for interleaving data)
+         *
+         * @return {PIXI.Geometry} returns self, useful for chaining.
+         */
+        addAttribute(id: string, buffer?: PIXI.Buffer, size?: number, normalized?: boolean, type?: number, stride?: number, start?: number): PIXI.Geometry;
+        /**
+         * returns the requested attribute
+         *
+         * @param {String} id  the name of the attribute required
+         * @return {PIXI.Attribute} the attribute requested.
+         */
+        getAttribute(id: string): PIXI.Attribute;
+        /**
+         *
+         * Adds an index buffer to the geometry
+         * The index buffer contains integers, three for each triangle in the geometry, which reference the various attribute buffers (position, colour, UV coordinates, other UV coordinates, normal, …). There is only ONE index buffer.
+         *
+         * @param {PIXI.Buffer} [buffer] the buffer that holds the data of the index buffer. You can also provide an Array and a buffer will be created from it.
+         * @return {PIXI.Geometry} returns self, useful for chaining.
+         */
+        addIndex(buffer?: PIXI.Buffer): PIXI.Geometry;
+        /**
+         * returns the index buffer
+         *
+         * @return {PIXI.Buffer} the index buffer.
+         */
+        getIndex(): PIXI.Buffer;
+        /**
+         * this function modifies the structure so that all current attributes become interleaved into a single buffer
+         * This can be useful if your model remains static as it offers a little performance boost
+         *
+         * @return {PIXI.Geometry} returns self, useful for chaining.
+         */
+        interleave(): PIXI.Geometry;
+        /**
+         * Destroys the geometry.
+         */
+        destroy(): void;
+        /**
+         * returns a clone of the geometry
+         *
+         * @returns {PIXI.Geometry} a new clone of this geometry
+         */
+        clone(): PIXI.Geometry;
+    }
+    /**
      * The ParticleContainer class is a really fast version of the Container built solely for speed,
      * so use when you need a lot of sprites or particles. The tradeoff of the ParticleContainer is that most advanced
      * functionality will not work. ParticleContainer implements the basic object transform (position, scale, rotation)
@@ -15995,28 +14767,6 @@ declare namespace PIXI {
             texture?: boolean;
             baseTexture?: boolean;
         }): void;
-        /**
-         * @method PIXI.Container#renderWebGL
-         * @deprecated since 5.0.0
-         * @see PIXI.Container#render
-         * @param {PIXI.Renderer} renderer Instance of renderer
-         */
-        renderWebGL(renderer: PIXI.Renderer): void;
-        /**
-         * @method PIXI.Container#renderAdvancedWebGL
-         * @deprecated since 5.0.0
-         * @see PIXI.Container#renderAdvanced
-         * @param {PIXI.Renderer} renderer Instance of renderer
-         */
-        renderAdvancedWebGL(renderer: PIXI.Renderer): void;
-        /**
-         * To be overridden by the subclass
-         * @method _renderCanvas
-         * @memberof PIXI.Container#
-         * @protected
-         * @param {PIXI.CanvasRenderer} renderer - The renderer
-         */
-        protected _renderCanvas(renderer: PIXI.CanvasRenderer): void;
         /**
          * The array of children of this container.
          *
@@ -16204,9 +14954,9 @@ declare namespace PIXI {
          * World transform and local transform of this object.
          * This will become read-only later, please do not assign anything there unless you know what are you doing.
          *
-         * @member {PIXI.TransformBase} PIXI.DisplayObject#transform
+         * @member {PIXI.Transform} PIXI.DisplayObject#transform
          */
-        transform: PIXI.TransformBase;
+        transform: PIXI.Transform;
         /**
          * The opacity of the object.
          *
@@ -16671,84 +15421,6 @@ declare namespace PIXI {
      */
     namespace prepare {
         /**
-         * @class PIXI.prepare.WebGLPrepare
-         * @deprecated since 5.0.0
-         * @see PIXI.prepare.Prepare
-         */
-        class WebGLPrepare {
-        }
-        /**
-         * The prepare manager provides functionality to upload content to the GPU
-         * This cannot be done directly for Canvas like in WebGL, but the effect can be achieved by drawing
-         * textures to an offline canvas.
-         * This draw call will force the texture to be moved onto the GPU.
-         *
-         * An instance of this class is automatically created by default, and can be found at renderer.plugins.prepare
-         *
-         * @class
-         * @extends PIXI.prepare.BasePrepare
-         * @memberof PIXI.prepare
-         */
-        class CanvasPrepare extends PIXI.prepare.BasePrepare {
-            constructor(renderer: PIXI.CanvasRenderer);
-            /**
-             * Destroys the plugin, don't use after this.
-             *
-             */
-            destroy(): void;
-            /**
-             * The limiter to be used to control how quickly items are prepared.
-             * @type {PIXI.prepare.CountLimiter|PIXI.prepare.TimeLimiter}
-             */
-            limiter: PIXI.prepare.CountLimiter | PIXI.prepare.TimeLimiter;
-            /**
-             * Reference to the renderer.
-             * @type {PIXI.AbstractRenderer}
-             * @protected
-             */
-            protected renderer: PIXI.AbstractRenderer;
-            /**
-             * The only real difference between CanvasPrepare and WebGLPrepare is what they pass
-             * to upload hooks. That different parameter is stored here.
-             * @type {PIXI.prepare.CanvasPrepare|PIXI.Renderer}
-             * @protected
-             */
-            protected uploadHookHelper: PIXI.prepare.CanvasPrepare | PIXI.Renderer;
-            /**
-             * Upload all the textures and graphics to the GPU.
-             *
-             * @param {Function|PIXI.DisplayObject|PIXI.Container|PIXI.BaseTexture|PIXI.Texture|PIXI.Graphics|PIXI.Text} item -
-             *        Either the container or display object to search for items to upload, the items to upload themselves,
-             *        or the callback function, if items have been added using `prepare.add`.
-             * @param {Function} [done] - Optional callback when all queued uploads have completed
-             */
-            upload(item: ((...params: any[]) => any) | PIXI.DisplayObject | PIXI.Container | PIXI.BaseTexture | PIXI.Texture | PIXI.Graphics | PIXI.Text, done?: (...params: any[]) => any): void;
-            /**
-             * Adds hooks for finding items.
-             *
-             * @param {Function} addHook - Function call that takes two parameters: `item:*, queue:Array`
-             *          function must return `true` if it was able to add item to the queue.
-             * @return {PIXI.prepare.BasePrepare} Instance of plugin for chaining.
-             */
-            registerFindHook(addHook: (...params: any[]) => any): PIXI.prepare.BasePrepare;
-            /**
-             * Adds hooks for uploading items.
-             *
-             * @param {Function} uploadHook - Function call that takes two parameters: `prepare:CanvasPrepare, item:*` and
-             *          function must return `true` if it was able to handle upload of item.
-             * @return {PIXI.prepare.BasePrepare} Instance of plugin for chaining.
-             */
-            registerUploadHook(uploadHook: (...params: any[]) => any): PIXI.prepare.BasePrepare;
-            /**
-             * Manually add an item to the uploading queue.
-             *
-             * @param {PIXI.DisplayObject|PIXI.Container|PIXI.BaseTexture|PIXI.Texture|PIXI.Graphics|PIXI.Text|*} item - Object to
-             *        add to the queue
-             * @return {PIXI.prepare.BasePrepare} Instance of plugin for chaining.
-             */
-            add(item: PIXI.DisplayObject | PIXI.Container | PIXI.BaseTexture | PIXI.Texture | PIXI.Graphics | PIXI.Text | any): PIXI.prepare.BasePrepare;
-        }
-        /**
          * The prepare manager provides functionality to upload content to the GPU. BasePrepare handles
          * basic queuing functionality and is extended by {@link PIXI.prepare.WebGLPrepare} and {@link PIXI.prepare.CanvasPrepare}
          * to provide preparation capabilities specific to their respective renderers.
@@ -16788,7 +15460,7 @@ declare namespace PIXI {
              * @type {PIXI.prepare.CanvasPrepare|PIXI.Renderer}
              * @protected
              */
-            protected uploadHookHelper: PIXI.prepare.CanvasPrepare | PIXI.Renderer;
+            protected uploadHookHelper: PIXI.Renderer;
             /**
              * Upload all the textures and graphics to the GPU.
              *
@@ -16875,7 +15547,7 @@ declare namespace PIXI {
              * @type {PIXI.prepare.CanvasPrepare|PIXI.Renderer}
              * @protected
              */
-            protected uploadHookHelper: PIXI.prepare.CanvasPrepare | PIXI.Renderer;
+            protected uploadHookHelper: PIXI.Renderer;
             /**
              * Upload all the textures and graphics to the GPU.
              *
@@ -16948,27 +15620,6 @@ declare namespace PIXI {
      * @namespace PIXI.settings
      */
     namespace settings {
-        /**
-         * Default transform type.
-         *
-         * @static
-         * @deprecated since 5.0.0
-         * @memberof PIXI.settings
-         * @type {PIXI.TRANSFORM_MODE}
-         * @default PIXI.TRANSFORM_MODE.STATIC
-         */
-        var TRANSFORM_MODE: PIXI.TRANSFORM_MODE;
-        /**
-         * Default `canvasPadding` for canvas-based Mesh rendering.
-         *
-         * @see PIXI.Mesh2d#canvasPadding
-         * @static
-         * @name MESH_CANVAS_PADDING
-         * @memberof PIXI.settings
-         * @type {number}
-         * @default 0
-         */
-        var MESH_CANVAS_PADDING: number;
         /**
          * The maximum support for using WebGL. If a device does not
          * support WebGL version, for instance WebGL 2, it will still
@@ -17252,41 +15903,6 @@ declare namespace PIXI {
     class Sprite extends PIXI.Container {
         constructor(texture: PIXI.Texture);
         /**
-         * @deprecated since 5.0.0
-         * @see PIXI.Sprite.from
-         * @method PIXI.Sprite.fromImage
-         * @return {PIXI.Sprite}
-         */
-        static fromImage(): PIXI.Sprite;
-        /**
-         * @deprecated since 5.0.0
-         * @method PIXI.Sprite.fromSVG
-         * @see PIXI.Sprite.from
-         * @return {PIXI.Sprite}
-         */
-        static fromSVG(): PIXI.Sprite;
-        /**
-         * @deprecated since 5.0.0
-         * @method PIXI.Sprite.fromCanvas
-         * @see PIXI.Sprite.from
-         * @return {PIXI.Sprite}
-         */
-        static fromCanvas(): PIXI.Sprite;
-        /**
-         * @deprecated since 5.0.0
-         * @method PIXI.Sprite.fromVideo
-         * @see PIXI.Sprite.from
-         * @return {PIXI.Sprite}
-         */
-        static fromVideo(): PIXI.Sprite;
-        /**
-         * @deprecated since 5.0.0
-         * @method PIXI.Sprite.fromFrame
-         * @see PIXI.Sprite.from
-         * @return {PIXI.Sprite}
-         */
-        static fromFrame(): PIXI.Sprite;
-        /**
          * The blend mode to be applied to the sprite. Apply a value of `PIXI.BLEND_MODES.NORMAL` to reset the blend mode.
          *
          * @member {number} PIXI.Sprite#blendMode
@@ -17430,27 +16046,6 @@ declare namespace PIXI {
          * @member {PIXI.Texture}
          */
         texture: PIXI.Texture;
-        /**
-         * @method PIXI.Container#renderWebGL
-         * @deprecated since 5.0.0
-         * @see PIXI.Container#render
-         * @param {PIXI.Renderer} renderer Instance of renderer
-         */
-        renderWebGL(renderer: PIXI.Renderer): void;
-        /**
-         * @method PIXI.Container#renderAdvancedWebGL
-         * @deprecated since 5.0.0
-         * @see PIXI.Container#renderAdvanced
-         * @param {PIXI.Renderer} renderer Instance of renderer
-         */
-        renderAdvancedWebGL(renderer: PIXI.Renderer): void;
-        /**
-         * Renders the object using the Canvas renderer
-         * @method renderCanvas
-         * @memberof PIXI.Container#
-         * @param {PIXI.CanvasRenderer} renderer - The renderer
-         */
-        renderCanvas(renderer: PIXI.CanvasRenderer): void;
         /**
          * The array of children of this container.
          *
@@ -17636,9 +16231,9 @@ declare namespace PIXI {
          * World transform and local transform of this object.
          * This will become read-only later, please do not assign anything there unless you know what are you doing.
          *
-         * @member {PIXI.TransformBase} PIXI.DisplayObject#transform
+         * @member {PIXI.Transform} PIXI.DisplayObject#transform
          */
-        transform: PIXI.TransformBase;
+        transform: PIXI.Transform;
         /**
          * The opacity of the object.
          *
@@ -18267,27 +16862,6 @@ declare namespace PIXI {
          */
         texture: PIXI.Texture;
         /**
-         * @method PIXI.Container#renderWebGL
-         * @deprecated since 5.0.0
-         * @see PIXI.Container#render
-         * @param {PIXI.Renderer} renderer Instance of renderer
-         */
-        renderWebGL(renderer: PIXI.Renderer): void;
-        /**
-         * @method PIXI.Container#renderAdvancedWebGL
-         * @deprecated since 5.0.0
-         * @see PIXI.Container#renderAdvanced
-         * @param {PIXI.Renderer} renderer Instance of renderer
-         */
-        renderAdvancedWebGL(renderer: PIXI.Renderer): void;
-        /**
-         * Renders the object using the Canvas renderer
-         * @method renderCanvas
-         * @memberof PIXI.Container#
-         * @param {PIXI.CanvasRenderer} renderer - The renderer
-         */
-        renderCanvas(renderer: PIXI.CanvasRenderer): void;
-        /**
          * The array of children of this container.
          *
          * @member {PIXI.DisplayObject[]} PIXI.Container#children
@@ -18472,9 +17046,9 @@ declare namespace PIXI {
          * World transform and local transform of this object.
          * This will become read-only later, please do not assign anything there unless you know what are you doing.
          *
-         * @member {PIXI.TransformBase} PIXI.DisplayObject#transform
+         * @member {PIXI.Transform} PIXI.DisplayObject#transform
          */
-        transform: PIXI.TransformBase;
+        transform: PIXI.Transform;
         /**
          * The opacity of the object.
          *
@@ -18830,21 +17404,9 @@ declare namespace PIXI {
      */
     class TilingSprite extends PIXI.Sprite {
         static from(source: number | string | PIXI.Texture | HTMLCanvasElement | HTMLVideoElement, options?: any): PIXI.Sprite;
-
         static fromFrame(): PIXI.Sprite;
-
         static fromImage(): PIXI.Sprite;
-
         constructor(texture: PIXI.Texture, width?: number, height?: number);
-        /**
-         * Renders the object using the Canvas renderer
-         *
-         * @protected
-         * @function _renderCanvas
-         * @memberof PIXI.TilingSprite#
-         * @param {PIXI.CanvasRenderer} renderer - a reference to the canvas renderer
-         */
-        protected _renderCanvas(renderer: PIXI.CanvasRenderer): void;
         /**
          * Tile transform
          *
@@ -19052,27 +17614,6 @@ declare namespace PIXI {
          */
         texture: PIXI.Texture;
         /**
-         * @method PIXI.Container#renderWebGL
-         * @deprecated since 5.0.0
-         * @see PIXI.Container#render
-         * @param {PIXI.Renderer} renderer Instance of renderer
-         */
-        renderWebGL(renderer: PIXI.Renderer): void;
-        /**
-         * @method PIXI.Container#renderAdvancedWebGL
-         * @deprecated since 5.0.0
-         * @see PIXI.Container#renderAdvanced
-         * @param {PIXI.Renderer} renderer Instance of renderer
-         */
-        renderAdvancedWebGL(renderer: PIXI.Renderer): void;
-        /**
-         * Renders the object using the Canvas renderer
-         * @method renderCanvas
-         * @memberof PIXI.Container#
-         * @param {PIXI.CanvasRenderer} renderer - The renderer
-         */
-        renderCanvas(renderer: PIXI.CanvasRenderer): void;
-        /**
          * The array of children of this container.
          *
          * @member {PIXI.DisplayObject[]} PIXI.Container#children
@@ -19257,9 +17798,9 @@ declare namespace PIXI {
          * World transform and local transform of this object.
          * This will become read-only later, please do not assign anything there unless you know what are you doing.
          *
-         * @member {PIXI.TransformBase} PIXI.DisplayObject#transform
+         * @member {PIXI.Transform} PIXI.DisplayObject#transform
          */
-        transform: PIXI.TransformBase;
+        transform: PIXI.Transform;
         /**
          * The opacity of the object.
          *
@@ -19760,21 +18301,6 @@ declare namespace PIXI {
         static getResourcePath(resource: PIXI.LoaderResource, baseUrl: string): void;
     }
     /**
-     * Constants that define the type of gradient on text.
-     *
-     * @static
-     * @constant
-     * @name TEXT_GRADIENT
-     * @memberof PIXI
-     * @type {object}
-     * @property {number} LINEAR_VERTICAL Vertical gradient
-     * @property {number} LINEAR_HORIZONTAL Linear gradient
-     */
-    var TEXT_GRADIENT: {
-        LINEAR_VERTICAL: number;
-        LINEAR_HORIZONTAL: number;
-    };
-    /**
      * A Text Object will create a line or multiple lines of text. To split a line you can use '\n' in your text string,
      * or add a wordWrap property set to true and and wordWrapWidth property with a value in the style object.
      *
@@ -19971,27 +18497,6 @@ declare namespace PIXI {
          */
         texture: PIXI.Texture;
         /**
-         * @method PIXI.Container#renderWebGL
-         * @deprecated since 5.0.0
-         * @see PIXI.Container#render
-         * @param {PIXI.Renderer} renderer Instance of renderer
-         */
-        renderWebGL(renderer: PIXI.Renderer): void;
-        /**
-         * @method PIXI.Container#renderAdvancedWebGL
-         * @deprecated since 5.0.0
-         * @see PIXI.Container#renderAdvanced
-         * @param {PIXI.Renderer} renderer Instance of renderer
-         */
-        renderAdvancedWebGL(renderer: PIXI.Renderer): void;
-        /**
-         * Renders the object using the Canvas renderer
-         * @method renderCanvas
-         * @memberof PIXI.Container#
-         * @param {PIXI.CanvasRenderer} renderer - The renderer
-         */
-        renderCanvas(renderer: PIXI.CanvasRenderer): void;
-        /**
          * The array of children of this container.
          *
          * @member {PIXI.DisplayObject[]} PIXI.Container#children
@@ -20170,9 +18675,9 @@ declare namespace PIXI {
          * World transform and local transform of this object.
          * This will become read-only later, please do not assign anything there unless you know what are you doing.
          *
-         * @member {PIXI.TransformBase} PIXI.DisplayObject#transform
+         * @member {PIXI.Transform} PIXI.DisplayObject#transform
          */
-        transform: PIXI.TransformBase;
+        transform: PIXI.Transform;
         /**
          * The opacity of the object.
          *
@@ -20849,6 +19354,21 @@ declare namespace PIXI {
          */
         toFontString(): string;
     }
+    /**
+     * Constants that define the type of gradient on text.
+     *
+     * @static
+     * @constant
+     * @name TEXT_GRADIENT
+     * @memberof PIXI
+     * @type {object}
+     * @property {number} LINEAR_VERTICAL Vertical gradient
+     * @property {number} LINEAR_HORIZONTAL Linear gradient
+     */
+    var TEXT_GRADIENT: {
+        LINEAR_VERTICAL: number;
+        LINEAR_HORIZONTAL: number;
+    };
     interface BitmapFontLoader extends PIXI.ILoaderPlugin {
     }
     /**
@@ -20901,7 +19421,7 @@ declare namespace PIXI {
      */
     class BitmapText extends PIXI.Container {
         constructor(text: string, style: {
-            font: string | {
+            font: {
                 name?: string;
                 size?: number;
             };
@@ -21017,35 +19537,6 @@ declare namespace PIXI {
         static registerFont(xml: XMLDocument, textures: {
             [key: string]: PIXI.Texture;
         } | PIXI.Texture | PIXI.Texture[]): any;
-        /**
-         * @method PIXI.Container#renderWebGL
-         * @deprecated since 5.0.0
-         * @see PIXI.Container#render
-         * @param {PIXI.Renderer} renderer Instance of renderer
-         */
-        renderWebGL(renderer: PIXI.Renderer): void;
-        /**
-         * @method PIXI.Container#renderAdvancedWebGL
-         * @deprecated since 5.0.0
-         * @see PIXI.Container#renderAdvanced
-         * @param {PIXI.Renderer} renderer Instance of renderer
-         */
-        renderAdvancedWebGL(renderer: PIXI.Renderer): void;
-        /**
-         * To be overridden by the subclass
-         * @method _renderCanvas
-         * @memberof PIXI.Container#
-         * @protected
-         * @param {PIXI.CanvasRenderer} renderer - The renderer
-         */
-        protected _renderCanvas(renderer: PIXI.CanvasRenderer): void;
-        /**
-         * Renders the object using the Canvas renderer
-         * @method renderCanvas
-         * @memberof PIXI.Container#
-         * @param {PIXI.CanvasRenderer} renderer - The renderer
-         */
-        renderCanvas(renderer: PIXI.CanvasRenderer): void;
         /**
          * The array of children of this container.
          *
@@ -21271,9 +19762,9 @@ declare namespace PIXI {
          * World transform and local transform of this object.
          * This will become read-only later, please do not assign anything there unless you know what are you doing.
          *
-         * @member {PIXI.TransformBase} PIXI.DisplayObject#transform
+         * @member {PIXI.Transform} PIXI.DisplayObject#transform
          */
-        transform: PIXI.TransformBase;
+        transform: PIXI.Transform;
         /**
          * The opacity of the object.
          *
@@ -21626,29 +20117,6 @@ declare namespace PIXI {
         getGlobalPosition(point: Point, skipUpdate: boolean): Point;
     }
     /**
-     * Represents the update priorities used by internal PIXI classes when registered with
-     * the {@link PIXI.Ticker} object. Higher priority items are updated first and lower
-     * priority items, such as render, should go later.
-     *
-     * @static
-     * @constant
-     * @name UPDATE_PRIORITY
-     * @memberof PIXI
-     * @type {object}
-     * @property {number} INTERACTION=50 Highest priority, used for {@link PIXI.interaction.InteractionManager}
-     * @property {number} HIGH=25 High priority updating, {@link PIXI.VideoBaseTexture} and {@link PIXI.AnimatedSprite}
-     * @property {number} NORMAL=0 Default priority for ticker events, see {@link PIXI.Ticker#add}.
-     * @property {number} LOW=-25 Low priority used for {@link PIXI.Application} rendering.
-     * @property {number} UTILITY=-50 Lowest priority used for {@link PIXI.prepare.BasePrepare} utility.
-     */
-    var UPDATE_PRIORITY: {
-        INTERACTION: number;
-        HIGH: number;
-        NORMAL: number;
-        LOW: number;
-        UTILITY: number;
-    };
-    /**
      * A Ticker class that runs an update loop that other objects listen to.
      * This class is composed around listeners
      * meant for execution on the next requested animation frame.
@@ -21861,6 +20329,29 @@ declare namespace PIXI {
     class TickerPlugin {
     }
     /**
+     * Represents the update priorities used by internal PIXI classes when registered with
+     * the {@link PIXI.Ticker} object. Higher priority items are updated first and lower
+     * priority items, such as render, should go later.
+     *
+     * @static
+     * @constant
+     * @name UPDATE_PRIORITY
+     * @memberof PIXI
+     * @type {object}
+     * @property {number} INTERACTION=50 Highest priority, used for {@link PIXI.interaction.InteractionManager}
+     * @property {number} HIGH=25 High priority updating, {@link PIXI.VideoBaseTexture} and {@link PIXI.AnimatedSprite}
+     * @property {number} NORMAL=0 Default priority for ticker events, see {@link PIXI.Ticker#add}.
+     * @property {number} LOW=-25 Low priority used for {@link PIXI.Application} rendering.
+     * @property {number} UTILITY=-50 Lowest priority used for {@link PIXI.prepare.BasePrepare} utility.
+     */
+    var UPDATE_PRIORITY: {
+        INTERACTION: number;
+        HIGH: number;
+        NORMAL: number;
+        LOW: number;
+        UTILITY: number;
+    };
+    /**
      * Regexp for data URI.
      * Based on: {@link https://github.com/ragingwind/data-uri-regex}
      *
@@ -21889,12 +20380,6 @@ declare namespace PIXI {
      * @namespace PIXI.utils
      */
     namespace utils {
-        /**
-         * @function PIXI.utils.getSvgSize
-         * @see PIXI.resources.SVGResource.getSize
-         * @deprecated since 5.0.0
-         */
-        function getSvgSize(): void;
         /**
          * Skips the hello message of renderers that are created after this is run.
          *
@@ -22122,47 +20607,6 @@ declare namespace PIXI {
          */
         function deprecation(version: string, message: string, ignoreDepth?: number): void;
         /**
-         * @todo Describe property usage
-         *
-         * @static
-         * @name ProgramCache
-         * @memberof PIXI.utils
-         * @type {Object}
-         */
-        var ProgramCache: any;
-        /**
-         * @todo Describe property usage
-         *
-         * @static
-         * @name TextureCache
-         * @memberof PIXI.utils
-         * @type {Object}
-         */
-        var TextureCache: any;
-        /**
-         * @todo Describe property usage
-         *
-         * @static
-         * @name BaseTextureCache
-         * @memberof PIXI.utils
-         * @type {Object}
-         */
-        var BaseTextureCache: any;
-        /**
-         * Destroys all texture in the cache
-         *
-         * @memberof PIXI.utils
-         * @function destroyTextureCache
-         */
-        function destroyTextureCache(): void;
-        /**
-         * Removes all textures from cache, but does not destroy them
-         *
-         * @memberof PIXI.utils
-         * @function clearTextureCache
-         */
-        function clearTextureCache(): void;
-        /**
          * Creates a Canvas element of the given size.
          *
          * @class
@@ -22207,6 +20651,47 @@ declare namespace PIXI {
              */
             height: number;
         }
+        /**
+         * @todo Describe property usage
+         *
+         * @static
+         * @name ProgramCache
+         * @memberof PIXI.utils
+         * @type {Object}
+         */
+        var ProgramCache: any;
+        /**
+         * @todo Describe property usage
+         *
+         * @static
+         * @name TextureCache
+         * @memberof PIXI.utils
+         * @type {Object}
+         */
+        var TextureCache: any;
+        /**
+         * @todo Describe property usage
+         *
+         * @static
+         * @name BaseTextureCache
+         * @memberof PIXI.utils
+         * @type {Object}
+         */
+        var BaseTextureCache: any;
+        /**
+         * Destroys all texture in the cache
+         *
+         * @memberof PIXI.utils
+         * @function destroyTextureCache
+         */
+        function destroyTextureCache(): void;
+        /**
+         * Removes all textures from cache, but does not destroy them
+         *
+         * @memberof PIXI.utils
+         * @function clearTextureCache
+         */
+        function clearTextureCache(): void;
         /**
          * Trim transparent borders from a canvas
          *
@@ -22257,16 +20742,11 @@ declare namespace PIXI {
 }
 
 /**
- * Types that can be passed to drawImage
- * @typedef {HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | ImageBitmap} ICanvasImageSource
- */
-declare type ICanvasImageSource = HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | ImageBitmap;
-
-/**
  * @interface SharedArrayBuffer
  */
 declare interface SharedArrayBuffer {
 }
+
 
 declare namespace PIXI {
     namespace utils {
@@ -22404,9 +20884,7 @@ declare namespace PIXI {
         progress: number;
         loading: boolean;
         defaultQueryString: string;
-
         resources: IResourceDictionary;
-
         concurrency: number;
 
         add(...params: any[]): this;
@@ -22442,15 +20920,14 @@ declare namespace PIXI {
     }
 
     export interface IResourceDictionary {
-        [index: string]: PIXI.loaders.Resource;
+        [index: string]: LoaderResource;
     }
 
     export interface ITextureDictionary {
-        [index: string]: PIXI.Texture;
+        [index: string]: Texture;
     }
 
     export interface ILoaderOptions {
-
         crossOrigin?: boolean | string;
         loadType?: number;
         xhrType?: string;
@@ -22459,7 +20936,6 @@ declare namespace PIXI {
             skipSource?: boolean;
             mimeType?: string | string[];
         };
-
     }
 
     export interface LoaderResource {
@@ -22476,7 +20952,6 @@ declare namespace PIXI {
         children: LoaderResource[];
         type: number;
         progressChunk: number;
-
         isDataUrl: boolean;
         isComplete: boolean;
         isLoading: boolean;
@@ -22484,7 +20959,6 @@ declare namespace PIXI {
         abort(message?: string): void;
         //tslint:disable-next-line:ban-types forbidden-types
         load(cb?: Function): void;
-
         texture: Texture;
         spineAtlas: any;
         spineData: any;
@@ -22541,4 +21015,8 @@ declare namespace PIXI {
 
         let EMPTY_GIF: string;
     }
+}
+
+declare module "pixi.js" {
+    export = PIXI;
 }

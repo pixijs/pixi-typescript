@@ -153,9 +153,9 @@ namespace basics {
 
             this.app.stop();
 
-            PIXI.loader.add("shader", "_assets/basics/shader.frag")
+            PIXI.Loader.shared.add("shader", "_assets/basics/shader.frag")
 
-                .load((loader: PIXI.loaders.Loader, resource: any): void => {
+                .load((loader: PIXI.Loader, resource: any): void => {
 
                     this.filter = new PIXI.Filter(null, resource.shader.data);
                     this.background.filters = [this.filter];
@@ -266,9 +266,9 @@ namespace basics {
 
         constructor() {
 
-            PIXI.loader
+            PIXI.Loader.shared
                 .add("required/assets/basics/fighter.json")
-                .load((loader: PIXI.loaders.Loader, resource: any) => {
+                .load((loader: PIXI.Loader, resource: any) => {
 
                     const frames = [];
 
@@ -558,7 +558,7 @@ namespace demos {
             this.app.stop();
             document.body.appendChild(this.app.view);
 
-            PIXI.loader
+            PIXI.Loader.shared
                 .add("spritesheet", "required/assets/mc.json")
                 .load((): void => {
 
@@ -615,7 +615,7 @@ namespace demos {
 
             this.maggots = [];
 
-            const totalSprites = this.app.renderer instanceof PIXI.WebGLRenderer ? 10000 : 100;
+            const totalSprites = this.app.renderer instanceof PIXI.Renderer ? 10000 : 100;
 
             const dudeTexture = PIXI.Texture.from("required/assets/tinyMaggot.png");
 
@@ -797,7 +797,7 @@ namespace demos {
             this.alienContainer.y = 300;
             this.app.stage.addChild(this.alienContainer);
 
-            PIXI.loader
+            PIXI.Loader.shared
                 .add("spritesheet", "required/assets/monsters.json")
                 .load((): void => {
 
@@ -1325,7 +1325,7 @@ namespace demos {
             this.app = new PIXI.Application();
             document.body.appendChild(this.app.view);
 
-            PIXI.loader
+            PIXI.Loader.shared
                 .add("desyrel", "required/assets/desyrel.xml")
                 .load((): void => {
 
@@ -1409,8 +1409,8 @@ namespace demos {
 
             this.bol = false;
 
-            PIXI.loader.add("flowerTop", "required/assets/flowerTop.png");
-            PIXI.loader.load((loader: PIXI.loaders.Loader, resources: any) => {
+            PIXI.Loader.shared.add("flowerTop", "required/assets/flowerTop.png");
+            PIXI.Loader.shared.load((loader: PIXI.Loader, resources: any) => {
                 this.texture = resources.flowerTop.texture;
                 this.init();
             });

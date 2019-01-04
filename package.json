@@ -1,13 +1,13 @@
 {
   "name": "pixi-typescript",
-  "version": "4.8.1",
+  "version": "5.0.0-rc",
   "description": "Typescript Declarations for pixi.js",
   "main": "pixi.js.d.ts",
   "directories": {
     "example": "examples"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "tsc pixi.js-tests.ts"
   },
   "repository": {
     "type": "git",
@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/pixijs/pixi-typescript/issues"
   },
-  "homepage": "https://github.com/pixijs/pixi-typescript#readme"
+  "homepage": "https://github.com/pixijs/pixi-typescript#readme",
+  "devDependencies": {
+    "typescript": "^3.2.2"
+  }
 }
