@@ -292,10 +292,10 @@ declare namespace PIXI {
         renderCanvas(renderer: CanvasRenderer): void;
         destroy(options?: DestroyOptions | boolean): void;
 
-        once(event: interaction.InteractionEventTypes | 'added' | 'removed', fn: (displayObject: DisplayObject) => void, context?: any): this;
+        once(event: interaction.InteractionEventTypes | 'added' | 'removed', fn: (event: interaction.InteractionEvent) => void, context?: any): this;
         //tslint:disable-next-line:ban-types forbidden-types
         once(event: string, fn: Function, context?: any): this;
-        on(event: interaction.InteractionEventTypes | 'added' | 'removed', fn: (displayObject: DisplayObject) => void, context?: any): this;
+        on(event: interaction.InteractionEventTypes | 'added' | 'removed', fn: (event: interaction.InteractionEvent) => void, context?: any): this;
         //tslint:disable-next-line:ban-types forbidden-types
         on(event: string, fn: Function, context?: any): this;
         //tslint:disable-next-line:ban-types forbidden-types
@@ -402,7 +402,11 @@ declare namespace PIXI {
         destroy(): void;
 
         on(event: interaction.InteractionEventTypes, fn: (event: interaction.InteractionEvent) => void, context?: any): this;
+        //tslint:disable-next-line:ban-types forbidden-types
+        on(event: string, fn: Function, context?: any): this;
         once(event: interaction.InteractionEventTypes, fn: (event: interaction.InteractionEvent) => void, context?: any): this;
+        //tslint:disable-next-line:ban-types forbidden-types
+        once(event: string, fn: Function, context?: any): this;
         removeListener(event: interaction.InteractionEventTypes, fn?: (event: interaction.InteractionEvent) => void, context?: any): this;
         removeAllListeners(event?: interaction.InteractionEventTypes): this;
         off(event: interaction.InteractionEventTypes, fn?: (event: interaction.InteractionEvent) => void, context?: any): this;
