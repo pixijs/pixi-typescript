@@ -294,12 +294,12 @@ declare namespace PIXI {
 
         once(event: interaction.InteractionEventTypes | 'added' | 'removed', fn: (event: interaction.InteractionEvent) => void, context?: any): this;
         //tslint:disable-next-line:ban-types forbidden-types
-        once(event: string, fn: Function, context?: any): this;
+        once(event: string | symbol, fn: Function, context?: any): this;
         on(event: interaction.InteractionEventTypes | 'added' | 'removed', fn: (event: interaction.InteractionEvent) => void, context?: any): this;
         //tslint:disable-next-line:ban-types forbidden-types
-        on(event: string, fn: Function, context?: any): this;
+        on(event: string | symbol, fn: Function, context?: any): this;
         //tslint:disable-next-line:ban-types forbidden-types
-        off(event: 'added' | 'removed' | string, fn?: Function, context?: any): this;
+        off(event: 'added' | 'removed' | string | symbol, fn?: Function, context?: any): this;
     }
 
     export class DisplayObject extends utils.EventEmitter implements interaction.InteractiveTarget, accessibility.AccessibleTarget {
@@ -403,10 +403,10 @@ declare namespace PIXI {
 
         on(event: interaction.InteractionEventTypes, fn: (event: interaction.InteractionEvent) => void, context?: any): this;
         //tslint:disable-next-line:ban-types forbidden-types
-        on(event: string, fn: Function, context?: any): this;
+        on(event: string | symbol, fn: Function, context?: any): this;
         once(event: interaction.InteractionEventTypes, fn: (event: interaction.InteractionEvent) => void, context?: any): this;
         //tslint:disable-next-line:ban-types forbidden-types
-        once(event: string, fn: Function, context?: any): this;
+        once(event: string | symbol, fn: Function, context?: any): this;
         removeListener(event: interaction.InteractionEventTypes, fn?: (event: interaction.InteractionEvent) => void, context?: any): this;
         removeAllListeners(event?: interaction.InteractionEventTypes): this;
         off(event: interaction.InteractionEventTypes, fn?: (event: interaction.InteractionEvent) => void, context?: any): this;
