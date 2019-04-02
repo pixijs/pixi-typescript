@@ -2594,6 +2594,7 @@ declare namespace PIXI {
             static EMPTY_GIF: string;
 
             texture: Texture;
+            sound: any;
             spineAtlas: any;
             spineData: any;
             textures?: TextureDictionary;
