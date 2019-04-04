@@ -770,6 +770,7 @@ declare namespace PIXI {
         static EMPTY: Rectangle;
 
         clone(): Rectangle;
+        ceil(resolution?: number, eps?: number): void;
         copy(rectangle: Rectangle): Rectangle;
         contains(x: number, y: number): boolean;
         pad(paddingX: number, paddingY: number): void;
@@ -1031,6 +1032,8 @@ declare namespace PIXI {
         state?: WebGLState;
         renderingToScreen: boolean;
         boundTextures: BaseTexture[];
+        emptyTextures: BaseTexture[];
+        protected _unknownBoundTextures: BaseTexture[];
         filterManager: FilterManager;
         textureManager?: TextureManager;
         textureGC?: TextureGarbageCollector;
@@ -1314,7 +1317,7 @@ declare namespace PIXI {
 
         maskSprite: Sprite;
         maskMatrix: Matrix;
-        apply(filterManager: FilterManager, input: RenderTarget, output: RenderTarget): void;
+        apply(filterManager: FilterManager, input: RenderTarget, output: RenderTarget, clear?: boolean): void;
     }
 
     // sprites
@@ -1993,6 +1996,7 @@ declare namespace PIXI {
             textures: Texture[] | AnimatedSpriteTextureTimeObject[];
             animationSpeed: number;
             loop: boolean;
+            updateAnchor: boolean;
             onComplete: () => void;
             onFrameChange: (currentFrame: number) => void;
             onLoop: () => void;
@@ -2354,59 +2358,50 @@ declare namespace PIXI {
 
     // pixi loader extends
     // https://github.com/englercj/resource-loader/
-    // 2.1.1
+    // 2.2.3
 
     class MiniSignalBinding {
-        //tslint:disable-next-line:ban-types forbidden-types
-        constructor(fn: Function, once?: boolean, thisArg?: any);
-
-        //tslint:disable-next-line:ban-types forbidden-types
-        protected _fn: Function;
-        protected _once: boolean;
-        protected _thisArg: any;
-        protected _next: MiniSignalBinding;
-        protected _prev: MiniSignalBinding;
-        protected _owner: MiniSignal;
-
         detach(): boolean;
     }
-    class MiniSignal {
+    class MiniSignal<CbType extends Function> {
         constructor();
-
-        protected _head: MiniSignalBinding;
-        protected _tail: MiniSignalBinding;
-
-        handlers(exists?: boolean): MiniSignalBinding[] | boolean;
-        handlers(exists?: true): boolean;
+        
+        handlers(exists: true): boolean;
         handlers(exists?: false): MiniSignalBinding[];
-
         has(node: MiniSignalBinding): boolean;
-        dispatch(): boolean;
-        //tslint:disable-next-line:ban-types forbidden-types
-        add(fn: Function, thisArg?: any): any;
-        //tslint:disable-next-line:ban-types forbidden-types
-        once(fn: Function, thisArg?: any): any;
-        detach(node: MiniSignalBinding): MiniSignal;
-        detachAll(): MiniSignal;
+        add(fn: CbType, thisArg?: any): MiniSignalBinding;
+        once(fn: CbType, thisArg?: any): MiniSignalBinding;
+        detach(node: MiniSignalBinding): MiniSignal<CbType>;
+        detachAll(): MiniSignal<CbType>;
+
+        dispatch: CbType;
     }
 
     export namespace loaders {
         export interface LoaderOptions {
-            crossOrigin?: boolean | string;
-            loadType?: number;
-            xhrType?: string;
-            metaData?: {
-                loadElement?: HTMLImageElement | HTMLAudioElement | HTMLVideoElement;
-                skipSource?: boolean;
-                mimeType?: string | string[];
-            };
+            name?: string;
+            key?: string;
+            url?: string;
+            crossOrigin?: string | boolean;
+            timeout?: number;
+            loadType?: LOAD_TYPE;
+            xhrType?: XHR_RESPONSE_TYPE;
+            onComplete?: OnCompleteSignal;
+            callback?: OnCompleteSignal;
+            metadata?: IMetadata;
         }
         export interface ResourceDictionary {
-            [index: string]: PIXI.loaders.Resource;
+            [key: string]: Resource;
         }
 
-        // As of ResourceLoader v2 we no longer require EventEmitter
-        // However, for depreciation reasons, it remains.
+        export function encodeBinary(input: string): string;
+
+        type OnProgressSignal = (loader: Loader, resource: Resource) => void;
+        type OnErrorSignal = (loader: Loader, resource: Resource) => void;
+        type OnLoadSignal = (loader: Loader, resource: Resource) => void;
+        type OnStartSignal = (loader: Loader) => void;
+        type OnCompleteSignal = (loader: Loader) => void;
+
         export class Loader extends utils.EventEmitter {
             // pixi overrides here
 
@@ -2415,56 +2410,37 @@ declare namespace PIXI {
 
             // below this line is the original non-pixi loader
 
-            static Resource: any;
-            static async: any;
-            static base64: any;
-
             constructor(baseUrl?: string, concurrency?: number);
-
+            static Resource: typeof Resource;
+            static async: typeof Resource;
+            static encodeBinary: typeof encodeBinary;
+            static base64: typeof encodeBinary;
             baseUrl: string;
             progress: number;
             loading: boolean;
             defaultQueryString: string;
-
-            //tslint:disable-next-line:ban-types forbidden-types
-            protected _beforeMiddleware: Function[];
-            //tslint:disable-next-line:ban-types forbidden-types
-            protected _afterMiddleware: Function[];
-            protected _resourcesParsing: Resource[];
-            //tslint:disable-next-line:ban-types forbidden-types
-            protected _boundLoadResource: (r: Resource, d: Function) => void;
-            protected _queue: any;
-
             resources: ResourceDictionary;
 
-            onProgress: MiniSignal;
-            onError: MiniSignal;
-            onLoad: MiniSignal;
-            onStart: MiniSignal;
-            onComplete: MiniSignal;
-
-            concurrency: number;
-
+            onProgress: MiniSignal<OnProgressSignal>;
+            onError: MiniSignal<OnErrorSignal>;
+            onLoad: MiniSignal<OnLoadSignal>;
+            onStart: MiniSignal<OnStartSignal>;
+            onComplete: MiniSignal<OnCompleteSignal>;
+            
+            add(name: string, url: string, callback?: OnCompleteSignal): this;
+            add(name: string, url: string, options?: LoaderOptions, callback?: OnCompleteSignal): this;
+            add(url: string, callback?: OnCompleteSignal): this;
+            add(url: string, options?: LoaderOptions, callback?: OnCompleteSignal): this;
+            add(options: LoaderOptions, callback?: OnCompleteSignal): this;
+            add(resources: (LoaderOptions | string)[], callback?: OnCompleteSignal): this;
             add(...params: any[]): this;
-            //tslint:disable-next-line:ban-types forbidden-types
-            add(name: string, url: string, options?: LoaderOptions, cb?: Function): this;
-            //tslint:disable-next-line:ban-types forbidden-types
-            add(obj: string | any | any[], options?: LoaderOptions, cb?: Function): this;
-
-            //tslint:disable-next-line:ban-types forbidden-types
-            pre(fn: Function): this;
-            //tslint:disable-next-line:ban-types forbidden-types
-            use(fn: Function): this;
+            pre(fn: (...params: any[]) => any): this;
+            use(fn: (...params: any[]) => any): this;
             reset(): this;
-            //tslint:disable-next-line:ban-types forbidden-types
-            load(cb?: Function): this;
-
-            protected _prepareUrl(url: string): string;
-            //tslint:disable-next-line:ban-types forbidden-types
-            protected _loadResource(resource: Resource, dequeue: Function): void;
-            protected _onStart(): void;
-            protected _onComplete(): void;
-            protected _onLoad(resource: Resource): void;
+            load(cb?: (...params: any[]) => any): this;
+            concurrency: number;
+            static pre(fn: (...params: any[]) => any): Loader;
+            static use(fn: (...params: any[]) => any): Loader;
 
             destroy(): void;
 
@@ -2474,7 +2450,6 @@ declare namespace PIXI {
             on(event: 'error', fn: (error: Error, loader: loaders.Loader, resource: Resource) => void, context?: any): this;
             on(event: 'load' | 'progress', fn: (loader: loaders.Loader, resource: Resource) => void, context?: any): this;
             on(event: 'start', fn: (loader: loaders.Loader) => void, context?: any): this;
-
             once(event: 'complete', fn: (loader: loaders.Loader, object: any) => void, context?: any): this;
             once(event: 'error', fn: (error: Error, loader: loaders.Loader, resource: Resource) => void, context?: any): this;
             once(event: 'load' | 'progress', fn: (loader: loaders.Loader, resource: Resource) => void, context?: any): this;
@@ -2485,112 +2460,69 @@ declare namespace PIXI {
         export interface TextureDictionary {
             [index: string]: PIXI.Texture;
         }
+        enum STATUS_FLAGS {
+            NONE,
+            DATA_URL,
+            COMPLETE,
+            LOADING
+        }
+        enum TYPE {
+            UNKNOWN,
+            JSON,
+            XML,
+            IMAGE,
+            AUDIO,
+            VIDEO,
+            TEXT
+        }
+        enum LOAD_TYPE {
+            XHR,
+            IMAGE,
+            AUDIO,
+            VIDEO
+        }
+        enum XHR_RESPONSE_TYPE {
+            DEFAULT,
+            BUFFER,
+            BLOB,
+            DOCUMENT,
+            JSON,
+            TEXT
+        }
+        type IMetadata = {
+            loadElement?: HTMLImageElement | HTMLAudioElement | HTMLVideoElement;
+            skipSource?: boolean;
+            mimeType?: string | string[];
+        };
         export class Resource {
-            static setExtensionLoadType(extname: string, loadType: number): void;
-            static setExtensionXhrType(extname: string, xhrType: string): void;
-
             constructor(name: string, url: string | string[], options?: LoaderOptions);
-
-            protected _flags: number;
-
-            name: string;
-            url: string;
-            extension: string;
+            static setExtensionLoadType(extname: string, loadType: LOAD_TYPE): void;
+            static setExtensionXhrType(extname: string, xhrType: XHR_RESPONSE_TYPE): void;
+            readonly name: string;
+            readonly url: string;
+            readonly extension: string;
             data: any;
-            crossOrigin: boolean | string;
-            loadType: number;
+            crossOrigin: string;
+            timeout: number;
+            loadType: LOAD_TYPE;
             xhrType: string;
-            metadata: any;
-            error: Error;
-            xhr: XMLHttpRequest | null;
-            children: Resource[];
-            type: number;
-            progressChunk: number;
-
-            //tslint:disable-next-line:ban-types forbidden-types
-            protected _dequeue: Function;
-            //tslint:disable-next-line:ban-types forbidden-types
-            protected _onLoadBinding: Function;
-            //tslint:disable-next-line:ban-types forbidden-types
-            protected _boundComplete: Function;
-            //tslint:disable-next-line:ban-types forbidden-types
-            protected _boundOnError: Function;
-            //tslint:disable-next-line:ban-types forbidden-types
-            protected _boundOnProgress: Function;
-            //tslint:disable-next-line:ban-types forbidden-types
-            protected _boundXhrOnError: Function;
-            //tslint:disable-next-line:ban-types forbidden-types
-            protected _boundXhrOnAbort: Function;
-            //tslint:disable-next-line:ban-types forbidden-types
-            protected _boundXhrOnLoad: Function;
-            //tslint:disable-next-line:ban-types forbidden-types
-            protected _boundXdrOnTimeout: Function;
-
-            onStart: MiniSignal;
-            onProgress: MiniSignal;
-            onComplete: MiniSignal;
-            onAfterMiddleware: MiniSignal;
-
-            isDataUrl: boolean;
-            isComplete: boolean;
-            isLoading: boolean;
+            metadata: IMetadata;
+            readonly error: Error;
+            readonly xhr: XMLHttpRequest;
+            readonly children: Resource[];
+            readonly type: TYPE;
+            readonly progressChunk: number;
+            onStart: MiniSignal<OnStartSignal>;
+            onProgress: MiniSignal<OnProgressSignal>;
+            onComplete: MiniSignal<OnCompleteSignal>;
+            onAfterMiddleware: MiniSignal<OnCompleteSignal>;
+            readonly isDataUrl: boolean;
+            readonly isComplete: boolean;
+            readonly isLoading: boolean;
             complete(): void;
-            abort(message?: string): void;
-            //tslint:disable-next-line:ban-types forbidden-types
-            load(cb?: Function): void;
-
-            protected _hasFlag(flag: number): boolean;
-            protected _setFlag(flag: number, value: boolean): void;
-            protected _loadElement(type: string): void;
-            protected _loadSourceElement(type: string): void;
-            protected _loadXhr(): void;
-            protected _loadXdr(): void;
-            protected _createSource(type: string, url: string, mime?: string): HTMLSourceElement;
-            protected _onError(event?: any): void;
-            protected _onProgress(event?: any): void;
-            protected _xhrOnError(): void;
-            protected _xhrOnAbort(): void;
-            protected _xdrOnTimeout(): void;
-            protected _xhrOnLoad(): void;
-            protected _determineCrossOrigin(url: string, loc: any): string;
-            protected _determineXhrType(): number;
-            protected _determineLoadType(): number;
-            protected _getExtension(): string;
-            protected _getMimeXhrType(type: number): string;
-
-            static STATUS_FLAGS: {
-                NONE: number;
-                DATA_URL: number;
-                COMPLETE: number;
-                LOADING: number;
-            };
-
-            static TYPE: {
-                UNKNOWN: number;
-                JSON: number;
-                XML: number;
-                IMAGE: number;
-                AUDIO: number;
-                VIDEO: number;
-                TEXT: number;
-            };
-
-            static LOAD_TYPE: {
-                XHR: number;
-                IMAGE: number;
-                AUDIO: number;
-                VIDEO: number;
-            };
-
-            static XHR_RESPONSE_TYPE: {
-                DEFAULT: string;
-                BUFFER: string;
-                BLOB: string;
-                DOCUMENT: string;
-                JSON: string;
-                TEXT: string;
-            };
-
+            abort(message: string): void;
+            load(cb?: OnCompleteSignal): void;
+            
             static EMPTY_GIF: string;
 
             texture: Texture;
@@ -2699,19 +2631,13 @@ declare namespace PIXI {
             protected _origWidth: number;
             protected _uvh: number;
             protected _uvw: number;
+            protected _cachedTint: number;
+            protected _tintedTexture: HTMLCanvasElement;
+            protected _canvasUvs: number[];
 
             updateHorizontalVertices(): void;
             updateVerticalVertices(): void;
-            protected drawSegment(
-                context: CanvasRenderingContext2D | WebGLRenderingContext,
-                textureSource: any,
-                w: number,
-                h: number,
-                x1: number,
-                y1: number,
-                x2: number,
-                y2: number
-            ): void;
+            protected _renderCanvas(renderer: CanvasRenderer): void;
             protected _refresh(): void;
         }
 
