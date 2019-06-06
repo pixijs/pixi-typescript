@@ -2459,46 +2459,13 @@ declare namespace PIXI {
         }
         export interface TextureDictionary {
             [index: string]: PIXI.Texture;
-        }       
-     
-        type IMetadata = {
+        }
+        interface IMetadata {
             loadElement?: HTMLImageElement | HTMLAudioElement | HTMLVideoElement;
             skipSource?: boolean;
             mimeType?: string | string[];
-        };
+        }
         export class Resource {
-            constructor(name: string, url: string | string[], options?: LoaderOptions);
-            static STATUS_FLAGS: {
-                NONE: number,
-                DATA_URL: number,
-                COMPLETE: number,
-                LOADING: number
-            }
-            static TYPE: {
-                UNKNOWN: number,
-                JSON: number,
-                XML: number,
-                IMAGE: number,
-                AUDIO: number,
-                VIDEO: number,
-                TEXT: number
-            }
-            static LOAD_TYPE: {
-                XHR: number,
-                IMAGE: number,
-                AUDIO: number,
-                VIDEO: number
-            }
-            static XHR_RESPONSE_TYPE: {
-                DEFAULT: number,
-                BUFFER: number,
-                BLOB: number,
-                DOCUMENT: number,
-                JSON: number,
-                TEXT: number
-            } 
-            static setExtensionLoadType(extname: string, loadType: number): void;
-            static setExtensionXhrType(extname: string, xhrType: number): void;
             readonly name: string;
             readonly url: string;
             readonly extension: string;
@@ -2523,8 +2490,6 @@ declare namespace PIXI {
             complete(): void;
             abort(message: string): void;
             load(cb?: OnCompleteSignal): void;
-            
-            static EMPTY_GIF: string;
 
             texture: Texture;
             sound: any;
@@ -2533,6 +2498,42 @@ declare namespace PIXI {
             textures?: TextureDictionary;
             spritesheet?: Spritesheet;
         }
+
+        namespace Resource {
+            enum STATUS_FLAGS {
+                NONE,
+                DATA_URL,
+                COMPLETE,
+                LOADING
+            }
+            enum TYPE {
+                UNKNOWN,
+                JSON,
+                XML,
+                IMAGE,
+                AUDIO,
+                VIDEO,
+                TEXT
+            }
+            enum LOAD_TYPE {
+                XHR,
+                IMAGE,
+                AUDIO,
+                VIDEO
+            }
+            enum XHR_RESPONSE_TYPE {
+                DEFAULT,
+                BUFFER,
+                BLOB,
+                DOCUMENT,
+                JSON,
+                TEXT
+            }
+            function setExtensionLoadType(extname: string, loadType: number): void;
+            function setExtensionXhrType(extname: string, xhrType: number): void;
+            const EMPTY_GIF: string;
+        }
+
         const shared: Loader;
     }
 
