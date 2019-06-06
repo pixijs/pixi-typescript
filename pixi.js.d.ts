@@ -2384,8 +2384,8 @@ declare namespace PIXI {
             url?: string;
             crossOrigin?: string | boolean;
             timeout?: number;
-            loadType?: number;
-            xhrType?: number;
+            loadType?: Resource.LOAD_TYPE;
+            xhrType?: Resource.XHR_RESPONSE_TYPE;
             onComplete?: OnCompleteSignal;
             callback?: OnCompleteSignal;
             metadata?: IMetadata;
@@ -2472,13 +2472,13 @@ declare namespace PIXI {
             data: any;
             crossOrigin: string;
             timeout: number;
-            loadType: number;
+            loadType: Resource.LOAD_TYPE;
             xhrType: string;
             metadata: IMetadata;
             readonly error: Error;
             readonly xhr: XMLHttpRequest;
             readonly children: Resource[];
-            readonly type: number;
+            readonly type: Resource.LOAD_TYPE;
             readonly progressChunk: number;
             onStart: MiniSignal<OnStartSignal>;
             onProgress: MiniSignal<OnProgressSignal>;
