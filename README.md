@@ -1,6 +1,8 @@
 ## Typescript Definitions for Pixi.js v4.x
 
-_Note_ This repository is not intended for v5.x at this time.
+_Note_ This repository is not intended for v5.x which ships with its own generated declarations.
+
+When using v5.x, you can use `import * as PIXI from "pixi.js"` without the need for `@types/pixi.js`
 
 ## Install
 

@@ -1,4 +1,4 @@
-// Type definitions for Pixi.js 4.8.7
+// Type definitions for Pixi.js 4.8.8
 // Project: https://github.com/pixijs/pixi.js/tree/v4.x
 // Definitions by: clark-stevenson <https://github.com/pixijs/pixi-typescript>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
@@ -2384,8 +2384,8 @@ declare namespace PIXI {
             url?: string;
             crossOrigin?: string | boolean;
             timeout?: number;
-            loadType?: LOAD_TYPE;
-            xhrType?: XHR_RESPONSE_TYPE;
+            loadType?: number;
+            xhrType?: number;
             onComplete?: OnCompleteSignal;
             callback?: OnCompleteSignal;
             metadata?: IMetadata;
@@ -2459,36 +2459,8 @@ declare namespace PIXI {
         }
         export interface TextureDictionary {
             [index: string]: PIXI.Texture;
-        }
-        enum STATUS_FLAGS {
-            NONE,
-            DATA_URL,
-            COMPLETE,
-            LOADING
-        }
-        enum TYPE {
-            UNKNOWN,
-            JSON,
-            XML,
-            IMAGE,
-            AUDIO,
-            VIDEO,
-            TEXT
-        }
-        enum LOAD_TYPE {
-            XHR,
-            IMAGE,
-            AUDIO,
-            VIDEO
-        }
-        enum XHR_RESPONSE_TYPE {
-            DEFAULT,
-            BUFFER,
-            BLOB,
-            DOCUMENT,
-            JSON,
-            TEXT
-        }
+        }       
+     
         type IMetadata = {
             loadElement?: HTMLImageElement | HTMLAudioElement | HTMLVideoElement;
             skipSource?: boolean;
@@ -2496,21 +2468,50 @@ declare namespace PIXI {
         };
         export class Resource {
             constructor(name: string, url: string | string[], options?: LoaderOptions);
-            static setExtensionLoadType(extname: string, loadType: LOAD_TYPE): void;
-            static setExtensionXhrType(extname: string, xhrType: XHR_RESPONSE_TYPE): void;
+            static STATUS_FLAGS: {
+                NONE: number,
+                DATA_URL: number,
+                COMPLETE: number,
+                LOADING: number
+            }
+            static TYPE: {
+                UNKNOWN: number,
+                JSON: number,
+                XML: number,
+                IMAGE: number,
+                AUDIO: number,
+                VIDEO: number,
+                TEXT: number
+            }
+            static LOAD_TYPE: {
+                XHR: number,
+                IMAGE: number,
+                AUDIO: number,
+                VIDEO: number
+            }
+            static XHR_RESPONSE_TYPE: {
+                DEFAULT: number,
+                BUFFER: number,
+                BLOB: number,
+                DOCUMENT: number,
+                JSON: number,
+                TEXT: number
+            } 
+            static setExtensionLoadType(extname: string, loadType: number): void;
+            static setExtensionXhrType(extname: string, xhrType: number): void;
             readonly name: string;
             readonly url: string;
             readonly extension: string;
             data: any;
             crossOrigin: string;
             timeout: number;
-            loadType: LOAD_TYPE;
+            loadType: number;
             xhrType: string;
             metadata: IMetadata;
             readonly error: Error;
             readonly xhr: XMLHttpRequest;
             readonly children: Resource[];
-            readonly type: TYPE;
+            readonly type: number;
             readonly progressChunk: number;
             onStart: MiniSignal<OnStartSignal>;
             onProgress: MiniSignal<OnProgressSignal>;
