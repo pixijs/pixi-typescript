@@ -366,12 +366,30 @@ declare namespace PIXI {
         renderer: PIXI.WebGLRenderer | PIXI.CanvasRenderer;
         stage: Container;
         ticker: ticker.Ticker;
+        /**
+         * Loader instance to help with asset loading.
+         */
         loader: loaders.Loader;
         readonly screen: Rectangle;
 
+        /**
+         * Convenience method for stopping the render.
+         */
         stop(): void;
+        /**
+         * Convenience method for starting the render.
+         */
         start(): void;
+        /**
+         * Render the current stage.
+         */
         render(): void;
+        /**
+         * Destroy and don't use after this.
+         * @param [removeView=false] Automatically remove canvas from DOM.
+         * @param [stageOptions] - Options parameter. A boolean will act as if all options
+         *  have been set to that value
+         */
         destroy(removeView?: boolean, stageOptions?: StageOptions | boolean): void;
         readonly view: HTMLCanvasElement;
     }
@@ -397,16 +415,76 @@ declare namespace PIXI {
         maxY: number;
         rect: Rectangle;
 
+        /**
+         * Checks if bounds are empty.
+         *
+         * @return True if empty.
+         */
         isEmpty(): boolean;
+        /**
+         * Clears the bounds and resets.
+         *
+         */
         clear(): void;
 
+        /**
+         * Can return Rectangle.EMPTY constant, either construct new rectangle, either use your rectangle
+         * It is not guaranteed that it will return tempRect
+         *
+         * @param rect - temporary object will be used if AABB is not empty
+         * @returns A rectangle of the bounds
+         */
         getRectangle(rect?: Rectangle): Rectangle;
+        /**
+         * This function should be inlined when its possible.
+         *
+         * @param point - The point to add.
+         */
         addPoint(point: Point): void;
+        /**
+         * Adds a quad, not transformed
+         *
+         * @param vertices - The verts to add.
+         */
         addQuad(vertices: ArrayLike<number>): Bounds | undefined;
+        /**
+         * Adds sprite frame, transformed.
+         *
+         * @param transform - TODO
+         * @param x0 - TODO
+         * @param y0 - TODO
+         * @param x1 - TODO
+         * @param y1 - TODO
+         */
         addFrame(transform: Transform, x0: number, y0: number, x1: number, y1: number): void;
+        /**
+         * Add an array of vertices
+         *
+         * @param transform - TODO
+         * @param vertices - TODO
+         * @param beginOffset - TODO
+         * @param endOffset - TODO
+         */
         addVertices(transform: Transform, vertices: ArrayLike<number>, beginOffset: number, endOffset: number): void;
+        /**
+         * Adds other Bounds
+         *
+         * @param bounds - TODO
+         */
         addBounds(bounds: Bounds): void;
+        /**
+         * Adds other Bounds, masked with Bounds
+         *
+         * @param bounds - TODO
+         * @param mask - TODO
+         */
         addBoundsMask(bounds: Bounds, mask: Bounds): void;
+        /**
+         * Adds other Bounds, masked with Rectangle
+         *
+         * @param bounds - TODO
+         * @param area - TODO
+         */
         addBoundsArea(bounds: Bounds, area: Rectangle): void;
     }
     /**
@@ -418,8 +496,8 @@ declare namespace PIXI {
         /**
          * Returns the display object in the container
          *
-         * @param {string} name - instance name
-         * @return {PIXI.DisplayObject} The child with the specified name.
+         * @param name - instance name
+         * @return The child with the specified name.
          */
         getChildByName<T extends DisplayObject = Container>(name: string): T;
         // end extras.getChildByName
@@ -433,53 +511,53 @@ declare namespace PIXI {
         /**
          * Adds a child to the container at a specified index. If the index is out of bounds an error will be thrown
          *
-         * @param {PIXI.DisplayObject} child - The child to add
-         * @param {number} index - The index to place the child in
-         * @return {PIXI.DisplayObject} The child that was added.
+         * @param child - The child to add
+         * @param index - The index to place the child in
+         * @return The child that was added.
          */
         addChildAt<T extends DisplayObject>(child: T, index: number): T;
         /**
          * Swaps the position of 2 Display Objects within this container.
          *
-         * @param {PIXI.DisplayObject} child - First display object to swap
-         * @param {PIXI.DisplayObject} child2 - Second display object to swap
+         * @param child - First display object to swap
+         * @param child2 - Second display object to swap
          */
         swapChildren(child: DisplayObject, child2: DisplayObject): void;
         /**
          * Returns the index position of a child DisplayObject instance
          *
-         * @param {PIXI.DisplayObject} child - The DisplayObject instance to identify
-         * @return {number} The index position of the child display object to identify
+         * @param child - The DisplayObject instance to identify
+         * @return The index position of the child display object to identify
          */
         getChildIndex(child: DisplayObject): number;
         /**
          * Changes the position of an existing child in the display object container
          *
-         * @param {PIXI.DisplayObject} child - The child DisplayObject instance for which you want to change the index number
-         * @param {number} index - The resulting index number for the child display object
+         * @param child - The child DisplayObject instance for which you want to change the index number
+         * @param index - The resulting index number for the child display object
          */
         setChildIndex(child: DisplayObject, index: number): void;
         /**
          * Returns the child at the specified index
          *
-         * @param {number} index - The index to get the child at
-         * @return {PIXI.DisplayObject} The child at the given index, if any.
+         * @param index - The index to get the child at
+         * @return The child at the given index, if any.
          */
         getChildAt<T extends DisplayObject = Container>(index: number): T;
         removeChild<T extends DisplayObject = Container>(child: DisplayObject): T;
         /**
          * Removes a child from the specified index position.
          *
-         * @param {number} index - The index to get the child from
-         * @return {PIXI.DisplayObject} The child that was removed.
+         * @param index - The index to get the child from
+         * @return The child that was removed.
          */
         removeChildAt<T extends DisplayObject = Container>(index: number): T;
         /**
          * Removes all children from this container that are within the begin and end indexes.
          *
-         * @param {number} [beginIndex=0] - The beginning position.
-         * @param {number} [endIndex=this.children.length] - The ending position. Default value is size of the container.
-         * @returns {DisplayObject[]} List of removed children
+         * @param [beginIndex=0] - The beginning position.
+         * @param [endIndex=this.children.length] - The ending position. Default value is size of the container.
+         * @returns List of removed children
          */
         removeChildren<T extends DisplayObject = Container>(beginIndex?: number, endIndex?: number): T[];
         /**
@@ -507,7 +585,7 @@ declare namespace PIXI {
          * Removes all internal references and listeners as well as removes children from the display list.
          * Do not use a Container after calling `destroy`.
          * 
-         * @param {DestroyOptions|boolean} [options] - Options parameter. A boolean will act as if all options have been set to that value
+         * @param [options] - Options parameter. A boolean will act as if all options have been set to that value
          */
         destroy(options?: DestroyOptions | boolean): void;
 
@@ -556,11 +634,11 @@ declare namespace PIXI {
         /**
          * Returns the global position of the displayObject. Does not depend on object scale, rotation and pivot.
          * 
-         * @param {Point} point - the point to write the global value to. If null a new point will be returned
-         * @param {boolean} skipUpdate - setting to true will stop the transforms of the scene graph from
+         * @param point - the point to write the global value to. If null a new point will be returned
+         * @param skipUpdate - setting to true will stop the transforms of the scene graph from
          *  being updated. This means the calculation returned MAY be out of date BUT will give you a
          *  nice performance boost
-         * @return {Point} The updated point
+         * @return The updated point
          */
         getGlobalPosition(point?: Point, skipUpdate?: boolean): Point;
         // end extras.getGlobalPosition
@@ -579,7 +657,7 @@ declare namespace PIXI {
         buttonMode: boolean;
         cursor: string;
         trackedPointers: { [key: number]: interaction.InteractionTrackingData };
-        // depricated
+        /** @deprecated */
         defaultCursor: string;
         // end interactive target
 
@@ -627,18 +705,18 @@ declare namespace PIXI {
         /**
          * Retrieves the bounds of the displayObject as a rectangle object.
          *
-         * @param {boolean} skipUpdate - setting to true will stop the transforms of the scene graph from
+         * @param skipUpdate - setting to true will stop the transforms of the scene graph from
          *  being updated. This means the calculation returned MAY be out of date BUT will give you a
          *  nice performance boost
-         * @param {PIXI.Rectangle} rect - Optional rectangle to store the result of the bounds calculation
-         * @return {PIXI.Rectangle} the rectangular bounding area
+         * @param rect - Optional rectangle to store the result of the bounds calculation
+         * @return the rectangular bounding area
          */
         getBounds(skipUpdate?: boolean, rect?: Rectangle): Rectangle;
         /**
          * Retrieves the local bounds of the displayObject as a rectangle object
          *
-         * @param {PIXI.Rectangle} [rect] - Optional rectangle to store the result of the bounds calculation
-         * @return {PIXI.Rectangle} the rectangular bounding area
+         * @param [rect] - Optional rectangle to store the result of the bounds calculation
+         * @return the rectangular bounding area
          */
         getLocalBounds(rect?: Rectangle): Rectangle;
         //creates and returns a new point
@@ -647,11 +725,11 @@ declare namespace PIXI {
         /**
          * Calculates the global position of the display object
          *
-         * @param {PIXI.Point} position - The world origin to calculate from
-         * @param {PIXI.Point} [point] - A Point object in which to store the value, optional
+         * @param position - The world origin to calculate from
+         * @param [point] - A Point object in which to store the value, optional
          *  (otherwise will create a new Point)
-         * @param {boolean} [skipUpdate=false] - Should we skip the update transform.
-         * @return {PIXI.Point} A point object representing the position of this object
+         * @param [skipUpdate=false] - Should we skip the update transform.
+         * @return A point object representing the position of this object
          */
         toGlobal<T extends PointLike>(position: PointLike, point?: T, skipUpdate?: boolean): T;
         //creates and returns a new point
@@ -660,18 +738,18 @@ declare namespace PIXI {
         /**
          * Calculates the local position of the display object relative to another point
          *
-         * @param {PIXI.Point} position - The world origin to calculate from
-         * @param {PIXI.DisplayObject} [from] - The DisplayObject to calculate the global position from
-         * @param {PIXI.Point} [point] - A Point object in which to store the value, optional
+         * @param position - The world origin to calculate from
+         * @param [from] - The DisplayObject to calculate the global position from
+         * @param [point] - A Point object in which to store the value, optional
          *  (otherwise will create a new Point)
-         * @param {boolean} [skipUpdate=false] - Should we skip the update transform
-         * @return {PIXI.Point} A point object representing the position of this object
+         * @param [skipUpdate=false] - Should we skip the update transform
+         * @return A point object representing the position of this object
          */
         toLocal<T extends PointLike>(position: PointLike, from?: DisplayObject, point?: T, skipUpdate?: boolean): T;
         /**
          * Renders the object using the WebGL renderer
          *
-         * @param {PIXI.WebGLRenderer} renderer - The renderer
+         * @param renderer - The renderer
          */
         renderWebGL(renderer: WebGLRenderer): void;
         renderCanvas(renderer: CanvasRenderer): void;
@@ -679,16 +757,16 @@ declare namespace PIXI {
         /**
          * Convenience function to set the position, scale, skew and pivot at once.
          *
-         * @param {number} [x=0] - The X position
-         * @param {number} [y=0] - The Y position
-         * @param {number} [scaleX=1] - The X scale value
-         * @param {number} [scaleY=1] - The Y scale value
-         * @param {number} [rotation=0] - The rotation
-         * @param {number} [skewX=0] - The X skew value
-         * @param {number} [skewY=0] - The Y skew value
-         * @param {number} [pivotX=0] - The X pivot value
-         * @param {number} [pivotY=0] - The Y pivot value
-         * @return {PIXI.DisplayObject} The DisplayObject instance
+         * @param [x=0] - The X position
+         * @param [y=0] - The Y position
+         * @param [scaleX=1] - The X scale value
+         * @param [scaleY=1] - The Y scale value
+         * @param [rotation=0] - The rotation
+         * @param [skewX=0] - The X skew value
+         * @param [skewY=0] - The Y skew value
+         * @param [pivotX=0] - The X pivot value
+         * @param [pivotY=0] - The Y pivot value
+         * @return The DisplayObject instance
          */
         setTransform(
             x?: number,
@@ -706,7 +784,6 @@ declare namespace PIXI {
          * remove the display object from its parent Container as well as remove
          * all current event listeners and internal references. Do not use a DisplayObject
          * after calling `destroy`.
-         *
          */
         destroy(): void;
 
@@ -729,7 +806,15 @@ declare namespace PIXI {
         localTransform: Matrix;
         protected _worldID: number;
         protected _parentID: number;
+        /**
+         * Updates only local matrix
+         */
         updateLocalTransform(): void;
+        /**
+         * Updates the values of the object and applies the parent's transform.
+         *
+         * @param parentTransform - The transform of the parent of this object
+         */
         updateTransform(parentTransform: TransformBase): void;
         updateWorldTransform(parentTransform: TransformBase): void;
     }
@@ -751,6 +836,11 @@ declare namespace PIXI {
 
         protected onChange(): void;
         updateSkew(): void;
+        /**
+         * Decomposes a matrix and sets the transforms properties based on it.
+         *
+         * @param matrix - The matrix to decompose
+         */
         setFromMatrix(matrix: Matrix): void;
 
         rotation: number;
@@ -772,6 +862,11 @@ declare namespace PIXI {
         protected _cx?: number;
 
         updateSkew(): void;
+        /**
+         * Decomposes a matrix and sets the transforms properties based on it.
+         *
+         * @param matrix - The matrix to decompose
+         */
         setFromMatrix(matrix: Matrix): void;
 
         rotation: number;
@@ -805,8 +900,21 @@ declare namespace PIXI {
         protected holes: Circle[] | Rectangle[] | Ellipse[] | Polygon[] | RoundedRectangle[] | any[];
         shape: Circle | Rectangle | Ellipse | Polygon | RoundedRectangle | any;
         type?: number;
+        /**
+         * Creates a new GraphicsData object with the same values as this one.
+         *
+         * @return Cloned GraphicsData object
+         */
         clone(): GraphicsData;
+        /**
+         * Adds a hole to the shape.
+         *
+         * @param shape - The shape of the hole.
+         */
         addHole(shape: Circle | Rectangle | Ellipse | Polygon | RoundedRectangle | any): void;
+        /**
+         * Destroys the Graphics data.
+         */
         destroy(options?: DestroyOptions | boolean): void;
     }
     export class Graphics extends Container {
@@ -892,6 +1000,10 @@ declare namespace PIXI {
         protected renderPolygon(points: Point[], close: boolean, context: CanvasRenderingContext2D): void;
         destroy(): void;
     }
+
+    /**
+     * Renders the graphics object.
+     */
     export class GraphicsRenderer extends ObjectRenderer {
         constructor(renderer: PIXI.CanvasRenderer);
 
@@ -901,7 +1013,16 @@ declare namespace PIXI {
 
         CONTEXT_UID: number;
 
+        /**
+         * Destroys this renderer.
+         *
+         */
         destroy(): void;
+        /**
+         * Renders a graphics object.
+         *
+         * @param graphics - The graphics object to render.
+         */
         render(graphics: Graphics): void;
         protected updateGraphics(graphics: PIXI.Graphics): void;
         getWebGLData(webGL: WebGLRenderingContext, type: number, nativeLines: number): WebGLGraphicsData;
@@ -926,10 +1047,27 @@ declare namespace PIXI {
         upload(): void;
         destroy(): void;
     }
+    /**
+     * This shader is used to draw simple primitive shapes for {@link PIXI.Graphics}.
+     */
     export class PrimitiveShader extends glCore.GLShader {}
 
     // math
 
+    /**
+     * Implements Dihedral Group D_8, see [group D4]{@link http://mathworld.wolfram.com/DihedralGroupD4.html},
+     * D8 is the same but with diagonals. Used for texture rotations.
+     *
+     * Vector xX(i), xY(i) is U-axis of sprite with rotation i
+     * Vector yY(i), yY(i) is V-axis of sprite with rotation i
+     * Rotations: 0 grad (0), 90 grad (2), 180 grad (4), 270 grad (6)
+     * Mirrors: vertical (8), main diagonal (10), horizontal (12), reverse diagonal (14)
+     * This is the small part of gameofbombs.com portal system. It works.
+     *
+     * @author Ivan @ivanpopelyshev
+     * @class
+     * @memberof PIXI
+     */
     export namespace GroupD8 {
         export const E: number;
         export const SE: number;
@@ -949,9 +1087,36 @@ declare namespace PIXI {
         export function inv(rotation: number): number;
         export function add(rotationSecond: number, rotationFirst: number): number;
         export function sub(rotationSecond: number, rotationFirst: number): number;
+        /**
+         * Adds 180 degrees to rotation. Commutative operation.
+         * 
+         * @param rotation - The number to rotate.
+         * @returns rotated number
+         */
         export function rotate180(rotation: number): number;
+        /**
+         * Direction of main vector can be horizontal, vertical or diagonal.
+         * Some objects work with vertical directions different.
+         *
+         * @param rotation - The number to check.
+         * @returns Whether or not the direction is vertical
+         */
         export function isVertical(rotation: number): boolean;
+        /**
+         * @param dx - TODO
+         * @param dy - TODO
+         *
+         * @return TODO
+         */
         export function byDirection(dx: number, dy: number): number;
+        /**
+         * Helps sprite to compensate texture packer rotation.
+         *
+         * @param matrix - sprite world matrix
+         * @param rotation - The rotation factor to use.
+         * @param tx - sprite anchoring
+         * @param ty - sprite anchoring
+         */
         export function matrixAppendRotationInv(matrix: Matrix, rotation: number, tx: number, ty: number): void;
     }
     export class Matrix {
@@ -964,9 +1129,49 @@ declare namespace PIXI {
         tx: number;
         ty: number;
 
+        /**
+         * Creates a Matrix object based on the given array. The Element to Matrix mapping order is as follows:
+         *
+         * a = array[0]
+         * b = array[1]
+         * c = array[3]
+         * d = array[4]
+         * tx = array[2]
+         * ty = array[5]
+         *
+         * @param {number[]} array - The array that the matrix will be populated from.
+         */
         fromArray(array: number[]): void;
+        /**
+         * sets the matrix properties
+         *
+         * @param a - Matrix component
+         * @param b - Matrix component
+         * @param c - Matrix component
+         * @param d - Matrix component
+         * @param tx - Matrix component
+         * @param ty - Matrix component
+         *
+         * @return This matrix. Good for chaining method calls.
+         */
         set(a: number, b: number, c: number, d: number, tx: number, ty: number): Matrix;
+        /**
+         * Creates an array from the current Matrix object.
+         *
+         * @param transpose - Whether we need to transpose the matrix or not
+         * @param [out=new Float32Array(9)] - If provided the array will be assigned to out
+         * @return the newly created array which contains the matrix
+         */
         toArray(transpose?: boolean, out?: number[]): number[];
+        
+        /**
+         * Get a new position with the current transformation applied.
+         * Can be used to go from a child's coordinate space to the world coordinate space. (e.g. rendering)
+         *
+         * @param pos - The origin
+         * @param [newPos] - The point that the new position is assigned to (allowed to be same as input)
+         * @return The new point, transformed through this matrix
+         */
         apply(pos: Point, newPos?: Point): Point;
         applyInverse(pos: Point, newPos?: Point): Point;
         translate(x: number, y: number): Matrix;
@@ -1094,48 +1299,48 @@ declare namespace PIXI {
         /**
          * Creates a clone of this Rectangle
          *
-         * @return {PIXI.Rectangle} a copy of the rectangle
+         * @return a copy of the rectangle
          */
         clone(): Rectangle;
         /**
          * Enlarges rectangle that way its corners lie on grid
          *
-         * @param {number} [resolution=1] resolution
-         * @param {number} [eps=0.001] precision
+         * @param [resolution=1] resolution
+         * @param [eps=0.001] precision
          */
         ceil(resolution?: number, eps?: number): void;
         /**
          * Copies another rectangle to this one.
          *
-         * @param {PIXI.Rectangle} rectangle - The rectangle to copy.
-         * @return {PIXI.Rectangle} Returns itself.
+         * @param rectangle - The rectangle to copy.
+         * @return Returns itself.
          */
         copy(rectangle: Rectangle): Rectangle;
         /**
          * Checks whether the x and y coordinates given are contained within this Rectangle
          *
-         * @param {number} x - The X coordinate of the point to test
-         * @param {number} y - The Y coordinate of the point to test
-         * @return {boolean} Whether the x/y coordinates are within this Rectangle
+         * @param x - The X coordinate of the point to test
+         * @param y - The Y coordinate of the point to test
+         * @return Whether the x/y coordinates are within this Rectangle
          */
         contains(x: number, y: number): boolean;
         /**
          * Pads the rectangle making it grow in all directions.
          *
-         * @param {number} paddingX - The horizontal padding amount.
-         * @param {number} [paddingY] - The vertical padding amount.
+         * @param paddingX - The horizontal padding amount.
+         * @param [paddingY] - The vertical padding amount.
          */
         pad(paddingX: number, paddingY: number): void;
         /**
          * Fits this rectangle around the passed one.
          *
-         * @param {PIXI.Rectangle} rectangle - The rectangle to fit.
+         * @param rectangle - The rectangle to fit.
          */
         fit(rectangle: Rectangle): void;
         /**
          * Enlarges this rectangle to include the passed rectangle.
          *
-         * @param {PIXI.Rectangle} rectangle - The rectangle to include.
+         * @param rectangle - The rectangle to include.
          */
         enlarge(rectangle: Rectangle): void;
     }
@@ -1222,12 +1427,12 @@ declare namespace PIXI {
         legacy?: boolean;
 
         /**
-         * Deprecated
+         * @deprecated
          */
         context?: WebGLRenderingContext;
 
         /**
-         * Deprecated
+         * @deprecated
          */
         autoResize?: boolean;
 
@@ -1493,11 +1698,21 @@ declare namespace PIXI {
         run(): void;
         unload(displayObject: DisplayObject): void;
     }
+    /**
+     * Base for a common object renderer that can be used as a system renderer plugin.
+     */
     export abstract class ObjectRenderer extends WebGLManager {
         constructor(renderer: WebGLRenderer);
-
+        /**
+         * Starts the renderer and sets the shader
+         *
+         */
         start(): void;
         stop(): void;
+        /**
+         * Stub method for rendering content and emptying the current batch.
+         *
+         */
         flush(): void;
 
         render(...args: any[]): void;
@@ -1747,22 +1962,21 @@ declare namespace PIXI {
         /**
          * Gets the local bounds of the sprite object.
          *
-         * @param {PIXI.Rectangle} rect - The output rectangle.
-         * @return {PIXI.Rectangle} The bounds.
+         * @param rect - The output rectangle.
+         * @return The bounds.
          */
         getLocalBounds(): Rectangle;
         /**
          * Tests if a point is inside this sprite
          *
-         * @param {PIXI.Point} point - the point to test
-         * @return {boolean} the result of the test
+         * @param point - the point to test
+         * @return the result of the test
          */
         containsPoint(point: Point): boolean;
         /**
          * Destroys this sprite and optionally its texture and children
          *
-         * @param {object|boolean} [options] - Options parameter. A boolean will act as if all options
-         *  have been set to that value
+         * @param [options] - Options parameter. A boolean will act as if all options have been set to that value
          */
         destroy(options?: DestroyOptions | boolean): void;
 
@@ -2612,7 +2826,7 @@ declare namespace PIXI {
             cursor: string;
             trackedPointers: { [key: number]: InteractionTrackingData };
 
-            /** deprecated */
+            /** @deprecated */
             defaultCursor: string;
         }
         export interface InteractionTrackingData {
@@ -3564,15 +3778,15 @@ declare namespace PIXI {
             /**
              * Return an array listing the events for which the emitter has registered listeners.
              *
-             * @returns {(string | symbol)[]}
+             * @returns
              */
             eventNames(): Array<string | symbol>;
 
             /**
              * Return the listeners registered for a given event.
              *
-             * @param {(string | symbol)} event The event name.
-             * @returns {Function[]}
+             * @param event The event name.
+             * @returns
              */
             //tslint:disable-next-line:ban-types forbidden-types
             listeners(event: string | symbol): Function[];
@@ -3581,28 +3795,28 @@ declare namespace PIXI {
              * Check if there listeners for a given event.
              * If `exists` argument is not `true` lists listeners.
              *
-             * @param {(string | symbol)} event The event name.
-             * @param {boolean} exists Only check if there are listeners.
-             * @returns {boolean}
+             * @param event The event name.
+             * @param exists Only check if there are listeners.
+             * @returns
              */
             listeners(event: string | symbol, exists: boolean): boolean;
 
             /**
              * Calls each of the listeners registered for a given event.
              *
-             * @param {(string | symbol)} event The event name.
-             * @param {...*} args Arguments that are passed to registered listeners
-             * @returns {boolean} `true` if the event had listeners, else `false`.
+             * @param event The event name.
+             * @param args Arguments that are passed to registered listeners
+             * @returns `true` if the event had listeners, else `false`.
              */
             emit(event: string | symbol, ...args: any[]): boolean;
 
             /**
              * Add a listener for a given event.
              *
-             * @param {(string | symbol)} event The event name.
-             * @param {Function} fn The listener function.
-             * @param {*} [context=this] The context to invoke the listener with.
-             * @returns {EventEmitter} `this`.
+             * @param event The event name.
+             * @param fn The listener function.
+             * @param [context=this] The context to invoke the listener with.
+             * @returns `this`.
              */
             //tslint:disable-next-line:ban-types forbidden-types
             on(event: string | symbol, fn: Function, context?: any): this;
@@ -3610,10 +3824,10 @@ declare namespace PIXI {
             /**
              * Add a one-time listener for a given event.
              *
-             * @param {(string | symbol)} event The event name.
-             * @param {Function} fn The listener function.
-             * @param {*} [context=this] The context to invoke the listener with.
-             * @returns {EventEmitter} `this`.
+             * @param event The event name.
+             * @param fn The listener function.
+             * @param [context=this] The context to invoke the listener with.
+             * @returns `this`.
              */
             //tslint:disable-next-line:ban-types forbidden-types
             once(event: string | symbol, fn: Function, context?: any): this;
@@ -3621,11 +3835,11 @@ declare namespace PIXI {
             /**
              * Remove the listeners of a given event.
              *
-             * @param {(string | symbol)} event The event name.
-             * @param {Function} fn Only remove the listeners that match this function.
-             * @param {*} context Only remove the listeners that have this context.
-             * @param {boolean} once Only remove one-time listeners.
-             * @returns {EventEmitter} `this`.
+             * @param event The event name.
+             * @param fn Only remove the listeners that match this function.
+             * @param context Only remove the listeners that have this context.
+             * @param once Only remove one-time listeners.
+             * @returns `this`.
              */
             //tslint:disable-next-line:ban-types forbidden-types
             removeListener(event: string | symbol, fn?: Function, context?: any, once?: boolean): this;
@@ -3633,8 +3847,8 @@ declare namespace PIXI {
             /**
              * Remove all listeners, or those of the specified event.
              *
-             * @param {(string | symbol)} event The event name.
-             * @returns {EventEmitter} `this`.
+             * @param event The event name.
+             * @returns `this`.
              */
             removeAllListeners(event?: string | symbol): this;
 
@@ -3910,8 +4124,8 @@ declare namespace PIXI {
          * @method
          * @name PIXI.GroupD8.isSwapWidthHeight
          * @see PIXI.GroupD8.isVertical
-         * @param {number} rotation - The number to check.
-         * @returns {boolean} Whether or not the direction is vertical
+         * @param rotation - The number to check.
+         * @returns Whether or not the direction is vertical
          * @deprecated since version 4.6.0
          */
         export function isSwapWidthHeight(rotation: number): boolean;
