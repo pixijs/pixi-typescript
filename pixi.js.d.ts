@@ -74,6 +74,11 @@ declare namespace PIXI {
      * Constants that define the type of gradient on text.
      */
     export const TEXT_GRADIENT: typeof CONST.TEXT_GRADIENT;
+    /**
+     * Represents the update priorities used by internal PIXI classes when registered with
+     * the {@link PIXI.ticker.Ticker} object. Higher priority items are updated first and lower
+     * priority items, such as render, should go later.
+     */
     export const UPDATE_PRIORITY: typeof CONST.UPDATE_PRIORITY;
     export function autoDetectRenderer(
         width: number,
@@ -81,6 +86,34 @@ declare namespace PIXI {
         options?: PIXI.RendererOptions,
         forceCanvas?: boolean
     ): PIXI.WebGLRenderer | PIXI.CanvasRenderer;
+    /**
+     * This helper function will automatically detect which renderer you should be using.
+     * WebGL is the preferred renderer as it is a lot faster. If webGL is not supported by
+     * the browser then this function will return a canvas renderer
+     * @param [options] - The optional renderer parameters
+     * @param [options.width=800] - the width of the renderers view
+     * @param [options.height=600] - the height of the renderers view
+     * @param [options.view] - the canvas to use as a view, optional
+     * @param [options.transparent=false] - If the render view is transparent, default false
+     * @param [options.antialias=false] - sets antialias (only applicable in chrome at the moment)
+     * @param [options.preserveDrawingBuffer=false] - enables drawing buffer preservation, enable this if you
+     *  need to call toDataUrl on the webgl context
+     * @param [options.backgroundColor=0x000000] - The background color of the rendered area
+     *  (shown if not transparent).
+     * @param [options.clearBeforeRender=true] - This sets if the renderer will clear the canvas or
+     *   not before the new render pass.
+     * @param [options.resolution=1] - The resolution / device pixel ratio of the renderer, retina would be 2
+     * @param [options.forceCanvas=false] - prevents selection of WebGL renderer, even if such is present
+     * @param [options.roundPixels=false] - If true PixiJS will Math.floor() x/y values when rendering,
+     *  stopping pixel interpolation.
+     * @param [options.forceFXAA=false] - forces FXAA antialiasing to be used over native.
+     *  FXAA is faster, but may not always look as great **webgl only**
+     * @param [options.legacy=false] - `true` to ensure compatibility with older / less advanced devices.
+     *  If you experience unexplained flickering try setting this to true. **webgl only**
+     * @param [options.powerPreference] - Parameter passed to webgl context, set to "high-performance"
+     *  for devices with dual graphics card **webgl only**
+     * @return Returns WebGL renderer if available, otherwise CanvasRenderer
+     */
     export function autoDetectRenderer(options?: PIXI.RendererOptions): PIXI.WebGLRenderer | PIXI.CanvasRenderer;
     export const loader: PIXI.loaders.Loader;
 
@@ -268,6 +301,9 @@ declare namespace PIXI {
             /** The texture uvs tile and repeat with mirroring */
             REPEAT: number;
         };
+        /**
+         * Constants that specify the transform type.
+         */
         export const TRANSFORM_MODE: {
             DEFAULT: number;
             DYNAMIC: number;
@@ -275,11 +311,7 @@ declare namespace PIXI {
         };
         /**
          * Regexp for image type by extension.
-         *
-         * @static
-         * @constant
-         * @memberof PIXI
-         * @type {RegExp|string}
+         * 
          * @example `image.png`
          */
         export const URL_FILE_EXTENSION: RegExp | string;
@@ -287,25 +319,18 @@ declare namespace PIXI {
          * Regexp for data URI.
          * Based on: {@link https://github.com/ragingwind/data-uri-regex}
          *
-         * @static
-         * @constant
-         * @name DATA_URI
-         * @memberof PIXI
-         * @type {RegExp|string}
          * @example data:image/png;base64
          */
         export const DATA_URI: RegExp | string;
         /**
          * Regexp for SVG size.
          *
-         * @static
-         * @constant
-         * @name SVG_SIZE
-         * @memberof PIXI
-         * @type {RegExp|string}
-         * @example &lt;svg width="100" height="100"&gt;&lt;/svg&gt;
+         * @example <svg width="100" height="100"></svg>;
          */
         export const SVG_SIZE: RegExp | string;
+        /**
+         * Constants that identify shapes, mainly to prevent `instanceof` calls.
+         */
         export const SHAPES: {
             /** Polygon */
             POLY: number;
@@ -318,26 +343,41 @@ declare namespace PIXI {
             /** Rounded Rectangle */
             RREC: number;
         };
+        /**
+         * Constants that specify float precision in shaders.
+         */
         export const PRECISION: {
-            /** LOW='lowp' */
+            /** 'lowp' */
             LOW: string;
-            /** MEDIUM='mediump' */
+            /** 'mediump' */
             MEDIUM: string;
-            /** HIGH='highp' */
+            /** 'highp' */
             HIGH: string;
         };
+        /**
+         * Constants that define the type of gradient on text.
+         */
         export const TEXT_GRADIENT: {
             /** Vertical gradient */
             LINEAR_VERTICAL: number;
             /** Linear gradient */
             LINEAR_HORIZONTAL: number;
         };
+        /**
+         * Represents the update priorities used by internal PIXI classes when registered with
+         * the {@link PIXI.ticker.Ticker} object. Higher priority items are updated first and lower
+         * priority items, such as render, should go later.
+         */
         export const UPDATE_PRIORITY: {
             /** INTERACTION=50 Highest priority, used for {@link PIXI.interaction.InteractionManager} */
             INTERACTION: number;
+            /** HIGH=25 High priority updating, {@link PIXI.VideoBaseTexture} and {@link PIXI.extras.AnimatedSprite} */
             HIGH: number;
+            /** NORMAL=0 Default priority for ticker events, see {@link PIXI.ticker.Ticker#add}. */
             NORMAL: number;
+            /** LOW=-25 Low priority used for {@link PIXI.Application} rendering. */
             LOW: number;
+            /** UTILITY=-50 Lowest priority used for {@link PIXI.prepare.BasePrepare} utility. */
             UTILITY: number;
         };
     }
@@ -349,7 +389,21 @@ declare namespace PIXI {
         texture?: boolean;
         baseTexture?: boolean;
     }
-
+    /**
+     * Convenience class to create a new PIXI application.
+     * This class automatically creates the renderer, ticker
+     * and root container.
+     *
+     * @example
+     * // Create the application
+     * const app = new PIXI.Application();
+     *
+     * // Add the view to the DOM
+     * document.body.appendChild(app.view);
+     *
+     * // ex, add display objects
+     * app.stage.addChild(PIXI.Sprite.fromImage('something.png'));
+     */
     export class Application {
         constructor(options?: ApplicationOptions);
         constructor(
@@ -408,6 +462,11 @@ declare namespace PIXI {
         */
         baseTexture?: boolean;
     }
+    /**
+     * 'Builder' pattern for bounds rectangles
+     * Axis-Aligned Bounding Box
+     * It is not a shape! Its mutable thing, no 'EMPTY' or that kind of problems
+     */
     export class Bounds {
         minX: number;
         minY: number;
@@ -490,6 +549,11 @@ declare namespace PIXI {
     /**
      * A Container represents a collection of display objects.
      * It is the base class of all display objects that act as a container for other objects.
+     *
+     *```js
+     * let container = new PIXI.Container();
+     * container.addChild(sprite);
+     * ```
      */
     export class Container extends DisplayObject {
         // begin extras.getChildByName
@@ -627,6 +691,9 @@ declare namespace PIXI {
         // end extras.cacheAsBitmap
 
         // begin extras.getChildByName
+        /**
+         * The instance name of the object.
+         */
         name: string | null;
         // end extras.getChildByName
 
@@ -2505,7 +2572,10 @@ declare namespace PIXI {
     }
 
     // shader
-
+    /**
+     * Wrapper class, webGL Shader for Pixi.
+     * Adds precision string if vertexSrc or fragmentSrc have no mention of it.
+     */
     export class Shader extends glCore.GLShader {
         constructor(
             gl: WebGLRenderingContext,
@@ -2806,22 +2876,47 @@ declare namespace PIXI {
             /**
              * Enable interaction events for the DisplayObject. Touch, pointer and mouse
              * events will not be emitted unless `interactive` is set to `true`.
+             *
+             * @example
+             * const sprite = new PIXI.Sprite(texture);
+             * sprite.interactive = true;
+             * sprite.on('tap', (event) => {
+             *    //handle event
+             * });
              */
             interactive: boolean;
+            /**
+             * Determines if the children to the displayObject can be clicked/touched
+             * Setting this to false allows PixiJS to bypass a recursive `hitTest` function
+             */
             interactiveChildren: boolean;
             /**
              * Interaction shape. Children will be hit first, then this shape will be checked.
              * Setting this will cause this shape to be checked in hit tests rather than the displayObject's bounds.
+             * @example
+             * const sprite = new PIXI.Sprite(texture);
+             * sprite.interactive = true;
+             * sprite.hitArea = new PIXI.Rectangle(0, 0, 100, 100);
              */
             hitArea: PIXI.Rectangle | PIXI.Circle | PIXI.Ellipse | PIXI.Polygon | PIXI.RoundedRectangle | PIXI.HitArea;
             /**
              * If enabled, the mouse cursor use the pointer behavior when hovered over the displayObject if it is interactive
              * Setting this changes the 'cursor' property to `'pointer'`.
+             *
+             * @example
+             * const sprite = new PIXI.Sprite(texture);
+             * sprite.interactive = true;
+             * sprite.buttonMode = true;
              */
             buttonMode: boolean;
             /**
              * This defines what cursor mode is used when the mouse cursor
              * is hovered over the displayObject.
+             * @example
+             * const sprite = new PIXI.Sprite(texture);
+             * sprite.interactive = true;
+             * sprite.cursor = 'wait';
+             * @see https://developer.mozilla.org/en/docs/Web/CSS/cursor
              */
             cursor: string;
             trackedPointers: { [key: number]: InteractionTrackingData };
@@ -3016,6 +3111,24 @@ declare namespace PIXI {
     }
 
     export namespace loaders {
+        /**
+         * Options for a call to `.add()`.
+         * @property [name] - The name of the resource to load, if not passed the url is used.
+         * @property [key] - Alias for `name`.
+         * @property [url] - The url for this resource, relative to the baseUrl of this loader.
+         * @property [crossOrigin] - Is this request cross-origin? Default is to
+         *      determine automatically.
+         * @property [timeout=0] - A timeout in milliseconds for the load. If the load takes
+         *      longer than this time it is cancelled and the load is considered a failure. If this value is
+         *      set to `0` then there is no explicit timeout.
+         * @property [loadType=Resource.LOAD_TYPE.XHR] - How should this resource
+         *      be loaded?
+         * @property [xhrType=Resource.XHR_RESPONSE_TYPE.DEFAULT] - How
+         *      should the data being loaded be interpreted when using XHR?
+         * @property [onComplete] - Callback to add an an onComplete signal istener.
+         * @property [callback] - Alias for `onComplete`.
+         * @property [metadata] - Extra configuration for middleware and the Resource object.
+         */
         export interface LoaderOptions {
             name?: string;
             key?: string;
@@ -3704,6 +3817,13 @@ declare namespace PIXI {
         export function skipHello(): void;
         export function isWebGLSupported(): boolean;
         export function sign(n: number): number;
+        /**
+         * Remove a range of items from an array
+         *
+         * @param arr The target array
+         * @param startIdx The index to begin removing from (inclusive)
+         * @param removeCount How many items to remove
+         */
         export function removeItems<T>(arr: T[], startIdx: number, removeCount: number): void;
         export function correctBlendMode(blendMode: number, premultiplied: boolean): number;
         export function premultiplyTint(tint: number, alpha: number): number;
