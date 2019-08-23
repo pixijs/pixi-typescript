@@ -865,7 +865,9 @@ declare namespace PIXI {
         off(event: interaction.InteractionEventTypes, fn?: (event: interaction.InteractionEvent) => void, context?: any): this;
         addListener(event: interaction.InteractionEventTypes, fn: (event: interaction.InteractionEvent) => void, context?: any): this;
     }
-
+    /**
+     * Generic class to deal with traditional 2D matrix transforms
+     */
     export class TransformBase {
         static IDENTITY: TransformBase;
 
@@ -885,6 +887,9 @@ declare namespace PIXI {
         updateTransform(parentTransform: TransformBase): void;
         updateWorldTransform(parentTransform: TransformBase): void;
     }
+    /**
+     * Transform that takes care about its versions
+     */
     export class TransformStatic extends TransformBase {
         position: ObservablePoint;
         scale: ObservablePoint;
@@ -912,6 +917,10 @@ declare namespace PIXI {
 
         rotation: number;
     }
+    /**
+     * Generic class to deal with traditional 2D matrix transforms
+     * local transformation is calculated from position,scale,skew and rotation
+     */
     export class Transform extends TransformBase {
         constructor();
 
@@ -984,6 +993,10 @@ declare namespace PIXI {
          */
         destroy(options?: DestroyOptions | boolean): void;
     }
+    /**
+     * The Graphics class contains methods used to draw primitive shapes such as lines, circles and
+     * rectangles to the display, and to color and fill them.
+     */
     export class Graphics extends Container {
         static CURVES: {
             adaptive: boolean;
