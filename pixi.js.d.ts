@@ -210,14 +210,16 @@ declare namespace PIXI {
         };
         /**
          * Default transform type.
+         * @type {PIXI.TRANSFORM_MODE}
          * @default PIXI.TRANSFORM_MODE.STATIC
          */
-        export let TRANSFORM_MODE: PIXI.TRANSFORM_MODE;
+        export let TRANSFORM_MODE: number;
         /**
          * Default Garbage Collection mode.
+         * @type {PIXI.GC_MODES}
          * @default PIXI.GC_MODES.AUTO
          */
-        export let GC_MODE: PIXI.GC_MODES;
+        export let GC_MODE: number;
         /**
          * Default Garbage Collection max idle.
          * @default 3600
@@ -230,24 +232,28 @@ declare namespace PIXI {
         export let GC_MAX_CHECK_COUNT: number;
         /**
          * Default wrap modes that are supported by pixi.
+         * @type {PIXI.WRAP_MODES}
          * @default PIXI.WRAP_MODES.CLAMP
          */
-        export let WRAP_MODE: PIXI.WRAP_MODES;
+        export let WRAP_MODE: number;
         /**
          * The scale modes that are supported by pixi.
+         * @type {PIXI.SCALE_MODES}
          * @default PIXI.SCALE_MODES.LINEAR
          */
-        export let SCALE_MODE: PIXI.SCALE_MODES;
+        export let SCALE_MODE: number;
         /**
          * Default specify float precision in vertex shader.
+         * @type {PIXI.PRECISION}
          * @default PIXI.PRECISION.HIGH
          */
-        export let PRECISION_VERTEX: PIXI.PRECISION;
+        export let PRECISION_VERTEX: string;
         /**
          * Default specify float precision in fragment shader.
+         * @type {PIXI.PRECISION}
          * @default PIXI.PRECISION.MEDIUM
          */
-        export let PRECISION_FRAGMENT: PIXI.PRECISION;
+        export let PRECISION_FRAGMENT: string;
         /**
          * @deprecated since version 4.4.0
          */
