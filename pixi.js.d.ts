@@ -120,15 +120,80 @@ declare namespace PIXI {
     //////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////SETTINGS///////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////
-
+    /**
+     * User's customizable globals for overriding the default PIXI settings, such
+     * as a renderer's default resolution, framerate, float percision, etc.
+     * @example
+     * // Use the native window resolution as the default resolution
+     * // will support high-density displays when rendering
+     * PIXI.settings.RESOLUTION = window.devicePixelRatio.
+     *
+     * // Disable interpolation when scaling, will make texture be pixelated
+     * PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
+     */
     export namespace settings {
+        /**
+         * Target frames per millisecond.
+         * @default 0.06
+         */
         export let TARGET_FPMS: number;
+        /**
+         * If set to true WebGL will attempt make textures mimpaped by default.
+         * Mipmapping will only succeed if the base texture uploaded has power of two dimensions.
+         * @default true
+         */
         export let MIPMAP_TEXTURES: boolean;
+        /**
+         * If set to true WebGL will attempt make textures mimpaped by default.
+         * Mipmapping will only succeed if the base texture uploaded has power of two dimensions.
+         * @default true
+         */
         export let RESOLUTION: number;
+        /**
+         * Default filter resolution.
+         * @default 1
+         */
         export let FILTER_RESOLUTION: number;
+        /**
+         * The maximum textures that this device supports.
+         * @default 32
+         */
         export let SPRITE_MAX_TEXTURES: number;
+        /**
+         * The default sprite batch size.
+         *
+         * The default aims to balance desktop and mobile devices.
+         * @default 4096
+         */
         export let SPRITE_BATCH_SIZE: number;
+        /**
+         * The prefix that denotes a URL is for a retina asset.
+         * @example `@2x`
+         * @default /@([0-9\.]+)x/
+         */
         export let RETINA_PREFIX: RegExp;
+        /**
+         * The default render options if none are supplied to {@link PIXI.WebGLRenderer}
+         * or {@link PIXI.CanvasRenderer}.
+         *
+         * @static
+         * @constant
+         * @memberof PIXI.settings
+         * @type {object}
+         * @property {HTMLCanvasElement} view=null
+         * @property {number} resolution=1
+         * @property {boolean} antialias=false
+         * @property {boolean} forceFXAA=false
+         * @property {boolean} autoResize=false
+         * @property {boolean} transparent=false
+         * @property {number} backgroundColor=0x000000
+         * @property {boolean} clearBeforeRender=true
+         * @property {boolean} preserveDrawingBuffer=false
+         * @property {boolean} roundPixels=false
+         * @property {number} width=800
+         * @property {number} height=600
+         * @property {boolean} legacy=false
+         */
         export const RENDER_OPTIONS: {
             view: HTMLCanvasElement | null;
             antialias: boolean;
@@ -143,17 +208,63 @@ declare namespace PIXI {
             height: number;
             legacy: boolean;
         };
-        export let TRANSFORM_MODE: number;
-        export let GC_MODE: number;
+        /**
+         * Default transform type.
+         * @default PIXI.TRANSFORM_MODE.STATIC
+         */
+        export let TRANSFORM_MODE: PIXI.TRANSFORM_MODE;
+        /**
+         * Default Garbage Collection mode.
+         * @default PIXI.GC_MODES.AUTO
+         */
+        export let GC_MODE: PIXI.GC_MODES;
+        /**
+         * Default Garbage Collection max idle.
+         * @default 3600
+         */
         export let GC_MAX_IDLE: number;
+        /**
+         * Default Garbage Collection maximum check count.
+         * @default 600
+         */
         export let GC_MAX_CHECK_COUNT: number;
-        export let WRAP_MODE: number;
-        export let SCALE_MODE: number;
-        export let PRECISION_VERTEX: string;
-        export let PRECISION_FRAGMENT: string;
+        /**
+         * Default wrap modes that are supported by pixi.
+         * @default PIXI.WRAP_MODES.CLAMP
+         */
+        export let WRAP_MODE: PIXI.WRAP_MODES;
+        /**
+         * The scale modes that are supported by pixi.
+         * @default PIXI.SCALE_MODES.LINEAR
+         */
+        export let SCALE_MODE: PIXI.SCALE_MODES;
+        /**
+         * Default specify float precision in vertex shader.
+         * @default PIXI.PRECISION.HIGH
+         */
+        export let PRECISION_VERTEX: PIXI.PRECISION;
+        /**
+         * Default specify float precision in fragment shader.
+         * @default PIXI.PRECISION.MEDIUM
+         */
+        export let PRECISION_FRAGMENT: PIXI.PRECISION;
+        /**
+         * @deprecated since version 4.4.0
+         */
         export let PRECISION: string;
+        /**
+         * Default number of uploads per frame using prepare plugin.
+         * @default 4
+         */
         export let UPLOADS_PER_FRAME: number;
+        /**
+         * Can we upload the same buffer in a single frame?
+         */
         export let CAN_UPLOAD_SAME_BUFFER: boolean;
+        /**
+         * Default Mesh `canvasPadding`.
+         * @see PIXI.mesh.Mesh#canvasPadding
+         */
         export let MESH_CANVAS_PADDING: number;
     }
 
@@ -949,7 +1060,9 @@ declare namespace PIXI {
     }
 
     // graphics
-
+    /**
+     * A GraphicsData object.
+     */
     export class GraphicsData {
         constructor(
             lineWidth: number,
@@ -998,6 +1111,16 @@ declare namespace PIXI {
      * rectangles to the display, and to color and fill them.
      */
     export class Graphics extends Container {
+        /**
+         * Graphics curves resolution settings. If `adaptive` flag is set to `true`,
+         * the resolution is calculated based on the curve's length to ensure better visual quality.
+         * Adaptive draw works with `bezierCurveTo` and `quadraticCurveTo`.
+         * 
+         * @property {boolean} adaptive=false - flag indicating if the resolution should be adaptive
+         * @property {number} maxLength=10 - maximal length of a single segment of the curve (if adaptive = false, ignored)
+         * @property {number} minSegments=8 - minimal number of segments in the curve (if adaptive = false, ignored)
+         * @property {number} maxSegments=2048 - maximal number of segments in the curve (if adaptive = false, ignored)
+         */
         static CURVES: {
             adaptive: boolean;
             maxLength: number;
@@ -1006,7 +1129,16 @@ declare namespace PIXI {
         };
 
         constructor(nativeLines?: boolean);
-
+        /**
+         * When cacheAsBitmap is set to true the graphics object will be rendered as if it was a sprite.
+         * This is useful if your graphics element does not change often, as it will speed up the rendering
+         * of the object in exchange for taking up texture memory. It is also useful if you need the graphics
+         * object to be anti-aliased, because it will be rendered using canvas. This is not recommended if
+         * you are constantly redrawing the graphics element.
+         * 
+         * @default false
+         */
+        cacheAsBitmap: boolean;
         fillAlpha: number;
         lineWidth: number;
         nativeLines: boolean;
@@ -1199,6 +1331,13 @@ declare namespace PIXI {
          */
         export function matrixAppendRotationInv(matrix: Matrix, rotation: number, tx: number, ty: number): void;
     }
+    /**
+     * The PixiJS Matrix class as an object, which makes it a lot faster,
+     * here is a representation of it :
+     * | a | c | tx|
+     * | b | d | ty|
+     * | 0 | 0 | 1 |
+     */
     export class Matrix {
         constructor(a?: number, b?: number, c?: number, d?: number, tx?: number, ty?: number);
 
@@ -1316,6 +1455,9 @@ declare namespace PIXI {
     export interface HitArea {
         contains(x: number, y: number): boolean;
     }
+    /**
+     * The Circle object can be used to specify a hit area for displayObjects
+     */
     export class Circle implements HitArea {
         constructor(x?: number, y?: number, radius?: number);
 
@@ -1328,6 +1470,9 @@ declare namespace PIXI {
         contains(x: number, y: number): boolean;
         getBounds(): Rectangle;
     }
+    /**
+     * The Ellipse object can be used to specify a hit area for displayObjects
+     */
     export class Ellipse implements HitArea {
         constructor(x?: number, y?: number, halfWidth?: number, halfHeight?: number);
 
@@ -1424,6 +1569,10 @@ declare namespace PIXI {
          */
         enlarge(rectangle: Rectangle): void;
     }
+    /**
+     * The Rounded Rectangle object is an area that has nice rounded corners, as indicated by its
+     * top-left corner point (x, y) and by its width and its height and its radius.
+     */
     export class RoundedRectangle implements HitArea {
         constructor(x?: number, y?: number, width?: number, height?: number, radius?: number);
 
@@ -1546,6 +1695,10 @@ declare namespace PIXI {
         interaction: interaction.InteractionManager;
     }
     export interface RendererPlugins extends DefaultRendererPlugins {}
+    /**
+     * The SystemRenderer is the base for a PixiJS Renderer. It is extended by the {@link PIXI.CanvasRenderer}
+     * and {@link PIXI.WebGLRenderer} which can be used for rendering a PixiJS scene.
+     */
     export class SystemRenderer extends utils.EventEmitter {
         constructor(system: string, options?: RendererOptions);
         constructor(system: string, screenWidth?: number, screenHeight?: number, options?: RendererOptions);
@@ -1580,10 +1733,31 @@ declare namespace PIXI {
         prepare: prepare.CanvasPrepare;
     }
     export interface CanvasRendererPlugins extends DefaultCanvasRendererPlugins, RendererPlugins {}
+    /**
+     * The CanvasRenderer draws the scene and all its content onto a 2d canvas. This renderer should
+     * be used for browsers that do not support WebGL. Don't forget to add the CanvasRenderer.view to
+     * your DOM or you will not see anything :)
+     */
     export class CanvasRenderer extends SystemRenderer {
         // plugintarget mixin start
         static __plugins: { [pluginName: string]: { new (renderer: CanvasRenderer): any } };
+        /**
+         * Adds a plugin to the renderer.
+         * 
+         * @param pluginName - The name of the plugin.
+         * @param ctor - The constructor function or class for the plugin.
+         */
         static registerPlugin(pluginName: string, ctor: { new (renderer: CanvasRenderer): any }): void;
+        /**
+         * Collection of installed plugins. These are included by default in PIXI, but can be excluded
+         * by creating a custom build. Consult the README for more information about creating custom
+         * builds and excluding plugins.
+         * 
+         * @property {PIXI.accessibility.AccessibilityManager} accessibility Support tabbing interactive elements.
+         * @property {PIXI.extract.CanvasExtract} extract Extract image data from renderer.
+         * @property {PIXI.interaction.InteractionManager} interaction Handles mouse, touch and pointer events.
+         * @property {PIXI.prepare.CanvasPrepare} prepare Pre-render display objects.
+         */
         plugins: CanvasRendererPlugins;
         initPlugins(): void;
         destroyPlugins(): void;
@@ -1598,6 +1772,9 @@ declare namespace PIXI {
         refresh: boolean;
         maskManager: CanvasMaskManager;
         smoothProperty: string;
+        /**
+         * Collection of methods for extracting data (image, pixels, etc.) from a display object or render texture
+         */
         extract: extract.CanvasExtract;
 
         context: CanvasRenderingContext2D | null;
@@ -1621,6 +1798,9 @@ declare namespace PIXI {
         off(event: 'prerender' | 'postrender', fn?: () => void, context?: any): this;
         addListener(event: 'prerender' | 'postrender', fn: () => void, context?: any): this;
     }
+    /**
+     * A set of functions used to handle masking.
+     */
     export class CanvasMaskManager {
         constructor(renderer: CanvasRenderer);
 
@@ -1629,6 +1809,9 @@ declare namespace PIXI {
         popMask(renderer: WebGLRenderer | CanvasRenderer): void;
         destroy(): void;
     }
+    /**
+     * Creates a Canvas element of the given size.
+     */
     export class CanvasRenderTarget {
         constructor(width: number, height: number, resolution: number);
 
@@ -1650,10 +1833,28 @@ declare namespace PIXI {
         prepare: prepare.WebGLPrepare;
     }
     export interface WebGLRendererPlugins extends DefaultWebGLRendererPlugins, RendererPlugins {}
+    /**
+     * The WebGLRenderer draws the scene and all its content onto a webGL enabled canvas. This renderer
+     * should be used for browsers that support webGL. This Render works by automatically managing webGLBatchs.
+     * So no need for Sprite Batches or Sprite Clouds.
+     * Don't forget to add the view to your DOM or you will not see anything :)
+     */
     export class WebGLRenderer extends SystemRenderer {
         // plugintarget mixin start
         static __plugins: { [pluginName: string]: { new (renderer: WebGLRenderer): any } };
+        /**
+         * Adds a plugin to the renderer.
+         */
         static registerPlugin(pluginName: string, ctor: { new (renderer: WebGLRenderer): any }): void;
+        /**
+         * Collection of installed plugins. These are included by default in PIXI, but can be excluded
+         * by creating a custom build. Consult the README for more information about creating custom
+         * builds and excluding plugins.
+         * @property {PIXI.accessibility.AccessibilityManager} accessibility Support tabbing interactive elements.
+         * @property {PIXI.extract.WebGLExtract} extract Extract image data from renderer.
+         * @property {PIXI.interaction.InteractionManager} interaction Handles mouse, touch and pointer events.
+         * @property {PIXI.prepare.WebGLPrepare} prepare Pre-render display objects.
+         */
         plugins: WebGLRendererPlugins;
         initPlugins(): void;
         destroyPlugins(): void;
@@ -1684,6 +1885,9 @@ declare namespace PIXI {
         filterManager: FilterManager;
         textureManager?: TextureManager;
         textureGC?: TextureGarbageCollector;
+        /**
+         * Collection of methods for extracting data (image, pixels, etc.) from a display object or render texture
+         */
         extract: extract.WebGLExtract;
         protected drawModes: any;
         protected _activeShader: Shader;
@@ -1727,6 +1931,9 @@ declare namespace PIXI {
         addListener(event: 'prerender' | 'postrender', fn: () => void, context?: any): this;
         addListener(event: 'context', fn: (gl: WebGLRenderingContext) => void, context?: any): this;
     }
+    /**
+     * A WebGL state machines
+     */
     export class WebGLState {
         constructor(gl: WebGLRenderingContext);
 
@@ -1750,6 +1957,9 @@ declare namespace PIXI {
         resetAttributes(): void;
         resetToDefault(): void;
     }
+    /**
+     * Helper class to create a webGL Texture
+     */
     export class TextureManager {
         constructor(renderer: WebGLRenderer);
 
@@ -1764,6 +1974,10 @@ declare namespace PIXI {
         removeAll(): void;
         destroy(): void;
     }
+    /**
+     * TextureGarbageCollector. This class manages the GPU and ensures that it does not get clogged
+     * up with textures that are no longer being used.
+     */
     export class TextureGarbageCollector {
         constructor(renderer: WebGLRenderer);
 
@@ -1797,6 +2011,9 @@ declare namespace PIXI {
 
         render(...args: any[]): void;
     }
+    /**
+     * Helper class to create a quad
+     */
     export class Quad {
         constructor(gl: WebGLRenderingContext);
 
@@ -1969,6 +2186,9 @@ declare namespace PIXI {
         otherMatrix: Matrix;
         alpha: number;
     };
+    /**
+     * The SpriteMaskFilter class
+     */
     export class SpriteMaskFilter extends Filter<SpriteMaskFilterUniforms> {
         constructor(sprite: Sprite);
 
