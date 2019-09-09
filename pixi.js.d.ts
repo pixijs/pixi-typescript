@@ -2255,8 +2255,7 @@ declare namespace PIXI {
             | 'mouseupoutside'
             | 'mousemove'
             | 'mouseover'
-            | 'mouseout'
-            | 'mouseover';
+            | 'mouseout';
         type InteractionPixiEvents = 'added' | 'removed';
         type InteractionEventTypes = InteractionPointerEvents | InteractionTouchEvents | InteractionMouseEvents | InteractionPixiEvents;
 
