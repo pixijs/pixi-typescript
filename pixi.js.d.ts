@@ -5,43 +5,195 @@
 
 declare namespace PIXI {
     // from CONST
+    /** String of the current PIXI version. */
     export const VERSION: typeof CONST.VERSION;
+    /** Two Pi. */
     export const PI_2: typeof CONST.PI_2;
+    /** Conversion factor for converting radians to degrees. */
     export const RAD_TO_DEG: typeof CONST.RAD_TO_DEG;
+    /** Conversion factor for converting degrees to radians. */
     export const DEG_TO_RAD: typeof CONST.DEG_TO_RAD;
+    /** Constant to identify the Renderer Type. */
     export const RENDERER_TYPE: typeof CONST.RENDERER_TYPE;
+    /**
+     * Various blend modes supported by PIXI.
+     *
+     * IMPORTANT - The WebGL renderer only supports the NORMAL, ADD, MULTIPLY and SCREEN blend modes.
+     * Anything else will silently act like NORMAL.
+     */
     export const BLEND_MODES: typeof CONST.BLEND_MODES;
+    /**
+     * Various webgl draw modes. These can be used to specify which GL drawMode to use
+     * under certain situations and renderers.
+     */
     export const DRAW_MODES: typeof CONST.DRAW_MODES;
+    /**
+     * The scale modes that are supported by pixi.
+     *
+     * The {@link PIXI.settings.SCALE_MODE} scale mode affects the default scaling mode of future operations.
+     * It can be re-assigned to either LINEAR or NEAREST, depending upon suitability.
+     */
     export const SCALE_MODES: typeof CONST.SCALE_MODES;
+    /**
+     * The wrap modes that are supported by pixi.
+     *
+     * The {@link PIXI.settings.WRAP_MODE} wrap mode affects the default wrapping mode of future operations.
+     * It can be re-assigned to either CLAMP or REPEAT, depending upon suitability.
+     * If the texture is non power of two then clamp will be used regardless as webGL can
+     * only use REPEAT if the texture is po2.
+     *
+     * This property only affects WebGL.
+    */
     export const WRAP_MODES: typeof CONST.WRAP_MODES;
+    /**
+     * Constants that specify the transform type.
+     */
     export const TRANSFORM_MODE: typeof CONST.TRANSFORM_MODE;
+    /**
+     * Constants that specify float precision in shaders.
+     */
     export const PRECISION: typeof CONST.PRECISION;
+    /**
+     * The gc modes that are supported by pixi.
+     *
+     * The {@link PIXI.settings.GC_MODE} Garbage Collection mode for PixiJS textures is AUTO
+     * If set to GC_MODE, the renderer will occasionally check textures usage. If they are not
+     * used for a specified period of time they will be removed from the GPU. They will of course
+     * be uploaded again when they are required. This is a silent behind the scenes process that
+     * should ensure that the GPU does not  get filled up.
+     *
+     * Handy for mobile devices!
+     * This property only affects WebGL.
+     */
     export const GC_MODES: typeof CONST.GC_MODES;
+    /**
+     * Constants that identify shapes, mainly to prevent `instanceof` calls.
+     */
     export const SHAPES: typeof CONST.SHAPES;
+    /**
+     * Constants that define the type of gradient on text.
+     */
     export const TEXT_GRADIENT: typeof CONST.TEXT_GRADIENT;
+    /**
+     * Represents the update priorities used by internal PIXI classes when registered with
+     * the {@link PIXI.ticker.Ticker} object. Higher priority items are updated first and lower
+     * priority items, such as render, should go later.
+     */
     export const UPDATE_PRIORITY: typeof CONST.UPDATE_PRIORITY;
-
     export function autoDetectRenderer(
         width: number,
         height: number,
         options?: PIXI.RendererOptions,
         forceCanvas?: boolean
     ): PIXI.WebGLRenderer | PIXI.CanvasRenderer;
+    /**
+     * This helper function will automatically detect which renderer you should be using.
+     * WebGL is the preferred renderer as it is a lot faster. If webGL is not supported by
+     * the browser then this function will return a canvas renderer
+     * @param [options] - The optional renderer parameters
+     * @param [options.width=800] - the width of the renderers view
+     * @param [options.height=600] - the height of the renderers view
+     * @param [options.view] - the canvas to use as a view, optional
+     * @param [options.transparent=false] - If the render view is transparent, default false
+     * @param [options.antialias=false] - sets antialias (only applicable in chrome at the moment)
+     * @param [options.preserveDrawingBuffer=false] - enables drawing buffer preservation, enable this if you
+     *  need to call toDataUrl on the webgl context
+     * @param [options.backgroundColor=0x000000] - The background color of the rendered area
+     *  (shown if not transparent).
+     * @param [options.clearBeforeRender=true] - This sets if the renderer will clear the canvas or
+     *   not before the new render pass.
+     * @param [options.resolution=1] - The resolution / device pixel ratio of the renderer, retina would be 2
+     * @param [options.forceCanvas=false] - prevents selection of WebGL renderer, even if such is present
+     * @param [options.roundPixels=false] - If true PixiJS will Math.floor() x/y values when rendering,
+     *  stopping pixel interpolation.
+     * @param [options.forceFXAA=false] - forces FXAA antialiasing to be used over native.
+     *  FXAA is faster, but may not always look as great **webgl only**
+     * @param [options.legacy=false] - `true` to ensure compatibility with older / less advanced devices.
+     *  If you experience unexplained flickering try setting this to true. **webgl only**
+     * @param [options.powerPreference] - Parameter passed to webgl context, set to "high-performance"
+     *  for devices with dual graphics card **webgl only**
+     * @return Returns WebGL renderer if available, otherwise CanvasRenderer
+     */
     export function autoDetectRenderer(options?: PIXI.RendererOptions): PIXI.WebGLRenderer | PIXI.CanvasRenderer;
     export const loader: PIXI.loaders.Loader;
 
     //////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////SETTINGS///////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////
-
+    /**
+     * User's customizable globals for overriding the default PIXI settings, such
+     * as a renderer's default resolution, framerate, float percision, etc.
+     * @example
+     * // Use the native window resolution as the default resolution
+     * // will support high-density displays when rendering
+     * PIXI.settings.RESOLUTION = window.devicePixelRatio.
+     *
+     * // Disable interpolation when scaling, will make texture be pixelated
+     * PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
+     */
     export namespace settings {
+        /**
+         * Target frames per millisecond.
+         * @default 0.06
+         */
         export let TARGET_FPMS: number;
+        /**
+         * If set to true WebGL will attempt make textures mimpaped by default.
+         * Mipmapping will only succeed if the base texture uploaded has power of two dimensions.
+         * @default true
+         */
         export let MIPMAP_TEXTURES: boolean;
+        /**
+         * If set to true WebGL will attempt make textures mimpaped by default.
+         * Mipmapping will only succeed if the base texture uploaded has power of two dimensions.
+         * @default true
+         */
         export let RESOLUTION: number;
+        /**
+         * Default filter resolution.
+         * @default 1
+         */
         export let FILTER_RESOLUTION: number;
+        /**
+         * The maximum textures that this device supports.
+         * @default 32
+         */
         export let SPRITE_MAX_TEXTURES: number;
+        /**
+         * The default sprite batch size.
+         *
+         * The default aims to balance desktop and mobile devices.
+         * @default 4096
+         */
         export let SPRITE_BATCH_SIZE: number;
+        /**
+         * The prefix that denotes a URL is for a retina asset.
+         * @example `@2x`
+         * @default /@([0-9\.]+)x/
+         */
         export let RETINA_PREFIX: RegExp;
+        /**
+         * The default render options if none are supplied to {@link PIXI.WebGLRenderer}
+         * or {@link PIXI.CanvasRenderer}.
+         *
+         * @static
+         * @constant
+         * @memberof PIXI.settings
+         * @type {object}
+         * @property {HTMLCanvasElement} view=null
+         * @property {number} resolution=1
+         * @property {boolean} antialias=false
+         * @property {boolean} forceFXAA=false
+         * @property {boolean} autoResize=false
+         * @property {boolean} transparent=false
+         * @property {number} backgroundColor=0x000000
+         * @property {boolean} clearBeforeRender=true
+         * @property {boolean} preserveDrawingBuffer=false
+         * @property {boolean} roundPixels=false
+         * @property {number} width=800
+         * @property {number} height=600
+         * @property {boolean} legacy=false
+         */
         export const RENDER_OPTIONS: {
             view: HTMLCanvasElement | null;
             antialias: boolean;
@@ -56,17 +208,69 @@ declare namespace PIXI {
             height: number;
             legacy: boolean;
         };
+        /**
+         * Default transform type.
+         * @type {PIXI.TRANSFORM_MODE}
+         * @default PIXI.TRANSFORM_MODE.STATIC
+         */
         export let TRANSFORM_MODE: number;
+        /**
+         * Default Garbage Collection mode.
+         * @type {PIXI.GC_MODES}
+         * @default PIXI.GC_MODES.AUTO
+         */
         export let GC_MODE: number;
+        /**
+         * Default Garbage Collection max idle.
+         * @default 3600
+         */
         export let GC_MAX_IDLE: number;
+        /**
+         * Default Garbage Collection maximum check count.
+         * @default 600
+         */
         export let GC_MAX_CHECK_COUNT: number;
+        /**
+         * Default wrap modes that are supported by pixi.
+         * @type {PIXI.WRAP_MODES}
+         * @default PIXI.WRAP_MODES.CLAMP
+         */
         export let WRAP_MODE: number;
+        /**
+         * The scale modes that are supported by pixi.
+         * @type {PIXI.SCALE_MODES}
+         * @default PIXI.SCALE_MODES.LINEAR
+         */
         export let SCALE_MODE: number;
+        /**
+         * Default specify float precision in vertex shader.
+         * @type {PIXI.PRECISION}
+         * @default PIXI.PRECISION.HIGH
+         */
         export let PRECISION_VERTEX: string;
+        /**
+         * Default specify float precision in fragment shader.
+         * @type {PIXI.PRECISION}
+         * @default PIXI.PRECISION.MEDIUM
+         */
         export let PRECISION_FRAGMENT: string;
+        /**
+         * @deprecated since version 4.4.0
+         */
         export let PRECISION: string;
+        /**
+         * Default number of uploads per frame using prepare plugin.
+         * @default 4
+         */
         export let UPLOADS_PER_FRAME: number;
+        /**
+         * Can we upload the same buffer in a single frame?
+         */
         export let CAN_UPLOAD_SAME_BUFFER: boolean;
+        /**
+         * Default Mesh `canvasPadding`.
+         * @see PIXI.mesh.Mesh#canvasPadding
+         */
         export let MESH_CANVAS_PADDING: number;
     }
 
@@ -117,16 +321,30 @@ declare namespace PIXI {
     // const
 
     export namespace CONST {
+        /** String of the current PIXI version. */
         export const VERSION: string;
+        /** Two Pi. */
         export const PI_2: number;
+        /** Conversion factor for converting radians to degrees. */
         export const RAD_TO_DEG: number;
+        /** Conversion factor for converting degrees to radians. */
         export const DEG_TO_RAD: number;
         export const TARGET_FPMS: number;
+        /** Constant to identify the Renderer Type. */
         export const RENDERER_TYPE: {
+            /** Unknown render type. */
             UNKNOWN: number;
+            /** WebGL render type. */
             WEBGL: number;
+            /** Canvas render type. */
             CANVAS: number;
         };
+        /**
+         * Various blend modes supported by PIXI.
+         *
+         * IMPORTANT - The WebGL renderer only supports the NORMAL, ADD, MULTIPLY and SCREEN blend modes.
+         * Anything else will silently act like NORMAL.
+         */
         export const BLEND_MODES: {
             NORMAL: number;
             ADD: number;
@@ -149,6 +367,10 @@ declare namespace PIXI {
             ADD_NPM: number;
             SCREEN_NPM: number;
         };
+        /**
+         * Various webgl draw modes. These can be used to specify which GL drawMode to use
+         * under certain situations and renderers.
+         */
         export const DRAW_MODES: {
             POINTS: number;
             LINES: number;
@@ -158,48 +380,121 @@ declare namespace PIXI {
             TRIANGLE_STRIP: number;
             TRIANGLE_FAN: number;
         };
+        /**
+         * The scale modes that are supported by pixi.
+         *
+         * The {@link PIXI.settings.SCALE_MODE} scale mode affects the default scaling mode of future operations.
+         * It can be re-assigned to either LINEAR or NEAREST, depending upon suitability.
+         */
         export const SCALE_MODES: {
+            /** Smooth scaling */
             LINEAR: number;
+            /** Pixelating scaling */
             NEAREST: number;
         };
+        /**
+         * The gc modes that are supported by pixi.
+         *
+         * The {@link PIXI.settings.GC_MODE} Garbage Collection mode for PixiJS textures is AUTO
+         * If set to GC_MODE, the renderer will occasionally check textures usage. If they are not
+         * used for a specified period of time they will be removed from the GPU. They will of course
+         * be uploaded again when they are required. This is a silent behind the scenes process that
+         * should ensure that the GPU does not  get filled up.
+         *
+         * Handy for mobile devices!
+         * This property only affects WebGL.
+         */
         export const GC_MODES: {
+            /** Garbage collection will happen periodically automatically */
             AUTO: number;
+            /** Garbage collection will need to be called manually */
             MANUAL: number;
         };
-        export const WRAP_MODES: {
+        export const WRAP_MODES: {           
+            /** The textures uvs are clamped */
             CLAMP: number;
+            /** The texture uvs tile and repeat */
             MIRRORED_REPEAT: number;
+            /** The texture uvs tile and repeat with mirroring */
             REPEAT: number;
         };
+        /**
+         * Constants that specify the transform type.
+         */
         export const TRANSFORM_MODE: {
             DEFAULT: number;
             DYNAMIC: number;
             STATIC: number;
         };
+        /**
+         * Regexp for image type by extension.
+         * 
+         * @example `image.png`
+         */
         export const URL_FILE_EXTENSION: RegExp | string;
+        /**
+         * Regexp for data URI.
+         * Based on: {@link https://github.com/ragingwind/data-uri-regex}
+         *
+         * @example data:image/png;base64
+         */
         export const DATA_URI: RegExp | string;
+        /**
+         * Regexp for SVG size.
+         *
+         * @example <svg width="100" height="100"></svg>;
+         */
         export const SVG_SIZE: RegExp | string;
+        /**
+         * Constants that identify shapes, mainly to prevent `instanceof` calls.
+         */
         export const SHAPES: {
+            /** Polygon */
             POLY: number;
+            /** Rectangle */
             RECT: number;
+            /** Circle */
             CIRC: number;
+            /** Ellipse */
             ELIP: number;
+            /** Rounded Rectangle */
             RREC: number;
         };
+        /**
+         * Constants that specify float precision in shaders.
+         */
         export const PRECISION: {
+            /** 'lowp' */
             LOW: string;
+            /** 'mediump' */
             MEDIUM: string;
+            /** 'highp' */
             HIGH: string;
         };
+        /**
+         * Constants that define the type of gradient on text.
+         */
         export const TEXT_GRADIENT: {
+            /** Vertical gradient */
             LINEAR_VERTICAL: number;
+            /** Linear gradient */
             LINEAR_HORIZONTAL: number;
         };
+        /**
+         * Represents the update priorities used by internal PIXI classes when registered with
+         * the {@link PIXI.ticker.Ticker} object. Higher priority items are updated first and lower
+         * priority items, such as render, should go later.
+         */
         export const UPDATE_PRIORITY: {
+            /** INTERACTION=50 Highest priority, used for {@link PIXI.interaction.InteractionManager} */
             INTERACTION: number;
+            /** HIGH=25 High priority updating, {@link PIXI.VideoBaseTexture} and {@link PIXI.extras.AnimatedSprite} */
             HIGH: number;
+            /** NORMAL=0 Default priority for ticker events, see {@link PIXI.ticker.Ticker#add}. */
             NORMAL: number;
+            /** LOW=-25 Low priority used for {@link PIXI.Application} rendering. */
             LOW: number;
+            /** UTILITY=-50 Lowest priority used for {@link PIXI.prepare.BasePrepare} utility. */
             UTILITY: number;
         };
     }
@@ -211,7 +506,21 @@ declare namespace PIXI {
         texture?: boolean;
         baseTexture?: boolean;
     }
-
+    /**
+     * Convenience class to create a new PIXI application.
+     * This class automatically creates the renderer, ticker
+     * and root container.
+     *
+     * @example
+     * // Create the application
+     * const app = new PIXI.Application();
+     *
+     * // Add the view to the DOM
+     * document.body.appendChild(app.view);
+     *
+     * // ex, add display objects
+     * app.stage.addChild(PIXI.Sprite.fromImage('something.png'));
+     */
     export class Application {
         constructor(options?: ApplicationOptions);
         constructor(
@@ -228,21 +537,53 @@ declare namespace PIXI {
         renderer: PIXI.WebGLRenderer | PIXI.CanvasRenderer;
         stage: Container;
         ticker: ticker.Ticker;
+        /**
+         * Loader instance to help with asset loading.
+         */
         loader: loaders.Loader;
         readonly screen: Rectangle;
 
+        /**
+         * Convenience method for stopping the render.
+         */
         stop(): void;
+        /**
+         * Convenience method for starting the render.
+         */
         start(): void;
+        /**
+         * Render the current stage.
+         */
         render(): void;
+        /**
+         * Destroy and don't use after this.
+         * @param [removeView=false] Automatically remove canvas from DOM.
+         * @param [stageOptions] - Options parameter. A boolean will act as if all options
+         *  have been set to that value
+         */
         destroy(removeView?: boolean, stageOptions?: StageOptions | boolean): void;
         readonly view: HTMLCanvasElement;
     }
 
     export interface DestroyOptions {
+        /** if set to true, all the children will have their destroy method called as well. 'options' will be passed on to those calls. */
         children?: boolean;
+        /**  Should it destroy the current texture of the sprite as well 
+         * 
+         * Only used for child Sprites if options.children is set to true
+        */
         texture?: boolean;
+        /** Should it destroy the base texture of the sprite as well
+         * 
+         * Only used for child Sprites if options.children is set to true
+        */
         baseTexture?: boolean;
     }
+    /**
+     * 'Builder' pattern for bounds rectangles
+     * Axis-Aligned Bounding Box
+     * It is not a shape! Its mutable thing, no 'EMPTY' or that kind of problems
+     */
     export class Bounds {
         minX: number;
         minY: number;
@@ -250,20 +591,95 @@ declare namespace PIXI {
         maxY: number;
         rect: Rectangle;
 
+        /**
+         * Checks if bounds are empty.
+         *
+         * @return True if empty.
+         */
         isEmpty(): boolean;
+        /**
+         * Clears the bounds and resets.
+         *
+         */
         clear(): void;
 
+        /**
+         * Can return Rectangle.EMPTY constant, either construct new rectangle, either use your rectangle
+         * It is not guaranteed that it will return tempRect
+         *
+         * @param rect - temporary object will be used if AABB is not empty
+         * @returns A rectangle of the bounds
+         */
         getRectangle(rect?: Rectangle): Rectangle;
+        /**
+         * This function should be inlined when its possible.
+         *
+         * @param point - The point to add.
+         */
         addPoint(point: Point): void;
+        /**
+         * Adds a quad, not transformed
+         *
+         * @param vertices - The verts to add.
+         */
         addQuad(vertices: ArrayLike<number>): Bounds | undefined;
+        /**
+         * Adds sprite frame, transformed.
+         *
+         * @param transform - TODO
+         * @param x0 - TODO
+         * @param y0 - TODO
+         * @param x1 - TODO
+         * @param y1 - TODO
+         */
         addFrame(transform: Transform, x0: number, y0: number, x1: number, y1: number): void;
+        /**
+         * Add an array of vertices
+         *
+         * @param transform - TODO
+         * @param vertices - TODO
+         * @param beginOffset - TODO
+         * @param endOffset - TODO
+         */
         addVertices(transform: Transform, vertices: ArrayLike<number>, beginOffset: number, endOffset: number): void;
+        /**
+         * Adds other Bounds
+         *
+         * @param bounds - TODO
+         */
         addBounds(bounds: Bounds): void;
+        /**
+         * Adds other Bounds, masked with Bounds
+         *
+         * @param bounds - TODO
+         * @param mask - TODO
+         */
         addBoundsMask(bounds: Bounds, mask: Bounds): void;
+        /**
+         * Adds other Bounds, masked with Rectangle
+         *
+         * @param bounds - TODO
+         * @param area - TODO
+         */
         addBoundsArea(bounds: Bounds, area: Rectangle): void;
     }
+    /**
+     * A Container represents a collection of display objects.
+     * It is the base class of all display objects that act as a container for other objects.
+     *
+     *```js
+     * let container = new PIXI.Container();
+     * container.addChild(sprite);
+     * ```
+     */
     export class Container extends DisplayObject {
         // begin extras.getChildByName
+        /**
+         * Returns the display object in the container
+         *
+         * @param name - instance name
+         * @return The child with the specified name.
+         */
         getChildByName<T extends DisplayObject = Container>(name: string): T;
         // end extras.getChildByName
 
@@ -273,16 +689,72 @@ declare namespace PIXI {
 
         protected onChildrenChange: (...args: any[]) => void;
         addChild<T extends DisplayObject>(child: T, ...additionalChildren: DisplayObject[]): T;
+        /**
+         * Adds a child to the container at a specified index. If the index is out of bounds an error will be thrown
+         *
+         * @param child - The child to add
+         * @param index - The index to place the child in
+         * @return The child that was added.
+         */
         addChildAt<T extends DisplayObject>(child: T, index: number): T;
+        /**
+         * Swaps the position of 2 Display Objects within this container.
+         *
+         * @param child - First display object to swap
+         * @param child2 - Second display object to swap
+         */
         swapChildren(child: DisplayObject, child2: DisplayObject): void;
+        /**
+         * Returns the index position of a child DisplayObject instance
+         *
+         * @param child - The DisplayObject instance to identify
+         * @return The index position of the child display object to identify
+         */
         getChildIndex(child: DisplayObject): number;
+        /**
+         * Changes the position of an existing child in the display object container
+         *
+         * @param child - The child DisplayObject instance for which you want to change the index number
+         * @param index - The resulting index number for the child display object
+         */
         setChildIndex(child: DisplayObject, index: number): void;
+        /**
+         * Returns the child at the specified index
+         *
+         * @param index - The index to get the child at
+         * @return The child at the given index, if any.
+         */
         getChildAt<T extends DisplayObject = Container>(index: number): T;
         removeChild<T extends DisplayObject = Container>(child: DisplayObject): T;
+        /**
+         * Removes a child from the specified index position.
+         *
+         * @param index - The index to get the child from
+         * @return The child that was removed.
+         */
         removeChildAt<T extends DisplayObject = Container>(index: number): T;
+        /**
+         * Removes all children from this container that are within the begin and end indexes.
+         *
+         * @param [beginIndex=0] - The beginning position.
+         * @param [endIndex=this.children.length] - The ending position. Default value is size of the container.
+         * @returns List of removed children
+         */
         removeChildren<T extends DisplayObject = Container>(beginIndex?: number, endIndex?: number): T[];
+        /**
+         * Updates the transform on all children of this container for rendering
+         */
         updateTransform(): void;
+        /**
+         * Recalculates the bounds of the container.
+         *
+         */
         calculateBounds(): void;
+        /**
+         * Recalculates the bounds of the object. Override this to
+         * calculate the bounds of the specific object (not including children).
+         *
+         */
         protected _calculateBounds(): void;
         protected containerUpdateTransform(): void;
         renderWebGL(renderer: WebGLRenderer): void;
@@ -290,6 +762,12 @@ declare namespace PIXI {
         protected _renderWebGL(renderer: WebGLRenderer): void;
         protected _renderCanvas(renderer: CanvasRenderer): void;
         renderCanvas(renderer: CanvasRenderer): void;
+        /**
+         * Removes all internal references and listeners as well as removes children from the display list.
+         * Do not use a Container after calling `destroy`.
+         * 
+         * @param [options] - Options parameter. A boolean will act as if all options have been set to that value
+         */
         destroy(options?: DestroyOptions | boolean): void;
 
         once(event: interaction.InteractionEventTypes | 'added' | 'removed', fn: (event: interaction.InteractionEvent) => void, context?: any): this;
@@ -301,11 +779,23 @@ declare namespace PIXI {
         //tslint:disable-next-line:ban-types forbidden-types
         off(event: 'added' | 'removed' | string | symbol, fn?: Function, context?: any): this;
     }
-
-    export class DisplayObject extends utils.EventEmitter implements interaction.InteractiveTarget, accessibility.AccessibleTarget {
+    /**
+     * The base class for all objects that are rendered on the screen.
+     * This is an abstract class and should not be used on its own rather it should be extended.
+     */
+    export abstract class DisplayObject extends utils.EventEmitter implements interaction.InteractiveTarget, accessibility.AccessibleTarget {
         // begin extras.cacheAsBitmap
         protected _cacheAsBitmap: boolean;
         protected _cacheData: boolean;
+        /**
+         * Set this to true if you want this display object to be cached as a bitmap.
+         * This basically takes a snap shot of the display object as it is at that moment. It can
+         * provide a performance benefit for complex static displayObjects.
+         * To remove simply set this property to 'false'
+         *
+         * IMPORTANT GOTCHA - make sure that all your textures are preloaded BEFORE setting this property to true
+         * as it will take a snapshot of what is currently there. If the textures have not loaded then they will not appear.
+         */
         cacheAsBitmap: boolean;
         protected _renderCachedWebGL(renderer: WebGLRenderer): void;
         protected _initCachedDisplayObject(renderer: WebGLRenderer): void;
@@ -318,10 +808,22 @@ declare namespace PIXI {
         // end extras.cacheAsBitmap
 
         // begin extras.getChildByName
+        /**
+         * The instance name of the object.
+         */
         name: string | null;
         // end extras.getChildByName
 
         // begin extras.getGlobalPosition
+        /**
+         * Returns the global position of the displayObject. Does not depend on object scale, rotation and pivot.
+         * 
+         * @param point - the point to write the global value to. If null a new point will be returned
+         * @param skipUpdate - setting to true will stop the transforms of the scene graph from
+         *  being updated. This means the calculation returned MAY be out of date BUT will give you a
+         *  nice performance boost
+         * @return The updated point
+         */
         getGlobalPosition(point?: Point, skipUpdate?: boolean): Point;
         // end extras.getGlobalPosition
 
@@ -339,7 +841,7 @@ declare namespace PIXI {
         buttonMode: boolean;
         cursor: string;
         trackedPointers: { [key: number]: interaction.InteractionTrackingData };
-        // depricated
+        /** @deprecated */
         defaultCursor: string;
         // end interactive target
 
@@ -372,22 +874,84 @@ declare namespace PIXI {
         mask: PIXI.Graphics | PIXI.Sprite | null;
         filters: Filter<any>[] | null;
 
+        /**
+         * Updates the object transform for rendering
+         *
+         * TODO - Optimization pass!
+         */
         updateTransform(): void;
         protected displayObjectUpdateTransform(): void;
+        /**
+         * recursively updates transform of all objects from the root to this one
+         * internal function for toLocal()
+         */
         protected _recursivePostUpdateTransform(): void;
+        /**
+         * Retrieves the bounds of the displayObject as a rectangle object.
+         *
+         * @param skipUpdate - setting to true will stop the transforms of the scene graph from
+         *  being updated. This means the calculation returned MAY be out of date BUT will give you a
+         *  nice performance boost
+         * @param rect - Optional rectangle to store the result of the bounds calculation
+         * @return the rectangular bounding area
+         */
         getBounds(skipUpdate?: boolean, rect?: Rectangle): Rectangle;
+        /**
+         * Retrieves the local bounds of the displayObject as a rectangle object
+         *
+         * @param [rect] - Optional rectangle to store the result of the bounds calculation
+         * @return the rectangular bounding area
+         */
         getLocalBounds(rect?: Rectangle): Rectangle;
         //creates and returns a new point
         toGlobal(position: PointLike): Point;
         //modifies the x and y of the passed point and returns it
+        /**
+         * Calculates the global position of the display object
+         *
+         * @param position - The world origin to calculate from
+         * @param [point] - A Point object in which to store the value, optional
+         *  (otherwise will create a new Point)
+         * @param [skipUpdate=false] - Should we skip the update transform.
+         * @return A point object representing the position of this object
+         */
         toGlobal<T extends PointLike>(position: PointLike, point?: T, skipUpdate?: boolean): T;
         //creates and returns a new point
         toLocal(position: PointLike, from?: DisplayObject): Point;
         //modifies the x and y of the passed point and returns it
+        /**
+         * Calculates the local position of the display object relative to another point
+         *
+         * @param position - The world origin to calculate from
+         * @param [from] - The DisplayObject to calculate the global position from
+         * @param [point] - A Point object in which to store the value, optional
+         *  (otherwise will create a new Point)
+         * @param [skipUpdate=false] - Should we skip the update transform
+         * @return A point object representing the position of this object
+         */
         toLocal<T extends PointLike>(position: PointLike, from?: DisplayObject, point?: T, skipUpdate?: boolean): T;
+        /**
+         * Renders the object using the WebGL renderer
+         *
+         * @param renderer - The renderer
+         */
         renderWebGL(renderer: WebGLRenderer): void;
         renderCanvas(renderer: CanvasRenderer): void;
         setParent(container: Container): Container;
+        /**
+         * Convenience function to set the position, scale, skew and pivot at once.
+         *
+         * @param [x=0] - The X position
+         * @param [y=0] - The Y position
+         * @param [scaleX=1] - The X scale value
+         * @param [scaleY=1] - The Y scale value
+         * @param [rotation=0] - The rotation
+         * @param [skewX=0] - The X skew value
+         * @param [skewY=0] - The Y skew value
+         * @param [pivotX=0] - The X pivot value
+         * @param [pivotY=0] - The Y pivot value
+         * @return The DisplayObject instance
+         */
         setTransform(
             x?: number,
             y?: number,
@@ -399,6 +963,12 @@ declare namespace PIXI {
             pivotX?: number,
             pivotY?: number
         ): DisplayObject;
+        /**
+         * Base destroy method for generic display objects. This will automatically
+         * remove the display object from its parent Container as well as remove
+         * all current event listeners and internal references. Do not use a DisplayObject
+         * after calling `destroy`.
+         */
         destroy(): void;
 
         on(event: interaction.InteractionEventTypes, fn: (event: interaction.InteractionEvent) => void, context?: any): this;
@@ -412,7 +982,9 @@ declare namespace PIXI {
         off(event: interaction.InteractionEventTypes, fn?: (event: interaction.InteractionEvent) => void, context?: any): this;
         addListener(event: interaction.InteractionEventTypes, fn: (event: interaction.InteractionEvent) => void, context?: any): this;
     }
-
+    /**
+     * Generic class to deal with traditional 2D matrix transforms
+     */
     export class TransformBase {
         static IDENTITY: TransformBase;
 
@@ -420,10 +992,21 @@ declare namespace PIXI {
         localTransform: Matrix;
         protected _worldID: number;
         protected _parentID: number;
+        /**
+         * Updates only local matrix
+         */
         updateLocalTransform(): void;
+        /**
+         * Updates the values of the object and applies the parent's transform.
+         *
+         * @param parentTransform - The transform of the parent of this object
+         */
         updateTransform(parentTransform: TransformBase): void;
         updateWorldTransform(parentTransform: TransformBase): void;
     }
+    /**
+     * Transform that takes care about its versions
+     */
     export class TransformStatic extends TransformBase {
         position: ObservablePoint;
         scale: ObservablePoint;
@@ -442,10 +1025,19 @@ declare namespace PIXI {
 
         protected onChange(): void;
         updateSkew(): void;
+        /**
+         * Decomposes a matrix and sets the transforms properties based on it.
+         *
+         * @param matrix - The matrix to decompose
+         */
         setFromMatrix(matrix: Matrix): void;
 
         rotation: number;
     }
+    /**
+     * Generic class to deal with traditional 2D matrix transforms
+     * local transformation is calculated from position,scale,skew and rotation
+     */
     export class Transform extends TransformBase {
         constructor();
 
@@ -463,13 +1055,20 @@ declare namespace PIXI {
         protected _cx?: number;
 
         updateSkew(): void;
+        /**
+         * Decomposes a matrix and sets the transforms properties based on it.
+         *
+         * @param matrix - The matrix to decompose
+         */
         setFromMatrix(matrix: Matrix): void;
 
         rotation: number;
     }
 
     // graphics
-
+    /**
+     * A GraphicsData object.
+     */
     export class GraphicsData {
         constructor(
             lineWidth: number,
@@ -496,11 +1095,38 @@ declare namespace PIXI {
         protected holes: Circle[] | Rectangle[] | Ellipse[] | Polygon[] | RoundedRectangle[] | any[];
         shape: Circle | Rectangle | Ellipse | Polygon | RoundedRectangle | any;
         type?: number;
+        /**
+         * Creates a new GraphicsData object with the same values as this one.
+         *
+         * @return Cloned GraphicsData object
+         */
         clone(): GraphicsData;
+        /**
+         * Adds a hole to the shape.
+         *
+         * @param shape - The shape of the hole.
+         */
         addHole(shape: Circle | Rectangle | Ellipse | Polygon | RoundedRectangle | any): void;
+        /**
+         * Destroys the Graphics data.
+         */
         destroy(options?: DestroyOptions | boolean): void;
     }
+    /**
+     * The Graphics class contains methods used to draw primitive shapes such as lines, circles and
+     * rectangles to the display, and to color and fill them.
+     */
     export class Graphics extends Container {
+        /**
+         * Graphics curves resolution settings. If `adaptive` flag is set to `true`,
+         * the resolution is calculated based on the curve's length to ensure better visual quality.
+         * Adaptive draw works with `bezierCurveTo` and `quadraticCurveTo`.
+         * 
+         * @property {boolean} adaptive=false - flag indicating if the resolution should be adaptive
+         * @property {number} maxLength=10 - maximal length of a single segment of the curve (if adaptive = false, ignored)
+         * @property {number} minSegments=8 - minimal number of segments in the curve (if adaptive = false, ignored)
+         * @property {number} maxSegments=2048 - maximal number of segments in the curve (if adaptive = false, ignored)
+         */
         static CURVES: {
             adaptive: boolean;
             maxLength: number;
@@ -509,7 +1135,16 @@ declare namespace PIXI {
         };
 
         constructor(nativeLines?: boolean);
-
+        /**
+         * When cacheAsBitmap is set to true the graphics object will be rendered as if it was a sprite.
+         * This is useful if your graphics element does not change often, as it will speed up the rendering
+         * of the object in exchange for taking up texture memory. It is also useful if you need the graphics
+         * object to be anti-aliased, because it will be rendered using canvas. This is not recommended if
+         * you are constantly redrawing the graphics element.
+         * 
+         * @default false
+         */
+        cacheAsBitmap: boolean;
         fillAlpha: number;
         lineWidth: number;
         nativeLines: boolean;
@@ -583,6 +1218,10 @@ declare namespace PIXI {
         protected renderPolygon(points: Point[], close: boolean, context: CanvasRenderingContext2D): void;
         destroy(): void;
     }
+
+    /**
+     * Renders the graphics object.
+     */
     export class GraphicsRenderer extends ObjectRenderer {
         constructor(renderer: PIXI.CanvasRenderer);
 
@@ -592,7 +1231,16 @@ declare namespace PIXI {
 
         CONTEXT_UID: number;
 
+        /**
+         * Destroys this renderer.
+         *
+         */
         destroy(): void;
+        /**
+         * Renders a graphics object.
+         *
+         * @param graphics - The graphics object to render.
+         */
         render(graphics: Graphics): void;
         protected updateGraphics(graphics: PIXI.Graphics): void;
         getWebGLData(webGL: WebGLRenderingContext, type: number, nativeLines: number): WebGLGraphicsData;
@@ -617,10 +1265,27 @@ declare namespace PIXI {
         upload(): void;
         destroy(): void;
     }
+    /**
+     * This shader is used to draw simple primitive shapes for {@link PIXI.Graphics}.
+     */
     export class PrimitiveShader extends glCore.GLShader {}
 
     // math
 
+    /**
+     * Implements Dihedral Group D_8, see [group D4]{@link http://mathworld.wolfram.com/DihedralGroupD4.html},
+     * D8 is the same but with diagonals. Used for texture rotations.
+     *
+     * Vector xX(i), xY(i) is U-axis of sprite with rotation i
+     * Vector yY(i), yY(i) is V-axis of sprite with rotation i
+     * Rotations: 0 grad (0), 90 grad (2), 180 grad (4), 270 grad (6)
+     * Mirrors: vertical (8), main diagonal (10), horizontal (12), reverse diagonal (14)
+     * This is the small part of gameofbombs.com portal system. It works.
+     *
+     * @author Ivan @ivanpopelyshev
+     * @class
+     * @memberof PIXI
+     */
     export namespace GroupD8 {
         export const E: number;
         export const SE: number;
@@ -640,11 +1305,45 @@ declare namespace PIXI {
         export function inv(rotation: number): number;
         export function add(rotationSecond: number, rotationFirst: number): number;
         export function sub(rotationSecond: number, rotationFirst: number): number;
+        /**
+         * Adds 180 degrees to rotation. Commutative operation.
+         * 
+         * @param rotation - The number to rotate.
+         * @returns rotated number
+         */
         export function rotate180(rotation: number): number;
+        /**
+         * Direction of main vector can be horizontal, vertical or diagonal.
+         * Some objects work with vertical directions different.
+         *
+         * @param rotation - The number to check.
+         * @returns Whether or not the direction is vertical
+         */
         export function isVertical(rotation: number): boolean;
+        /**
+         * @param dx - TODO
+         * @param dy - TODO
+         *
+         * @return TODO
+         */
         export function byDirection(dx: number, dy: number): number;
+        /**
+         * Helps sprite to compensate texture packer rotation.
+         *
+         * @param matrix - sprite world matrix
+         * @param rotation - The rotation factor to use.
+         * @param tx - sprite anchoring
+         * @param ty - sprite anchoring
+         */
         export function matrixAppendRotationInv(matrix: Matrix, rotation: number, tx: number, ty: number): void;
     }
+    /**
+     * The PixiJS Matrix class as an object, which makes it a lot faster,
+     * here is a representation of it :
+     * | a | c | tx|
+     * | b | d | ty|
+     * | 0 | 0 | 1 |
+     */
     export class Matrix {
         constructor(a?: number, b?: number, c?: number, d?: number, tx?: number, ty?: number);
 
@@ -655,9 +1354,49 @@ declare namespace PIXI {
         tx: number;
         ty: number;
 
+        /**
+         * Creates a Matrix object based on the given array. The Element to Matrix mapping order is as follows:
+         *
+         * a = array[0]
+         * b = array[1]
+         * c = array[3]
+         * d = array[4]
+         * tx = array[2]
+         * ty = array[5]
+         *
+         * @param {number[]} array - The array that the matrix will be populated from.
+         */
         fromArray(array: number[]): void;
+        /**
+         * sets the matrix properties
+         *
+         * @param a - Matrix component
+         * @param b - Matrix component
+         * @param c - Matrix component
+         * @param d - Matrix component
+         * @param tx - Matrix component
+         * @param ty - Matrix component
+         *
+         * @return This matrix. Good for chaining method calls.
+         */
         set(a: number, b: number, c: number, d: number, tx: number, ty: number): Matrix;
+        /**
+         * Creates an array from the current Matrix object.
+         *
+         * @param transpose - Whether we need to transpose the matrix or not
+         * @param [out=new Float32Array(9)] - If provided the array will be assigned to out
+         * @return the newly created array which contains the matrix
+         */
         toArray(transpose?: boolean, out?: number[]): number[];
+        
+        /**
+         * Get a new position with the current transformation applied.
+         * Can be used to go from a child's coordinate space to the world coordinate space. (e.g. rendering)
+         *
+         * @param pos - The origin
+         * @param [newPos] - The point that the new position is assigned to (allowed to be same as input)
+         * @return The new point, transformed through this matrix
+         */
         apply(pos: Point, newPos?: Point): Point;
         applyInverse(pos: Point, newPos?: Point): Point;
         translate(x: number, y: number): Matrix;
@@ -694,6 +1433,11 @@ declare namespace PIXI {
         copy(point: PointLike): void;
     }
 
+    /**
+     * The Point object represents a location in a two-dimensional coordinate system, where x represents
+     * the horizontal axis and y represents the vertical axis.
+     * An observable point is a point that triggers a callback when the point's position is changed.
+     */
     export class ObservablePoint extends PointLike {
         constructor(cb: () => any, scope?: any, x?: number, y?: number);
 
@@ -703,6 +1447,10 @@ declare namespace PIXI {
         scope: any;
     }
 
+    /**
+     * The Point object represents a location in a two-dimensional coordinate system, where x represents
+     * the horizontal axis and y represents the vertical axis.
+     */
     export class Point extends PointLike {
         constructor(x?: number, y?: number);
 
@@ -713,6 +1461,9 @@ declare namespace PIXI {
     export interface HitArea {
         contains(x: number, y: number): boolean;
     }
+    /**
+     * The Circle object can be used to specify a hit area for displayObjects
+     */
     export class Circle implements HitArea {
         constructor(x?: number, y?: number, radius?: number);
 
@@ -725,6 +1476,9 @@ declare namespace PIXI {
         contains(x: number, y: number): boolean;
         getBounds(): Rectangle;
     }
+    /**
+     * The Ellipse object can be used to specify a hit area for displayObjects
+     */
     export class Ellipse implements HitArea {
         constructor(x?: number, y?: number, halfWidth?: number, halfHeight?: number);
 
@@ -754,6 +1508,10 @@ declare namespace PIXI {
         contains(x: number, y: number): boolean;
         close(): void;
     }
+    /**
+     * Rectangle object is an area defined by its position, as indicated by its top-left corner
+     * point (x, y) and by its width and its height.
+     */
     export class Rectangle implements HitArea {
         constructor(x?: number, y?: number, width?: number, height?: number);
 
@@ -769,14 +1527,58 @@ declare namespace PIXI {
 
         static EMPTY: Rectangle;
 
+        /**
+         * Creates a clone of this Rectangle
+         *
+         * @return a copy of the rectangle
+         */
         clone(): Rectangle;
+        /**
+         * Enlarges rectangle that way its corners lie on grid
+         *
+         * @param [resolution=1] resolution
+         * @param [eps=0.001] precision
+         */
         ceil(resolution?: number, eps?: number): void;
+        /**
+         * Copies another rectangle to this one.
+         *
+         * @param rectangle - The rectangle to copy.
+         * @return Returns itself.
+         */
         copy(rectangle: Rectangle): Rectangle;
+        /**
+         * Checks whether the x and y coordinates given are contained within this Rectangle
+         *
+         * @param x - The X coordinate of the point to test
+         * @param y - The Y coordinate of the point to test
+         * @return Whether the x/y coordinates are within this Rectangle
+         */
         contains(x: number, y: number): boolean;
+        /**
+         * Pads the rectangle making it grow in all directions.
+         *
+         * @param paddingX - The horizontal padding amount.
+         * @param [paddingY] - The vertical padding amount.
+         */
         pad(paddingX: number, paddingY: number): void;
+        /**
+         * Fits this rectangle around the passed one.
+         *
+         * @param rectangle - The rectangle to fit.
+         */
         fit(rectangle: Rectangle): void;
+        /**
+         * Enlarges this rectangle to include the passed rectangle.
+         *
+         * @param rectangle - The rectangle to include.
+         */
         enlarge(rectangle: Rectangle): void;
     }
+    /**
+     * The Rounded Rectangle object is an area that has nice rounded corners, as indicated by its
+     * top-left corner point (x, y) and by its width and its height and its radius.
+     */
     export class RoundedRectangle implements HitArea {
         constructor(x?: number, y?: number, width?: number, height?: number, radius?: number);
 
@@ -860,12 +1662,12 @@ declare namespace PIXI {
         legacy?: boolean;
 
         /**
-         * Deprecated
+         * @deprecated
          */
         context?: WebGLRenderingContext;
 
         /**
-         * Deprecated
+         * @deprecated
          */
         autoResize?: boolean;
 
@@ -899,6 +1701,10 @@ declare namespace PIXI {
         interaction: interaction.InteractionManager;
     }
     export interface RendererPlugins extends DefaultRendererPlugins {}
+    /**
+     * The SystemRenderer is the base for a PixiJS Renderer. It is extended by the {@link PIXI.CanvasRenderer}
+     * and {@link PIXI.WebGLRenderer} which can be used for rendering a PixiJS scene.
+     */
     export class SystemRenderer extends utils.EventEmitter {
         constructor(system: string, options?: RendererOptions);
         constructor(system: string, screenWidth?: number, screenHeight?: number, options?: RendererOptions);
@@ -933,10 +1739,31 @@ declare namespace PIXI {
         prepare: prepare.CanvasPrepare;
     }
     export interface CanvasRendererPlugins extends DefaultCanvasRendererPlugins, RendererPlugins {}
+    /**
+     * The CanvasRenderer draws the scene and all its content onto a 2d canvas. This renderer should
+     * be used for browsers that do not support WebGL. Don't forget to add the CanvasRenderer.view to
+     * your DOM or you will not see anything :)
+     */
     export class CanvasRenderer extends SystemRenderer {
         // plugintarget mixin start
         static __plugins: { [pluginName: string]: { new (renderer: CanvasRenderer): any } };
+        /**
+         * Adds a plugin to the renderer.
+         * 
+         * @param pluginName - The name of the plugin.
+         * @param ctor - The constructor function or class for the plugin.
+         */
         static registerPlugin(pluginName: string, ctor: { new (renderer: CanvasRenderer): any }): void;
+        /**
+         * Collection of installed plugins. These are included by default in PIXI, but can be excluded
+         * by creating a custom build. Consult the README for more information about creating custom
+         * builds and excluding plugins.
+         * 
+         * @property {PIXI.accessibility.AccessibilityManager} accessibility Support tabbing interactive elements.
+         * @property {PIXI.extract.CanvasExtract} extract Extract image data from renderer.
+         * @property {PIXI.interaction.InteractionManager} interaction Handles mouse, touch and pointer events.
+         * @property {PIXI.prepare.CanvasPrepare} prepare Pre-render display objects.
+         */
         plugins: CanvasRendererPlugins;
         initPlugins(): void;
         destroyPlugins(): void;
@@ -951,6 +1778,9 @@ declare namespace PIXI {
         refresh: boolean;
         maskManager: CanvasMaskManager;
         smoothProperty: string;
+        /**
+         * Collection of methods for extracting data (image, pixels, etc.) from a display object or render texture
+         */
         extract: extract.CanvasExtract;
 
         context: CanvasRenderingContext2D | null;
@@ -974,6 +1804,9 @@ declare namespace PIXI {
         off(event: 'prerender' | 'postrender', fn?: () => void, context?: any): this;
         addListener(event: 'prerender' | 'postrender', fn: () => void, context?: any): this;
     }
+    /**
+     * A set of functions used to handle masking.
+     */
     export class CanvasMaskManager {
         constructor(renderer: CanvasRenderer);
 
@@ -982,6 +1815,9 @@ declare namespace PIXI {
         popMask(renderer: WebGLRenderer | CanvasRenderer): void;
         destroy(): void;
     }
+    /**
+     * Creates a Canvas element of the given size.
+     */
     export class CanvasRenderTarget {
         constructor(width: number, height: number, resolution: number);
 
@@ -1003,10 +1839,28 @@ declare namespace PIXI {
         prepare: prepare.WebGLPrepare;
     }
     export interface WebGLRendererPlugins extends DefaultWebGLRendererPlugins, RendererPlugins {}
+    /**
+     * The WebGLRenderer draws the scene and all its content onto a webGL enabled canvas. This renderer
+     * should be used for browsers that support webGL. This Render works by automatically managing webGLBatchs.
+     * So no need for Sprite Batches or Sprite Clouds.
+     * Don't forget to add the view to your DOM or you will not see anything :)
+     */
     export class WebGLRenderer extends SystemRenderer {
         // plugintarget mixin start
         static __plugins: { [pluginName: string]: { new (renderer: WebGLRenderer): any } };
+        /**
+         * Adds a plugin to the renderer.
+         */
         static registerPlugin(pluginName: string, ctor: { new (renderer: WebGLRenderer): any }): void;
+        /**
+         * Collection of installed plugins. These are included by default in PIXI, but can be excluded
+         * by creating a custom build. Consult the README for more information about creating custom
+         * builds and excluding plugins.
+         * @property {PIXI.accessibility.AccessibilityManager} accessibility Support tabbing interactive elements.
+         * @property {PIXI.extract.WebGLExtract} extract Extract image data from renderer.
+         * @property {PIXI.interaction.InteractionManager} interaction Handles mouse, touch and pointer events.
+         * @property {PIXI.prepare.WebGLPrepare} prepare Pre-render display objects.
+         */
         plugins: WebGLRendererPlugins;
         initPlugins(): void;
         destroyPlugins(): void;
@@ -1037,6 +1891,9 @@ declare namespace PIXI {
         filterManager: FilterManager;
         textureManager?: TextureManager;
         textureGC?: TextureGarbageCollector;
+        /**
+         * Collection of methods for extracting data (image, pixels, etc.) from a display object or render texture
+         */
         extract: extract.WebGLExtract;
         protected drawModes: any;
         protected _activeShader: Shader;
@@ -1080,6 +1937,9 @@ declare namespace PIXI {
         addListener(event: 'prerender' | 'postrender', fn: () => void, context?: any): this;
         addListener(event: 'context', fn: (gl: WebGLRenderingContext) => void, context?: any): this;
     }
+    /**
+     * A WebGL state machines
+     */
     export class WebGLState {
         constructor(gl: WebGLRenderingContext);
 
@@ -1103,6 +1963,9 @@ declare namespace PIXI {
         resetAttributes(): void;
         resetToDefault(): void;
     }
+    /**
+     * Helper class to create a webGL Texture
+     */
     export class TextureManager {
         constructor(renderer: WebGLRenderer);
 
@@ -1117,6 +1980,10 @@ declare namespace PIXI {
         removeAll(): void;
         destroy(): void;
     }
+    /**
+     * TextureGarbageCollector. This class manages the GPU and ensures that it does not get clogged
+     * up with textures that are no longer being used.
+     */
     export class TextureGarbageCollector {
         constructor(renderer: WebGLRenderer);
 
@@ -1131,15 +1998,28 @@ declare namespace PIXI {
         run(): void;
         unload(displayObject: DisplayObject): void;
     }
+    /**
+     * Base for a common object renderer that can be used as a system renderer plugin.
+     */
     export abstract class ObjectRenderer extends WebGLManager {
         constructor(renderer: WebGLRenderer);
-
+        /**
+         * Starts the renderer and sets the shader
+         *
+         */
         start(): void;
         stop(): void;
+        /**
+         * Stub method for rendering content and emptying the current batch.
+         *
+         */
         flush(): void;
 
         render(...args: any[]): void;
     }
+    /**
+     * Helper class to create a quad
+     */
     export class Quad {
         constructor(gl: WebGLRenderingContext);
 
@@ -1312,6 +2192,9 @@ declare namespace PIXI {
         otherMatrix: Matrix;
         alpha: number;
     };
+    /**
+     * The SpriteMaskFilter class
+     */
     export class SpriteMaskFilter extends Filter<SpriteMaskFilterUniforms> {
         constructor(sprite: Sprite);
 
@@ -1322,6 +2205,27 @@ declare namespace PIXI {
 
     // sprites
 
+    /**
+     * The Sprite object is the base for all textured objects that are rendered to the screen
+     *
+     * A sprite can be created directly from an image like this:
+     *
+     * ```js
+     * let sprite = new PIXI.Sprite.fromImage('assets/image.png');
+     * ```
+     *
+     * The more efficient way to create sprites is using a {@link PIXI.Spritesheet}:
+     *
+     * ```js
+     * PIXI.loader.add("assets/spritesheet.json").load(setup);
+     *
+     * function setup() {
+     *   let sheet = PIXI.loader.resources["assets/spritesheet.json"].spritesheet;
+     *   let sprite = new PIXI.Sprite(sheet.textures["image.png"]);
+     *   ...
+     * }
+     * ```
+     */
     export class Sprite extends Container {
         constructor(texture?: Texture);
 
@@ -1348,14 +2252,38 @@ declare namespace PIXI {
         height: number;
 
         protected _onTextureUpdate(): void;
+        /**
+         * calculates worldTransform * vertices, store it in vertexData
+         */
         calculateVertices(): void;
         protected _calculateBounds(): void;
+        /**
+         * calculates worldTransform * vertices for a non texture with a trim. store it in vertexTrimmedData
+         * This is used to ensure that the true width and height of a trimmed texture is respected
+         */
         protected calculateTrimmedVertices(): void;
         protected onAnchorUpdate(): void;
         protected _renderWebGL(renderer: WebGLRenderer): void;
         protected _renderCanvas(renderer: CanvasRenderer): void;
+        /**
+         * Gets the local bounds of the sprite object.
+         *
+         * @param rect - The output rectangle.
+         * @return The bounds.
+         */
         getLocalBounds(): Rectangle;
+        /**
+         * Tests if a point is inside this sprite
+         *
+         * @param point - the point to test
+         * @return the result of the test
+         */
         containsPoint(point: Point): boolean;
+        /**
+         * Destroys this sprite and optionally its texture and children
+         *
+         * @param [options] - Options parameter. A boolean will act as if all options have been set to that value
+         */
         destroy(options?: DestroyOptions | boolean): void;
 
         static from(source: number | string | BaseTexture | HTMLImageElement | HTMLCanvasElement | HTMLVideoElement): Sprite;
@@ -1883,7 +2811,10 @@ declare namespace PIXI {
     }
 
     // shader
-
+    /**
+     * Wrapper class, webGL Shader for Pixi.
+     * Adds precision string if vertexSrc or fragmentSrc have no mention of it.
+     */
     export class Shader extends glCore.GLShader {
         constructor(
             gl: WebGLRenderingContext,
@@ -2181,14 +3112,55 @@ declare namespace PIXI {
 
     export namespace interaction {
         export interface InteractiveTarget {
+            /**
+             * Enable interaction events for the DisplayObject. Touch, pointer and mouse
+             * events will not be emitted unless `interactive` is set to `true`.
+             *
+             * @example
+             * const sprite = new PIXI.Sprite(texture);
+             * sprite.interactive = true;
+             * sprite.on('tap', (event) => {
+             *    //handle event
+             * });
+             */
             interactive: boolean;
+            /**
+             * Determines if the children to the displayObject can be clicked/touched
+             * Setting this to false allows PixiJS to bypass a recursive `hitTest` function
+             */
             interactiveChildren: boolean;
+            /**
+             * Interaction shape. Children will be hit first, then this shape will be checked.
+             * Setting this will cause this shape to be checked in hit tests rather than the displayObject's bounds.
+             * @example
+             * const sprite = new PIXI.Sprite(texture);
+             * sprite.interactive = true;
+             * sprite.hitArea = new PIXI.Rectangle(0, 0, 100, 100);
+             */
             hitArea: PIXI.Rectangle | PIXI.Circle | PIXI.Ellipse | PIXI.Polygon | PIXI.RoundedRectangle | PIXI.HitArea;
+            /**
+             * If enabled, the mouse cursor use the pointer behavior when hovered over the displayObject if it is interactive
+             * Setting this changes the 'cursor' property to `'pointer'`.
+             *
+             * @example
+             * const sprite = new PIXI.Sprite(texture);
+             * sprite.interactive = true;
+             * sprite.buttonMode = true;
+             */
             buttonMode: boolean;
+            /**
+             * This defines what cursor mode is used when the mouse cursor
+             * is hovered over the displayObject.
+             * @example
+             * const sprite = new PIXI.Sprite(texture);
+             * sprite.interactive = true;
+             * sprite.cursor = 'wait';
+             * @see https://developer.mozilla.org/en/docs/Web/CSS/cursor
+             */
             cursor: string;
             trackedPointers: { [key: number]: InteractionTrackingData };
 
-            // depricated
+            /** @deprecated */
             defaultCursor: string;
         }
         export interface InteractionTrackingData {
@@ -2377,6 +3349,24 @@ declare namespace PIXI {
     }
 
     export namespace loaders {
+        /**
+         * Options for a call to `.add()`.
+         * @property [name] - The name of the resource to load, if not passed the url is used.
+         * @property [key] - Alias for `name`.
+         * @property [url] - The url for this resource, relative to the baseUrl of this loader.
+         * @property [crossOrigin] - Is this request cross-origin? Default is to
+         *      determine automatically.
+         * @property [timeout=0] - A timeout in milliseconds for the load. If the load takes
+         *      longer than this time it is cancelled and the load is considered a failure. If this value is
+         *      set to `0` then there is no explicit timeout.
+         * @property [loadType=Resource.LOAD_TYPE.XHR] - How should this resource
+         *      be loaded?
+         * @property [xhrType=Resource.XHR_RESPONSE_TYPE.DEFAULT] - How
+         *      should the data being loaded be interpreted when using XHR?
+         * @property [onComplete] - Callback to add an an onComplete signal istener.
+         * @property [callback] - Alias for `onComplete`.
+         * @property [metadata] - Extra configuration for middleware and the Resource object.
+         */
         export interface LoaderOptions {
             name?: string;
             key?: string;
@@ -3065,6 +4055,13 @@ declare namespace PIXI {
         export function skipHello(): void;
         export function isWebGLSupported(): boolean;
         export function sign(n: number): number;
+        /**
+         * Remove a range of items from an array
+         *
+         * @param arr The target array
+         * @param startIdx The index to begin removing from (inclusive)
+         * @param removeCount How many items to remove
+         */
         export function removeItems<T>(arr: T[], startIdx: number, removeCount: number): void;
         export function correctBlendMode(blendMode: number, premultiplied: boolean): number;
         export function premultiplyTint(tint: number, alpha: number): number;
@@ -3139,15 +4136,15 @@ declare namespace PIXI {
             /**
              * Return an array listing the events for which the emitter has registered listeners.
              *
-             * @returns {(string | symbol)[]}
+             * @returns
              */
             eventNames(): Array<string | symbol>;
 
             /**
              * Return the listeners registered for a given event.
              *
-             * @param {(string | symbol)} event The event name.
-             * @returns {Function[]}
+             * @param event The event name.
+             * @returns
              */
             //tslint:disable-next-line:ban-types forbidden-types
             listeners(event: string | symbol): Function[];
@@ -3156,28 +4153,28 @@ declare namespace PIXI {
              * Check if there listeners for a given event.
              * If `exists` argument is not `true` lists listeners.
              *
-             * @param {(string | symbol)} event The event name.
-             * @param {boolean} exists Only check if there are listeners.
-             * @returns {boolean}
+             * @param event The event name.
+             * @param exists Only check if there are listeners.
+             * @returns
              */
             listeners(event: string | symbol, exists: boolean): boolean;
 
             /**
              * Calls each of the listeners registered for a given event.
              *
-             * @param {(string | symbol)} event The event name.
-             * @param {...*} args Arguments that are passed to registered listeners
-             * @returns {boolean} `true` if the event had listeners, else `false`.
+             * @param event The event name.
+             * @param args Arguments that are passed to registered listeners
+             * @returns `true` if the event had listeners, else `false`.
              */
             emit(event: string | symbol, ...args: any[]): boolean;
 
             /**
              * Add a listener for a given event.
              *
-             * @param {(string | symbol)} event The event name.
-             * @param {Function} fn The listener function.
-             * @param {*} [context=this] The context to invoke the listener with.
-             * @returns {EventEmitter} `this`.
+             * @param event The event name.
+             * @param fn The listener function.
+             * @param [context=this] The context to invoke the listener with.
+             * @returns `this`.
              */
             //tslint:disable-next-line:ban-types forbidden-types
             on(event: string | symbol, fn: Function, context?: any): this;
@@ -3185,10 +4182,10 @@ declare namespace PIXI {
             /**
              * Add a one-time listener for a given event.
              *
-             * @param {(string | symbol)} event The event name.
-             * @param {Function} fn The listener function.
-             * @param {*} [context=this] The context to invoke the listener with.
-             * @returns {EventEmitter} `this`.
+             * @param event The event name.
+             * @param fn The listener function.
+             * @param [context=this] The context to invoke the listener with.
+             * @returns `this`.
              */
             //tslint:disable-next-line:ban-types forbidden-types
             once(event: string | symbol, fn: Function, context?: any): this;
@@ -3196,11 +4193,11 @@ declare namespace PIXI {
             /**
              * Remove the listeners of a given event.
              *
-             * @param {(string | symbol)} event The event name.
-             * @param {Function} fn Only remove the listeners that match this function.
-             * @param {*} context Only remove the listeners that have this context.
-             * @param {boolean} once Only remove one-time listeners.
-             * @returns {EventEmitter} `this`.
+             * @param event The event name.
+             * @param fn Only remove the listeners that match this function.
+             * @param context Only remove the listeners that have this context.
+             * @param once Only remove one-time listeners.
+             * @returns `this`.
              */
             //tslint:disable-next-line:ban-types forbidden-types
             removeListener(event: string | symbol, fn?: Function, context?: any, once?: boolean): this;
@@ -3208,8 +4205,8 @@ declare namespace PIXI {
             /**
              * Remove all listeners, or those of the specified event.
              *
-             * @param {(string | symbol)} event The event name.
-             * @returns {EventEmitter} `this`.
+             * @param event The event name.
+             * @returns `this`.
              */
             removeAllListeners(event?: string | symbol): this;
 
@@ -3485,8 +4482,8 @@ declare namespace PIXI {
          * @method
          * @name PIXI.GroupD8.isSwapWidthHeight
          * @see PIXI.GroupD8.isVertical
-         * @param {number} rotation - The number to check.
-         * @returns {boolean} Whether or not the direction is vertical
+         * @param rotation - The number to check.
+         * @returns Whether or not the direction is vertical
          * @deprecated since version 4.6.0
          */
         export function isSwapWidthHeight(rotation: number): boolean;
